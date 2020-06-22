@@ -36,3 +36,217 @@
     transform: rotate(360deg);
   }
 }
+
+#flash{
+  animation: animateflash infinite 2s linear;
+  animation-direction: alternate;
+}
+@keyframes animateflash {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+#firstcoin {
+  animation: animate infinite 3.5s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+  animation-direction: inherit;
+}
+@keyframes animate {
+  0%{
+    transform: translate(0, 0);
+    opacity: 0;
+  } 
+  95%{
+    transform: translate(20px, 100px) ;
+    opacity: 1;
+  }
+  100%{
+    transform: translate(20px, 100px) ;
+    opacity: 0;
+  } 
+  
+}
+
+.color1 {
+  stop-color: #a7a9ac;
+}
+.color2 {
+  stop-color: #e0e1e2;
+}
+.color3 {
+  stop-color: #ffffff;
+}
+.color4 {
+  stop-color: #f7f7f8;
+}
+.color5 {
+  stop-color: #e2e3e4;
+}
+.color6 {
+  stop-color: #bfc1c3;
+}
+.color7 {
+  stop-color: #a7a9ac;
+}
+.color8 {
+  stop-color: #f15a29;
+}
+.color9 {
+  stop-color: #f26534;
+}
+.color10 {
+  stop-color: #f79f6d;
+}
+.color11 {
+  stop-color: #fbc391;
+}
+.color12 {
+  stop-color: #fcd19f;
+}
+.color13 {
+  stop-color: #f15a29;
+}
+.color14 {
+  stop-color: #fcd19f;
+}
+.color15 {
+  stop-color: #f15a29;
+}
+.color16 {
+  stop-color: #f15a29;
+}
+.color17 {
+  stop-color: #fcd19f;
+}
+.color18 {
+  stop-color: #f15a29;
+}
+.color19 {
+  stop-color: #f15a29;
+}
+.color20 {
+  stop-color: #f47a49;
+}
+.color21 {
+  stop-color: #f8a977;
+}
+.color22 {
+  stop-color: #fbc694;
+}
+.color23 {
+  stop-color: #fcd19f;
+}
+.color24 {
+  stop-color: #fbc593;
+}
+.color25 {
+  stop-color: #f8a675;
+}
+.color26 {
+  stop-color: #f37443;
+}
+.color27 {
+  stop-color: #f15a29;
+}
+.color28 {
+  stop-color: #f9ab7a;
+}
+.color29 {
+  stop-color: #fbca99;
+}
+.color30 {
+  stop-color: #fab886;
+}
+.color31 {
+  stop-color: #f79a69;
+}
+.color32 {
+  stop-color: #f3713f;
+}
+.color33 {
+  stop-color: #f26332;
+}
+.color34 {
+  stop-color: #f47c49;
+}
+.color35 {
+  stop-color: #f8a570;
+}
+.color36 {
+  stop-color: #fcd199;
+}
+.color37 {
+  stop-color: #fccc95;
+}
+.color38 {
+  stop-color: #f47a47;
+}
+.color39 {
+  stop-color: #f15a29;
+}
+
+.color40{
+  stop-color:#F2673A
+}
+.color41{
+  stop-color:#F58A67
+}
+.color42{
+  stop-color:#FAC2B0
+}
+.color43{
+  stop-color:#FFFFFF
+}
+.color44{
+  stop-color:#F47A49
+}
+.color45{
+  stop-color:#F8A977
+}
+.color46{
+  stop-color:#FBC694
+}
+.color47{
+  stop-color:#D1D3D4
+}
+
+.color48{
+  stop-color:#A7A9AC
+}
+.color49{
+  stop-color:#A8AAAD
+}
+.color50{
+  stop-color:#D7D8D9
+}
+.color51{
+  stop-color:#F4F4F5
+}
+.color52{
+  stop-color:#F3F4F4
+}
+.color53{
+  stop-color:#D4D5D7
+}
+.color54{
+  stop-color:#939598
+}
+.color55{
+  stop-color:#A4A6A8
+}
+.color56{
+  stop-color:#D1D2D3
+}
+.color57{
+  stop-color:#D7D9DA
+}
+.color58{
+  stop-color:#BCBEC0
+}
+
+.chart{
+  border-bottom: 1px solid #f15a29;
+}
