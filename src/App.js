@@ -3,7 +3,7 @@ import { Router } from "@reach/router";
 import HomeLayout from "./pages/homepage";
 import DashboardLayout from "./pages/dashboard";
 import AccountLayout from "./pages/account";
-import { ajax } from "rxjs/ajax";
+
 
 function App() {
   useEffect(() => {}, []);
