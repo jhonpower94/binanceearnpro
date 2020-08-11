@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   space: {
-    margin: theme.spacing(1),
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
   flag: {
     margin: theme.spacing(2),
@@ -75,10 +76,10 @@ function SelectLanguage() {
     <React.Fragment>
       <Grow in={true} style={{ transitionDelay: "500ms" }}>
         <Button
+          color="inherit"
           variant={
             useMediaQuery(useTheme().breakpoints.up("sm")) ? "outlined" : "text"
           }
-          size="small"
           className={classes.button}
           onClick={handleClick}
         >

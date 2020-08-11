@@ -31,7 +31,7 @@ const arrayDatas = [
   {
     name: "SHB & HZX",
     tradeprefix: "shb",
-    days: "3 day",
+    days: "3 Day",
     deposit_amount: 100,
     return_amount: 115,
     date: new Date().toLocaleDateString(),
@@ -43,7 +43,7 @@ const arrayDatas = [
   {
     name: "TYU & XYT",
     tradeprefix: "TYU",
-    days: "7 days",
+    days: "7 Days",
     deposit_amount: 1000,
     return_amount: 15000,
     date: new Date().toLocaleDateString(),
@@ -59,7 +59,7 @@ const currenttrading = (tradeprefix) => {
   return 15;
 };
 
-function Withdraw() {
+function Investment() {
   const classes = useStyles();
 
   const [currentpage, setCurrentpage] = useState(1);
@@ -83,24 +83,26 @@ function Withdraw() {
                 <ListItem className={classes.row}>
                   <ListItemText
                     primary={data.name}
-                    secondary={data.status}
+                    secondary={`${data.days} investment`}
                   />
-
-                  <Typography variant="caption">{data.status}</Typography>
+                  <img
+                    src={require(data.trading
+                      ? "../icons/trading.svg"
+                      : "../icons/success.svg")}
+                  />
+                  
                 </ListItem>
                 <ListItem className={classes.row}>
                   <ListItemText
-                    primary={`Deposit amount ${data.deposit_amount}`}
+                    primary="Deposit amount"
                     secondary={`@ ${data.date} ${data.time}`}
                   />
-                  <Typography variant="body1">{data.days}</Typography>
+                  <Typography variant="h5">{`$ ${data.deposit_amount}`}</Typography>
                 </ListItem>
                 <ListItem className={classes.row}>
                   <ListItemText
                     primary={
-                      data.trading
-                        ? `current value ${currenttrading()}%`
-                        : `Trade earned ${data.profit}%`
+                      data.trading ? `current trade value` : `Returned amount`
                     }
                     secondary={
                       data.trading
@@ -108,14 +110,11 @@ function Withdraw() {
                         : `@ ${data.date} ${data.time}`
                     }
                   />
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    disabled={data.withdrawn}
-                  >
-                    Withdraw
-                  </Button>
+                  <Typography variant="h5">
+                    {data.trading
+                      ? `${currenttrading()}%`
+                      : `$ ${data.return_amount}`}
+                  </Typography>
                 </ListItem>
               </Paper>
             </Grid>
@@ -133,4 +132,4 @@ function Withdraw() {
   );
 }
 
-export default Withdraw;
+export default Investment;

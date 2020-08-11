@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, createContext } from "react";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import { deepOrange } from "@material-ui/core/colors";
+import { orange } from "@material-ui/core/colors";
 import { Router } from "@reach/router";
 import HomeLayout from "./pages/homepage";
 import DashboardLayout from "./pages/dashboard";
@@ -15,10 +15,23 @@ import MyInvestments from "./pages/dashboard/allinvestments";
 import Exchange from "./pages/dashboard/currencyexchange";
 import Invest from "./pages/dashboard/invest";
 import Support from "./pages/dashboard/support";
-import Deposit from "./pages/dashboard/transactions/deposit";
-import Withdrawal from "./pages/dashboard/transactions/withdrawal";
-import Withdraw from "./pages/dashboard/withdraw";
-import BonusWithdrawal from "./pages/dashboard/withdraw/bonus";
+import Transactions from "./pages/dashboard/transactions";
+import Investment from "./pages/dashboard/invest/myinvestments";
+import WithdrawBonus from "./pages/dashboard/withdraw/bonus";
+import SignIn from "./pages/account/singin";
+import SignUp from "./pages/account/signup";
+import ResetPassword from "./pages/account/resetpass";
+import InvestBlock from "./pages/homepage/sections/investblock";
+import Home from "./pages/homepage/sections/home";
+import Signal from "./pages/homepage/sections/signal";
+import About from "./pages/homepage/sections/aboutus";
+import Locations from "./pages/homepage/sections/locations";
+import BlocDatas from "./pages/homepage/sections/blockdata";
+import Contactus from "./pages/homepage/sections/contactus";
+import Guide from "./pages/homepage/sections/guide";
+import Downloads from "./pages/homepage/sections/downloads";
+import Security from "./pages/homepage/sections/security";
+import { reactLocalStorage } from "reactjs-localstorage";
 
 const store = createStore(allreducer);
 store.subscribe(() => console.log(store.getState()));
@@ -27,7 +40,12 @@ const dark = store.getState().darkMode;
 export const AppContext = createContext();
 
 function App() {
-  const [darktheme, setDarktheme] = useState({ status: false });
+  const [darktheme, setDarktheme] = useState({
+    status: reactLocalStorage.getObject("var").darkmode,
+  });
+  const [intro, setIntro] = useState({
+    layout: "layout",
+  });
   const palletType = darktheme.status ? "dark" : "light";
   const secondary = darktheme.status ? "#424242" : "#ffffff";
 
@@ -36,7 +54,7 @@ function App() {
       type: palletType,
       primary: {
         // Purple and green play nicely together.
-        main: deepOrange[500],
+        main: orange[800],
       },
       secondary: {
         // This is green.A700 as hex.
@@ -44,29 +62,45 @@ function App() {
       },
     },
   });
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(reactLocalStorage.getObject("var"));
+  }, []);
 
   return (
     <Provider store={store}>
-      <AppContext.Provider value={{ darktheme, setDarktheme }}>
+      <AppContext.Provider value={{ darktheme, intro, setDarktheme, setIntro }}>
         <ThemeProvider theme={theme}>
           <Router>
-            <HomeLayout path="/" />
+            <HomeLayout path="/">
+              <Home path="/" />
+              <InvestBlock path="invest" />
+              <Signal path="signals" />
+              <About path="about" />
+              <Locations path="locations" />
+              <BlocDatas path="tradedatas" />
+              <Downloads path="downloads/:page" />
+              <Contactus path="contact" />
+              <Guide path="guide" />
+              <Security path="security/:page" />
+            </HomeLayout>
 
             <DashboardLayout path="dashboard">
               <DashboardPage path="/" />
               <Invest path="invest" />
-              <Withdraw path="withdraw" />
+              <Investment path="investments" />
               <MyInvestments path="investments" />
-              <Deposit path="deposit" />
-              <Withdrawal path="withdrawal" />
+              <WithdrawBonus path="withdraw/:page" />
+              <Transactions path="transactions" />
               <Exchange path="exchange" />
-              <AccountSettings path="settings" />
+              <AccountSettings path="settings/:page" />
               <Support path="support" />
-              <BonusWithdrawal path="withdrawbonus"/>
             </DashboardLayout>
 
-            <AccountLayout path="account" />
+            <AccountLayout path="account">
+              <SignIn path="/" />
+              <SignUp path="register" />
+              <ResetPassword path="resetpassword" />
+            </AccountLayout>
           </Router>
         </ThemeProvider>
       </AppContext.Provider>

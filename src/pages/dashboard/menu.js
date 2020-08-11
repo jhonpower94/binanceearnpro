@@ -9,7 +9,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Fade from "@material-ui/core/Fade";
 import Avatar from "@material-ui/core/Avatar";
-import { deepOrange } from "@material-ui/core/colors";
+import { deepOrange, orange } from "@material-ui/core/colors";
 import { Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   orange: {
-    color: theme.palette.getContrastText(deepOrange[500]),
-    backgroundColor: deepOrange[500],
+    color: theme.palette.getContrastText(orange[800]),
+    backgroundColor: orange[800],
   },
   space: {
     marginTop: theme.spacing(1),
@@ -75,7 +75,7 @@ function DasboardMenu() {
 
   return (
     <div className={classes.sectionDesktop}>
-      <Button variant="text" onClick={handleClick}>
+      <Button onClick={handleClick}>
         <Badge variant="dot" color="primary">
           <NotificationsSharpIcon />
         </Badge>

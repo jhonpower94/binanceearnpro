@@ -13,7 +13,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Collapse from "@material-ui/core/Collapse";
@@ -24,13 +23,23 @@ import DasboardMenu from "./menu";
 import Fade from "@material-ui/core/Fade";
 import Nightmode from "../../components/Darkmode";
 import { navigate } from "@reach/router";
-import { ExpandMoreSharp, ExpandLessSharp } from "@material-ui/icons";
+import {
+  ExpandMoreSharp,
+  ExpandLessSharp,
+  AddCircleSharp,
+  AddShoppingCartRounded,
+} from "@material-ui/icons";
+import { Button, ListItemAvatar } from "@material-ui/core";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    fontFamily: "Roboto",
+  },
+  rootblock: {
+    display: "block",
     fontFamily: "Roboto",
   },
   grow: {
@@ -79,6 +88,9 @@ const useStyles = makeStyles((theme) => ({
   display: {
     display: "block",
   },
+  avater: {
+    width: "2.5em",
+  },
 }));
 
 function DashboardLayout(props) {
@@ -89,8 +101,13 @@ function DashboardLayout(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [selecteditem, setSelecteditem] = React.useState(null);
   const [selecteditemSub, setSelecteditemSub] = React.useState(null);
+  const [selectedSub, setSelectedSub] = React.useState(null);
 
-  const [openTransMenu, setOpenpenTransMenu] = React.useState(true);
+  const [openTransMenu, setOpenpenTransMenu] = React.useState(false);
+  const [submenu, setSubmenu] = React.useState({
+    withdraw: false,
+    settings: false,
+  });
 
   const handleDrawerToggle = () => {
     setMobileOpen((prev) => !prev);
@@ -100,19 +117,33 @@ function DashboardLayout(props) {
     setMobileOpen(false);
   };
 
-  const handleListItemClick = (index, link, collapse) => {
+  const handleListItemClick = (index, link, collapse, title) => {
     if (collapse) {
-      setOpenpenTransMenu(!openTransMenu);
+      setSelecteditemSub(index);
+      if (title == "settings") {
+        setSubmenu({
+          ...submenu,
+          settings: !submenu.settings,
+          withdraw: false,
+        });
+      } else {
+        setSubmenu({
+          ...submenu,
+          withdraw: !submenu.withdraw,
+          settings: false,
+        });
+      }
     } else {
-      setSelecteditemSub(null);
+      setOpenpenTransMenu(false);
+      setSelectedSub(null);
       setSelecteditem(index);
       navigate(`/${link}`);
       closemenu();
     }
   };
-  const handleSubmenuClick = (index, link) => {
+  const handleSubmenuClick = (index, link, line) => {
     setSelecteditem(null);
-    setSelecteditemSub(index);
+    setSelectedSub(line);
     navigate(`/${link}`);
     closemenu();
   };
@@ -122,56 +153,63 @@ function DashboardLayout(props) {
       name: currentStrings.Nav.Dashboard,
       link: "dashboard",
       index: 0,
-      icon: <InboxIcon color={selecteditem === 0 ? "primary" : "inherit"} />,
+      avater: require("./icons/balance.svg"),
+      submenu: [],
     },
     {
       name: currentStrings.Nav.invest,
       link: "dashboard/invest",
-      icon: <MailIcon color={selecteditem === 1 ? "primary" : "inherit"} />,
+      avater: require("./icons/briefcase.svg"),
+      submenu: [],
     },
     {
-      name: currentStrings.Nav.matured_investment,
-      link: "dashboard/withdraw",
-      icon: <InboxIcon color={selecteditem === 2 ? "primary" : "inherit"} />,
+      name: "My trades",
+      link: "dashboard/investments",
+      avater: require("./icons/investments.svg"),
+      submenu: [],
     },
     {
-      name: "Withdraw Bonus",
-      link: "dashboard/withdrawbonus",
-      icon: <InboxIcon color={selecteditem === 3 ? "primary" : "inherit"} />,
+      name: "Withdraw bonus",
+      link: "dashboard/withdraw/bonus",
+      avater: require("./icons/withdrawbonus.svg"),
     },
     {
       name: currentStrings.Nav.transactions,
       link: "dashboard/transactions",
-      icon: <InboxIcon color={selecteditem === 4 ? "primary" : "inherit"} />,
-      Collapse: true,
+      avater: require("./icons/history.svg"),
     },
     {
       name: currentStrings.Nav.converter,
       link: "dashboard/exchange",
-      icon: <InboxIcon color={selecteditem === 5 ? "primary" : "inherit"} />,
+      avater: require("./icons/exchange.svg"),
+      submenu: [],
     },
     {
       name: currentStrings.Nav.settings,
-      link: "dashboard/settings",
-      icon: <InboxIcon color={selecteditem === 6 ? "primary" : "inherit"} />,
+      title: "settings",
+      avater: require("./icons/settings.svg"),
+      Collapse: true,
+      menuOpen: submenu.settings,
+      submenu: [
+        {
+          name: "Reset password",
+          link: "dashboard/settings/password",
+          line: 5,
+          avater: require("./icons/resetpass.svg"),
+        },
+        {
+          name: "change email address",
+          link: "dashboard/settings/address",
+          line: 6,
+          avater: require("./icons/email.svg"),
+        },
+      ],
     },
     {
       name: currentStrings.Nav.support,
       link: "dashboard/support",
-      icon: <InboxIcon color={selecteditem === 7 ? "primary" : "inherit"} />,
-    },
-  ];
-
-  const submenu = [
-    {
-      name: "Deposit",
-      link: "dashboard/deposit",
-      icon: <InboxIcon color={selecteditemSub === 0 ? "primary" : "inherit"} />,
-    },
-    {
-      name: "Withdrawals",
-      link: "dashboard/withdrawal",
-      icon: <MailIcon color={selecteditemSub === 1 ? "primary" : "inherit"} />,
+      avater: require("./icons/support.svg"),
+      submenu: [],
     },
   ];
 
@@ -187,43 +225,43 @@ function DashboardLayout(props) {
             <ListItem
               button
               onClick={() =>
-                handleListItemClick(index, links.link, links.Collapse)
+                handleListItemClick(
+                  index,
+                  links.link,
+                  links.Collapse,
+                  links.title
+                )
               }
             >
-              <ListItemIcon>{links.icon}</ListItemIcon>
+              <ListItemAvatar>
+                <img src={links.avater} className={classes.avater} alt="image" />
+              </ListItemAvatar>
               <ListItemText
                 primary={links.name}
                 className={selecteditem === index ? classes.navtext : null}
               />
-              {openTransMenu ? (
-                <ExpandLessSharp
-                  className={
-                    links.Collapse ? classes.display : classes.displaynone
-                  }
-                />
-              ) : (
-                <ExpandMoreSharp
-                  className={
-                    links.Collapse ? classes.display : classes.displaynone
-                  }
-                />
-              )}
+              {links.Collapse ? <ExpandMoreSharp /> : null}
             </ListItem>
-            {links.Collapse ? (
-              <Collapse in={openTransMenu} timeout="auto" unmountOnExit>
+            {links.menuOpen ? (
+              <Collapse in={links.menuOpen} timeout="auto" unmountOnExit>
                 <List>
-                  {submenu.map((menu, index) => (
+                  {links.submenu.map((menu, index) => (
                     <ListItem
-                      key={index}
                       button
+                      key={index}
                       className={classes.nested}
-                      onClick={() => handleSubmenuClick(index, menu.link)}
+                      onClick={() =>
+                        handleSubmenuClick(index, menu.link, menu.line)
+                      }
                     >
-                      <ListItemIcon>{menu.icon}</ListItemIcon>
+                      <ListItemAvatar>
+                        <img src={menu.avater} className={classes.avater} />
+                      </ListItemAvatar>
+
                       <ListItemText
                         primary={menu.name}
                         className={
-                          selecteditemSub === index ? classes.navtext : null
+                          selectedSub === menu.line ? classes.navtext : null
                         }
                       />
                     </ListItem>
@@ -241,7 +279,13 @@ function DashboardLayout(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <div className={classes.root}>
+    <div
+      className={
+        useMediaQuery(useTheme().breakpoints.up("sm"))
+          ? classes.root
+          : classes.rootblock
+      }
+    >
       <CssBaseline />
       <AppBar color="secondary" position="fixed" className={classes.appBar}>
         <Toolbar>
@@ -269,6 +313,11 @@ function DashboardLayout(props) {
           )}
           <SelectLanguage />
           <div className={classes.grow} />
+          {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
+            <IconButton>
+              <AddShoppingCartRounded />
+            </IconButton>
+          ) : null}
           <DasboardMenu />
         </Toolbar>
       </AppBar>

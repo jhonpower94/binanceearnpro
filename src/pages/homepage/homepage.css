@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "Roboto";
+  src: local("Roboto"), url(../../fonts/Roboto-Regular.ttf) format("truetype");
+}
+
+.intro {
+  background-image: url(../../images/intro.svg);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.intromobile {
+  background-image: url(../../images/intromobile.svg);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

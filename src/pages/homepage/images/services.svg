@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X8 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="5in" height="4in" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"
+viewBox="0 0 5000 4000"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+    <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="623.902" y1="1370.96" x2="4299.33" y2="1370.96">
+     <stop offset="0" stop-opacity="1" stop-color="#A56526"/>
+     <stop offset="0.117647" stop-opacity="1" stop-color="#A6682F"/>
+     <stop offset="0.501961" stop-opacity="1" stop-color="#FAA954"/>
+     <stop offset="1" stop-opacity="1" stop-color="#A76C39"/>
+    </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_1929909459728">
+   <polygon fill="url(#id0)" points="624,1303 2684,1073 4299,1330 2466,1669 "/>
+   <polygon fill="#FAA954" points="2231,403 267,627 624,1303 2685,1075 "/>
+   <polygon fill="#FAA954" points="3064,379 4707,578 4299,1330 2685,1075 "/>
+   <g>
+    <path fill="#FFCC29" d="M2094 746l85 25 11 -53c5,-22 24,-36 43,-30l263 78c18,6 30,29 25,51l-11 53 763 227c55,17 89,83 75,148l-158 755c-13,65 -69,105 -124,88l-1179 -351c-55,-16 -88,-83 -75,-148l158 -754c14,-65 70,-105 124,-89z"/>
+    <rect fill="#3E4095" transform="matrix(0.613739 0.182882 -0.138765 0.663363 2219.76 710.889)" width="458" height="217" rx="47" ry="47"/>
+    <path fill="#FFF688" d="M1791 911l112 33 16 -75c7,-31 33,-51 58,-44l349 101c25,7 39,38 33,69l-16 75 1013 290c72,21 115,113 95,205l-229 1058c-20,91 -95,149 -167,128l-1566 -449c-72,-21 -115,-112 -95,-204l229 -1058c20,-92 95,-150 168,-129z"/>
+    <rect fill="#00A859" transform="matrix(0.814471 0.233764 -0.201543 0.931076 1959.06 857.778)" width="458" height="217" rx="47" ry="47"/>
+    <g>
+     <path fill="#FFF8AF" d="M1446 1110l137 41 17 -86c8,-35 38,-57 68,-48l423 126c30,9 48,45 41,81l-18 85 1226 365c87,26 141,133 119,238l-253 1211c-22,104 -111,168 -199,142l-1894 -564c-87,-26 -141,-133 -119,-238l253 -1210c22,-105 112,-169 199,-143z"/>
+     <rect fill="#ED3237" transform="matrix(0.985447 0.293643 -0.222807 1.06512 1647.9 1053.49)" width="458" height="217" rx="47" ry="47"/>
+    </g>
+   </g>
+   <polygon fill="#E67237" points="2457,1663 4310,1347 4306,3221 2474,3665 "/>
+   <polygon fill="#FAA954" points="4299,1330 2466,1669 3054,2715 4807,2156 "/>
+   <polygon fill="#F58634" points="624,1303 2463,1661 2479,3680 624,3180 "/>
+   <polygon fill="#FAA954" points="624,1303 2466,1669 1869,2688 116,2129 "/>
+  </g>
+ </g>
+</svg>

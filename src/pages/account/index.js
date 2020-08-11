@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { HomePageStrings } from "../../lang/langhomepage";
 
-function AccountLayout() {
+function AccountLayout(props) {
   useEffect(() => {}, []);
 
   return (
     <React.Fragment>
-      <p>Account page</p>
+      {props.children}
     </React.Fragment>
   );
 }
