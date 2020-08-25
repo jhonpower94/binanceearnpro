@@ -1,6 +1,9 @@
-import React from "react";
-import clsx from 'clsx';
-import Avatar from "@material-ui/core/Avatar";
+import React, { useContext } from "react";
+import clsx from "clsx";
+import firebase from "../../config";
+import { AppContext } from "../../App";
+import { useDispatch } from "react-redux";
+import { loading$ } from "../../redux/action";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -15,8 +18,15 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { IconButton, Input, OutlinedInput, FormControl, InputLabel } from "@material-ui/core";
+import {
+  IconButton,
+  Input,
+  OutlinedInput,
+  FormControl,
+  InputLabel,
+} from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { navigate } from "@reach/router";
 
 function Copyright() {
   return (
@@ -55,7 +65,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { intro, setIntro } = useContext(AppContext);
   const [values, setValues] = React.useState({
+    email: "",
     password: "",
     showPassword: false,
   });
@@ -71,7 +84,40 @@ export default function SignIn() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  const persistance = () => {
+    setIntro({
+      ...intro,
+      persistence: !intro.persistence,
+    });
+  };
+  const submitLogin = (event) => {
+    event.preventDefault();
+    dispatch(loading$());
+    const persistance = intro.persistence
+      ? firebase.auth.Auth.Persistence.SESSION
+      : firebase.auth.Auth.Persistence.NONE;
 
+    firebase
+      .auth()
+      .setPersistence(persistance)
+      .then(() => {
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(values.email, values.password)
+          .then(() => {
+            dispatch(loading$());
+            navigate("dashboard");
+          })
+          .catch((err) => {
+            dispatch(loading$());
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        dispatch(loading$());
+        console.log(err);
+      });
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -87,7 +133,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={submitLogin}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -95,7 +141,7 @@ export default function SignIn() {
             fullWidth
             id="email"
             label="Email Address"
-            name="email"
+            onChange={handleChange("email")}
             autoComplete="email"
             autoFocus
           />
@@ -129,7 +175,7 @@ export default function SignIn() {
           </FormControl>
 
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox color="primary" onChange={persistance} />}
             label="Remember me"
           />
           <Button
@@ -141,19 +187,25 @@ export default function SignIn() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
         </form>
+        <Grid container>
+          <Grid item xs>
+            <Link
+              component="button"
+              onClick={() => navigate("account/resetpassword")}
+            >
+              Forgot password?
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link
+              component="button"
+              onClick={() => navigate("account/register")}
+            >
+              {"Don't have an account? Sign Up"}
+            </Link>
+          </Grid>
+        </Grid>
       </div>
       <Box mt={8}>
         <Copyright />

@@ -10,9 +10,11 @@ import Divider from "@material-ui/core/Divider";
 import Fade from "@material-ui/core/Fade";
 import Avatar from "@material-ui/core/Avatar";
 import { deepOrange, orange } from "@material-ui/core/colors";
-import { Button } from "@material-ui/core";
+import { Button, Link } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
+import { app } from "../../config";
+import { navigate } from "@reach/router";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -20,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   orange: {
     color: theme.palette.getContrastText(orange[800]),
-    backgroundColor: orange[800],
+    backgroundColor: theme.palette.primary.main,
   },
   space: {
     marginTop: theme.spacing(1),
@@ -55,6 +57,7 @@ const StyledMenu = withStyles({
 function DasboardMenu() {
   const classes = useStyles();
   const currentStrings = useSelector((state) => state.language);
+  const notifications = useSelector((state) => state.notification.notification);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -71,13 +74,33 @@ function DasboardMenu() {
     setAnchorElUser(null);
   };
 
+  function logOut() {
+    app
+      .auth()
+      .signOut()
+      .then(function () {
+        navigate("../account");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function navigaTion() {
+    navigate("../account/resetpassword");
+  }
+
   useEffect(() => {}, []);
+
+  const selectNoty = (type) => {
+    console.log(type);
+  };
 
   return (
     <div className={classes.sectionDesktop}>
-      <Button onClick={handleClick}>
+      <Button onClick={handleClick} color="primary">
         <Badge variant="dot" color="primary">
-          <NotificationsSharpIcon />
+          <NotificationsSharpIcon color="action" />
         </Badge>
       </Button>
 
@@ -93,24 +116,27 @@ function DasboardMenu() {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        {[
-          { name: "profie", duration: "100ms" },
-          { name: "profie", duration: "200ms" },
-          { name: "profie", duration: "300ms" },
-          { name: "profie", duration: "400ms" },
-          { name: "profie", duration: "500ms" },
-        ].map((lnk, index) => (
+        {notifications.map((lnk, index) => (
           <Fade in={open} key={index} style={{ transitionDelay: lnk.duration }}>
             <MenuItem onClick={handleClose} className={classes.flexcolumn}>
               <Typography variant="subtitle2">
                 {new Date().toLocaleDateString()}
               </Typography>
               <Typography variant="body1" className={classes.space}>
-                &#128176; Header
+                &#128176; {lnk.type}
               </Typography>
               <Typography variant="subtitle2">
-                {" "}
-                this is the notification discription
+                {lnk.type === "investment"
+                  ? `Investment return of ${lnk.amount} @${lnk.date}`
+                  : `you have recieves a bonus of from a user`}
+                <Link
+                  component="button"
+                  onClick={() => {
+                    selectNoty(lnk.type);
+                  }}
+                >
+                  check out
+                </Link>
               </Typography>
             </MenuItem>
           </Fade>
@@ -132,15 +158,18 @@ function DasboardMenu() {
 
         <Divider />
         {[
-          { title: currentStrings.usermenu.settings, duration: "200ms" },
-          { title: currentStrings.usermenu.logout, duration: "300ms" },
+          {
+            title: "Reset password",
+            action: navigaTion,
+          },
+          { title: currentStrings.usermenu.logout, action: logOut },
         ].map((link, index) => (
           <Fade
             in={Boolean(anchorElUser)}
             key={index}
-            style={{ transitionDelay: link.duration }}
+            style={{ transitionDelay: index * 200 }}
           >
-            <MenuItem>
+            <MenuItem onClick={link.action}>
               <ListItemText primary={link.title} />
             </MenuItem>
           </Fade>

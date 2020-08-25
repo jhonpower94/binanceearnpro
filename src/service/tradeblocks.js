@@ -1,55 +1,60 @@
-
- export const dataArray = [
-    {
-      name: "G $ S",
-      investment_period: "3 hours",
-      return_percentage: 15,
-      minimum_stake: 100,
-      duration: "100ms",
-    },
-    {
-      name: "G $ S",
-      investment_period: "6 hours",
-      return_percentage: 15,
-      minimum_stake: 500,
-      duration: "200ms",
-    },
-    {
-      name: "T $ G",
-      investment_period: "12 hours",
-      return_percentage: 15,
-      minimum_stake: 1000,
-    },
-    {
-      name: "u $ t",
-      investment_period: "24 hours",
-      return_percentage: 15,
-      minimum_stake: 2000,
-      duration: "300ms",
-    },
-    {
-      name: "o $ m",
-      investment_period: "2 days",
-      return_percentage: 15,
-      minimum_stake: 3000,
-      duration: "400ms",
-    },
-    {
-      name: "u $ t",
-      investment_period: "3 days",
-      return_percentage: 15,
-      minimum_stake: 4000,
-    },
-    {
-      name: "u $ t",
-      investment_period: "4 days",
-      return_percentage: 15,
-      minimum_stake: 5000,
-    },
-    {
-      name: "u $ t",
-      investment_period: "5 days",
-      return_percentage: 15,
-      minimum_stake: 6000,
-    },
-  ];
+export const blocks = [
+  {
+    name: "Plan 1",
+    rate: "6",
+    duration: 24,
+    lot: 50,
+    max: 500,
+  },
+  {
+    name: "Plan 2",
+    rate: "12",
+    duration: 24,
+    lot: 500,
+    max: 1000,
+  },
+  {
+    name: "Plan 3",
+    rate: "15",
+    duration: 34,
+    lot: 1000,
+    max: 2000,
+  },
+  {
+    name: "Plan 4",
+    rate: "20",
+    image: "M",
+    duration: 48,
+    lot: 2000,
+    max: 3000,
+  },
+  {
+    name: "Vip",
+    rate: "25",
+    duration: 50,
+    lot: 4000,
+    max: 5000,
+  },
+  {
+    name: "Hourly Vip",
+    rate: "10",
+    duration: 5,
+    lot: 5000,
+    max: 6000,
+  },
+  {
+    name: "Hourly Vip",
+    rate: "12",
+    duration: 5,
+    lot: 7000,
+    max: 10000,
+  },
+  {
+    name: "Hourly Vip",
+    rate: "12",
+    duration: 12,
+    lot: 12000,
+    max: 10000000,
+  },
+ 
+];

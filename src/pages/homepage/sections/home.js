@@ -123,7 +123,7 @@ function Home(props) {
             subtitle={headings.addtrade.subtitle}
             image={headings.addtrade.image}
           />
-          <InvestBlock blocks={true} page="Invest" />
+          <InvestBlock blocksHome={true} page="Invest" />
         </div>
 
         <div className={classes.margintop}>

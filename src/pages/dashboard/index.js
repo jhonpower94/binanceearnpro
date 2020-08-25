@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
+import { AppContext } from "../../App";
 import "./dashboard.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  loading$,
+  totalprofit$,
+  totaldeposit$,
+  totalwithdrawn$,
+  totalbonusearned$,
+  bonusCollections$,
+  mainbalance$,
+  bonusbalance$,
+  myinvestment$,
+  notification$,
+} from "../../redux/action";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -25,11 +37,38 @@ import Nightmode from "../../components/Darkmode";
 import { navigate } from "@reach/router";
 import {
   ExpandMoreSharp,
-  ExpandLessSharp,
-  AddCircleSharp,
   AddShoppingCartRounded,
+  AccountBalance,
+  MonetizationOnSharp,
+  BusinessCenterSharp,
+  GetAppSharp,
+  AccountBalanceWallet,
+  LiveHelp,
 } from "@material-ui/icons";
-import { Button, ListItemAvatar } from "@material-ui/core";
+import { ListItemAvatar, Box, Typography } from "@material-ui/core";
+import firebase, {
+  loggedIn$,
+  firestore,
+  docData,
+  collectionData,
+} from "../../config";
+import { reactLocalStorage } from "reactjs-localstorage";
+import { css } from "@emotion/core";
+import PulseLoader from "react-spinners/PulseLoader";
+import ReactCountryFlag from "react-country-flag";
+import { blocks } from "../../service/tradeblocks";
+import { Converter } from "easy-currencies";
+import getSymbolFromCurrency from "currency-symbol-map";
+var getCountry = require("country-currency-map").getCountry;
+var cc = require("currency-codes");
+var formatLocaleCurrency = require("country-currency-map").formatLocaleCurrency;
+const lookup = require("country-code-lookup");
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 const drawerWidth = 240;
 
@@ -91,23 +130,256 @@ const useStyles = makeStyles((theme) => ({
   avater: {
     width: "2.5em",
   },
+  spacing: {
+    flexGrow: 1,
+  },
 }));
+
+let converter = new Converter(
+  "OpenExchangeRates",
+  "67eb8de24a554b9499d1d1bf919c93a3"
+);
 
 function DashboardLayout(props) {
   const { window } = props;
   const classes = useStyles();
+  const {
+    userData,
+    balance,
+    user,
+    setUser,
+    setUserData,
+    setBalance,
+  } = useContext(AppContext);
   const theme = useTheme();
+  const dispatch = useDispatch();
   const currentStrings = useSelector((state) => state.language);
+  const loading = useSelector((state) => state.loading);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [selecteditem, setSelecteditem] = React.useState(null);
   const [selecteditemSub, setSelecteditemSub] = React.useState(null);
   const [selectedSub, setSelectedSub] = React.useState(null);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [values, setValues] = React.useState({
+    currencyCode: "",
+    countrycodeIos2: "",
+    currencySymbol: "",
+  });
 
   const [openTransMenu, setOpenpenTransMenu] = React.useState(false);
   const [submenu, setSubmenu] = React.useState({
     withdraw: false,
     settings: false,
   });
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        navigate("../account");
+      } else {
+        if (user.emailVerified) {
+          const datas = firestore.doc(`users/${user.uid}`);
+          docData(datas, "id").subscribe((val) => {
+            reactLocalStorage.setObject("userdata", val); // for collecting user id on transaction
+            setUser({ ...user, ...val });
+
+            const currencyandBalance = async () => {
+              await reactLocalStorage.setObject("country", {
+                country: val.country,
+              });
+            };
+
+            currencyandBalance().then(() => {
+              const country = JSON.parse(localStorage.getItem("country"))
+                .country;
+              console.log(JSON.parse(localStorage.getItem("country")).country);
+              const newCurcode = getCountry(country).currency; // currency code
+              const newCursymbol = getSymbolFromCurrency(newCurcode); // currency code
+
+              blocks.forEach((vl, index) => {
+                converter
+                  .convert(vl.lot, "USD", newCurcode)
+                  .then((val) => {
+                    vl.lot = val;
+                    console.log(val);
+                  })
+                  .then(() => navigate(""))
+                  .catch((err) => console.log(err));
+              });
+
+              setValues({
+                ...values,
+                currencyCode: newCurcode,
+                countrycodeIos2: lookup.byCountry(country).iso2,
+              });
+
+              // add currency code to storage
+              reactLocalStorage.setObject("country", {
+                ...reactLocalStorage.getObject("country"),
+                currencycode: newCurcode,
+              });
+
+              setUserData({
+                ...userData,
+                currencyInfo: {
+                  countrycode: newCurcode,
+                  currencysymbol: newCursymbol,
+                },
+              });
+            });
+          });
+        } else {
+          navigate("../account/verifyemail");
+        }
+
+        // total return collection
+        const returnedbalance = firestore
+          .doc(`users/${user.uid}`)
+          .collection("deposits")
+          .where("complete", "==", true);
+
+        collectionData(returnedbalance, "id").subscribe((data) => {
+          console.log(data);
+          const country = JSON.parse(localStorage.getItem("country")).country;
+          const newCurcode = getCountry(country).currency; // currency code
+
+          const returnTotal = data.reduce((prv, cur) => {
+            return prv + cur.return_amount;
+          }, 0);
+
+          dispatch(
+            mainbalance$(
+              formatLocaleCurrency(Math.floor(returnTotal), newCurcode, {
+                autoFixed: false,
+              })
+            )
+          );
+        });
+
+        // totatal deposited
+        const allDeposits = firestore
+          .doc(`users/${user.uid}`)
+          .collection("deposits")
+          .orderBy("created_at", "desc");
+        collectionData(allDeposits, "id").subscribe((data) => {
+          const country = JSON.parse(localStorage.getItem("country")).country;
+          const newCurcode = getCountry(country).currency; // currency code
+
+          const totalDeposit = data.reduce((prv, cur) => {
+            return prv + cur.amount;
+          }, 0);
+
+          const totalPercentage = data.reduce((prv, cur) => {
+            return prv + cur.percentage;
+          }, 0);
+
+          dispatch(myinvestment$(data));
+
+          dispatch(
+            totaldeposit$(
+              formatLocaleCurrency(totalDeposit, newCurcode, {
+                autoFixed: false,
+              })
+            )
+          );
+
+          //total profits
+          const totlProfit = (totalPercentage / 100) * totalDeposit;
+          dispatch(
+            totalprofit$(
+              formatLocaleCurrency(totlProfit, newCurcode, { autoFixed: false })
+            )
+          );
+        });
+
+        //total withdrawn
+        const Total_withdrawn = firestore
+          .doc(`users/${user.uid}`)
+          .collection("deposits")
+          .where("return_amount", "==", 0);
+        collectionData(Total_withdrawn, "id").subscribe((data) => {
+          const country = JSON.parse(localStorage.getItem("country")).country;
+          const newCurcode = getCountry(country).currency; // currency code
+          const newCursymbol = getSymbolFromCurrency(newCurcode); // currency code
+          const totalwithdrawn = data.reduce((prv, cur) => {
+            return prv + cur.amount;
+          }, 0);
+
+          dispatch(
+            totalwithdrawn$(
+              formatLocaleCurrency(totalwithdrawn, newCurcode, {
+                autoFixed: false,
+              })
+            )
+          );
+        });
+
+        // bonus balance
+        const Bonus = firestore.doc(`users/${user.uid}`).collection("bonus");
+        collectionData(Bonus, "id").subscribe((data) => {
+          const country = JSON.parse(localStorage.getItem("country")).country;
+          const newCurcode = getCountry(country).currency;
+
+          // bonus total recievede bonus
+          const bonusTotalRecieved = data.reduce((prv, cur) => {
+            return prv + cur.amount;
+          }, 0);
+          converter
+            .convert(bonusTotalRecieved, "USD", newCurcode)
+            .then((vl) => {
+              dispatch(
+                totalbonusearned$(
+                  formatLocaleCurrency(vl, newCurcode, { autoFixed: false })
+                )
+              );
+            });
+
+          // main remaining bonus balance
+          const bonusCurrentBalance = data.reduce((prv, cur) => {
+            return prv + cur.deposit_amount;
+          }, 0);
+          // convert bonus remaining balance to default currency
+          converter
+            .convert(bonusCurrentBalance, "USD", newCurcode)
+            .then((val) => {
+              dispatch(
+                bonusbalance$(
+                  formatLocaleCurrency(Math.floor(val), newCurcode, {
+                    autoFixed: false,
+                  })
+                )
+              );
+            });
+
+          // bonus collections
+          data.forEach((val, index) => {
+            converter
+              .convert(val.deposit_amount, "USD", newCurcode)
+              .then((vl) => {
+                val.deposit_amount = formatLocaleCurrency(vl, newCurcode, {
+                  autoFixed: false,
+                });
+                dispatch(bonusCollections$(data));
+              })
+              .then(() => navigate(""))
+              .catch((err) => console.log(err));
+          });
+        });
+
+        // notification
+        const notifications = firestore
+          .doc(`users/${user.uid}`)
+          .collection("notification");
+
+        collectionData(notifications, "id").subscribe((data) => {
+          dispatch(notification$(data));
+        });
+      }
+    });
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prev) => !prev);
@@ -152,70 +424,59 @@ function DashboardLayout(props) {
     {
       name: currentStrings.Nav.Dashboard,
       link: "dashboard",
-      index: 0,
-      avater: require("./icons/balance.svg"),
+
+      avater: <AccountBalance color="primary" />,
       submenu: [],
     },
     {
       name: currentStrings.Nav.invest,
       link: "dashboard/invest",
-      avater: require("./icons/briefcase.svg"),
+      avater: <MonetizationOnSharp color="primary" />,
       submenu: [],
     },
     {
       name: "My trades",
       link: "dashboard/investments",
-      avater: require("./icons/investments.svg"),
+      avater: <BusinessCenterSharp color="primary" />,
       submenu: [],
     },
     {
       name: "Withdraw bonus",
       link: "dashboard/withdraw/bonus",
-      avater: require("./icons/withdrawbonus.svg"),
+      avater: <GetAppSharp color="primary" />,
     },
     {
-      name: currentStrings.Nav.transactions,
-      link: "dashboard/transactions",
-      avater: require("./icons/history.svg"),
-    },
-    {
-      name: currentStrings.Nav.converter,
-      link: "dashboard/exchange",
-      avater: require("./icons/exchange.svg"),
+      name: "Wallet",
+      link: "dashboard/wallet",
+      avater: <AccountBalanceWallet color="primary" />,
       submenu: [],
-    },
-    {
-      name: currentStrings.Nav.settings,
-      title: "settings",
-      avater: require("./icons/settings.svg"),
-      Collapse: true,
-      menuOpen: submenu.settings,
-      submenu: [
-        {
-          name: "Reset password",
-          link: "dashboard/settings/password",
-          line: 5,
-          avater: require("./icons/resetpass.svg"),
-        },
-        {
-          name: "change email address",
-          link: "dashboard/settings/address",
-          line: 6,
-          avater: require("./icons/email.svg"),
-        },
-      ],
     },
     {
       name: currentStrings.Nav.support,
       link: "dashboard/support",
-      avater: require("./icons/support.svg"),
+      avater: <LiveHelp color="primary" />,
       submenu: [],
     },
   ];
 
+  const footer = (
+    <Box
+      className={classes.margintop}
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      m={2}
+    >
+      <img src={require("../../images/mobile.svg")} width="30" />
+      <Typography variant="caption">
+        &copy; Hotbloq, LLC, {new Date().toLocaleDateString()}.
+      </Typography>
+    </Box>
+  );
+
   const drawer = (
     <div>
-      <List>
+      <List component="nav">
         <ListItem>
           <Nightmode />
         </ListItem>
@@ -224,6 +485,7 @@ function DashboardLayout(props) {
           <div key={index}>
             <ListItem
               button
+              selected={selecteditem === index}
               onClick={() =>
                 handleListItemClick(
                   index,
@@ -233,12 +495,9 @@ function DashboardLayout(props) {
                 )
               }
             >
-              <ListItemAvatar>
-                <img src={links.avater} className={classes.avater} alt="image" />
-              </ListItemAvatar>
+              <ListItemAvatar>{links.avater}</ListItemAvatar>
               <ListItemText
-                primary={links.name}
-                className={selecteditem === index ? classes.navtext : null}
+                primary={<Typography color="initial">{links.name}</Typography>}
               />
               {links.Collapse ? <ExpandMoreSharp /> : null}
             </ListItem>
@@ -274,9 +533,6 @@ function DashboardLayout(props) {
       </List>
     </div>
   );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <div
@@ -314,9 +570,23 @@ function DashboardLayout(props) {
           <SelectLanguage />
           <div className={classes.grow} />
           {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
-            <IconButton>
-              <AddShoppingCartRounded />
-            </IconButton>
+            <Box>
+              <ListItem>
+                <ListItemAvatar>
+                  <ReactCountryFlag
+                    countryCode={values.countrycodeIos2}
+                    svg
+                    style={{
+                      width: "em",
+                      height: "2em",
+                    }}
+                    title={userData.data.country}
+                  />
+                </ListItemAvatar>
+
+                <ListItemText primary={values.currencyCode} />
+              </ListItem>
+            </Box>
           ) : null}
           <DasboardMenu />
         </Toolbar>
@@ -338,6 +608,8 @@ function DashboardLayout(props) {
             }}
           >
             {drawer}
+            <span className={classes.spacing} />
+            {footer}
           </Drawer>
         </Hidden>
         <Hidden xsDown implementation="css">
@@ -349,12 +621,30 @@ function DashboardLayout(props) {
             open
           >
             {drawer}
+            <span className={classes.spacing} />
+            {footer}
           </Drawer>
         </Hidden>
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {props.children}
+        {loading.loading ? (
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt={20}
+          >
+            <PulseLoader
+              css={override}
+              size={30}
+              color={"#ef6c00"}
+              loading={true}
+            />
+          </Box>
+        ) : (
+          props.children
+        )}
       </main>
     </div>
   );

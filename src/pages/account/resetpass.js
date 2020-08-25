@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import firebase, { auth } from "../../config";
 import clsx from "clsx";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import InputAdornment from "@material-ui/core/InputAdornment";
+
 import { Link } from "@reach/router";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -70,21 +68,31 @@ const useStyles = makeStyles((theme) => ({
 export default function ResetPassword() {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    password: "",
-    showPassword: false,
+    email: "",
   });
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handleChange = (event) => {
+    setValues({ ...values, [event.target.name]: event.target.value });
   };
-
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-
-  const handleMouseDownPassword = (event) => {
+  const resetpass = (event) => {
     event.preventDefault();
+    auth.sendPasswordResetEmail(values.email).then(()=>{
+      console.log("sent")
+    })
   };
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setValues({
+          ...values,
+          email: user.email,
+        });
+      } else {
+        return null;
+      }
+    });
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -101,7 +109,7 @@ export default function ResetPassword() {
         <Typography component="h1" variant="h5">
           Reset password
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={resetpass}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -112,6 +120,8 @@ export default function ResetPassword() {
             name="email"
             autoComplete="email"
             autoFocus
+            value={values.email}
+            onChange={handleChange}
           />
 
           <Button

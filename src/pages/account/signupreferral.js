@@ -105,9 +105,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function SignUpReferral(props) {
   const classes = useStyles();
   const { intro, setIntro } = useContext(AppContext);
+  const { id } = props;
   const dispatch = useDispatch();
   const [values, setValues] = React.useState({
     numberformat: "",
@@ -118,6 +119,7 @@ export default function SignUp() {
     showPassword: false,
     country: countrylist[0].name,
     mobilecode: intro.mobilecode,
+    referrerid: "",
   });
 
   const handleChange = (event) => {
@@ -150,12 +152,8 @@ export default function SignUp() {
       password: values.password,
       country: values.country,
       mobilecode: intro.mobilecode,
-      referrer: false,
-      total_profit: 0,
-      total_deposited: 0,
-      total_withdrawn: 0,
-      total_bonus_earned: 0,
-      countrycode: intro.countrycode,
+      referrer: true,
+      referrerid: id,
     };
     app
       .auth()
@@ -165,7 +163,7 @@ export default function SignUp() {
         const userid = user.user.uid;
         addUsers(datas, userid).then(() => {
           dispatch(loading$());
-          navigate("../dashboard");
+          navigate("../../dashboard");
         });
       })
       .catch((err) => {
@@ -314,6 +312,20 @@ export default function SignUp() {
                 }}
               />
             </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                fullWidth
+                id="refId"
+                label="Referrer ID"
+                name="referrerid"
+                autoComplete="referrer"
+                value={id}
+                disabled
+                onChange={handleChange}
+              />
+            </Grid>
+
             <Grid item xs={12}>
               <FormControlLabel
                 control={

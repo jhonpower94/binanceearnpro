@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AppContext } from "../../../App";
+import { useSelector } from "react-redux";
 import clsx from "clsx";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -53,60 +55,29 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "x-large",
     color: theme.palette.primary.main,
   },
-  avaterbalance:{
-    width: "5em"
+  avaterbalance: {
+    width: "5em",
   },
-  avaterbonus:{
-    width: "3.8em"
+  avaterbonus: {
+    width: "3.8em",
   },
-  avateref:{
-    width: "2.5em"
-  }
+  avateref: {
+    width: "2.5em",
+  },
+  cardheader: {
+    background: theme.palette.primary.main,
+    color: theme.palette.getContrastText("#ef6c00"),
+  },
+  wordbreak: {
+    wordBreak: "break-word",
+  },
 }));
 
-const profileData = [
-  {
-    title: "Total profit earned",
-    value: 5000,
-  },
-  {
-    title: "Total deposited",
-    value: 5000,
-  },
-  {
-    title: "Total withdrawn",
-    value: 5000,
-  },
-  {
-    title: "Total bonus earned",
-    value: 5000,
-  },
-];
-
-const referralData = [
-  {
-    user: "jhon snow",
-    date: new Date().toLocaleDateString(),
-    amount: 30
-  },
-  {
-    user: "jhon snow",
-    date: new Date().toLocaleDateString(),
-    amount: 30
-  },
-  {
-    user: "jhon snow",
-    date: new Date().toLocaleDateString(),
-    amount: 30
-  },
-  {
-    user: "jhon snow",
-    date: new Date().toLocaleDateString(),
-    amount: 30
-  }
-];
-
 function DashboardPage() {
+  const { userData, user, balance } = useContext(AppContext);
+  const mainbalance = useSelector((state) => state.balance);
+  const referralData = useSelector((state) => state.bonus.bonus);
+  const activities = useSelector((state) => state.activities);
   const [currentpage, setCurrentpage] = useState(1);
   const [postperpage, setPostperpage] = useState(3);
   const classes = useStyles();
@@ -121,15 +92,34 @@ function DashboardPage() {
   const balanceData = [
     {
       title: "Account balance",
-      balance: 10000,
+      balance: mainbalance.main_balance,
       subheader: "Deposits and earning",
-      Avater: <img src={require("../icons/balance.svg")} className={classes.avaterbalance} /> ,
+      Avater: require("../icons/balance.svg"),
     },
     {
       title: "Bonus balance",
-      balance: 100,
+      balance: mainbalance.bonus_balance,
       subheader: "Awards and referral bonus",
-      Avater: <img src={require("../icons/bonus.svg")} className={classes.avaterbonus} />,
+      Avater: require("../icons/bonus.svg"),
+    },
+  ];
+
+  const profileData = [
+    {
+      title: "Total profit earned",
+      value: activities.totlProfit,
+    },
+    {
+      title: "Total deposited",
+      value: activities.totalDeposit,
+    },
+    {
+      title: "Total withdrawn",
+      value: activities.totalwithdrawn,
+    },
+    {
+      title: "Total bonus earned",
+      value: activities.bonusTotalRecieved,
     },
   ];
 
@@ -142,10 +132,15 @@ function DashboardPage() {
           {balanceData.map((data, index) => (
             <Grid item xs={12} sm={6} key={index}>
               <Paper className={classes.column}>
-                <CardHeader title={data.title} action={data.Avater} />
+                <CardHeader
+                  title={data.title}
+                  action={<img src={data.Avater} width="50" />}
+                  className={classes.cardheader}
+                />
+
                 <div className={classes.row}>
                   <div className={clsx(classes.column, classes.align)}>
-                    <Typography variant="h4">$ {data.balance}</Typography>
+                    <Typography variant="h4">{data.balance}</Typography>
 
                     <ListItemText
                       primary={data.subheader}
@@ -158,25 +153,41 @@ function DashboardPage() {
           ))}
           <Grid item xs={12} sm={7}>
             <Paper>
-              <ListItem>
-                <img
-                  src={require("../../../images/mobile.svg")}
-                  height="50px"
+              <ListItem className={classes.cardheader}>
+                <ListItemAvatar>
+                  <img
+                    src={require("../../../images/mobile.svg")}
+                    height="50px"
+                  />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={<Typography variant="h6">Activities</Typography>}
                 />
-                <CardHeader title="Activities" />
               </ListItem>
               <List>
                 {profileData.map((data, index) => (
                   <ListItem key={index}>
                     <ListItemText primary={data.title} />
                     <ListItemSecondaryAction>
-                      <Typography variant="h6">{`$ ${data.value}`}</Typography>
+                      <Typography variant="h6">{data.value}</Typography>
                     </ListItemSecondaryAction>
                   </ListItem>
                 ))}
                 <ListItem>
-                  <ListItemText primary="Referrals I.D" />
-                  <Typography variant="body1">Jhonsnow@gmail.com</Typography>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                  >
+                    <Typography>Referral ID</Typography>
+                    <Typography
+                      variant="body1"
+                      className={classes.wordbreak}
+                      align="center"
+                    >
+                      {`http://${window.location.hostname}:3000/account/register/${user.id}`}
+                    </Typography>
+                  </Box>
                 </ListItem>
               </List>
             </Paper>{" "}
@@ -189,11 +200,18 @@ function DashboardPage() {
                   : null
               }
             >
-              <ListItem>
+              <ListItem className={classes.cardheader}>
                 <ListItemAvatar>
-                <img src={require("../icons/star.svg")} className={classes.avateref} />
+                  <img
+                    src={require("../icons/star.svg")}
+                    className={classes.avateref}
+                  />
                 </ListItemAvatar>
-                <ListItemText primary="Referrals earnings" />
+                <ListItemText
+                  primary={
+                    <Typography variant="h6">Referral earnings</Typography>
+                  }
+                />
               </ListItem>
               <CardContent>
                 <Pagnition
@@ -207,10 +225,12 @@ function DashboardPage() {
                   {currentPost.map((data, index) => (
                     <ListItem key={index}>
                       <ListItemText
-                        primary={data.user}
+                        primary={data.from}
                         secondary={`@ ${data.date}`}
                       />
-                      <Typography variant="h6">{`$ ${data.amount}`}</Typography>
+                      <Typography variant="h6">
+                        {data.deposit_amount}
+                      </Typography>
                     </ListItem>
                   ))}
                 </List>

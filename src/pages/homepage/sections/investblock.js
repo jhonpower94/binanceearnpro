@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AppContext } from "../../../App";
-import { dataArray } from "../../../service/tradeblocks";
+import { blocks } from "../../../service/tradeblocks";
 import {
   Typography,
   Box,
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 function InvestBlock(props) {
   const classes = useStyles();
-  const { blocks, page } = props;
+  const { blocksHome, page } = props;
   const [arrays, setArrays] = useState([]);
   const { intro, setIntro } = useContext(AppContext);
 
@@ -38,8 +38,8 @@ function InvestBlock(props) {
       layout: <IntroHeaderPages title="Invest Title" image="copytradewhite.svg" />,
     });
     window.scrollTo(0, 0);
-    const newBlock = dataArray.slice(0, 3);
-    blocks ? setArrays(newBlock) : setArrays(dataArray);
+    const newBlock = blocks.slice(0, 3);
+    blocksHome ? setArrays(newBlock) : setArrays(blocks);
   }, []);
 
   return (

@@ -2,14 +2,23 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Pagnition from "../../../components/pagination";
+import { useSelector, useDispatch } from "react-redux";
 import {
   ListItem,
   ListItemText,
   Typography,
-  Paper,
+  Card,
   Button,
+  List,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  CardHeader,
+  Box,
+  Divider,
 } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
+import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
+import { navigate } from "@reach/router";
 
 const useStyles = makeStyles((theme) => ({
   column: {
@@ -25,7 +34,14 @@ const useStyles = makeStyles((theme) => ({
   space: {
     flexGrow: 1,
   },
+  bgheader: {
+    background: theme.palette.primary.main,
+    color: theme.palette.getContrastText("#000000"),
+  },
 }));
+
+const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
+  .currencycode;
 
 const arrayDatas = [
   {
@@ -61,72 +77,103 @@ const currenttrading = (tradeprefix) => {
 
 function Investment() {
   const classes = useStyles();
-
+  const investments = useSelector((state) => state.investment.trades);
+  const [withdrawn, setwithdrawn] = useState(false);
   const [currentpage, setCurrentpage] = useState(1);
   const [postperpage, setPostperpage] = useState(4);
   // get current post
   const indexofLastpost = currentpage * postperpage;
   const indexofFirstpage = indexofLastpost - postperpage;
-  const currentPost = arrayDatas.slice(indexofFirstpage, indexofLastpost);
+  const currentPost = investments.slice(indexofFirstpage, indexofLastpost);
   // change page
   const paginate = (pagenumber) => setCurrentpage(pagenumber);
 
   useEffect(() => {}, []);
 
+  const withdraw = (data) => {
+    console.log(data.id);
+  };
+
   return (
     <React.Fragment>
-      <Container maxWidth="md">
-        <Grid container spacing={5}>
-          {currentPost.map((data, index) => (
-            <Grid item xs={12} sm={6} key={index}>
-              <Paper className={classes.column}>
-                <ListItem className={classes.row}>
-                  <ListItemText
-                    primary={data.name}
-                    secondary={`${data.days} investment`}
-                  />
-                  <img
-                    src={require(data.trading
-                      ? "../icons/trading.svg"
-                      : "../icons/success.svg")}
-                  />
-                  
-                </ListItem>
-                <ListItem className={classes.row}>
-                  <ListItemText
-                    primary="Deposit amount"
-                    secondary={`@ ${data.date} ${data.time}`}
-                  />
-                  <Typography variant="h5">{`$ ${data.deposit_amount}`}</Typography>
-                </ListItem>
-                <ListItem className={classes.row}>
-                  <ListItemText
-                    primary={
-                      data.trading ? `current trade value` : `Returned amount`
-                    }
-                    secondary={
-                      data.trading
-                        ? `Today @ ${new Date().toLocaleTimeString()}`
-                        : `@ ${data.date} ${data.time}`
-                    }
-                  />
-                  <Typography variant="h5">
-                    {data.trading
-                      ? `${currenttrading()}%`
-                      : `$ ${data.return_amount}`}
-                  </Typography>
-                </ListItem>
-              </Paper>
-            </Grid>
-          ))}
-          <Grid item xs={12} sm={12}>
-            <Pagnition
-              postperpage={postperpage}
-              totalpost={arrayDatas.length}
-              paginate={paginate}
-            />
-          </Grid>
-        </Grid>
+      <Container maxWidth="sm">
+        <Card variant="outlined">
+          <CardHeader title="My investments" className={classes.bgheader} />
+          <Box display="flex" justifyContent="center" m={1}>
+            {withdrawn ? (
+              <Typography variant="caption" color="error">
+                sorry cannot withdraw 0.00 amount
+              </Typography>
+            ) : null}
+          </Box>
+          <List>
+            {currentPost.map((data, index) => (
+              <div key={index}>
+                <CardHeader
+                  title={
+                    <Typography variant="h5">{data.block_name}</Typography>
+                  }
+                  subheader={
+                    <Typography variant="subtitle2">{data.date}</Typography>
+                  }
+                  avatar={
+                    data.complete ? (
+                      <img
+                        src={require("../../../images/investdot.svg")}
+                        height="30"
+                      />
+                    ) : (
+                      <img
+                        src={require("../../../images/signaldot.svg")}
+                        height="30"
+                      />
+                    )
+                  }
+                  action={
+                    !data.return_amount ? (
+                      <Typography variant="h5">
+                        {formatLocaleCurrency(
+                          data.deposit_amount,
+                          defaultCurrency,
+                          {
+                            autoFixed: false,
+                          }
+                        )}
+                      </Typography>
+                    ) : (
+                      <Typography variant="h5">
+                        {formatLocaleCurrency(
+                          data.return_amount,
+                          defaultCurrency,
+                          { autoFixed: false }
+                        )}
+                      </Typography>
+                    )
+                  }
+                />
+
+                <Box display="flex" justifyContent="center">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => withdraw(data)}
+                    disabled={!data.complete || data.withdrawn}
+                  >
+                    Withdraw
+                  </Button>
+                </Box>
+                <Divider variant="inset" component="li" />
+              </div>
+            ))}
+          </List>
+        </Card>
+        <Box m={2}>
+          <Pagnition
+            postperpage={postperpage}
+            totalpost={arrayDatas.length}
+            paginate={paginate}
+          />
+        </Box>
       </Container>
     </React.Fragment>
   );

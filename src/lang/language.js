@@ -9,7 +9,7 @@ function GetCustomInterfaceLanguage() {
 export const Strings = new LocalizedStrings(
   {
     en: english,
-    it: italy,
+    IT: italy,
   },
   {
     customLanguageInterface: GetCustomInterfaceLanguage,

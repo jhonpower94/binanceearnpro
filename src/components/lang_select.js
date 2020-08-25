@@ -132,7 +132,7 @@ function SelectLanguage() {
             title: "IT",
             countrycode: "IT",
             duration: "500ms",
-            languagecode: "it",
+            languagecode: "IT",
           },
           {
             title: "PT",
