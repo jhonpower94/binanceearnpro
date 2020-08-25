@@ -73,10 +73,9 @@ const currenttrading = (tradeprefix) => {
   return 15;
 };
 
-const userid = JSON.parse(window.localStorage.getItem("userdata")).id;
-
 function WithdrawBonus() {
   const classes = useStyles();
+  const userid = JSON.parse(window.localStorage.getItem("userdata")).id;
   const dispatch = useDispatch();
   const bonus = useSelector((state) => state.bonus.bonus);
   const [withdrawn, setwithdrawn] = useState(false);

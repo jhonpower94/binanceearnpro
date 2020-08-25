@@ -203,7 +203,7 @@ function DashboardPage() {
               <ListItem className={classes.cardheader}>
                 <ListItemAvatar>
                   <img
-                    src={require("../icons/star.svg")}
+                    src={require("../icons/bonus.svg")}
                     className={classes.avateref}
                   />
                 </ListItemAvatar>

@@ -100,11 +100,12 @@ let converter = new Converter(
   "OpenExchangeRates",
   "67eb8de24a554b9499d1d1bf919c93a3"
 );
-const currencyCode = JSON.parse(window.localStorage.getItem("country"))
-  .currencycode;
+
 
 function Invest() {
   const classes = useStyles();
+  const currencyCode = JSON.parse(window.localStorage.getItem("country"))
+  .currencycode;
   const dispatch = useDispatch();
   const {
     paymentInfo,

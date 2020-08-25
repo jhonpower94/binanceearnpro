@@ -13,6 +13,7 @@ import {
   bonusbalance$,
   myinvestment$,
   notification$,
+  locationinfo$,
 } from "../../redux/action";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AppBar from "@material-ui/core/AppBar";
@@ -190,6 +191,8 @@ function DashboardLayout(props) {
               await reactLocalStorage.setObject("country", {
                 country: val.country,
               });
+
+              await dispatch(locationinfo$(val));
             };
 
             currencyandBalance().then(() => {

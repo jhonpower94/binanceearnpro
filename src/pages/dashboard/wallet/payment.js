@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { AppContext } from "../../../App";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loading$, loadingpayment$ } from "../../../redux/action";
 import { auth, firestore, docData } from "../../../config";
 import {
@@ -65,11 +65,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const storagedata = reactLocalStorage.getObject("paymentInfo");
-const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
 
 function Wallet() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const currentUserId = useSelector(
+    (state) => state.locationinfo.locationinfo.id
+  );
   const [snackPack, setSnackPack] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const [messageInfo, setMessageInfo] = React.useState(undefined);

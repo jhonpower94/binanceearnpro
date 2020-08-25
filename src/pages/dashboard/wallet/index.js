@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { AppContext } from "../../../App";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loading$ } from "../../../redux/action";
 import {
   makeStyles,
@@ -63,12 +63,12 @@ const currencies = [
   },
 ];
 
-const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
-  .currencycode;
-
 function Wallet() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const defaultCurrency = useSelector(
+    (state) => state.locationinfo.locationinfo.country
+  );
   const { paymentInfo, setPaymentInfo, user } = useContext(AppContext);
   const [minimum_deposit, setMinimum_deposit] = useState();
   const [amounterr, setAmountErr] = useState(false);

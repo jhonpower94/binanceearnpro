@@ -40,12 +40,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
-  .currencycode;
-const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
 
 function Invoice() {
   const classes = useStyles();
+  const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
+  .currencycode;
+const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
 
   const dispatch = useDispatch();
   const { paymentInfo, setPaymentInfo, user, setUser } = useContext(AppContext);

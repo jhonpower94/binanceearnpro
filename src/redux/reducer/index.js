@@ -111,6 +111,19 @@ const notifications = (state = { notification: [] }, action) => {
   }
 };
 
+const locationinfo = (
+  state = { locationinfo: [{ country: "", id: "", wallet_balance: 0 }] },
+  action
+) => {
+  const newlocation = { ...state, locationinfo: action.payload };
+  switch (action.type) {
+    case "LOCATIONINFO":
+      return newlocation;
+    default:
+      return state;
+  }
+};
+
 export const allreducer = combineReducers({
   language: languageSelected,
   darkMode: darkMode,
@@ -122,4 +135,5 @@ export const allreducer = combineReducers({
   bonus: bonus,
   investment: investment,
   notification: notifications,
+  locationinfo: locationinfo,
 });

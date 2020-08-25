@@ -17,13 +17,12 @@ const useStyles = makeStyles((theme) => ({
 const storageData = JSON.parse(window.localStorage.getItem("userdata"));
 const paymentInfo = JSON.parse(window.localStorage.getItem("paymentInfo"));
 
-const currentUserId = storageData.id;
-const blockindex = paymentInfo.blockindex;
-const depositamount = parseInt(paymentInfo.amount);
-const referrerpercentage = (4 / 100) * depositamount;
-
 function PaymentSuccess() {
   const classes = useStyles();
+  const currentUserId = storageData.id;
+  const blockindex = paymentInfo.blockindex;
+  const depositamount = parseInt(paymentInfo.amount);
+  const referrerpercentage = (4 / 100) * depositamount;
   const dispatch = useDispatch();
   const [valid, setValid] = useState(true);
   const isLoading = useSelector((state) => state.loadingpayment);

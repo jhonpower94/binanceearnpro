@@ -16,18 +16,21 @@ const useStyles = makeStyles((theme) => ({
 
 const storageData = JSON.parse(window.localStorage.getItem("userdata"));
 const paymentInfo = JSON.parse(window.localStorage.getItem("paymentInfo"));
-const walletAmount = JSON.parse(window.localStorage.getItem("userdata"))
-  .wallet_balance;
-const currentUserId = storageData.id;
 
-const depositamount = paymentInfo.amount;
-const newWalletamount = depositamount + walletAmount;
 
-const doc = firestore.doc(`users/${currentUserId}`);
 
 function CreditSucess() {
   const classes = useStyles();
+  const depositamount = paymentInfo.amount;
   const dispatch = useDispatch();
+  const walletAmount = useSelector(
+    (state) => state.locationinfo.locationinfo.wallet_balance
+  );
+  const currentUserId = useSelector(
+    (state) => state.locationinfo.locationinfo.id
+  );
+  const doc = firestore.doc(`users/${currentUserId}`);
+  const newWalletamount = depositamount + walletAmount;
   const isLoading = useSelector((state) => state.loadingpayment);
   const { setIntro } = useContext(AppContext);
   const [userInfo, setUserInfo] = useState({

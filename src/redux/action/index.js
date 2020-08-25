@@ -84,3 +84,10 @@ export const notification$ = (data) => {
     payload: data,
   };
 };
+
+export const locationinfo$ = (data) => {
+  return {
+    type: "LOCATIONINFO",
+    payload: data,
+  };
+};

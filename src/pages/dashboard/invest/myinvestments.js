@@ -40,9 +40,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
-  .currencycode;
-
 const arrayDatas = [
   {
     name: "SHB & HZX",
@@ -77,6 +74,8 @@ const currenttrading = (tradeprefix) => {
 
 function Investment() {
   const classes = useStyles();
+  const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
+    .currencycode;
   const investments = useSelector((state) => state.investment.trades);
   const [withdrawn, setwithdrawn] = useState(false);
   const [currentpage, setCurrentpage] = useState(1);
