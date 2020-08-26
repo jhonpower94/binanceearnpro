@@ -174,7 +174,7 @@ function Wallet() {
                       </InputLabel>
                       <OutlinedInput
                         id="outlined-adornment-amount"
-                        value={Math.floor(paymentInfo.amount) + 1}
+                        value={Math.floor(paymentInfo.amount) }
                         onChange={(e) =>
                           setPaymentInfo({
                             ...paymentInfo,

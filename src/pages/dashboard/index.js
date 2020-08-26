@@ -487,7 +487,7 @@ function DashboardLayout(props) {
       m={2}
     >
       <Typography variant="caption">
-        &copy; Hotbloq, LLC, {new Date().toLocaleDateString()}.
+        &copy; Coinspringinvest, INC, {new Date().toLocaleDateString()}.
       </Typography>
     </Box>
   );
