@@ -105,6 +105,8 @@ function DasboardMenu() {
     navigate("../account/resetpassword");
   }
 
+  const avaterstring = `${info.firstName}`;
+
   useEffect(() => {}, []);
 
   return (
@@ -116,7 +118,10 @@ function DasboardMenu() {
       </Button>
 
       <IconButton edge="end" color="primary" onClick={handleClickUser}>
-        <Avatar className={classes.orange}>J</Avatar>
+        <Avatar className={classes.orange}>
+         
+          {avaterstring.substring(0,1)}
+        </Avatar>
       </IconButton>
 
       <StyledMenu
@@ -158,7 +163,10 @@ function DasboardMenu() {
       >
         <Fade in={Boolean(anchorElUser)} style={{ transitionDelay: "100ms" }}>
           <MenuItem>
-            <ListItemText primary={`${info.firstName} ${info.lastName}`} secondary={info.email} />
+            <ListItemText
+              primary={`${info.firstName} ${info.lastName}`}
+              secondary={info.email}
+            />
           </MenuItem>
         </Fade>
 
