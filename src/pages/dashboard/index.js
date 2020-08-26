@@ -186,7 +186,11 @@ function DashboardLayout(props) {
           const datas = firestore.doc(`users/${user.uid}`);
           docData(datas, "id").subscribe((val) => {
             reactLocalStorage.setObject("userdata", val); // for collecting user id on transaction
-            setUser({ ...user, ...val });
+            if (isNaN(val.wallet_balance)) {
+              setUser({ ...user, wallet_balance: 0 });
+            } else {
+              setUser({ ...user, ...val });
+            }
 
             const currencyandBalance = async () => {
               await reactLocalStorage.setObject("country", {
@@ -289,14 +293,25 @@ function DashboardLayout(props) {
               })
             )
           );
-
-          //total profits
-          const totlProfit = (totalPercentage / 100) * totalDeposit;
-          dispatch(
-            totalprofit$(
-              formatLocaleCurrency(totlProfit, newCurcode, { autoFixed: false })
-            )
-          );
+          if (isNaN(totalPercentage)) {
+            dispatch(
+              totalprofit$(
+                formatLocaleCurrency(0, newCurcode, {
+                  autoFixed: false,
+                })
+              )
+            );
+          } else {
+            //total profits
+            const totlProfit = (totalPercentage / 100) * totalDeposit;
+            dispatch(
+              totalprofit$(
+                formatLocaleCurrency(totlProfit, newCurcode, {
+                  autoFixed: false,
+                })
+              )
+            );
+          }
         });
 
         //total withdrawn
@@ -637,7 +652,7 @@ function DashboardLayout(props) {
             <PulseLoader
               css={override}
               size={30}
-              color={"#ef6c00"}
+              color={"#2196f3"}
               loading={true}
             />
           </Box>

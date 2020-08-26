@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import { SmsRounded } from "@material-ui/icons";
 import { deepOrange } from "@material-ui/core/colors";
+import { navigate } from "@reach/router";
 
 const useStyles = makeStyles((theme) => ({
   large: {
@@ -36,17 +37,17 @@ function Support() {
         <Paper>
          <CardHeader action={
            <img
-           src={require("../icons/support.svg")}
+           src={require("../../homepage/images/message.svg")}
            alt="image"
            width="80"
          />
          }
-         title="Live Support"
+         title="24 hours Customer Support"
          subheader="chat with our 24/7 customer support service"
          />
           <CardContent>
-            <Button variant="contained" color="primary" fullWidth>
-              Start Chat
+            <Button variant="contained" color="primary" fullWidth onClick={()=>navigate("https://coinspringinvest.net/support")}>
+              Contact Us
             </Button>
           </CardContent>
         </Paper>

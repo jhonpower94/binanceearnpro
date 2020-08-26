@@ -54,7 +54,7 @@ function VerifyEmailSent(props) {
           <img
             src={require("../../images/logo.png")}
             height={
-              useMediaQuery(useTheme().breakpoints.up("sm")) ? "100px" : "80px"
+              useMediaQuery(useTheme().breakpoints.up("sm")) ? "70px" : "50px"
             }
           />
         </div>
