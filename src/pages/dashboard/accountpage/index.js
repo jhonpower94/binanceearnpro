@@ -24,6 +24,7 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Pagnition from "../../../components/pagination";
+import { navigate } from "@reach/router";
 
 const useStyles = makeStyles((theme) => ({
   column: {
@@ -257,7 +258,7 @@ function DashboardPage() {
             </Card>
           </Grid>
           {useMediaQuery(useTheme().breakpoints.up("sm")) ? null : (
-            <Fab color="primary" aria-label="add" className={classes.fab}>
+            <Fab color="primary" aria-label="add" className={classes.fab} onClick={()=>navigate("invest")}>
               <AddIcon />
             </Fab>
           )}

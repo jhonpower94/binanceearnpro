@@ -454,7 +454,7 @@ function DashboardLayout(props) {
       submenu: [],
     },
     {
-      name: "My trades",
+      name: "My investment",
       link: "investments",
       avater: <BusinessCenterSharp color="primary" />,
       submenu: [],

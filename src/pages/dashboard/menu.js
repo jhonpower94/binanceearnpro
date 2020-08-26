@@ -158,7 +158,7 @@ function DasboardMenu() {
       >
         <Fade in={Boolean(anchorElUser)} style={{ transitionDelay: "100ms" }}>
           <MenuItem>
-            <ListItemText primary="Jhon snow" secondary="jhon@gmail.com" />
+            <ListItemText primary={`${info.firstName} ${info.lastName}`} secondary={info.email} />
           </MenuItem>
         </Fade>
 
