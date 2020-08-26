@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Pagnition from "../../../components/pagination";
 import { useSelector, useDispatch } from "react-redux";
+import { selectedmenuItem$ } from "../../../redux/action";
 import {
   ListItem,
   ListItemText,
@@ -77,6 +78,7 @@ function Investment() {
   const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
     .currencycode;
   const investments = useSelector((state) => state.investment.trades);
+  const dispatch = useDispatch();
   const [withdrawn, setwithdrawn] = useState(false);
   const [currentpage, setCurrentpage] = useState(1);
   const [postperpage, setPostperpage] = useState(4);
@@ -87,7 +89,10 @@ function Investment() {
   // change page
   const paginate = (pagenumber) => setCurrentpage(pagenumber);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    dispatch(selectedmenuItem$(2));
+  }, []);
 
   const withdraw = (data) => {
     console.log(data.id);

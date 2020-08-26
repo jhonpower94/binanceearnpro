@@ -32,8 +32,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://coinspringinvest.net">
+        coinspringinvest
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -106,7 +106,7 @@ export default function SignIn() {
           .signInWithEmailAndPassword(values.email, values.password)
           .then(() => {
             dispatch(loading$());
-            navigate("dashboard");
+            navigate("/");
           })
           .catch((err) => {
             dispatch(loading$());
@@ -124,7 +124,7 @@ export default function SignIn() {
       <div className={classes.paper}>
         <div className={classes.avatar}>
           <img
-            src={require("../../images/logodesktop.svg")}
+            src={require("../../images/logo.png")}
             height={
               useMediaQuery(useTheme().breakpoints.up("sm")) ? "100px" : "80px"
             }

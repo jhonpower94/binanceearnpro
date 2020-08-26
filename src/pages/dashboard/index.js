@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
     [theme.breakpoints.up("sm")]: {
       display: "none",
     },
@@ -156,8 +156,9 @@ function DashboardLayout(props) {
   const dispatch = useDispatch();
   const currentStrings = useSelector((state) => state.language);
   const loading = useSelector((state) => state.loading);
+  const select = useSelector((state) => state.selectetedmenu.number);
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [selecteditem, setSelecteditem] = React.useState(null);
+  const [selecteditem, setSelecteditem] = React.useState(select);
   const [selecteditemSub, setSelecteditemSub] = React.useState(null);
   const [selectedSub, setSelectedSub] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
@@ -426,37 +427,37 @@ function DashboardLayout(props) {
   const sideNavlinks = [
     {
       name: currentStrings.Nav.Dashboard,
-      link: "dashboard",
+      link: "",
 
       avater: <AccountBalance color="primary" />,
       submenu: [],
     },
     {
       name: currentStrings.Nav.invest,
-      link: "dashboard/invest",
+      link: "invest",
       avater: <MonetizationOnSharp color="primary" />,
       submenu: [],
     },
     {
       name: "My trades",
-      link: "dashboard/investments",
+      link: "investments",
       avater: <BusinessCenterSharp color="primary" />,
       submenu: [],
     },
     {
       name: "Withdraw bonus",
-      link: "dashboard/withdraw/bonus",
+      link: "withdraw/bonus",
       avater: <GetAppSharp color="primary" />,
     },
     {
       name: "Wallet",
-      link: "dashboard/wallet",
+      link: "wallet",
       avater: <AccountBalanceWallet color="primary" />,
       submenu: [],
     },
     {
       name: currentStrings.Nav.support,
-      link: "dashboard/support",
+      link: "support",
       avater: <LiveHelp color="primary" />,
       submenu: [],
     },
@@ -470,7 +471,6 @@ function DashboardLayout(props) {
       alignItems="center"
       m={2}
     >
-      <img src={require("../../images/mobile.svg")} width="30" />
       <Typography variant="caption">
         &copy; Hotbloq, LLC, {new Date().toLocaleDateString()}.
       </Typography>
@@ -480,10 +480,6 @@ function DashboardLayout(props) {
   const drawer = (
     <div>
       <List component="nav">
-        <ListItem>
-          <Nightmode />
-        </ListItem>
-        <Divider />
         {sideNavlinks.map((links, index) => (
           <div key={index}>
             <ListItem
@@ -559,15 +555,15 @@ function DashboardLayout(props) {
           </IconButton>
           {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
             <img
-              src={require("../../images/logodesktop.svg")}
+              src={require("../../images/logo.png")}
               alt="logo"
               width="150px"
             />
           ) : (
             <img
-              src={require("../../images/mobile.svg")}
+              src={require("../../images/logo.png")}
               alt="logo"
-              height="50px"
+              height="25px"
             />
           )}
           <SelectLanguage />
@@ -652,5 +648,14 @@ function DashboardLayout(props) {
     </div>
   );
 }
+
+/* 
+  <ListItem>
+          <Nightmode />
+        </ListItem>
+        <Divider />
+
+        <img src={require("../../images/mobile.svg")} width="30" />
+*/
 
 export default DashboardLayout;

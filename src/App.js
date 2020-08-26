@@ -114,7 +114,7 @@ function App() {
         main: secondary,
       },
       action: {
-        selected: "#ef6c001f",
+        selected: "#2196f33d",
       },
     },
   });
@@ -132,6 +132,21 @@ function App() {
     });
     */
   }, []);
+
+  /*
+<HomeLayout path="/">
+              <Home path="/" />
+              <InvestBlock path="invest" />
+              <Signal path="signals" />
+              <About path="about" />
+              <Locations path="locations" />
+              <BlocDatas path="tradedatas" />
+              <Downloads path="downloads/:page" />
+              <Contactus path="contact" />
+              <Guide path="guide" />
+              <Security path="security/:page" />
+            </HomeLayout>
+  */
 
   return (
     <Provider store={store}>
@@ -157,20 +172,7 @@ function App() {
       >
         <ThemeProvider theme={theme}>
           <Router>
-            <HomeLayout path="/">
-              <Home path="/" />
-              <InvestBlock path="invest" />
-              <Signal path="signals" />
-              <About path="about" />
-              <Locations path="locations" />
-              <BlocDatas path="tradedatas" />
-              <Downloads path="downloads/:page" />
-              <Contactus path="contact" />
-              <Guide path="guide" />
-              <Security path="security/:page" />
-            </HomeLayout>
-
-            <DashboardLayout path="dashboard">
+            <DashboardLayout path="/">
               <DashboardPage path="/" />
               <Invest path="invest" />
               <Investment path="investments" />

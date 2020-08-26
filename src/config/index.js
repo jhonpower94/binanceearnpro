@@ -7,14 +7,14 @@ import { collectionData, docData } from "rxfire/firestore";
 import { filter } from "rxjs/operators";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAvue4Nuo9hVT9ex5TGGsx0EB-fDxkATbQ",
-  authDomain: "hotblock-48cbf.firebaseapp.com",
-  databaseURL: "https://hotblock-48cbf.firebaseio.com",
-  projectId: "hotblock-48cbf",
-  storageBucket: "hotblock-48cbf.appspot.com",
-  messagingSenderId: "569044229872",
-  appId: "1:569044229872:web:2ef373868892454c286c35",
-  measurementId: "G-VS2EM66FF2",
+  apiKey: "AIzaSyDeGgFnprcPu0fryzS4KIjuElibM1fMkJg",
+  authDomain: "coinspringinvest.firebaseapp.com",
+  databaseURL: "https://coinspringinvest.firebaseio.com",
+  projectId: "coinspringinvest",
+  storageBucket: "coinspringinvest.appspot.com",
+  messagingSenderId: "337977634714",
+  appId: "1:337977634714:web:4c2947983842e02bc79423",
+  measurementId: "G-V2C6D61ZXQ",
 };
 const app = firebase.initializeApp(firebaseConfig);
 

@@ -124,6 +124,16 @@ const locationinfo = (
   }
 };
 
+const selectetedmenu = (state = { number: 0 }, action) => {
+  const select = { ...state, number: action.payload };
+  switch (action.type) {
+    case "SELECTED":
+      return select;
+    default:
+      return state;
+  }
+};
+
 export const allreducer = combineReducers({
   language: languageSelected,
   darkMode: darkMode,
@@ -136,4 +146,5 @@ export const allreducer = combineReducers({
   investment: investment,
   notification: notifications,
   locationinfo: locationinfo,
+  selectetedmenu: selectetedmenu,
 });

@@ -13,7 +13,8 @@ import { deepOrange, orange } from "@material-ui/core/colors";
 import { Button, Link } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
-import { app } from "../../config";
+import { locationinfo$ } from "../../redux/action";
+import { app, firestore } from "../../config";
 import { navigate } from "@reach/router";
 
 const useStyles = makeStyles((theme) => ({
@@ -58,6 +59,7 @@ function DasboardMenu() {
   const classes = useStyles();
   const currentStrings = useSelector((state) => state.language);
   const notifications = useSelector((state) => state.notification.notification);
+  const info = useSelector((state) => state.locationinfo.locationinfo);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -69,9 +71,22 @@ function DasboardMenu() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (link) => {
     setAnchorEl(null);
     setAnchorElUser(null);
+    console.log(link);
+    firestore
+      .doc(`users/${info.id}`)
+      .collection("notification")
+      .doc(link.id)
+      .delete()
+      .then(() => {
+        if (link.type === "investment") {
+          navigate("invest");
+        } else {
+          navigate("bonus");
+        }
+      });
   };
 
   function logOut() {
@@ -91,10 +106,6 @@ function DasboardMenu() {
   }
 
   useEffect(() => {}, []);
-
-  const selectNoty = (type) => {
-    console.log(type);
-  };
 
   return (
     <div className={classes.sectionDesktop}>
@@ -118,7 +129,10 @@ function DasboardMenu() {
       >
         {notifications.map((lnk, index) => (
           <Fade in={open} key={index} style={{ transitionDelay: lnk.duration }}>
-            <MenuItem onClick={handleClose} className={classes.flexcolumn}>
+            <MenuItem
+              onClick={() => handleClose(lnk)}
+              className={classes.flexcolumn}
+            >
               <Typography variant="subtitle2">
                 {new Date().toLocaleDateString()}
               </Typography>
@@ -129,14 +143,6 @@ function DasboardMenu() {
                 {lnk.type === "investment"
                   ? `Investment return of ${lnk.amount} @${lnk.date}`
                   : `you have recieves a bonus of from a user`}
-                <Link
-                  component="button"
-                  onClick={() => {
-                    selectNoty(lnk.type);
-                  }}
-                >
-                  check out
-                </Link>
               </Typography>
             </MenuItem>
           </Fade>

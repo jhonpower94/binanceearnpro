@@ -52,7 +52,7 @@ function VerifyEmailSent(props) {
       <div className={classes.paper}>
         <div className={classes.avatar}>
           <img
-            src={require("../../images/logodesktop.svg")}
+            src={require("../../images/logo.png")}
             height={
               useMediaQuery(useTheme().breakpoints.up("sm")) ? "100px" : "80px"
             }
@@ -75,22 +75,24 @@ function VerifyEmailSent(props) {
             <Link
               variant="body1"
               color="primary"
-              onClick={() => navigate("../../dashboard")}
+              onClick={() =>
+                (window.location.href = "../../")
+              }
               className={classes.margintop}
             >
               proceed to account
             </Link>
           </Typography>
           <Typography variant="subtitle2" align="center">
-              did not recieve email verification message {""}
-          <Link
-            variant="body1"
-            color="primary"
-            onClick={() => navigate("../verifyemail")}
-            className={classes.margintop}
-          >
-            resend
-          </Link>
+            did not recieve email verification message {""}
+            <Link
+              variant="body1"
+              color="primary"
+              onClick={() => navigate("../verifyemail")}
+              className={classes.margintop}
+            >
+              resend
+            </Link>
           </Typography>
         </Box>
       </div>

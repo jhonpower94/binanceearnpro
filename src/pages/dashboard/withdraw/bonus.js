@@ -17,7 +17,7 @@ import {
 } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import { useSelector, useDispatch } from "react-redux";
-import { loading$ } from "../../../redux/action";
+import { loading$, selectedmenuItem$ } from "../../../redux/action";
 import { firestore } from "../../../config";
 import { navigate } from "@reach/router";
 
@@ -88,7 +88,10 @@ function WithdrawBonus() {
   // change page
   const paginate = (pagenumber) => setCurrentpage(pagenumber);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    dispatch(selectedmenuItem$(3));
+  }, []);
 
   const withdraw = (data) => {
     dispatch(loading$());

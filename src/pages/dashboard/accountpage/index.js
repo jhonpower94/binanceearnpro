@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AppContext } from "../../../App";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { selectedmenuItem$ } from "../../../redux/action";
 import clsx from "clsx";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -19,6 +20,7 @@ import {
   CardContent,
   Fab,
   Box,
+  Card,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Pagnition from "../../../components/pagination";
@@ -75,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
 
 function DashboardPage() {
   const { userData, user, balance } = useContext(AppContext);
+  const dispatch = useDispatch();
   const mainbalance = useSelector((state) => state.balance);
   const referralData = useSelector((state) => state.bonus.bonus);
   const activities = useSelector((state) => state.activities);
@@ -123,12 +126,15 @@ function DashboardPage() {
     },
   ];
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    dispatch(selectedmenuItem$(0));
+  }, []);
 
   return (
     <React.Fragment>
       <Container maxWidth="md">
-        <Grid container spacing={5}>
+        <Grid container spacing={5} justify="center">
           {balanceData.map((data, index) => (
             <Grid item xs={12} sm={6} key={index}>
               <Paper className={classes.column}>
@@ -173,22 +179,6 @@ function DashboardPage() {
                     </ListItemSecondaryAction>
                   </ListItem>
                 ))}
-                <ListItem>
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                  >
-                    <Typography>Referral ID</Typography>
-                    <Typography
-                      variant="body1"
-                      className={classes.wordbreak}
-                      align="center"
-                    >
-                      {`http://${window.location.hostname}:3000/account/register/${user.id}`}
-                    </Typography>
-                  </Box>
-                </ListItem>
               </List>
             </Paper>{" "}
           </Grid>
@@ -244,6 +234,27 @@ function DashboardPage() {
                 </CardContent>
               )}
             </Paper>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Card variant="outlined">
+              <CardContent>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  m={3}
+                >
+                  <Typography>Referral ID</Typography>
+                  <Typography
+                    variant="body1"
+                    className={classes.wordbreak}
+                    align="center"
+                  >
+                    {`http://${window.location.hostname}:3000/account/register/${user.id}`}
+                  </Typography>
+                </Box>
+              </CardContent>
+            </Card>
           </Grid>
           {useMediaQuery(useTheme().breakpoints.up("sm")) ? null : (
             <Fab color="primary" aria-label="add" className={classes.fab}>

@@ -91,3 +91,10 @@ export const locationinfo$ = (data) => {
     payload: data,
   };
 };
+
+export const selectedmenuItem$ = (data) => {
+  return {
+    type: "SELECTED",
+    payload: data,
+  };
+};

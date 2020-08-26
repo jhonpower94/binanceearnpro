@@ -65,10 +65,9 @@ const currencies = [
 
 function Wallet() {
   const classes = useStyles();
+  const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
+    .currencycode;
   const dispatch = useDispatch();
-  const defaultCurrency = useSelector(
-    (state) => state.locationinfo.locationinfo.country
-  );
   const { paymentInfo, setPaymentInfo, user } = useContext(AppContext);
   const [minimum_deposit, setMinimum_deposit] = useState();
   const [amounterr, setAmountErr] = useState(false);
@@ -136,7 +135,7 @@ function Wallet() {
             <CardHeader title="My wallet" className={classes.bgheader} />
             <CardContent>
               <Box display="flex" flexDirection="column" alignItems="center">
-                <Typography variant="h2">
+                <Typography variant="h4">
                   {formatLocaleCurrency(user.wallet_balance, defaultCurrency, {
                     autoFixed: false,
                   })}
