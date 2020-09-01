@@ -112,16 +112,22 @@ function DasboardMenu() {
   return (
     <div className={classes.sectionDesktop}>
       <Button onClick={handleClick} color="primary">
-        <Badge variant="dot" color="primary">
+        <Badge
+          variant={notifications.length > 0 ? "dot" : null}
+          color="primary"
+        >
           <NotificationsSharpIcon color="action" />
         </Badge>
       </Button>
 
       <IconButton edge="end" color="primary" onClick={handleClickUser}>
-        <Avatar className={classes.orange}>
-         
-          {avaterstring.substring(0,1)}
-        </Avatar>
+        <Badge variant={info.approved ? null : "dot"} color="primary">
+          <Avatar
+            className={classes.orange}
+            src={info.profile_image}
+            alt={info.firstName}
+          />
+        </Badge>
       </IconButton>
 
       <StyledMenu

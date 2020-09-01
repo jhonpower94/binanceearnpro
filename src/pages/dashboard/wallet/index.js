@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { AppContext } from "../../../App";
 import { useDispatch, useSelector } from "react-redux";
-import { loading$ } from "../../../redux/action";
+import { loading$, selectedmenuItem$ } from "../../../redux/action";
 import {
   makeStyles,
   Container,
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(5),
   },
   bgheader: {
-    background: "#1835c0",
+    background: theme.palette.primary.main,
     color: theme.palette.getContrastText("#1835c0"),
   },
 }));
@@ -74,10 +74,10 @@ function Wallet() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    converter.convert(50, "USD", defaultCurrency).then((vl) => {
-      setPaymentInfo({ ...paymentInfo, amount: vl });
-      setMinimum_deposit(vl);
-    });
+    dispatch(selectedmenuItem$(4));
+
+    setPaymentInfo({ ...paymentInfo, amount: 50 });
+    setMinimum_deposit(50);
   }, []);
 
   const CoinpaymentsCreateTransactionOpts = {
@@ -131,7 +131,7 @@ function Wallet() {
     <Container>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
-          <Paper>
+          <Card>
             <CardHeader title="My wallet" className={classes.bgheader} />
             <CardContent>
               <Box display="flex" flexDirection="column" alignItems="center">
@@ -153,10 +153,10 @@ function Wallet() {
                 </Typography>
               </ListItem>
             </CardContent>
-          </Paper>
+          </Card>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper>
+          <Card>
             <CardHeader title="Credit wallet" className={classes.bgheader} />
             <CardContent>
               <Box m={2}>
@@ -174,7 +174,7 @@ function Wallet() {
                       </InputLabel>
                       <OutlinedInput
                         id="outlined-adornment-amount"
-                        value={Math.floor(paymentInfo.amount) }
+                        value={Math.floor(paymentInfo.amount)}
                         onChange={(e) =>
                           setPaymentInfo({
                             ...paymentInfo,
@@ -235,7 +235,7 @@ function Wallet() {
                 </Box>
               ) : null}
             </CardContent>
-          </Paper>
+          </Card>
         </Grid>
       </Grid>
     </Container>

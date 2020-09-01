@@ -16,6 +16,7 @@ import {
   List,
   Box,
   CardHeader,
+  Card,
 } from "@material-ui/core";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -28,7 +29,7 @@ import {
 import { blocks } from "../../../service/tradeblocks";
 import Pagnition from "../../../components/pagination";
 import { useSelector, useDispatch } from "react-redux";
-import { blocks$ } from "../../../redux/action";
+import { selectedmenuItem$ } from "../../../redux/action";
 import { ajax } from "rxjs/ajax";
 import { map, catchError } from "rxjs/operators";
 import { of, from, Observabl } from "rxjs";
@@ -101,11 +102,10 @@ let converter = new Converter(
   "67eb8de24a554b9499d1d1bf919c93a3"
 );
 
-
 function Invest() {
   const classes = useStyles();
   const currencyCode = JSON.parse(window.localStorage.getItem("country"))
-  .currencycode;
+    .currencycode;
   const dispatch = useDispatch();
   const {
     paymentInfo,
@@ -158,6 +158,7 @@ function Invest() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    dispatch(selectedmenuItem$(1));
   }, []);
 
   return (
@@ -216,17 +217,10 @@ function Invest() {
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               <Grid item xs={12} sm={4}>
-                <Paper className={classes.column}>
+                <Card className={classes.column}>
                   <div className={classes.headerbg}>
                     <CardHeader
-                      avatar={
-                        <Avatar className={classes.avatar}>
-                          <Typography>&#128176;</Typography>
-                        </Avatar>
-                      }
-                      action={
-                        <Typography variant="h6">{trade.name}</Typography>
-                      }
+                      title={<Typography variant="h6">{trade.name}</Typography>}
                     />
                   </div>
 
@@ -234,7 +228,7 @@ function Invest() {
                     <ListItem>
                       <ListItemText primary="Minimun stake" />
                       <Typography variant="h5">
-                        {formatLocaleCurrency(trade.lot, currencyCode, {
+                        {formatLocaleCurrency(trade.lot, "USD", {
                           autoFixed: false,
                         })}
                       </Typography>
@@ -259,7 +253,7 @@ function Invest() {
                       </Button>
                     </ListItem>
                   </List>
-                </Paper>
+                </Card>
               </Grid>
             </Fade>
           ))}

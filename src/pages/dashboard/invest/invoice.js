@@ -70,7 +70,7 @@ const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
     },
     {
       name: "Deposit Amount",
-      value: formatLocaleCurrency(paymentInfo.amount, defaultCurrency, {
+      value: formatLocaleCurrency(paymentInfo.amount, "USD", {
         autoFixed: false,
       }),
     },
@@ -78,7 +78,7 @@ const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
       name: "Minimun Stake",
       value: formatLocaleCurrency(
         Math.floor(paymentInfo.block.lot) + 1,
-        defaultCurrency,
+        "USD",
         { autoFixed: false }
       ),
     },
@@ -91,7 +91,7 @@ const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
         selectedValue === "wallet" ? "Remaining Balance" : "Payment Currency",
       value:
         selectedValue === "wallet"
-          ? formatLocaleCurrency(user.wallet_balance, defaultCurrency, {
+          ? formatLocaleCurrency(user.wallet_balance, "USD", {
               autoFixed: false,
             })
           : paymentInfo.cryptoType,
@@ -287,7 +287,7 @@ const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
                   }}
                   startAdornment={
                     <InputAdornment position="start">
-                      {defaultCurrency}
+                      USD
                     </InputAdornment>
                   }
                   labelWidth={60}

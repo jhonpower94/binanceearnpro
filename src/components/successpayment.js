@@ -21,25 +21,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const storageData = JSON.parse(window.localStorage.getItem("userdata"));
-const paymentInfo = JSON.parse(window.localStorage.getItem("paymentInfo"));
+const paymentInfostorage = JSON.parse(
+  window.localStorage.getItem("paymentInfo")
+);
 
 function PaymentSuccess() {
   const classes = useStyles();
-  const currentUserId = storageData.id;
+  const { setIntro, paymentInfo } = useContext(AppContext);
+  const userInfos = useSelector((state) => state.locationinfo.locationinfo);
+  const currentUserId = userInfos.id;
   const currencySymbol = JSON.parse(window.localStorage.getItem("country"))
     .currencycode;
-  const blockindex = paymentInfo.blockindex;
+  const blockindex = paymentInfostorage.blockindex;
   const depositamount = parseInt(paymentInfo.amount);
-  const referrerpercent = (4 / 100) * depositamount;
-  const referrerpercentage = converter.convert(
-    referrerpercent,
-    currencySymbol,
-    "USD"
-  );
+  const referrerpercent = (5 / 100) * depositamount;
+
   const dispatch = useDispatch();
   const [valid, setValid] = useState(true);
   const isLoading = useSelector((state) => state.loadingpayment);
-  const { setIntro } = useContext(AppContext);
   const [userInfo, setUserInfo] = useState({
     name: "",
     id: "",
@@ -62,7 +61,7 @@ function PaymentSuccess() {
           .doc(`users/${currentUserId}`)
           .collection("deposits")
           .add({
-            block_name: paymentInfo.block.name,
+            block_name: paymentInfostorage.block.name,
             deposit_amount: depositamount,
             amount: depositamount,
             userid: currentUserId,
@@ -86,38 +85,57 @@ function PaymentSuccess() {
                 depositid: depositid,
                 duration: paymentInfo.block.duration,
                 currency: currencySymbol,
+                rate: paymentInfo.block.rate,
               },
             }).subscribe(() => {
               console.log("started cron");
+
               dispatch(loadingpayment$());
-              const referrer = storageData.referrer;
-              const referrerId = storageData.referrerid;
+              const referrer = userInfos.referrer;
+              const referrerId = userInfos.referrerid;
+
+              // add to all transaction
+              firestore.collection("alldeposits").add({
+                type: "investment",
+                block_name: paymentInfostorage.block.name,
+                deposit_amount: depositamount,
+                amount: depositamount,
+                userid: currentUserId,
+                email: userInfos.email,
+                firstname: userInfos.firstName,
+                lastname: userInfos.lastName,
+                date: new Date().toLocaleDateString(),
+                created_at: firebase.firestore.FieldValue.serverTimestamp(),
+              });
               if (referrer) {
                 //add referrer bonus is true
                 firestore
-                  .doc(`users/${referrerId}`)
+                  .collection("users")
+                  .doc(referrerId)
                   .collection("bonus")
                   .add({
-                    amount: referrerpercentage,
-                    deposit_amount: referrerpercentage,
-                    from: storageData.firstName,
+                    amount: referrerpercent,
+                    deposit_amount: referrerpercent,
+                    from: userInfos.firstName,
                     date: new Date().toLocaleDateString(),
                   })
                   .then(() => {
                     //add notification to referrer database
-                    console.log(`referral percentage: ${referrerpercentage}`);
+                    console.log(`referral percentage: ${referrerpercent}`);
                     firestore
                       .doc(`users/${referrerId}`)
                       .collection("notification")
                       .add({
                         date: new Date().toLocaleDateString(),
                         time: new Date().toLocaleTimeString(),
-                        amount: referrerpercentage,
+                        amount: referrerpercent,
                         type: "Bonus",
                       });
                   })
+
                   .then(() => {
                     console.log("transactions complete");
+                    dispatch(loading$());
                     navigate("complete");
                   });
               } else {

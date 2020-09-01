@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const storagedata = reactLocalStorage.getObject("paymentInfo");
+const storagedata = window.localStorage.getItem("paymentInfo");
 
 function Wallet() {
   const classes = useStyles();
@@ -118,9 +118,6 @@ function Wallet() {
   useEffect(() => {
     window.scrollTo(0, 0);
     console.log(JSON.parse(window.localStorage.getItem("paymentInfo")));
-    console.log(
-      JSON.parse(window.localStorage.getItem("userdata")).wallet_balance
-    );
 
     setPaymentInfo({
       ...paymentInfo,
@@ -175,7 +172,7 @@ function Wallet() {
       setUserInfo({ ...userInfo, name: user.displayName, id: user.uid });
     });
 
-    console.log(storagedata);
+    console.log(paymentInfo);
     console.log(currentUserId);
 
     // check transactions status

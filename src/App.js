@@ -14,6 +14,7 @@ import DashboardPage from "./pages/dashboard/accountpage";
 import MyInvestments from "./pages/dashboard/allinvestments";
 import Exchange from "./pages/dashboard/currencyexchange";
 import Wallet from "./pages/dashboard/wallet";
+import Profile from "./pages/dashboard/profile";
 import CreditWallet from "./pages/dashboard/wallet/payment";
 import CreditSucess from "./pages/dashboard/wallet/creditsuccess";
 import Invest from "./pages/dashboard/invest";
@@ -28,6 +29,8 @@ import SignUpReferral from "./pages/account/signupreferral";
 import VerifyEmail from "./pages/account/verifyemail";
 import VerifyEmailSent from "./pages/account/sentverification";
 import ResetPassword from "./pages/account/resetpass";
+import SignInAdmin from "./pages/admin/login";
+import DashboardAdmin from "./pages/admin/dashboard";
 import InvestBlock from "./pages/homepage/sections/investblock";
 import Home from "./pages/homepage/sections/home";
 import Signal from "./pages/homepage/sections/signal";
@@ -39,9 +42,13 @@ import Guide from "./pages/homepage/sections/guide";
 import Downloads from "./pages/homepage/sections/downloads";
 import Security from "./pages/homepage/sections/security";
 import { reactLocalStorage } from "reactjs-localstorage";
+import Kyc from "./pages/admin/kyc";
+import Investments from "./pages/admin/investments";
+import TransactionsAdmin from "./pages/admin/transactions";
 import Payment from "./components/payment";
 import PaymentSuccess from "./components/successpayment";
 import Complete from "./components/complete";
+import AdminLayout from "./pages/admin";
 import { ajax } from "rxjs/ajax";
 import { map, catchError } from "rxjs/operators";
 import { of } from "rxjs";
@@ -183,7 +190,7 @@ function App() {
               <Wallet path="wallet" />
               <CreditWallet path="payment_wallet" />
               <CreditSucess path="credit_success" />
-              <Exchange path="exchange" />
+              <Profile path="profile" />
               <AccountSettings path="settings/:page" />
               <Support path="support" />
               <Payment path="payment" />
@@ -193,12 +200,20 @@ function App() {
 
             <AccountLayout path="account">
               <SignIn path="/" />
+              <SignInAdmin path="admin" />
               <SignUp path="register" />
               <SignUpReferral path="register/:id" />
               <VerifyEmail path="verifyemail" />
               <VerifyEmailSent path="emailsent/:email" />
               <ResetPassword path="resetpassword" />
             </AccountLayout>
+
+            <AdminLayout path="manager">
+              <DashboardAdmin path="/" />
+              <TransactionsAdmin path="transactions" />
+              <Kyc path="kyc" />
+              <Investments path="investments" />
+            </AdminLayout>
           </Router>
         </ThemeProvider>
       </AppContext.Provider>

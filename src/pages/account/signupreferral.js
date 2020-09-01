@@ -29,7 +29,7 @@ import getSymbolFromCurrency from "currency-symbol-map";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { countrylist } from "../../config/countrylist";
 import { from } from "rxjs";
-import { app } from "../../config";
+import firebase, { app } from "../../config";
 import { addUsers } from "../../config/services";
 import { dispatch } from "rxjs/internal/observable/pairs";
 import { navigate } from "@reach/router";
@@ -153,6 +153,7 @@ export default function SignUpReferral(props) {
       country: values.country,
       mobilecode: intro.mobilecode,
       referrer: true,
+      registered: firebase.firestore.FieldValue.serverTimestamp(),
       referrerid: id,
     };
     app

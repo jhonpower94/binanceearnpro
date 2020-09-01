@@ -66,7 +66,6 @@ const useStyles = makeStyles((theme) => ({
 
 const storagedata = reactLocalStorage.getObject("paymentInfo");
 
-
 function Payment() {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -109,10 +108,6 @@ function Payment() {
     {
       name: "Recieved amount",
       value: trx_info.receivedf,
-    },
-    {
-      name: "Reamaining",
-      value: trx_info.amount - trx_info.received,
     },
   ];
 

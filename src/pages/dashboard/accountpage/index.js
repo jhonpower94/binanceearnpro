@@ -7,7 +7,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+import Script from "react-load-script";
 import {
   ListItem,
   ListItemText,
@@ -77,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function DashboardPage() {
+  const classes = useStyles();
   const { userData, user, balance } = useContext(AppContext);
   const dispatch = useDispatch();
   const mainbalance = useSelector((state) => state.balance);
@@ -84,7 +85,6 @@ function DashboardPage() {
   const activities = useSelector((state) => state.activities);
   const [currentpage, setCurrentpage] = useState(1);
   const [postperpage, setPostperpage] = useState(3);
-  const classes = useStyles();
 
   const indexofLastpost = currentpage * postperpage;
   const indexofFirstpage = indexofLastpost - postperpage;
@@ -136,11 +136,28 @@ function DashboardPage() {
     <React.Fragment>
       <Container maxWidth="md">
         <Grid container spacing={5} justify="center">
+          <Grid item xs={12} sm={12}>
+            <coingecko-coin-price-marquee-widget
+              coin-ids="bitcoin,ethereum,eos,ripple,litecoin"
+              currency="usd"
+              background-color="#ffffff"
+              locale="en"
+            ></coingecko-coin-price-marquee-widget>
+            <coingecko-coin-compare-chart-widget
+              coin-ids="bitcoin,ethereum,eos,ripple,litecoin"
+              currency="usd"
+              locale="en"
+            ></coingecko-coin-compare-chart-widget>
+            <Script url="https://widgets.coingecko.com/coingecko-coin-price-marquee-widget.js" />
+            <Script url="https://widgets.coingecko.com/coingecko-coin-compare-chart-widget.js" />
+          </Grid>
+        </Grid>
+        <Grid container spacing={5} justify="center">
           {balanceData.map((data, index) => (
             <Grid item xs={12} sm={6} key={index}>
-              <Paper className={classes.column}>
+              <Card className={classes.column}>
                 <CardHeader
-                  title={data.title}
+                  title={<Typography variant="h6">{data.title}</Typography>}
                   action={<img src={data.Avater} width="50" />}
                   className={classes.cardheader}
                 />
@@ -155,11 +172,11 @@ function DashboardPage() {
                     />
                   </div>
                 </div>
-              </Paper>
+              </Card>
             </Grid>
           ))}
           <Grid item xs={12} sm={7}>
-            <Paper>
+            <Card>
               <ListItem className={classes.cardheader}>
                 <ListItemAvatar>
                   <img
@@ -181,10 +198,10 @@ function DashboardPage() {
                   </ListItem>
                 ))}
               </List>
-            </Paper>{" "}
+            </Card>{" "}
           </Grid>
           <Grid item xs={12} sm={5}>
-            <Paper
+            <Card
               className={
                 useMediaQuery(useTheme().breakpoints.up("sm"))
                   ? classes.height
@@ -234,7 +251,7 @@ function DashboardPage() {
                   </Typography>
                 </CardContent>
               )}
-            </Paper>
+            </Card>
           </Grid>
           <Grid item xs={12} sm={12}>
             <Card variant="outlined">
@@ -258,7 +275,12 @@ function DashboardPage() {
             </Card>
           </Grid>
           {useMediaQuery(useTheme().breakpoints.up("sm")) ? null : (
-            <Fab color="primary" aria-label="add" className={classes.fab} onClick={()=>navigate("invest")}>
+            <Fab
+              color="primary"
+              aria-label="add"
+              className={classes.fab}
+              onClick={() => navigate("invest")}
+            >
               <AddIcon />
             </Fab>
           )}

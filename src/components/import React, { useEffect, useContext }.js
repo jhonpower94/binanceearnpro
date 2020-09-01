@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from "react";
-import clsx from "clsx";
 import { AppContext } from "../../App";
 import "./dashboard.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,7 +14,6 @@ import {
   myinvestment$,
   notification$,
   locationinfo$,
-  selectedmenuItem$,
 } from "../../redux/action";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AppBar from "@material-ui/core/AppBar";
@@ -48,7 +46,7 @@ import {
   AccountBalanceWallet,
   LiveHelp,
 } from "@material-ui/icons";
-import { ListItemAvatar, Box, Typography, Link } from "@material-ui/core";
+import { ListItemAvatar, Box, Typography } from "@material-ui/core";
 import firebase, {
   loggedIn$,
   firestore,
@@ -106,9 +104,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   // necessary for content to be below app bar
-  toolbar: {
-    marginTop: theme.spacing(15),
-  },
+  toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
   },
@@ -137,19 +133,6 @@ const useStyles = makeStyles((theme) => ({
   },
   spacing: {
     flexGrow: 1,
-  },
-  link: {
-    marginRight: theme.spacing(3),
-    cursor: "pointer",
-  },
-  linkcolor: {
-    color: theme.palette.getContrastText("#000000"),
-  },
-
-  ceneter: {
-    textAlign: "center",
-    display: "flex",
-    overflow: "auto",
   },
 }));
 
@@ -224,6 +207,17 @@ function DashboardLayout(props) {
               const newCurcode = getCountry(country).currency; // currency code
               const newCursymbol = getSymbolFromCurrency(newCurcode); // currency code
 
+              blocks.forEach((vl, index) => {
+                converter
+                  .convert(vl.lot, "USD", newCurcode)
+                  .then((val) => {
+                    vl.lot = val;
+                    console.log(val);
+                  })
+                  .then(() => navigate(""))
+                  .catch((err) => console.log(err));
+              });
+
               setValues({
                 ...values,
                 currencyCode: newCurcode,
@@ -266,7 +260,7 @@ function DashboardLayout(props) {
 
           dispatch(
             mainbalance$(
-              formatLocaleCurrency(Math.floor(returnTotal), "USD", {
+              formatLocaleCurrency(Math.floor(returnTotal), newCurcode, {
                 autoFixed: false,
               })
             )
@@ -294,7 +288,7 @@ function DashboardLayout(props) {
 
           dispatch(
             totaldeposit$(
-              formatLocaleCurrency(totalDeposit, "USD", {
+              formatLocaleCurrency(totalDeposit, newCurcode, {
                 autoFixed: false,
               })
             )
@@ -302,7 +296,7 @@ function DashboardLayout(props) {
           if (isNaN(totalPercentage)) {
             dispatch(
               totalprofit$(
-                formatLocaleCurrency(0, "USD", {
+                formatLocaleCurrency(0, newCurcode, {
                   autoFixed: false,
                 })
               )
@@ -312,7 +306,7 @@ function DashboardLayout(props) {
             const totlProfit = (totalPercentage / 100) * totalDeposit;
             dispatch(
               totalprofit$(
-                formatLocaleCurrency(totlProfit, "USD", {
+                formatLocaleCurrency(totlProfit, newCurcode, {
                   autoFixed: false,
                 })
               )
@@ -335,7 +329,7 @@ function DashboardLayout(props) {
 
           dispatch(
             totalwithdrawn$(
-              formatLocaleCurrency(totalwithdrawn, "USD", {
+              formatLocaleCurrency(totalwithdrawn, newCurcode, {
                 autoFixed: false,
               })
             )
@@ -352,33 +346,45 @@ function DashboardLayout(props) {
           const bonusTotalRecieved = data.reduce((prv, cur) => {
             return prv + cur.amount;
           }, 0);
-          dispatch(
-            totalbonusearned$(
-              formatLocaleCurrency(bonusTotalRecieved, "USD", {
-                autoFixed: false,
-              })
-            )
-          );
+          converter
+            .convert(bonusTotalRecieved, "USD", newCurcode)
+            .then((vl) => {
+              dispatch(
+                totalbonusearned$(
+                  formatLocaleCurrency(vl, newCurcode, { autoFixed: false })
+                )
+              );
+            });
 
           // main remaining bonus balance
           const bonusCurrentBalance = data.reduce((prv, cur) => {
             return prv + cur.deposit_amount;
           }, 0);
-
-          dispatch(
-            bonusbalance$(
-              formatLocaleCurrency(Math.floor(bonusCurrentBalance), "USD", {
-                autoFixed: false,
-              })
-            )
-          );
+          // convert bonus remaining balance to default currency
+          converter
+            .convert(bonusCurrentBalance, "USD", newCurcode)
+            .then((val) => {
+              dispatch(
+                bonusbalance$(
+                  formatLocaleCurrency(Math.floor(val), newCurcode, {
+                    autoFixed: false,
+                  })
+                )
+              );
+            });
 
           // bonus collections
           data.forEach((val, index) => {
-            val.deposit_amount = formatLocaleCurrency(val.deposit_amount, "USD", {
-              autoFixed: false,
-            });
-            dispatch(bonusCollections$(data));
+            converter
+              .convert(val.deposit_amount, "USD", newCurcode)
+              .then((vl) => {
+                val.deposit_amount = formatLocaleCurrency(vl, newCurcode, {
+                  autoFixed: false,
+                });
+                dispatch(bonusCollections$(data));
+              })
+              .then(() => navigate(""))
+              .catch((err) => console.log(err));
           });
         });
 
@@ -486,16 +492,6 @@ function DashboardLayout(props) {
     </Box>
   );
 
-  const link = [
-    { name: "Account", link: "" },
-    { name: "Invest", link: "invest" },
-    { name: "Investments", link: "investments" },
-    { name: "Bonus", link: "withdraw/bonus" },
-    { name: "Wallet", link: "wallet" },
-    { name: "Profile", link: "profile" },
-    { name: "Support", link: "support" },
-  ];
-
   const drawer = (
     <div>
       <List component="nav">
@@ -561,8 +557,17 @@ function DashboardLayout(props) {
       }
     >
       <CssBaseline />
-      <AppBar color="secondary">
+      <AppBar color="secondary" position="fixed" className={classes.appBar}>
         <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
           {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
             <img
               src={require("../../images/logo.png")}
@@ -593,33 +598,48 @@ function DashboardLayout(props) {
                   />
                 </ListItemAvatar>
 
-                <ListItemText primary="USD" />
+                <ListItemText primary={values.currencyCode} />
               </ListItem>
             </Box>
           ) : null}
           <DasboardMenu />
         </Toolbar>
-        <Toolbar>
-          <div className={classes.ceneter}>
-            {link.map((lnk, index) => (
-              <Link
-                key={index}
-                component="button"
-                variant="body1"
-                className={
-                  select == index
-                    ? classes.link
-                    : clsx(classes.link, classes.linkcolor)
-                }
-                onClick={() => navigate(`/${lnk.link}`)}
-              >
-                {lnk.name}
-              </Link>
-            ))}
-          </div>
-        </Toolbar>
       </AppBar>
-
+      <nav className={classes.drawer} aria-label="mailbox folders">
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Hidden smUp implementation="css">
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === "rtl" ? "right" : "left"}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+          >
+            {drawer}
+            <span className={classes.spacing} />
+            {footer}
+          </Drawer>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer}
+            <span className={classes.spacing} />
+            {footer}
+          </Drawer>
+        </Hidden>
+      </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {loading.loading ? (
@@ -637,7 +657,7 @@ function DashboardLayout(props) {
             />
           </Box>
         ) : (
-          <React.Fragment>{props.children}</React.Fragment>
+          props.children
         )}
       </main>
     </div>
@@ -654,3 +674,15 @@ function DashboardLayout(props) {
 */
 
 export default DashboardLayout;
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDeGgFnprcPu0fryzS4KIjuElibM1fMkJg",
+    authDomain: "coinspringinvest.firebaseapp.com",
+    databaseURL: "https://coinspringinvest.firebaseio.com",
+    projectId: "coinspringinvest",
+    storageBucket: "coinspringinvest.appspot.com",
+    messagingSenderId: "337977634714",
+    appId: "1:337977634714:web:4c2947983842e02bc79423",
+    measurementId: "G-V2C6D61ZXQ",
+  };

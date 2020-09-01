@@ -1,0 +1,15 @@
+home 
+about us
+faqs
+support
+trades
+contact us
+
+onClick={() => {
+                  reactLocalStorage.setObject("var", {
+                    darkmode: !darktheme.status,
+                  });
+                  setDarktheme({
+                    status: reactLocalStorage.getObject("var").darkmode,
+                  });
+                }}

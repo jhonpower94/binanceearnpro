@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Pagnition from "../../../components/pagination";
 import { useSelector, useDispatch } from "react-redux";
 import { selectedmenuItem$ } from "../../../redux/action";
+import firebase, { firestore } from "../../../config";
 import {
   ListItem,
   ListItemText,
@@ -20,6 +21,13 @@ import {
 import Container from "@material-ui/core/Container";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import { navigate } from "@reach/router";
+import { GetAppSharp, FiberManualRecordSharp } from "@material-ui/icons";
+const { Converter } = require("easy-currencies");
+
+let converter = new Converter(
+  "OpenExchangeRates",
+  "67eb8de24a554b9499d1d1bf919c93a3"
+);
 
 const useStyles = makeStyles((theme) => ({
   column: {
@@ -75,6 +83,8 @@ const currenttrading = (tradeprefix) => {
 
 function Investment() {
   const classes = useStyles();
+  const storageData = JSON.parse(window.localStorage.getItem("userdata"));
+  const currentUserId = storageData.id;
   const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
     .currencycode;
   const investments = useSelector((state) => state.investment.trades);
@@ -92,17 +102,43 @@ function Investment() {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(selectedmenuItem$(2));
+    converter.convert("500", "USD", "EUR").then((v) => console.log(v));
   }, []);
 
   const withdraw = (data) => {
     console.log(data.id);
+
+    firestore
+      .collection("transactions")
+      .add({
+        type: "Plan withdrawal",
+        action: "withdrawal",
+        pending: true,
+        name: data.block_name,
+        return_amount: data.return_amount,
+        date: new Date().toLocaleDateString(),
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        email: storageData.email,
+        firstname: storageData.firstName,
+        lastname: storageData.lastName,
+      })
+      .then(() => {
+        firestore
+          .doc(`users/${currentUserId}`)
+          .collection("deposits")
+          .doc(data.id)
+          .update({
+            return_amount: 0,
+            withdrawn: true,
+          });
+      });
   };
 
   return (
     <React.Fragment>
       <Container maxWidth="sm">
         <Card variant="outlined">
-          <CardHeader title="My investments" className={classes.bgheader} />
+          <CardHeader title={<Typography variant="h6">My investments</Typography>} />
           <Box display="flex" justifyContent="center" m={1}>
             {withdrawn ? (
               <Typography variant="caption" color="error">
@@ -122,35 +158,23 @@ function Investment() {
                   }
                   avatar={
                     data.complete ? (
-                      <img
-                        src={require("../../../images/investdot.svg")}
-                        height="30"
-                      />
+                      <FiberManualRecordSharp color="primary" />
                     ) : (
-                      <img
-                        src={require("../../../images/signaldot.svg")}
-                        height="30"
-                      />
+                      <FiberManualRecordSharp color="disabled" />
                     )
                   }
                   action={
                     !data.return_amount ? (
                       <Typography variant="h5">
-                        {formatLocaleCurrency(
-                          data.deposit_amount,
-                          defaultCurrency,
-                          {
-                            autoFixed: false,
-                          }
-                        )}
+                        {formatLocaleCurrency(data.deposit_amount, "USD", {
+                          autoFixed: false,
+                        })}
                       </Typography>
                     ) : (
                       <Typography variant="h5">
-                        {formatLocaleCurrency(
-                          data.return_amount,
-                          defaultCurrency,
-                          { autoFixed: false }
-                        )}
+                        {formatLocaleCurrency(data.return_amount, "USD", {
+                          autoFixed: false,
+                        })}
                       </Typography>
                     )
                   }
@@ -158,7 +182,8 @@ function Investment() {
 
                 <Box display="flex" justifyContent="center">
                   <Button
-                    variant="contained"
+                    variant="text"
+                    startIcon={<GetAppSharp />}
                     color="primary"
                     onClick={() => withdraw(data)}
                     disabled={!data.complete || data.withdrawn}

@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { selectedmenuItem$ } from "../../../redux/action";
 import {
   Container,
   Paper,
   Box,
   CardContent,
-  Avatar,
-  ListItem,
-  Typography,
   Button,
   CardHeader,
 } from "@material-ui/core";
@@ -29,24 +28,33 @@ const useStyles = makeStyles((theme) => ({
 
 function Support() {
   const classes = useStyles();
-  useEffect(() => {}, []);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(selectedmenuItem$(6));
+  }, []);
 
   return (
     <React.Fragment>
       <Container maxWidth="sm">
         <Paper>
-         <CardHeader action={
-           <img
-           src={require("../../homepage/images/message.svg")}
-           alt="image"
-           width="80"
-         />
-         }
-         title="24 hours Customer Support"
-         subheader="chat with our 24/7 customer support service"
-         />
+          <CardHeader
+            action={
+              <img
+                src={require("../../homepage/images/message.svg")}
+                alt="image"
+                width="80"
+              />
+            }
+            title="24 hours Customer Support"
+            subheader="chat with our 24/7 customer support service"
+          />
           <CardContent>
-            <Button variant="contained" color="primary" fullWidth onClick={()=>navigate("https://coinspringinvest.net/support")}>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              onClick={() => navigate("https://coinspringinvest.net/support")}
+            >
               Contact Us
             </Button>
           </CardContent>

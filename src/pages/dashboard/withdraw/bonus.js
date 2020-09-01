@@ -18,8 +18,9 @@ import {
 import Container from "@material-ui/core/Container";
 import { useSelector, useDispatch } from "react-redux";
 import { loading$, selectedmenuItem$ } from "../../../redux/action";
-import { firestore } from "../../../config";
+import firebase, { firestore } from "../../../config";
 import { navigate } from "@reach/router";
+import { GetAppSharp } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   column: {
@@ -76,6 +77,7 @@ const currenttrading = (tradeprefix) => {
 function WithdrawBonus() {
   const classes = useStyles();
   const userid = JSON.parse(window.localStorage.getItem("userdata")).id;
+  const storageData = JSON.parse(window.localStorage.getItem("userdata"));
   const dispatch = useDispatch();
   const bonus = useSelector((state) => state.bonus.bonus);
   const [withdrawn, setwithdrawn] = useState(false);
@@ -105,8 +107,23 @@ function WithdrawBonus() {
         withdrawn: true,
       })
       .then(() => {
-        dispatch(loading$());
-        navigate("../complete");
+        firestore
+          .collection("transactions")
+          .add({
+            type: "Bonus withdrawal",
+            action: "withdrawal",
+            pending: true,
+            return_amount: data.amount,
+            date: new Date().toLocaleDateString(),
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            email: storageData.email,
+            firstname: storageData.firstName,
+            lastname: storageData.lastName,
+          })
+          .then(() => {
+            dispatch(loading$());
+            navigate("../complete");
+          });
       });
   };
 
@@ -114,7 +131,7 @@ function WithdrawBonus() {
     <React.Fragment>
       <Container maxWidth="sm">
         <Card variant="outlined">
-          <CardHeader title="Bonus" className={classes.bgheader} />
+          <CardHeader title={<Typography variant="h6">Recieved bonus</Typography>} />
           <Box display="flex" justifyContent="center" m={1}>
             {withdrawn ? (
               <Typography variant="caption" color="error">
@@ -135,7 +152,8 @@ function WithdrawBonus() {
 
                 <Box display="flex" justifyContent="center">
                   <Button
-                    variant="contained"
+                    variant="text"
+                    startIcon={<GetAppSharp />}
                     color="primary"
                     disabled={data.withdrawn}
                     onClick={() => withdraw(data)}

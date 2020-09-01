@@ -15,13 +15,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const storageData = JSON.parse(window.localStorage.getItem("userdata"));
-const paymentInfo = JSON.parse(window.localStorage.getItem("paymentInfo"));
-
-
+const paymentInfostorage = JSON.parse(
+  window.localStorage.getItem("paymentInfo")
+);
 
 function CreditSucess() {
   const classes = useStyles();
-  const depositamount = paymentInfo.amount;
+  const { setIntro, paymentInfo } = useContext(AppContext);
+  const depositamount = parseInt(paymentInfo.amount);
   const dispatch = useDispatch();
   const walletAmount = useSelector(
     (state) => state.locationinfo.locationinfo.wallet_balance
@@ -29,10 +30,10 @@ function CreditSucess() {
   const currentUserId = useSelector(
     (state) => state.locationinfo.locationinfo.id
   );
+  const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const doc = firestore.doc(`users/${currentUserId}`);
   const newWalletamount = depositamount + walletAmount;
   const isLoading = useSelector((state) => state.loadingpayment);
-  const { setIntro } = useContext(AppContext);
   const [userInfo, setUserInfo] = useState({
     name: "",
     id: "",
@@ -50,7 +51,6 @@ function CreditSucess() {
       return data;
     }
     if (isLoading.loading) {
-      dispatch(loading$());
       doc
         .update({
           wallet_balance: newWalletamount,
@@ -62,8 +62,26 @@ function CreditSucess() {
             created_at: firebase.firestore.FieldValue.serverTimestamp(),
             amount: depositamount,
           });
-        })
-        .then(dispatch(loading$()));
+        });
+      firestore.collection("alldeposits").add({
+        type: "wallet",
+        deposit_amount: depositamount,
+        created_at: firebase.firestore.FieldValue.serverTimestamp(),
+        email: userInfos.email,
+        firstname: userInfos.firstName,
+        lastname: userInfos.lastName,
+      });
+      firestore.collection("transactions").add({
+        type: "wallet deposit",
+        pending: false,
+        name: "wallet Deposit",
+        return_amount: depositamount,
+        date: new Date().toLocaleDateString(),
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        email: userInfos.email,
+        firstname: userInfos.firstName,
+        lastname: userInfos.lastName,
+      });
     } else {
       navigate("invest");
     }
