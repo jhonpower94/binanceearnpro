@@ -40,13 +40,13 @@ import Nightmode from "../../components/Darkmode";
 import { navigate } from "@reach/router";
 import {
   ExpandMoreSharp,
-  AddShoppingCartRounded,
   AccountBalance,
   MonetizationOnSharp,
   BusinessCenterSharp,
   GetAppSharp,
   AccountBalanceWallet,
   LiveHelp,
+  ArrowForwardIos,
 } from "@material-ui/icons";
 import { ListItemAvatar, Box, Typography, Link } from "@material-ui/core";
 import firebase, {
@@ -139,13 +139,15 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   link: {
-    marginRight: theme.spacing(3),
+    marginLeft: theme.spacing(3),
     cursor: "pointer",
   },
   linkcolor: {
     color: theme.palette.getContrastText("#000000"),
   },
-
+  linkarrow:{
+    marginLeft: theme.spacing(0.5),
+  },
   ceneter: {
     textAlign: "center",
     display: "flex",
@@ -375,9 +377,13 @@ function DashboardLayout(props) {
 
           // bonus collections
           data.forEach((val, index) => {
-            val.deposit_amount = formatLocaleCurrency(val.deposit_amount, "USD", {
-              autoFixed: false,
-            });
+            val.deposit_amount = formatLocaleCurrency(
+              val.deposit_amount,
+              "USD",
+              {
+                autoFixed: false,
+              }
+            );
             dispatch(bonusCollections$(data));
           });
         });
@@ -617,6 +623,7 @@ function DashboardLayout(props) {
               </Link>
             ))}
           </div>
+          <ArrowForwardIos fontSize="small" color="disabled" className={classes.linkarrow} />
         </Toolbar>
       </AppBar>
 
