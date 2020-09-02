@@ -134,6 +134,16 @@ const selectetedmenu = (state = { number: 0 }, action) => {
   }
 };
 
+const trxinfo = (state = {}, action) => {
+  const txinfo = { ...state, ...action.payload };
+  switch (action.type) {
+    case "TRXNS":
+      return txinfo;
+    default:
+      return state;
+  }
+};
+
 export const allreducer = combineReducers({
   language: languageSelected,
   darkMode: darkMode,
@@ -147,4 +157,5 @@ export const allreducer = combineReducers({
   notification: notifications,
   locationinfo: locationinfo,
   selectetedmenu: selectetedmenu,
+  trxinfo: trxinfo,
 });

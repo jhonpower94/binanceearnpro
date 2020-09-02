@@ -72,6 +72,7 @@ function Wallet() {
   const currentUserId = useSelector(
     (state) => state.locationinfo.locationinfo.id
   );
+  const txn_info = useSelector((state) => state.trxinfo);
   const [snackPack, setSnackPack] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const [messageInfo, setMessageInfo] = React.useState(undefined);
@@ -129,8 +130,7 @@ function Wallet() {
       .do(() => {
         client
           .getTx({
-            txid: JSON.parse(window.localStorage.getItem("paymentInfo"))
-              .txn_info.txn_id,
+            txid: txn_info.txn_id,
             full: 1,
           })
           .then((success) => {
@@ -201,7 +201,7 @@ function Wallet() {
             avatar="&#44444;"
             title={
               <Typography variant="h4" className={classes.italic}>
-                {storagedata.cryptoType}
+                {paymentInfo.cryptoType}
               </Typography>
             }
             action={

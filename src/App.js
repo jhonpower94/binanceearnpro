@@ -78,7 +78,7 @@ function App() {
     block: {},
     blockindex: 0,
     amount: 0,
-    cryptoType: "LTCT",
+    cryptoType: "BTC",
     userid: "",
     info: {},
   });

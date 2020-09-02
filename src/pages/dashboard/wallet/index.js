@@ -1,7 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
 import { AppContext } from "../../../App";
 import { useDispatch, useSelector } from "react-redux";
-import { loading$, selectedmenuItem$ } from "../../../redux/action";
+import {
+  loading$,
+  selectedmenuItem$,
+  transactionInfo$,
+} from "../../../redux/action";
 import {
   makeStyles,
   Container,
@@ -68,6 +72,7 @@ function Wallet() {
   const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
     .currencycode;
   const dispatch = useDispatch();
+
   const { paymentInfo, setPaymentInfo, user } = useContext(AppContext);
   const [minimum_deposit, setMinimum_deposit] = useState();
   const [amounterr, setAmountErr] = useState(false);
@@ -83,7 +88,7 @@ function Wallet() {
   const CoinpaymentsCreateTransactionOpts = {
     currency1: "USD",
     currency2: paymentInfo.cryptoType,
-    amount: 1,
+    amount: paymentInfo.amount,
     buyer_email: "jhonsnow751@gmail.com",
   };
 
@@ -97,13 +102,15 @@ function Wallet() {
     };
 
     const addToStorage = async (value) => {
-      await reactLocalStorage.setObject("paymentInfo", {
+      /*  await reactLocalStorage.setObject("paymentInfo", {
         ...storagedata,
         txn_info: value,
         amount: paymentInfo.amount,
         cryptoType: paymentInfo.cryptoType,
         active_transaction: false,
-      });
+      }); */
+
+      await dispatch(transactionInfo$(value));
     };
     dispatch(loading$());
     if (paymentInfo.amount >= minimum_deposit) {
@@ -196,7 +203,7 @@ function Wallet() {
                       select
                       size="small"
                       label="Currency"
-                      value="LTCT"
+                      value={paymentInfo.cryptoType}
                       onChange={(e) =>
                         setPaymentInfo({
                           ...paymentInfo,

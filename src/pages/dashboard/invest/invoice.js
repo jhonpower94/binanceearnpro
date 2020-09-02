@@ -1,7 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
 import { AppContext } from "../../../App";
 import { useDispatch } from "react-redux";
-import { loading$, loadingpayment$ } from "../../../redux/action";
+import {
+  loading$,
+  loadingpayment$,
+  transactionInfo$,
+} from "../../../redux/action";
 import { firestore } from "../../../config";
 import {
   makeStyles,
@@ -40,12 +44,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 function Invoice() {
   const classes = useStyles();
   const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
-  .currencycode;
-const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
+    .currencycode;
+  const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
 
   const dispatch = useDispatch();
   const { paymentInfo, setPaymentInfo, user, setUser } = useContext(AppContext);
@@ -119,7 +122,7 @@ const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
   const CoinpaymentsCreateTransactionOpts = {
     currency1: "USD",
     currency2: paymentInfo.cryptoType,
-    amount: 1,
+    amount: paymentInfo.amount,
     buyer_email: "jhonsnow751@gmail.com",
   };
   const storagedata = reactLocalStorage.getObject("paymentInfo");
@@ -130,6 +133,7 @@ const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
       await reactLocalStorage.remove("paymentInfo");
     };
     const addToStorage = async (value) => {
+      /*
       await reactLocalStorage.setObject("paymentInfo", {
         ...storagedata,
         txn_info: value,
@@ -139,6 +143,17 @@ const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
         cryptoType: paymentInfo.cryptoType,
         active_transaction: false,
       });
+      */
+      await dispatch(
+        transactionInfo$({
+          ...value,
+          block: paymentInfo.block,
+          blockindex: paymentInfo.blockindex,
+          amount: paymentInfo.amount,
+          cryptoType: paymentInfo.cryptoType,
+          active_transaction: false,
+        })
+      );
     };
     dispatch(loading$());
     if (paymentInfo.amount >= paymentInfo.block.lot) {
@@ -286,9 +301,7 @@ const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
                     });
                   }}
                   startAdornment={
-                    <InputAdornment position="start">
-                      USD
-                    </InputAdornment>
+                    <InputAdornment position="start">USD</InputAdornment>
                   }
                   labelWidth={60}
                 />

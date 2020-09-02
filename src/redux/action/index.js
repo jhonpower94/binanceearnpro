@@ -98,3 +98,11 @@ export const selectedmenuItem$ = (data) => {
     payload: data,
   };
 };
+
+export const transactionInfo$ = (data) => {
+  return {
+    type: "TRXNS",
+    payload: data,
+  };
+};
+

@@ -27,12 +27,13 @@ const paymentInfostorage = JSON.parse(
 
 function PaymentSuccess() {
   const classes = useStyles();
-  const { setIntro, paymentInfo } = useContext(AppContext);
+  const { paymentInfo } = useContext(AppContext);
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
+  const txn_info = useSelector((state) => state.trxinfo);
   const currentUserId = userInfos.id;
   const currencySymbol = JSON.parse(window.localStorage.getItem("country"))
     .currencycode;
-  const blockindex = paymentInfostorage.blockindex;
+  const blockindex = txn_info.blockindex;
   const depositamount = parseInt(paymentInfo.amount);
   const referrerpercent = (5 / 100) * depositamount;
 
@@ -61,7 +62,7 @@ function PaymentSuccess() {
           .doc(`users/${currentUserId}`)
           .collection("deposits")
           .add({
-            block_name: paymentInfostorage.block.name,
+            block_name: txn_info.block.name,
             deposit_amount: depositamount,
             amount: depositamount,
             userid: currentUserId,
@@ -97,7 +98,7 @@ function PaymentSuccess() {
               // add to all transaction
               firestore.collection("alldeposits").add({
                 type: "investment",
-                block_name: paymentInfostorage.block.name,
+                block_name: txn_info.block.name,
                 deposit_amount: depositamount,
                 amount: depositamount,
                 userid: currentUserId,

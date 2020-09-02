@@ -164,51 +164,6 @@ function Invest() {
   return (
     <React.Fragment>
       <Container maxWidth="md">
-        <div className={classes.margin}>
-          <Button
-            startIcon={<FilterListRounded />}
-            endIcon={open ? <ExpandLess /> : <ExpandMore />}
-            onClick={handleClick}
-          >
-            sort by
-          </Button>
-          <StyledMenu
-            id="fade-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={open}
-            onClose={handleClose}
-            TransitionComponent={Fade}
-          >
-            {[
-              {
-                title: "Highest",
-                click: sortFromHighest,
-              },
-              {
-                title: "Lowest",
-                click: sortFromLowest,
-              },
-            ].map((opt, index) => (
-              <MenuItem
-                onClick={() => {
-                  opt.click();
-                  handleClose();
-                }}
-                key={index}
-              >
-                <ListItemText primary={opt.title} />
-              </MenuItem>
-            ))}
-          </StyledMenu>
-          <span className={classes.space} />
-          <Pagnition
-            postperpage={postperpage}
-            totalpost={arrays.length}
-            paginate={paginate}
-          />
-        </div>
-
         <Grid container spacing={5} justify="center">
           {currentPost.map((trade, index) => (
             <Fade
@@ -264,3 +219,52 @@ function Invest() {
 }
 
 export default Invest;
+
+/*
+custom filter and pagnation
+
+<div className={classes.margin}>
+          <Button
+            startIcon={<FilterListRounded />}
+            endIcon={open ? <ExpandLess /> : <ExpandMore />}
+            onClick={handleClick}
+          >
+            sort by
+          </Button>
+          <StyledMenu
+            id="fade-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={open}
+            onClose={handleClose}
+            TransitionComponent={Fade}
+          >
+            {[
+              {
+                title: "Highest",
+                click: sortFromHighest,
+              },
+              {
+                title: "Lowest",
+                click: sortFromLowest,
+              },
+            ].map((opt, index) => (
+              <MenuItem
+                onClick={() => {
+                  opt.click();
+                  handleClose();
+                }}
+                key={index}
+              >
+                <ListItemText primary={opt.title} />
+              </MenuItem>
+            ))}
+          </StyledMenu>
+          <span className={classes.space} />
+          <Pagnition
+            postperpage={postperpage}
+            totalpost={arrays.length}
+            paginate={paginate}
+          />
+        </div>
+*/

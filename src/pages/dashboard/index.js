@@ -139,7 +139,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   link: {
-    marginLeft: theme.spacing(3),
+    marginRight: theme.spacing(3),
     cursor: "pointer",
   },
   linkcolor: {
