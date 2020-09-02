@@ -145,7 +145,7 @@ const useStyles = makeStyles((theme) => ({
   linkcolor: {
     color: theme.palette.getContrastText("#000000"),
   },
-  linkarrow:{
+  linkarrow: {
     marginLeft: theme.spacing(0.5),
   },
   ceneter: {
@@ -623,7 +623,16 @@ function DashboardLayout(props) {
               </Link>
             ))}
           </div>
-          <ArrowForwardIos fontSize="small" color="disabled" className={classes.linkarrow} />
+
+          <ArrowForwardIos
+            fontSize="small"
+            color="disabled"
+            className={
+              useMediaQuery(useTheme().breakpoints.up("sm"))
+                ? classes.displaynone
+                : classes.linkarrow
+            }
+          />
         </Toolbar>
       </AppBar>
 
