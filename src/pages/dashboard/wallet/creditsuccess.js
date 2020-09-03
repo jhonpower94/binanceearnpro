@@ -70,7 +70,7 @@ function CreditSucess() {
         email: userInfos.email,
         firstname: userInfos.firstName,
         lastname: userInfos.lastName,
-      });
+      })
       firestore.collection("transactions").add({
         type: "wallet deposit",
         pending: false,
@@ -81,7 +81,7 @@ function CreditSucess() {
         email: userInfos.email,
         firstname: userInfos.firstName,
         lastname: userInfos.lastName,
-      });
+      }).then(()=>navigate("complete"));
     } else {
       navigate("invest");
     }
