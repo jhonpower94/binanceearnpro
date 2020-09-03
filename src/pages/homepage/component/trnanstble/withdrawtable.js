@@ -122,8 +122,8 @@ export default function WithdrawTable() {
           <TableHead>
             <TableRow>
               <TableCell align="left">Description</TableCell>
-
               <TableCell align="right">Amount</TableCell>
+
               <TableCell align="left">Date</TableCell>
             </TableRow>
           </TableHead>
