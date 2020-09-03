@@ -21,10 +21,19 @@ import {
   Fab,
   Box,
   Card,
+  FormControl,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+  InputLabel,
+  Button,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Pagnition from "../../../components/pagination";
 import { navigate } from "@reach/router";
+import { FileCopySharp, CloseSharp } from "@material-ui/icons";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import Snackbar from "@material-ui/core/Snackbar";
 
 const useStyles = makeStyles((theme) => ({
   column: {
@@ -90,6 +99,11 @@ function DashboardPage() {
   const indexofFirstpage = indexofLastpost - postperpage;
   const currentPost = referralData.slice(indexofFirstpage, indexofLastpost);
 
+  // referral snackber
+  const [snackPack, setSnackPack] = React.useState([]);
+  const [open, setOpen] = React.useState(false);
+  const [messageInfo, setMessageInfo] = React.useState(undefined);
+
   // change page
   const paginate = (pagenumber) => setCurrentpage(pagenumber);
 
@@ -130,7 +144,31 @@ function DashboardPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(selectedmenuItem$(0));
-  }, []);
+    if (snackPack.length && !messageInfo) {
+      // Set a new snack when we don't have an active one
+      setMessageInfo({ ...snackPack[0] });
+      setSnackPack((prev) => prev.slice(1));
+      setOpen(true);
+    } else if (snackPack.length && messageInfo && open) {
+      // Close an active snack when a new one is added
+      setOpen(false);
+    }
+  }, [[snackPack, messageInfo, open]]);
+
+  const handleClick = (message) => () => {
+    setSnackPack((prev) => [...prev, { message, key: new Date().getTime() }]);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const handleExited = () => {
+    setMessageInfo(undefined);
+  };
 
   return (
     <React.Fragment>
@@ -262,14 +300,68 @@ function DashboardPage() {
                   alignItems="center"
                   m={3}
                 >
-                  <Typography>Referral ID</Typography>
-                  <Typography
-                    variant="body1"
-                    className={classes.wordbreak}
-                    align="center"
+                  <FormControl
+                    className={clsx(classes.margin, classes.textField)}
+                    variant="outlined"
+                    fullWidth
+                    disabled
+                    size="small"
                   >
-                    {`http://${window.location.hostname}:3000/account/register/${user.id}`}
-                  </Typography>
+                    <InputLabel htmlFor="referral-link">
+                      Referral link
+                    </InputLabel>
+                    <OutlinedInput
+                      id="referral-link"
+                      value={`http://${window.location.hostname}/account/register/${user.id}`}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <CopyToClipboard
+                            text={`http://${window.location.hostname}/account/register/${user.id}`}
+                            onCopy={handleClick("Link copied")}
+                          >
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              edge="end"
+                            >
+                              <FileCopySharp />
+                            </IconButton>
+                          </CopyToClipboard>
+                        </InputAdornment>
+                      }
+                      labelWidth={70}
+                    />
+                  </FormControl>
+                  <Snackbar
+                    key={messageInfo ? messageInfo.key : undefined}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    open={open}
+                    autoHideDuration={6000}
+                    onClose={handleClose}
+                    onExited={handleExited}
+                    message={messageInfo ? messageInfo.message : undefined}
+                    action={
+                      <React.Fragment>
+                        <Button
+                          color="secondary"
+                          size="small"
+                          onClick={handleClose}
+                        >
+                          UNDO
+                        </Button>
+                        <IconButton
+                          aria-label="close"
+                          color="inherit"
+                          className={classes.close}
+                          onClick={handleClose}
+                        >
+                          <CloseSharp />
+                        </IconButton>
+                      </React.Fragment>
+                    }
+                  />
                 </Box>
               </CardContent>
             </Card>

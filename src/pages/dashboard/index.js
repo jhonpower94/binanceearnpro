@@ -279,7 +279,7 @@ function DashboardLayout(props) {
         const allDeposits = firestore
           .doc(`users/${user.uid}`)
           .collection("deposits")
-          .orderBy("created_at", "desc");
+          .orderBy("created_at", "asc");
         collectionData(allDeposits, "id").subscribe((data) => {
           const country = JSON.parse(localStorage.getItem("country")).country;
           const newCurcode = getCountry(country).currency; // currency code
@@ -289,8 +289,11 @@ function DashboardLayout(props) {
           }, 0);
 
           const totalPercentage = data.reduce((prv, cur) => {
-            return prv + cur.percentage;
+            const pasint = parseInt(cur.percentage)
+            return prv + pasint;
           }, 0);
+
+          console.log(totalPercentage);
 
           dispatch(myinvestment$(data));
 

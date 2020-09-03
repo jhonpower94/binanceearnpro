@@ -86,7 +86,7 @@ function PaymentSuccess() {
                 depositid: depositid,
                 duration: paymentInfo.block.duration,
                 currency: currencySymbol,
-                rate: paymentInfo.block.rate,
+                rate: parseInt(paymentInfo.block.rate),
               },
             }).subscribe(() => {
               console.log("started cron");

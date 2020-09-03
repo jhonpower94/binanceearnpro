@@ -49,6 +49,9 @@ import Payment from "./components/payment";
 import PaymentSuccess from "./components/successpayment";
 import Complete from "./components/complete";
 import AdminLayout from "./pages/admin";
+import Tables from "./pages/homepage/component/trnanstble";
+import DepositTable from "./pages/homepage/component/trnanstble/depositable";
+import WithdrawTable from "./pages/homepage/component/trnanstble/withdrawtable";
 import { ajax } from "rxjs/ajax";
 import { map, catchError } from "rxjs/operators";
 import { of } from "rxjs";
@@ -214,6 +217,11 @@ function App() {
               <Kyc path="kyc" />
               <Investments path="investments" />
             </AdminLayout>
+
+            <Tables path="tables">
+              <WithdrawTable path="withdrawtable" />
+              <DepositTable path="depositable" />
+            </Tables>
           </Router>
         </ThemeProvider>
       </AppContext.Provider>

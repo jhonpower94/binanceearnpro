@@ -133,17 +133,6 @@ function Invoice() {
       await reactLocalStorage.remove("paymentInfo");
     };
     const addToStorage = async (value) => {
-      /*
-      await reactLocalStorage.setObject("paymentInfo", {
-        ...storagedata,
-        txn_info: value,
-        block: paymentInfo.block,
-        blockindex: paymentInfo.blockindex,
-        amount: paymentInfo.amount,
-        cryptoType: paymentInfo.cryptoType,
-        active_transaction: false,
-      });
-      */
       await dispatch(
         transactionInfo$({
           ...value,
@@ -188,14 +177,15 @@ function Invoice() {
       await reactLocalStorage.remove("paymentInfo");
     };
     const addToStorage = async () => {
-      await reactLocalStorage.setObject("paymentInfo", {
-        ...storagedata,
-        block: paymentInfo.block,
-        blockindex: paymentInfo.blockindex,
-        amount: paymentInfo.amount,
-        cryptoType: paymentInfo.cryptoType,
-        active_transaction: false,
-      });
+      await dispatch(
+        transactionInfo$({
+          block: paymentInfo.block,
+          blockindex: paymentInfo.blockindex,
+          amount: paymentInfo.amount,
+          cryptoType: paymentInfo.cryptoType,
+          active_transaction: false,
+        })
+      );
     };
 
     dispatch(loading$());
