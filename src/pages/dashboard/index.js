@@ -348,7 +348,7 @@ function DashboardLayout(props) {
         });
 
         // bonus balance
-        const Bonus = firestore.doc(`users/${user.uid}`).collection("bonus");
+        const Bonus = firestore.doc(`users/${user.uid}`).collection("bonus").orderBy("created_at", "desc");
         collectionData(Bonus, "id").subscribe((data) => {
           const country = JSON.parse(localStorage.getItem("country")).country;
           const newCurcode = getCountry(country).currency;

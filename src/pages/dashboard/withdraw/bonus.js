@@ -169,7 +169,7 @@ function WithdrawBonus() {
         <Box m={2}>
           <Pagnition
             postperpage={postperpage}
-            totalpost={arrayDatas.length}
+            totalpost={bonus.length}
             paginate={paginate}
           />
         </Box>

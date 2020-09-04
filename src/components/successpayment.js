@@ -119,6 +119,7 @@ function PaymentSuccess() {
                     deposit_amount: referrerpercent,
                     from: userInfos.firstName,
                     date: new Date().toLocaleDateString(),
+                    created_at: firebase.firestore.FieldValue.serverTimestamp(),
                   })
                   .then(() => {
                     //add notification to referrer database

@@ -213,7 +213,7 @@ function Investment() {
         <Box m={2}>
           <Pagnition
             postperpage={postperpage}
-            totalpost={arrayDatas.length}
+            totalpost={investments.length}
             paginate={paginate}
           />
         </Box>
