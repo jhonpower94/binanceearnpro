@@ -132,7 +132,7 @@ export default function WithdrawTable() {
               <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                 <TableCell align="left">
                   <Box display="flex" flexDirection="column">
-                    <Typography variant="body1">{`${trans.firstName} ${trans.lastName}`}</Typography>
+                    <Typography variant="body1">{`${trans.firstname} ${trans.lastname}`}</Typography>
                   </Box>
                 </TableCell>
 
