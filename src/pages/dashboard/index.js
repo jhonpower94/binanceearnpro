@@ -279,7 +279,7 @@ function DashboardLayout(props) {
         const allDeposits = firestore
           .doc(`users/${user.uid}`)
           .collection("deposits")
-          .orderBy("created_at", "asc");
+          .orderBy("created_at", "desc");
         collectionData(allDeposits, "id").subscribe((data) => {
           const country = JSON.parse(localStorage.getItem("country")).country;
           const newCurcode = getCountry(country).currency; // currency code
