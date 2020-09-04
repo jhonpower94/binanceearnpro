@@ -242,14 +242,7 @@ function Payment() {
               {trx_info.payment_address}
             </Typography>
 
-            <CopyToClipboard
-              text={trx_info.payment_address}
-              onCopy={handleClick("Address copied")}
-            >
-              <Typography variant="caption" display="block" gutterBottom>
-                Copy
-              </Typography>
-            </CopyToClipboard>
+            
           </Box>
         </div>
         <Divider variant="middle" />
