@@ -91,7 +91,8 @@ export default function DepositTable() {
       .where("type", "==", "investment")
       .orderBy("created_at", "asc");
     collectionData(alldeposits, "id").subscribe((data) => {
-      setDeposits(data);
+      const newDeposits = data.slice(0, 5);
+      setDeposits(newDeposits);
     });
   }, []);
 
@@ -101,10 +102,9 @@ export default function DepositTable() {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell align="left">Description</TableCell>
+              <TableCell align="left">Name</TableCell>
 
               <TableCell align="right">Deposit Amount</TableCell>
-              <TableCell align="right">Deposit Date</TableCell>
             </TableRow>
           </TableHead>
 
@@ -113,32 +113,21 @@ export default function DepositTable() {
               <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                 <TableCell align="left">
                   <Box display="flex" flexDirection="column">
-                    <Typography variant="body1">{dep.block_name}</Typography>
-                    <Typography variant="caption">{`${dep.firstname} ${dep.lastname} ${dep.email}`}</Typography>
+                    <Typography variant="body1">{`${dep.firstname} ${dep.lastname}`}</Typography>
                   </Box>
                 </TableCell>
                 <TableCell align="right">
-                  {formatLocaleCurrency(dep.deposit_amount, "USD", {
-                    autoFixed: false,
-                  })}
-                </TableCell>
-                <TableCell align="right">
-                  {new Date(dep.created_at.seconds * 1000).toLocaleDateString()}
+                  <Typography variant="h6">
+                    {formatLocaleCurrency(dep.deposit_amount, "USD", {
+                      autoFixed: false,
+                    })}
+                  </Typography>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
     </Paper>
   );
 }

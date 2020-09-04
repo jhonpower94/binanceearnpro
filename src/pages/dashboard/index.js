@@ -468,7 +468,7 @@ function DashboardLayout(props) {
       avater: <GetAppSharp color="primary" />,
     },
     {
-      name: "Wallet",
+      name: "Deposit",
       link: "wallet",
       avater: <AccountBalanceWallet color="primary" />,
       submenu: [],
@@ -500,7 +500,7 @@ function DashboardLayout(props) {
     { name: "Invest", link: "invest" },
     { name: "Investments", link: "investments" },
     { name: "Bonus", link: "withdraw/bonus" },
-    { name: "Wallet", link: "wallet" },
+    { name: "Deposit", link: "wallet" },
     { name: "Profile", link: "profile" },
     { name: "Support", link: "support" },
   ];

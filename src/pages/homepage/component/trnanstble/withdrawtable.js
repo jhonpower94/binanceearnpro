@@ -104,7 +104,8 @@ export default function WithdrawTable() {
       .where("type", "==", "Plan withdrawal")
       .orderBy("timestamp", "asc");
     collectionData(alltransactions, "id").subscribe((data) => {
-      setTranactions(data);
+      const newTransactions = data.slice(0, 5);
+      setTranactions(newTransactions);
     });
   }, []);
 
@@ -121,10 +122,8 @@ export default function WithdrawTable() {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell align="left">Description</TableCell>
+              <TableCell align="left">Name</TableCell>
               <TableCell align="right">Amount</TableCell>
-
-              <TableCell align="left">Date</TableCell>
             </TableRow>
           </TableHead>
 
@@ -133,33 +132,23 @@ export default function WithdrawTable() {
               <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                 <TableCell align="left">
                   <Box display="flex" flexDirection="column">
-                    <Typography variant="body1">{trans.type}</Typography>
-                    <Typography variant="caption">{`${trans.name} ${trans.email}`}</Typography>
+                    <Typography variant="body1">{`${trans.firstName} ${trans.lastName}`}</Typography>
                   </Box>
                 </TableCell>
 
                 <TableCell align="right">
-                  <Typography variant="h5">
+                  <Typography variant="h6">
                     {formatLocaleCurrency(trans.return_amount, "USD", {
                       autoFixed: false,
                     })}
                   </Typography>
                 </TableCell>
-                <TableCell align="left">{trans.date}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
+      
     </Paper>
   );
 }
