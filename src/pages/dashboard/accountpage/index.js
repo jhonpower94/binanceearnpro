@@ -88,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
 function DashboardPage() {
   const classes = useStyles();
   const { userData, user, balance } = useContext(AppContext);
+  const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const dispatch = useDispatch();
   const mainbalance = useSelector((state) => state.balance);
   const referralData = useSelector((state) => state.bonus.bonus);
@@ -312,11 +313,11 @@ function DashboardPage() {
                     </InputLabel>
                     <OutlinedInput
                       id="referral-link"
-                      value={`http://${window.location.hostname}/account/register/${user.id}`}
+                      value={`http://${window.location.hostname}/account/register/${userInfos.id}`}
                       endAdornment={
                         <InputAdornment position="end">
                           <CopyToClipboard
-                            text={`http://${window.location.hostname}/account/register/${user.id}`}
+                            text={`http://${window.location.hostname}/account/register/${userInfos.id}`}
                             onCopy={handleClick("Link copied")}
                           >
                             <IconButton
