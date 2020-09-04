@@ -17,11 +17,13 @@ import {
   CardHeader,
   Box,
   Divider,
+  Link,
 } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import { navigate } from "@reach/router";
 import { GetAppSharp, FiberManualRecordSharp } from "@material-ui/icons";
+import { Alert, AlertTitle } from "@material-ui/lab";
 const { Converter } = require("easy-currencies");
 
 let converter = new Converter(
@@ -88,6 +90,7 @@ function Investment() {
   const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
     .currencycode;
   const investments = useSelector((state) => state.investment.trades);
+  const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const dispatch = useDispatch();
   const [withdrawn, setwithdrawn] = useState(false);
   const [currentpage, setCurrentpage] = useState(1);
@@ -138,8 +141,19 @@ function Investment() {
     <React.Fragment>
       <Container maxWidth="sm">
         <Card variant="outlined">
-          <CardHeader title={<Typography variant="h6">My investments</Typography>} />
+          <CardHeader
+            title={<Typography variant="h6">My investments</Typography>}
+          />
           <Box display="flex" justifyContent="center" m={1}>
+            {!userInfos.btcaddress ? (
+              <Alert severity="warning">
+                <AlertTitle>Warning</AlertTitle>
+                You have not set your BTC withdrawal address —{" "}
+                <Link component="button" onClick={()=>navigate("profile")}>
+                  Add BTC address here
+                </Link>
+              </Alert>
+            ) : null}
             {withdrawn ? (
               <Typography variant="caption" color="error">
                 sorry cannot withdraw 0.00 amount

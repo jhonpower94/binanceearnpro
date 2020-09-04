@@ -30,6 +30,7 @@ function Profile() {
   const [userAddress, setUserAdress] = useState({
     address: "",
     state: "",
+    btcaddress: "",
   });
   const dispatch = useDispatch();
 
@@ -120,10 +121,20 @@ function Profile() {
         <CardContent>
           <form onSubmit={submitAddress}>
             <Grid container spacing={3}>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  label="Your bitcoin Address"
+                  defaultValue={userInfos.btcaddress}
+                  variant="outlined"
+                  name="btcaddress"
+                  fullWidth
+                  required
+                  onChange={onChangeAddress}
+                />
+              </Grid>
               <Grid item xs={12} sm={7}>
                 <TextField
                   label="Street Address"
-                  id="outlined-size-small"
                   defaultValue={userInfos.address}
                   variant="outlined"
                   name="address"
