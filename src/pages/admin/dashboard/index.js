@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, forwardRef, useState } from "react";
 import { AppContext } from "../../../App";
-import { firestore, auth, collectionData } from "../../../config";
+import { firestore, auth, collectionData, docData } from "../../../config";
 import {
   makeStyles,
   Container,
@@ -27,6 +27,8 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
+import UsersTable from "./userstable";
+import { navigate } from "@reach/router";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -69,7 +71,7 @@ function DashboardAdmin() {
       { title: "Name", field: "firstName" },
       { title: "Surname", field: "lastName" },
       { title: "Referred", field: "referrer" },
-
+      { title: "Referrer Name", field: "referrername" },
       { title: "Email", field: "email" },
     ],
   });
@@ -77,10 +79,26 @@ function DashboardAdmin() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const allusers = firestore.collection("users").orderBy("registered", "asc");
+    const allusers = firestore.collection("users");
     collectionData(allusers, "id").subscribe((data) => {
-      setdata(data);
-      console.log(data)
+      data.forEach((dt, index) => {
+        const getid = firestore.doc(`users/${dt.referrerid}`);
+        docData(getid, "id").subscribe((vl) => {
+          if (dt.referrer) {
+            dt.referrername = `${vl.firstName} ${vl.lastName}`;
+            dt.referreremail = vl.email;
+          } else {
+            dt.referrername = "";
+            dt.referreremail = "";
+          }
+
+          setdata(data);
+          console.log(data);
+          navigate("");
+        });
+      });
+
+      console.log(data);
     });
 
     const alldeposit = firestore.collection("alldeposits");
@@ -193,6 +211,9 @@ function DashboardAdmin() {
                 }),
             }}
           />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <UsersTable />
         </Grid>
       </Grid>
     </Container>
