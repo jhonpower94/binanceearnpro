@@ -121,8 +121,8 @@ function Invoice() {
 
   const CoinpaymentsCreateTransactionOpts = {
     currency1: "USD",
-    currency2: "LTCT",
-    amount: 1,
+    currency2: paymentInfo.cryptoType,
+    amount: paymentInfo.amount,
     buyer_email: "jhonsnow751@gmail.com",
   };
   const storagedata = reactLocalStorage.getObject("paymentInfo");
