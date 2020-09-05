@@ -27,7 +27,6 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
-import UsersTable from "./userstable";
 import { navigate } from "@reach/router";
 
 const tableIcons = {
@@ -70,6 +69,7 @@ function DashboardAdmin() {
     columns: [
       { title: "Name", field: "firstName" },
       { title: "Surname", field: "lastName" },
+      { title: "$ Wallet balance", field: "wallet_balance", type: "numeric" },
       { title: "Referred", field: "referrer" },
       { title: "Referrer Name", field: "referrername" },
       { title: "Email", field: "email" },
@@ -189,14 +189,15 @@ function DashboardAdmin() {
                 new Promise((resolve) => {
                   setTimeout(() => {
                     resolve();
-                    if (oldData) {
-                      setState((prevState) => {
-                        const data = [...prevState.data];
-                        data[data.indexOf(oldData)] = newData;
-                        return { ...prevState, data };
+                    if (newData.wallet_balance) {
+                      console.log(newData);
+                      firestore.doc(`users/${newData.id}`).update({
+                        wallet_balance: newData.wallet_balance,
                       });
+                    } else {
+                      console.log("none");
                     }
-                  }, 600);
+                  }, 1000);
                 }),
               onRowDelete: (oldData) =>
                 new Promise((resolve) => {
@@ -211,9 +212,6 @@ function DashboardAdmin() {
                 }),
             }}
           />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <UsersTable />
         </Grid>
       </Grid>
     </Container>
