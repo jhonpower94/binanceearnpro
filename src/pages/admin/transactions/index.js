@@ -99,7 +99,7 @@ export default function TransactionsAdmin() {
   };
 
   useEffect(() => {
-    const alltransactions = firestore.collection("transactions").orderBy("timestamp", "asc");
+    const alltransactions = firestore.collection("transactions").orderBy("timestamp", "desc");
     collectionData(alltransactions, "id").subscribe((data) => {
       setTranactions(data);
     });

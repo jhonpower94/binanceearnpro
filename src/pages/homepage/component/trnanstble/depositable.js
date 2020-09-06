@@ -89,10 +89,10 @@ export default function DepositTable() {
     const alldeposits = firestore
       .collection("alldeposits")
       .where("type", "==", "investment")
-      .orderBy("created_at", "asc");
+      .orderBy("created_at", "desc");
     collectionData(alldeposits, "id").subscribe((data) => {
       const newDeposits = data.slice(0, 5);
-      setDeposits(newDeposits);
+      setDeposits(data);
     });
   }, []);
 

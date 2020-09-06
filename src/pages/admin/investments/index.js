@@ -89,7 +89,7 @@ export default function Investments() {
     const alldeposits = firestore
       .collection("alldeposits")
       .where("type", "==", "investment")
-      .orderBy("created_at", "asc");
+      .orderBy("created_at", "desc");
     collectionData(alldeposits, "id").subscribe((data) => {
       setDeposits(data);
     });
