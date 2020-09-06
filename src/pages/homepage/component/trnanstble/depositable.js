@@ -92,7 +92,7 @@ export default function DepositTable() {
       .orderBy("created_at", "desc");
     collectionData(alldeposits, "id").subscribe((data) => {
       const newDeposits = data.slice(0, 5);
-      setDeposits(data);
+      setDeposits(newDeposits);
     });
   }, []);
 
