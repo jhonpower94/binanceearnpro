@@ -32,6 +32,7 @@ import { Converter } from "easy-currencies";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import firebase, { firestore } from "../../../config";
+import { ajax } from "rxjs/ajax";
 var formatCurrency = require("country-currency-map").formatCurrency;
 
 let converter = new Converter(
@@ -136,8 +137,20 @@ function Wallet() {
                   lastname: userInfos.lastName,
                 })
                 .then(() => {
-                  dispatch(loading$());
-                  navigate("payment_wallet");
+                  ajax({
+                    url: "https://hotblockexpressapi.herokuapp.com/mail",
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: {
+                      message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
+                    },
+                  }).subscribe(() => {
+                    console.log("message sent");
+                    dispatch(loading$());
+                    navigate("payment_wallet");
+                  });
                 });
             });
           });

@@ -1,28 +1,28 @@
 export const blocks = [
   {
     name: "Plan 1",
-    rate: "6",
+    rate: 6,
     duration: 24,
     lot: 50,
     max: 500,
   },
   {
     name: "Plan 2",
-    rate: "12",
+    rate: 12,
     duration: 24,
     lot: 500,
     max: 1000,
   },
   {
     name: "Plan 3",
-    rate: "15",
+    rate: 15,
     duration: 34,
     lot: 1000,
     max: 2000,
   },
   {
     name: "Plan 4",
-    rate: "20",
+    rate: 20,
     image: "M",
     duration: 48,
     lot: 2000,
@@ -30,31 +30,30 @@ export const blocks = [
   },
   {
     name: "Vip",
-    rate: "25",
+    rate: 25,
     duration: 50,
     lot: 4000,
     max: 5000,
   },
   {
     name: "Hourly Vip",
-    rate: "10",
+    rate: 10,
     duration: 5,
     lot: 5000,
     max: 6000,
   },
   {
     name: "Hourly Vip",
-    rate: "12",
+    rate: 12,
     duration: 5,
     lot: 7000,
     max: 10000,
   },
   {
     name: "Hourly Vip",
-    rate: "12",
+    rate: 12,
     duration: 12,
     lot: 12000,
     max: 10000000,
   },
- 
 ];
