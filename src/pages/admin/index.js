@@ -64,6 +64,7 @@ const navs = [
   { nav: "Transactions", link: "transactions" },
   { nav: "Investments", link: "investments" },
   { nav: "kyc", link: "kyc" },
+  { nav: "Credit bonus", link: "creditbonus" },
 ];
 
 function AdminLyout(props) {
@@ -85,7 +86,7 @@ function AdminLyout(props) {
             navigate("account/admin");
           }
         });
-      }else{
+      } else {
         navigate("../account/admin");
       }
     });
@@ -110,9 +111,12 @@ function AdminLyout(props) {
       </List>
       <Divider />
       <List>
-        <ListItem button onClick={()=>{
-          auth.signOut().then(()=>navigate("../account/admin"))
-        }}>
+        <ListItem
+          button
+          onClick={() => {
+            auth.signOut().then(() => navigate("../account/admin"));
+          }}
+        >
           <ListItemText primary="Logout" />
         </ListItem>
       </List>

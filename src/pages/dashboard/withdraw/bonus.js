@@ -131,7 +131,9 @@ function WithdrawBonus() {
     <React.Fragment>
       <Container maxWidth="sm">
         <Card variant="outlined">
-          <CardHeader title={<Typography variant="h6">Recieved bonus</Typography>} />
+          <CardHeader
+            title={<Typography variant="h6">Recieved bonus</Typography>}
+          />
           <Box display="flex" justifyContent="center" m={1}>
             {withdrawn ? (
               <Typography variant="caption" color="error">
@@ -144,7 +146,7 @@ function WithdrawBonus() {
               <div key={index}>
                 <CardHeader
                   title={<Typography variant="h5">{data.from}</Typography>}
-                  subheader={data.date}
+                  subheader={`${data.description} ${data.date}`}
                   action={
                     <Typography variant="h5">{data.deposit_amount}</Typography>
                   }

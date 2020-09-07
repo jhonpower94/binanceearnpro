@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { AppContext } from "../../../App";
 import { useDispatch, useSelector } from "react-redux";
 import { loading$, loadingpayment$ } from "../../../redux/action";
-import { auth, firestore, docData } from "../../../config";
+import firebase, { auth, firestore, docData } from "../../../config";
 import {
   makeStyles,
   Container,
@@ -73,6 +73,7 @@ function Wallet() {
     (state) => state.locationinfo.locationinfo.id
   );
   const txn_info = useSelector((state) => state.trxinfo);
+  const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const [snackPack, setSnackPack] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const [messageInfo, setMessageInfo] = React.useState(undefined);
@@ -125,38 +126,27 @@ function Wallet() {
       ...JSON.parse(window.localStorage.getItem("paymentInfo")),
     });
 
+    client
+      .getTx({
+        txid: txn_info.txn_id,
+        full: 1,
+      })
+      .then((success) => {
+        setTrx_info({ ...trx_info, ...success });
+      });
+
     // check transaction
-    const checkTx = repeat()
+    /*  const checkTx = repeat()
       .do(() => {
-        client
-          .getTx({
-            txid: txn_info.txn_id,
-            full: 1,
-          })
-          .then((success) => {
-            setTrx_info({ ...trx_info, ...success });
-            if (success.status == 1) {
-              const startLoadpayment = async () => {
-                await dispatch(loadingpayment$());
-              };
-              stopChectx().then(() => {
-                startLoadpayment().then(() => navigate("credit_success"));
-              });
-            } else if (success.status < 0) {
-              stopChectx().then(() => {
-                console.log("transaction timeout");
-                navigate("wallet");
-              });
-            } else {
-              console.log(success.status);
-            }
-          });
+      
       })
       .every(30000);
 
     const stopChectx = async () => {
       await checkTx.cancel();
     };
+
+    */
 
     if (snackPack.length && !messageInfo) {
       // Set a new snack when we don't have an active one

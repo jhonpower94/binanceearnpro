@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { AppContext } from "../../../App";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -16,7 +17,7 @@ import {
   Box,
   Typography,
 } from "@material-ui/core";
-import { firestore, collectionData } from "../../../config";
+import { firestore, collectionData, docData } from "../../../config";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import {
   CheckBox,
@@ -24,6 +25,8 @@ import {
   CheckBoxSharp,
   ClearSharp,
 } from "@material-ui/icons";
+import { async } from "rxjs";
+import { navigate } from "@reach/router";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -85,6 +88,9 @@ const useStyles = makeStyles({
 
 export default function TransactionsAdmin() {
   const classes = useStyles();
+  const { updateWalletBalance, setupdateWalletBalance } = useContext(
+    AppContext
+  );
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [transactions, setTranactions] = React.useState([]);
@@ -99,7 +105,9 @@ export default function TransactionsAdmin() {
   };
 
   useEffect(() => {
-    const alltransactions = firestore.collection("transactions").orderBy("timestamp", "desc");
+    const alltransactions = firestore
+      .collection("transactions")
+      .orderBy("timestamp", "desc");
     collectionData(alltransactions, "id").subscribe((data) => {
       setTranactions(data);
     });
@@ -109,6 +117,21 @@ export default function TransactionsAdmin() {
     firestore.doc(`transactions/${id}`).update({
       pending: !val,
       complete: val,
+    });
+  };
+
+  const setWalets = (trans) => {
+    const query = firestore.doc(`users/${trans.userid}`);
+    docData(query, "id").subscribe((data) => {
+      const oldamount = data.wallet_balance;
+      const newamount = oldamount + trans.return_amount;
+      setupdateWalletBalance({
+        ...updateWalletBalance,
+        userid: trans.userid,
+        transid: trans.id,
+        newamount: newamount,
+      });
+      navigate("updatewallet");
     });
   };
 
@@ -152,25 +175,33 @@ export default function TransactionsAdmin() {
                 </TableCell>
                 <TableCell align="left">{trans.date}</TableCell>
                 <TableCell align="left">
-                  {trans.type === "wallet deposit" ? null : (
-                    <ButtonGroup
-                      disableElevation
-                      variant="contained"
-                      color="primary"
-                      size="small"
+                  <ButtonGroup
+                    disableElevation
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                  >
+                    <Button
+                      onClick={() => {
+                        trans.type === "wallet deposit"
+                          ? setWalets(trans)
+                          : setTransactionComplete(trans.id, true);
+                      }}
                     >
-                      <Button
-                        onClick={() => setTransactionComplete(trans.id, true)}
-                      >
-                        <CheckSharp />
-                      </Button>
-                      <Button
-                        onClick={() => setTransactionComplete(trans.id, false)}
-                      >
-                        <ClearSharp />
-                      </Button>
-                    </ButtonGroup>
-                  )}
+                      <CheckSharp />
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        if (trans.type != "wallet deposit") {
+                          setTransactionComplete(trans.id, false);
+                        } else {
+                          return null;
+                        }
+                      }}
+                    >
+                      <ClearSharp />
+                    </Button>
+                  </ButtonGroup>
                 </TableCell>
               </TableRow>
             ))}

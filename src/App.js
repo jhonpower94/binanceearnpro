@@ -43,8 +43,11 @@ import Downloads from "./pages/homepage/sections/downloads";
 import Security from "./pages/homepage/sections/security";
 import { reactLocalStorage } from "reactjs-localstorage";
 import Kyc from "./pages/admin/kyc";
+import CreditBonus from "./pages/admin/dashboard/creditbonus";
+import DeleteUsers from "./pages/admin/dashboard/deleteuser";
 import Investments from "./pages/admin/investments";
 import TransactionsAdmin from "./pages/admin/transactions";
+import UpdateWallet from "./pages/admin/transactions/updatewallet";
 import Payment from "./components/payment";
 import PaymentSuccess from "./components/successpayment";
 import Complete from "./components/complete";
@@ -108,6 +111,9 @@ function App() {
   });
 
   const [user, setUser] = useState({ wallet_balance: 0 });
+  const [updateWalletBalance, setupdateWalletBalance] = useState({
+    status: false,
+  });
 
   const palletType = darktheme.status ? "dark" : "dark";
   const secondary = darktheme.status ? "#424242" : "#424242";
@@ -170,6 +176,8 @@ function App() {
           balance,
           user,
           MinDeposits,
+          updateWalletBalance,
+          setupdateWalletBalance,
           setMinDeposit,
           setUser,
           setBalance,
@@ -213,7 +221,10 @@ function App() {
 
             <AdminLayout path="manager">
               <DashboardAdmin path="/" />
+              <CreditBonus path="creditbonus" />
+              <DeleteUsers path="deleteuser" />
               <TransactionsAdmin path="transactions" />
+              <UpdateWallet path="updatewallet" />
               <Kyc path="kyc" />
               <Investments path="investments" />
             </AdminLayout>

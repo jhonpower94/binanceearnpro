@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, forwardRef, useState } from "react";
 import { AppContext } from "../../../App";
 import { firestore, auth, collectionData, docData } from "../../../config";
+
 import {
   makeStyles,
   Container,
@@ -28,6 +29,7 @@ import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import { navigate } from "@reach/router";
+import { ajax } from "rxjs/ajax";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -203,10 +205,20 @@ function DashboardAdmin() {
                 new Promise((resolve) => {
                   setTimeout(() => {
                     resolve();
-                    setState((prevState) => {
-                      const data = [...prevState.data];
-                      data.splice(data.indexOf(oldData), 1);
-                      return { ...prevState, data };
+                    ajax({
+                      url: "http://localhost:9000/delete",
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: {
+                        uid: oldData.id,
+                      },
+                    }).subscribe(() => {
+                      firestore
+                        .doc(`users/${oldData.id}`)
+                        .delete()
+                        .then(() => console.log("deleted"));
                     });
                   }, 600);
                 }),

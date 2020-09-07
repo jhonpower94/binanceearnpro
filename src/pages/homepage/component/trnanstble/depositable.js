@@ -87,9 +87,9 @@ export default function DepositTable() {
 
   useEffect(() => {
     const alldeposits = firestore
-      .collection("alldeposits")
-      .where("type", "==", "investment")
-      .orderBy("created_at", "desc");
+      .collection("transactions")
+      .where("pending", "==", false)
+      .orderBy("timestamp", "desc")
     collectionData(alldeposits, "id").subscribe((data) => {
       const newDeposits = data.slice(0, 5);
       setDeposits(newDeposits);
@@ -118,7 +118,7 @@ export default function DepositTable() {
                 </TableCell>
                 <TableCell align="right">
                   <Typography variant="h6">
-                    {formatLocaleCurrency(dep.deposit_amount, "USD", {
+                    {formatLocaleCurrency(dep.return_amount, "USD", {
                       autoFixed: false,
                     })}
                   </Typography>

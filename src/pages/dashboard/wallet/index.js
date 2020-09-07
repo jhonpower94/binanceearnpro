@@ -31,6 +31,7 @@ import { navigate } from "@reach/router";
 import { Converter } from "easy-currencies";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
+import firebase, { firestore } from "../../../config";
 var formatCurrency = require("country-currency-map").formatCurrency;
 
 let converter = new Converter(
@@ -74,6 +75,7 @@ function Wallet() {
   const dispatch = useDispatch();
 
   const { paymentInfo, setPaymentInfo, user } = useContext(AppContext);
+  const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const [minimum_deposit, setMinimum_deposit] = useState();
   const [amounterr, setAmountErr] = useState(false);
 
@@ -102,13 +104,13 @@ function Wallet() {
     };
 
     const addToStorage = async (value) => {
-      /*  await reactLocalStorage.setObject("paymentInfo", {
+      await reactLocalStorage.setObject("paymentInfo", {
         ...storagedata,
         txn_info: value,
         amount: paymentInfo.amount,
         cryptoType: paymentInfo.cryptoType,
         active_transaction: false,
-      }); */
+      });
 
       await dispatch(transactionInfo$(value));
     };
@@ -119,8 +121,24 @@ function Wallet() {
         .then((val) => {
           removePaymentStorage().then(() => {
             addToStorage(val).then(() => {
-              dispatch(loading$());
-              navigate("payment_wallet");
+              firestore
+                .collection("transactions")
+                .add({
+                  userid: userInfos.id,
+                  type: "wallet deposit",
+                  pending: true,
+                  name: "wallet Deposit",
+                  return_amount: parseInt(paymentInfo.amount),
+                  date: new Date().toLocaleDateString(),
+                  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                  email: userInfos.email,
+                  firstname: userInfos.firstName,
+                  lastname: userInfos.lastName,
+                })
+                .then(() => {
+                  dispatch(loading$());
+                  navigate("payment_wallet");
+                });
             });
           });
         })
@@ -143,7 +161,7 @@ function Wallet() {
             <CardContent>
               <Box display="flex" flexDirection="column" alignItems="center">
                 <Typography variant="h4">
-                  {formatLocaleCurrency(user.wallet_balance, defaultCurrency, {
+                  {formatLocaleCurrency(user.wallet_balance, "USD", {
                     autoFixed: false,
                   })}
                 </Typography>
@@ -154,7 +172,7 @@ function Wallet() {
               <ListItem>
                 <ListItemText primary="Minimum Deposit" />
                 <Typography variant="h6">
-                  {formatLocaleCurrency(minimum_deposit, defaultCurrency, {
+                  {formatLocaleCurrency(minimum_deposit, "USD", {
                     autoFixed: false,
                   })}
                 </Typography>

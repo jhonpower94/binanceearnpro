@@ -118,6 +118,7 @@ function PaymentSuccess() {
                     amount: referrerpercent,
                     deposit_amount: referrerpercent,
                     from: userInfos.firstName,
+                    description: "Referral bonus",
                     date: new Date().toLocaleDateString(),
                     created_at: firebase.firestore.FieldValue.serverTimestamp(),
                   })
