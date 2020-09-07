@@ -206,7 +206,7 @@ function DashboardAdmin() {
                   setTimeout(() => {
                     resolve();
                     ajax({
-                      url: "http://localhost:9000/delete",
+                      url: "https://hotblockexpressapi.herokuapp.com/delete",
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",
