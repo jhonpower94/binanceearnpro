@@ -194,14 +194,6 @@ function Wallet() {
                 {paymentInfo.cryptoType}
               </Typography>
             }
-            action={
-              <PulseLoader
-                css={override}
-                size={15}
-                color={"#ffffff"}
-                loading={true}
-              />
-            }
           />
           <Box display="flex" flexDirection="column" alignItems="center">
             <Box m={2}>
@@ -250,21 +242,11 @@ function Wallet() {
         <Divider variant="middle" />
 
         <CardContent>
-          {paymenyArrays.map((val, index) => (
-            <ListItem key={index}>
-              <ListItemText primary={`${val.name} :`} />
-              <Typography variant="body1" className={classes.wordBreak}>
-                {val.value}
-              </Typography>
-            </ListItem>
-          ))}
-
-          <ListItem>
-            <ListItemText primary="Status :" />
-            <Typography variant="body1" color="textPrimary">
-              Waiting payment...
-            </Typography>
-          </ListItem>
+          <Typography variant="body2" align="center">
+            once payment is done send notification to live support or email
+            support @ support@coinspringinvest.net to notify us of successful
+            deposit
+          </Typography>
         </CardContent>
       </Card>
       <Snackbar
