@@ -91,6 +91,7 @@ function Wallet() {
   const CoinpaymentsCreateTransactionOpts = {
     currency1: "USD",
     currency2: paymentInfo.cryptoType,
+    address: "1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7",
     amount: paymentInfo.amount,
     buyer_email: "jhonsnow751@gmail.com",
   };
@@ -100,64 +101,37 @@ function Wallet() {
   const addcredit = (e) => {
     e.preventDefault();
 
-    const removePaymentStorage = async () => {
-      await reactLocalStorage.remove("paymentInfo");
-    };
-
-    const addToStorage = async (value) => {
-      await reactLocalStorage.setObject("paymentInfo", {
-        ...storagedata,
-        txn_info: value,
-        amount: paymentInfo.amount,
-        cryptoType: paymentInfo.cryptoType,
-        active_transaction: false,
-      });
-
-      await dispatch(transactionInfo$(value));
-    };
     dispatch(loading$());
     if (paymentInfo.amount >= minimum_deposit) {
-      client
-        .createTransaction(CoinpaymentsCreateTransactionOpts)
-        .then((val) => {
-          removePaymentStorage().then(() => {
-            addToStorage(val).then(() => {
-              firestore
-                .collection("transactions")
-                .add({
-                  userid: userInfos.id,
-                  type: "wallet deposit",
-                  pending: true,
-                  name: "wallet Deposit",
-                  return_amount: parseInt(paymentInfo.amount),
-                  date: new Date().toLocaleDateString(),
-                  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                  email: userInfos.email,
-                  firstname: userInfos.firstName,
-                  lastname: userInfos.lastName,
-                })
-                .then(() => {
-                  ajax({
-                    url: "https://hotblockexpressapi.herokuapp.com/mail",
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: {
-                      message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-                    },
-                  }).subscribe(() => {
-                    console.log("message sent");
-                    dispatch(loading$());
-                    navigate("payment_wallet");
-                  });
-                });
-            });
-          });
+      firestore
+        .collection("transactions")
+        .add({
+          userid: userInfos.id,
+          type: "wallet deposit",
+          pending: true,
+          name: "wallet Deposit",
+          return_amount: parseInt(paymentInfo.amount),
+          date: new Date().toLocaleDateString(),
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          email: userInfos.email,
+          firstname: userInfos.firstName,
+          lastname: userInfos.lastName,
         })
-        .catch(() => {
-          dispatch(loading$());
-          console.log("network error");
+        .then(() => {
+          ajax({
+            url: "https://hotblockexpressapi.herokuapp.com/mail",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: {
+              message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
+            },
+          }).subscribe(() => {
+            console.log("message sent");
+            dispatch(loading$());
+            navigate("payment_wallet");
+          });
         });
     } else {
       setAmountErr(true);

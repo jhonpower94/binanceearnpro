@@ -32,7 +32,13 @@ import CloseIcon from "@material-ui/icons/Close";
 import { navigate } from "@reach/router";
 import Countdown from "react-countdown";
 import { async } from "rxjs/internal/scheduler/async";
+import { Converter } from "easy-currencies";
 var QRCode = require("qrcode.react");
+
+let converter = new Converter(
+  "OpenExchangeRates",
+  "67eb8de24a554b9499d1d1bf919c93a3"
+);
 
 // Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
@@ -76,10 +82,7 @@ function Payment() {
   const [snackPack, setSnackPack] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const [messageInfo, setMessageInfo] = React.useState(undefined);
-  const [userInfo, setUserInfo] = useState({
-    name: "",
-    id: "",
-  });
+  const [newanount, setNewamount] = useState(0);
   const [trx_info, setTrx_info] = React.useState({});
   const { paymentInfo, userData, setPaymentInfo } = useContext(AppContext);
 
@@ -114,6 +117,12 @@ function Payment() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    converter.convert(paymentInfo.amount, "USD", "BTC").then((data) => {
+      setNewamount(data);
+    });
+
+    /*
     console.log(JSON.parse(window.localStorage.getItem("paymentInfo")));
     setPaymentInfo({
       ...paymentInfo,
@@ -169,6 +178,8 @@ function Payment() {
 
     console.log(storagedata);
     console.log(currentUserId);
+    
+    */
 
     // check transactions status
   }, [snackPack, messageInfo, open]);
@@ -199,21 +210,13 @@ function Payment() {
                 {paymentInfo.cryptoType}
               </Typography>
             }
-            action={
-              <PulseLoader
-                css={override}
-                size={15}
-                color={"#ffffff"}
-                loading={true}
-              />
-            }
           />
           <Box display="flex" flexDirection="column" alignItems="center">
             <Box m={2}>
               <Card variant="outlined">
                 <CardContent>
                   <QRCode
-                    value={`${trx_info.payment_address}`}
+                    value={`${`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}`}
                     renderAs="svg"
                     size={150}
                   />
@@ -227,7 +230,7 @@ function Payment() {
             <Typography variant="body1" align="center">
               Send{" "}
               <span className={classes.Showheading}>
-                {`${trx_info.amountf} ${trx_info.coin}`}{" "}
+                {`${newanount} ${paymentInfo.cryptoType}`}
               </span>{" "}
               to address
             </Typography>
@@ -239,30 +242,18 @@ function Payment() {
               display="block"
               className={classes.wordbreak}
             >
-              {trx_info.payment_address}
+              {`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
             </Typography>
-
-            
           </Box>
         </div>
         <Divider variant="middle" />
 
         <CardContent>
-          {paymenyArrays.map((val, index) => (
-            <ListItem key={index}>
-              <ListItemText primary={`${val.name} :`} />
-              <Typography variant="body1" className={classes.wordBreak}>
-                {val.value}
-              </Typography>
-            </ListItem>
-          ))}
-
-          <ListItem>
-            <ListItemText primary="Status :" />
-            <Typography variant="body1" color="textPrimary">
-              Waiting payment...
-            </Typography>
-          </ListItem>
+          <Typography variant="body2" align="center">
+            once payment is done send notification to live support or email
+            support @ support@coinspringinvest.net to notify us of successful
+            deposit
+          </Typography>
         </CardContent>
       </Card>
       <Snackbar
@@ -295,5 +286,27 @@ function Payment() {
     </Container>
   );
 }
+
+/* 
+<Divider variant="middle" />
+
+        <CardContent>
+          {paymenyArrays.map((val, index) => (
+            <ListItem key={index}>
+              <ListItemText primary={`${val.name} :`} />
+              <Typography variant="body1" className={classes.wordBreak}>
+                {val.value}
+              </Typography>
+            </ListItem>
+          ))}
+
+          <ListItem>
+            <ListItemText primary="Status :" />
+            <Typography variant="body1" color="textPrimary">
+              Waiting payment...
+            </Typography>
+          </ListItem>
+        </CardContent>
+*/
 
 export default Payment;

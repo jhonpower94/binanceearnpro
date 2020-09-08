@@ -32,7 +32,13 @@ import CloseIcon from "@material-ui/icons/Close";
 import { navigate } from "@reach/router";
 import Countdown from "react-countdown";
 import { async } from "rxjs/internal/scheduler/async";
+import { Converter } from "easy-currencies";
 var QRCode = require("qrcode.react");
+
+let converter = new Converter(
+  "OpenExchangeRates",
+  "67eb8de24a554b9499d1d1bf919c93a3"
+);
 
 // Can be a string as well. Need to ensure each key-value pair ends with ;
 const override = css`
@@ -82,6 +88,7 @@ function Wallet() {
     id: "",
   });
   const [trx_info, setTrx_info] = React.useState({});
+  const [newanount, setNewamount] = useState(0);
   const { paymentInfo, userData, setPaymentInfo } = useContext(AppContext);
 
   // Random component
@@ -119,6 +126,12 @@ function Wallet() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    converter.convert(paymentInfo.amount, "USD", "BTC").then((data) => {
+      setNewamount(data);
+    });
+
+    /*
     console.log(JSON.parse(window.localStorage.getItem("paymentInfo")));
 
     setPaymentInfo({
@@ -136,7 +149,7 @@ function Wallet() {
       });
 
     // check transaction
-    /*  const checkTx = repeat()
+      const checkTx = repeat()
       .do(() => {
       
       })
@@ -200,7 +213,7 @@ function Wallet() {
               <Card variant="outlined">
                 <CardContent>
                   <QRCode
-                    value={`${trx_info.payment_address}`}
+                    value={`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
                     renderAs="svg"
                     size={150}
                   />
@@ -214,7 +227,7 @@ function Wallet() {
             <Typography variant="body1" align="center">
               Send{" "}
               <span className={classes.Showheading}>
-                {`${trx_info.amountf} ${trx_info.coin}`}{" "}
+                {`${newanount} ${paymentInfo.cryptoType}`}{" "}
               </span>{" "}
               to address
             </Typography>
@@ -226,7 +239,7 @@ function Wallet() {
               display="block"
               className={classes.wordbreak}
             >
-              {trx_info.payment_address}
+              {`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
             </Typography>
 
             <CopyToClipboard

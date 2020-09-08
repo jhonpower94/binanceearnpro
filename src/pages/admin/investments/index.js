@@ -8,9 +8,11 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import { Button, Box, Typography } from "@material-ui/core";
-import { firestore, collectionData } from "../../../config";
+import { Button, Box, Typography, Badge } from "@material-ui/core";
+import firebase, { firestore, collectionData } from "../../../config";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
+import { DoneSharp } from "@material-ui/icons";
+import { ajax } from "rxjs/ajax";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -95,6 +97,79 @@ export default function Investments() {
     });
   }, []);
 
+  const updateInvestment = (data) => {
+    console.log(data);
+    firestore
+      .doc(`users/${data.userid}`)
+      .collection("deposits")
+      .add({
+        block_name: data.block_name,
+        deposit_amount: data.deposit_amount,
+        amount: data.amount,
+        userid: data.userid,
+        complete: false,
+        date: new Date().toLocaleDateString(),
+        created_at: firebase.firestore.FieldValue.serverTimestamp(),
+      })
+      .then((tr) => {
+        console.log("transaction added");
+        const depositid = tr.id;
+        ajax({
+          url: "https://hotblockexpressapi.herokuapp.com/ipn",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            blockindex: 1,
+            deposit_amount: data.deposit_amount,
+            userid: data.userid,
+            depositid: depositid,
+            duration: data.duration,
+            currency: "USD",
+            rate: parseInt(data.rate),
+          },
+        }).subscribe(() => {
+          console.log("started cron");
+          firestore.doc(`alldeposits/${data.id}`).update({
+            pending: false,
+          });
+          if (data.referrer) {
+            //add referrer bonus is true
+            firestore
+              .doc(`users/${data.referrerid}`)
+              .collection("bonus")
+              .add({
+                amount: 5,
+                deposit_amount: 5,
+                from: `${data.firstname} ${data.lastname}`,
+                description: "Referral bonus",
+                date: new Date().toLocaleDateString(),
+                created_at: firebase.firestore.FieldValue.serverTimestamp(),
+              })
+              .then(() => {
+                console.log(`referral added`);
+                firestore
+                  .doc(`users/${data.referrerId}`)
+                  .collection("notification")
+                  .add({
+                    date: new Date().toLocaleDateString(),
+                    time: new Date().toLocaleTimeString(),
+                    amount: 5,
+                    type: "Bonus",
+                  });
+
+                firestore.doc(`users/${data.userid}`).update({
+                  referrer: false,
+                });
+              });
+          } else {
+            return null;
+          }
+        });
+      });
+  };
+
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
@@ -102,9 +177,10 @@ export default function Investments() {
           <TableHead>
             <TableRow>
               <TableCell align="left">Description</TableCell>
-
+              <TableCell align="center">Status</TableCell>
               <TableCell align="right">Deposit Amount</TableCell>
               <TableCell align="right">Deposit Date</TableCell>
+              <TableCell align="center">Action</TableCell>
             </TableRow>
           </TableHead>
 
@@ -117,6 +193,13 @@ export default function Investments() {
                     <Typography variant="caption">{`${dep.firstname} ${dep.lastname} ${dep.email}`}</Typography>
                   </Box>
                 </TableCell>
+                <TableCell align="center">
+                  {dep.pending ? (
+                    <Badge badgeContent="pending" color="error" />
+                  ) : (
+                    <Badge badgeContent="successful" color="primary" />
+                  )}
+                </TableCell>
                 <TableCell align="right">
                   {formatLocaleCurrency(dep.deposit_amount, "USD", {
                     autoFixed: false,
@@ -124,6 +207,17 @@ export default function Investments() {
                 </TableCell>
                 <TableCell align="right">
                   {new Date(dep.created_at.seconds * 1000).toLocaleDateString()}
+                </TableCell>
+                <TableCell align="center">
+                  <Button
+                    variant="contained"
+                    size="small"
+                    color="primary"
+                    disabled={dep.pending ? false : true}
+                    onClick={() => updateInvestment(dep)}
+                  >
+                    <DoneSharp />
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

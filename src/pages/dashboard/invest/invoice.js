@@ -1,12 +1,12 @@
 import React, { useEffect, useContext, useState } from "react";
 import { AppContext } from "../../../App";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   loading$,
   loadingpayment$,
   transactionInfo$,
 } from "../../../redux/action";
-import { firestore } from "../../../config";
+import firebase, { firestore } from "../../../config";
 import {
   makeStyles,
   Container,
@@ -32,6 +32,7 @@ import {
 import { client } from "../../../config/services";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { navigate } from "@reach/router";
+import { ajax } from "rxjs/ajax";
 var formatLocaleCurrency = require("country-currency-map").formatLocaleCurrency;
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +51,7 @@ function Invoice() {
     .currencycode;
   const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
 
+  const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const dispatch = useDispatch();
   const { paymentInfo, setPaymentInfo, user, setUser } = useContext(AppContext);
   const [selectedValue, setSelectedValue] = React.useState("wallet");
@@ -129,6 +131,7 @@ function Invoice() {
 
   const submitPayment = (e) => {
     e.preventDefault();
+    /*
     const removePaymentStorage = async () => {
       await reactLocalStorage.remove("paymentInfo");
     };
@@ -168,6 +171,43 @@ function Invoice() {
       });
       dispatch(loading$());
     }
+    */
+    dispatch(loading$());
+    firestore
+      .collection("alldeposits")
+      .add({
+        type: "investment",
+        pending: true,
+        block_name: paymentInfo.block.name,
+        rate: parseInt(paymentInfo.block.rate),
+        deposit_amount: paymentInfo.amount,
+        amount: paymentInfo.amount,
+        userid: userInfos.id,
+        email: userInfos.email,
+        firstname: userInfos.firstName,
+        lastname: userInfos.lastName,
+        date: new Date().toLocaleDateString(),
+        created_at: firebase.firestore.FieldValue.serverTimestamp(),
+        duration: paymentInfo.block.duration,
+        referrer: userInfos.referrer,
+        referrerid: userInfos.referrerid,
+      })
+      .then(() => {
+        ajax({
+          url: "https://hotblockexpressapi.herokuapp.com/mail",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            message: `incoming investment request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
+          },
+        }).subscribe(() => {
+          console.log("message sent");
+          dispatch(loading$());
+          navigate("payment_wallet");
+        });
+      });
   };
 
   const submitpaymentWallet = (e) => {

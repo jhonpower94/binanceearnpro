@@ -115,16 +115,16 @@ function PaymentSuccess() {
                   .doc(referrerId)
                   .collection("bonus")
                   .add({
-                    amount: referrerpercent,
-                    deposit_amount: referrerpercent,
-                    from: userInfos.firstName,
+                    amount: 5,
+                    deposit_amount: 5,
+                    from: `${userInfos.firstName} ${userInfos.lastName}`,
                     description: "Referral bonus",
                     date: new Date().toLocaleDateString(),
                     created_at: firebase.firestore.FieldValue.serverTimestamp(),
                   })
                   .then(() => {
                     //add notification to referrer database
-                    console.log(`referral percentage: ${referrerpercent}`);
+                    console.log(`referral added`);
                     firestore
                       .doc(`users/${referrerId}`)
                       .collection("notification")
@@ -133,6 +133,9 @@ function PaymentSuccess() {
                         time: new Date().toLocaleTimeString(),
                         amount: referrerpercent,
                         type: "Bonus",
+                      });
+                      firestore.doc(`users/${currentUserId}`).update({
+                        referrer: false,
                       });
                   })
 
