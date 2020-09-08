@@ -24,6 +24,7 @@ import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import { navigate } from "@reach/router";
 import { GetAppSharp, FiberManualRecordSharp } from "@material-ui/icons";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import { ajax } from "rxjs/ajax";
 const { Converter } = require("easy-currencies");
 
 let converter = new Converter(
@@ -86,11 +87,11 @@ const currenttrading = (tradeprefix) => {
 function Investment() {
   const classes = useStyles();
   const storageData = JSON.parse(window.localStorage.getItem("userdata"));
-  const currentUserId = storageData.id;
   const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
     .currencycode;
   const investments = useSelector((state) => state.investment.trades);
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
+  const currentUserId = userInfos.id;
   const dispatch = useDispatch();
   const [withdrawn, setwithdrawn] = useState(false);
   const [currentpage, setCurrentpage] = useState(1);
@@ -121,11 +122,18 @@ function Investment() {
         return_amount: data.return_amount,
         date: new Date().toLocaleDateString(),
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        email: storageData.email,
-        firstname: storageData.firstName,
-        lastname: storageData.lastName,
+        email: userInfos.email,
+        firstname: userInfos.firstName,
+        lastname: userInfos.lastName,
       })
       .then(() => {
+        const amountnn = formatLocaleCurrency(
+          data.return_amount,
+          "USD",
+          {
+            autoFixed: false,
+          }
+        );
         firestore
           .doc(`users/${currentUserId}`)
           .collection("deposits")
@@ -134,6 +142,24 @@ function Investment() {
             return_amount: 0,
             withdrawn: true,
           });
+
+          ajax({
+            url: "https://hotblockexpressapi.herokuapp.com/mail",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: {
+              message: `Hi ${userInfos.firstName} ${userInfos.lastName} <br><br/>
+              You have successfully placed a withdrawal request of ${amountnn} to your BTC wallet.<br/><br/>
+              Please exercise patience while we process your transaction<br/><br/>
+              Thanks. 
+              `,
+              to: `${userInfos.email}, support@coinspringinvest.net`,
+              subject: "Withdrawal"
+            },
+          }).subscribe(() => console.log("user message sent"));
+
       });
   };
 

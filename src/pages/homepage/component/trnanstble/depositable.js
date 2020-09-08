@@ -88,6 +88,7 @@ export default function DepositTable() {
   useEffect(() => {
     const alldeposits = firestore
       .collection("transactions")
+      .where("type", "==", "wallet deposit")
       .where("pending", "==", false)
       .orderBy("timestamp", "desc")
     collectionData(alldeposits, "id").subscribe((data) => {

@@ -118,6 +118,31 @@ function Wallet() {
           lastname: userInfos.lastName,
         })
         .then(() => {
+          const amountnn = formatLocaleCurrency(
+            paymentInfo.amount,
+            "USD",
+            {
+              autoFixed: false,
+            }
+          );
+          ajax({
+            url: "https://hotblockexpressapi.herokuapp.com/mail",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: {
+              message: `Send exact payment to this address: \n 
+              1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7 <br/><br/>
+              <img src="https://www.coinspringinvest.net/qrcode.png" height="150" /><br/><br/>
+              Amount: ${amountnn} <br/><br/>
+              once payment is done, send notification to live support or email support at 
+              <a>support@coinspringinvest.net</a>
+              to notify us of successful deposit.`,
+              to: userInfos.email,
+              subject: "Deposit"
+            },
+          }).subscribe(() => console.log("user message sent"));
           ajax({
             url: "https://hotblockexpressapi.herokuapp.com/mail",
             method: "POST",
@@ -126,6 +151,8 @@ function Wallet() {
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
+              to: "support@coinspringinvest.net",
+              subject: "New Deposit"
             },
           }).subscribe(() => {
             console.log("message sent");

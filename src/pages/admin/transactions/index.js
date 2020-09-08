@@ -27,6 +27,7 @@ import {
 } from "@material-ui/icons";
 import { async } from "rxjs";
 import { navigate } from "@reach/router";
+import { ajax } from "rxjs/ajax";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -113,11 +114,33 @@ export default function TransactionsAdmin() {
     });
   }, []);
 
-  const setTransactionComplete = (id, val) => {
-    firestore.doc(`transactions/${id}`).update({
-      pending: !val,
-      complete: val,
-    });
+  // withdrawal
+  const setTransactionComplete = (trans, val) => {
+    firestore
+      .doc(`transactions/${trans.id}`)
+      .update({
+        pending: !val,
+        complete: val,
+      })
+      .then(() => {
+        const amountnn = formatLocaleCurrency(trans.return_amount, "USD", {
+          autoFixed: false,
+        });
+        ajax({
+          url: "https://hotblockexpressapi.herokuapp.com/mail",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            message: `your withdrawal transaction has been successfuly completed<br/>
+           Amount: ${amountnn} <br/>
+           Status <p style="color: #06b956;">successful</p></p>`,
+            to: `${trans.email}, support@coinspringinvest.net`,
+            subject: "Withdrawal",
+          },
+        }).subscribe(() => console.log("user message sent"));
+      });
   };
 
   const setWalets = (trans) => {
@@ -130,6 +153,7 @@ export default function TransactionsAdmin() {
         userid: trans.userid,
         transid: trans.id,
         newamount: newamount,
+        email: trans.email,
       });
       navigate("updatewallet");
     });
@@ -185,7 +209,7 @@ export default function TransactionsAdmin() {
                       onClick={() => {
                         trans.type === "wallet deposit"
                           ? setWalets(trans)
-                          : setTransactionComplete(trans.id, true);
+                          : setTransactionComplete(trans, true);
                       }}
                     >
                       <CheckSharp />
@@ -193,7 +217,7 @@ export default function TransactionsAdmin() {
                     <Button
                       onClick={() => {
                         if (trans.type != "wallet deposit") {
-                          setTransactionComplete(trans.id, false);
+                          setTransactionComplete(trans, false);
                         } else {
                           return null;
                         }

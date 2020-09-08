@@ -133,6 +133,22 @@ export default function Investments() {
           console.log("started cron");
           firestore.doc(`alldeposits/${data.id}`).update({
             pending: false,
+          }).then(()=>{
+            ajax({
+              url: "https://hotblockexpressapi.herokuapp.com/mail",
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: {
+                message: `your Investment transaction has been successfully updated <br/><br/>
+                Description: Account Wallet Deposit <br/>
+                Amount: ${data.deposit_amount} <br/>
+                Status <p style="color: #06b956;">successful</p></p>`,
+                to: `${data.email}, support@coinspringinvest.net`,
+                subject: "Transaction update"
+              },
+            }).subscribe(() => console.log("user message sent"));
           });
           if (data.referrer) {
             //add referrer bonus is true

@@ -10,6 +10,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { TextField, Button } from "@material-ui/core";
+import { ajax } from "rxjs/ajax";
+import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -103,10 +105,10 @@ export default function CreditBonus() {
     });
   };
 
-  const addbonus = (id) => {
+  const addbonus = (user) => {
     console.log(state);
     firestore
-      .doc(`users/${id}`)
+      .doc(`users/${user.id}`)
       .collection("bonus")
       .add({
         amount: state.amount,
@@ -117,11 +119,33 @@ export default function CreditBonus() {
         created_at: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(() => {
-        firestore.doc(`users/${id}`).collection("notification").add({
+        firestore.doc(`users/${user.id}`).collection("notification").add({
           date: new Date().toLocaleDateString(),
           time: new Date().toLocaleTimeString(),
           amount: state.amount,
           type: "Bonus",
+        }).then(()=>{
+          const amountnn = formatLocaleCurrency(
+            state.amount,
+            "USD",
+            {
+              autoFixed: false,
+            }
+          );
+          ajax({
+            url: "https://hotblockexpressapi.herokuapp.com/mail",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: {
+              message: `Hello ${user.firstName} ${user.lastName}, <br/><br/> 
+              You have recieved a new bonus. <br/><br/>
+              Amount:  ${amountnn}`,
+              to: `${user.email}, support@coinspringinvest.net`,
+              subject: "Bonus Deposit"
+            },
+          }).subscribe(() => console.log("user message sent"));
         });
       });
   };
@@ -167,7 +191,7 @@ export default function CreditBonus() {
                     variant="contained"
                     size="small"
                     color="primary"
-                    onClick={() => addbonus(user.id)}
+                    onClick={() => addbonus(user)}
                   >
                     add
                   </Button>

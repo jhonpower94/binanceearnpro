@@ -4,6 +4,8 @@ import { makeStyles, Container } from "@material-ui/core";
 import { firestore } from "../../../config";
 import { navigate } from "@reach/router";
 import { CheckBoxSharp } from "@material-ui/icons";
+import { ajax } from "rxjs/ajax";
+import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -28,13 +30,43 @@ function UpdateWallet() {
       })
       .then(() => {
         setupdateWalletBalance({ status: true });
-        firestore.doc(`transactions/${updateWalletBalance.transid}`).update({
-          pending: false,
-        });
+        firestore
+          .doc(`transactions/${updateWalletBalance.transid}`)
+          .update({
+            pending: false,
+          })
+          .then(() => {
+            const amountnn = formatLocaleCurrency(
+              updateWalletBalance.newamount,
+              "USD",
+              {
+                autoFixed: false,
+              }
+            );
+            ajax({
+              url: "https://hotblockexpressapi.herokuapp.com/mail",
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: {
+                message: `your Deposit has been successfully updated <br/><br/>
+              Description: Account Wallet Deposit <br/>
+              Amount: ${amountnn} <br/>
+              Status <p style="color: #06b956;">successful</p></p>`,
+                to: `${updateWalletBalance.email}, support@coinspringinvest.net`,
+                subject: "Transaction update",
+              },
+            }).subscribe(() => console.log("user message sent"));
+          });
       });
   }, []);
 
-  return <Container className={classes.margintop}>Updating wallet <CheckBoxSharp color="primary" /></Container>;
+  return (
+    <Container className={classes.margintop}>
+      Updating wallet <CheckBoxSharp color="primary" />
+    </Container>
+  );
 }
 
 export default UpdateWallet;

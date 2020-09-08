@@ -21,6 +21,8 @@ import { loading$, selectedmenuItem$ } from "../../../redux/action";
 import firebase, { firestore } from "../../../config";
 import { navigate } from "@reach/router";
 import { GetAppSharp } from "@material-ui/icons";
+import { ajax } from "rxjs/ajax";
+import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 
 const useStyles = makeStyles((theme) => ({
   column: {
@@ -79,6 +81,7 @@ function WithdrawBonus() {
   const userid = JSON.parse(window.localStorage.getItem("userdata")).id;
   const storageData = JSON.parse(window.localStorage.getItem("userdata"));
   const dispatch = useDispatch();
+  const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const bonus = useSelector((state) => state.bonus.bonus);
   const [withdrawn, setwithdrawn] = useState(false);
   const [currentpage, setCurrentpage] = useState(1);
@@ -121,8 +124,32 @@ function WithdrawBonus() {
             lastname: storageData.lastName,
           })
           .then(() => {
-            dispatch(loading$());
-            navigate("../complete");
+            const amountnn = formatLocaleCurrency(
+              data.amount,
+              "USD",
+              {
+                autoFixed: false,
+              }
+            );
+            ajax({
+              url: "https://hotblockexpressapi.herokuapp.com/mail",
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: {
+                message: `Hi ${userInfos.firstName} ${userInfos.lastName} <br><br/>
+                You have successfully placed a withdrawal request of ${amountnn} to your BTC wallet.<br/><br/>
+                Please exercise patience while we process your transaction<br/><br/>
+                Thanks. `,
+                to: `${userInfos.email}, support@coinspringinvest.net`,
+                subject: "New Deposit",
+              },
+            }).subscribe(() => {
+              console.log("message sent");
+              dispatch(loading$());
+              navigate("../complete");
+            });
           });
       });
   };

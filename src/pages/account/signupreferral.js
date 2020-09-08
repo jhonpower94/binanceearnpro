@@ -29,10 +29,11 @@ import getSymbolFromCurrency from "currency-symbol-map";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { countrylist } from "../../config/countrylist";
 import { from } from "rxjs";
-import firebase, { app } from "../../config";
+import firebase, { app, firestore, docData } from "../../config";
 import { addUsers } from "../../config/services";
 import { dispatch } from "rxjs/internal/observable/pairs";
 import { navigate } from "@reach/router";
+import { ajax } from "rxjs/ajax";
 var cc = require("currency-codes");
 
 function Copyright() {
@@ -163,8 +164,25 @@ export default function SignUpReferral(props) {
         console.log("user created");
         const userid = user.user.uid;
         addUsers(datas, userid).then(() => {
-          dispatch(loading$());
-          navigate("../../dashboard");
+          const getreferrerdata = firestore.doc(`users/${id}`);
+          docData(getreferrerdata, "id").subscribe((data) => {
+            ajax({
+              url: "https://hotblockexpressapi.herokuapp.com/mail",
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: {
+                message: `Hi ${data.firstName} <Br/> This is to notiy you that your referral ${values.firstName} ${values.lastName} has successfully registered. <br/> Thank you for partnering with us `,
+                to: data.email,
+                subject: "New invitation"
+              },
+            }).subscribe(() => {
+              console.log("message sent");
+              dispatch(loading$());
+              navigate("../../dashboard");
+            });
+          });
         });
       })
       .catch((err) => {

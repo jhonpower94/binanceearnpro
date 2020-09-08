@@ -193,6 +193,9 @@ function Invoice() {
         referrerid: userInfos.referrerid,
       })
       .then(() => {
+        const amountnn = formatLocaleCurrency(paymentInfo.amount, "USD", {
+          autoFixed: false,
+        });
         ajax({
           url: "https://hotblockexpressapi.herokuapp.com/mail",
           method: "POST",
@@ -200,7 +203,9 @@ function Invoice() {
             "Content-Type": "application/json",
           },
           body: {
-            message: `incoming investment request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
+            message: `incoming investment request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${amountnn}`,
+            to: userInfos.email,
+            subject: "investment",
           },
         }).subscribe(() => {
           console.log("message sent");
