@@ -126,6 +126,9 @@ export default function TransactionsAdmin() {
         const amountnn = formatLocaleCurrency(trans.return_amount, "USD", {
           autoFixed: false,
         });
+      if(trans.isdeposit){
+        console.log("deposi withdrawal")
+      }
         ajax({
           url: "https://hotblockexpressapi.herokuapp.com/mail",
           method: "POST",

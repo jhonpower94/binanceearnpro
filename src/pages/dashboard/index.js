@@ -501,6 +501,7 @@ function DashboardLayout(props) {
     { name: "Investments", link: "investments" },
     { name: "Bonus", link: "withdraw/bonus" },
     { name: "Deposit", link: "wallet" },
+    { name: "Withdraw", link: "withdrawform" },
     { name: "Profile", link: "profile" },
     { name: "Support", link: "support" },
   ];

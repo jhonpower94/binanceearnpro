@@ -23,6 +23,7 @@ import Invoice from "./pages/dashboard/invest/invoice";
 import Support from "./pages/dashboard/support";
 import Transactions from "./pages/dashboard/transactions";
 import WithdrawBonus from "./pages/dashboard/withdraw/bonus";
+import Withdrawform from "./pages/dashboard/withdraw/withdraw";
 import SignIn from "./pages/account/singin";
 import SignUp from "./pages/account/signup";
 import SignUpReferral from "./pages/account/signupreferral";
@@ -197,6 +198,7 @@ function App() {
               <Invoice path="invoice" />
               <MyInvestments path="investments" />
               <WithdrawBonus path="withdraw/:page" />
+              <Withdrawform path="withdrawform"/>
               <Transactions path="transactions" />
               <Wallet path="wallet" />
               <CreditWallet path="payment_wallet" />
