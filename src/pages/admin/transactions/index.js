@@ -215,7 +215,7 @@ export default function TransactionsAdmin() {
                 <TableCell align="left">
                   <Box display="flex" flexDirection="column">
                     <Typography variant="body1">{trans.type}</Typography>
-                    <Typography variant="caption">{`${trans.name} ${trans.email}`}</Typography>
+                    <Typography variant="caption">{`${trans.name} ${trans.firstname}  ${trans.lastname}`}</Typography>
                   </Box>
                 </TableCell>
 
