@@ -66,6 +66,7 @@ function PaymentSuccess() {
             deposit_amount: depositamount,
             amount: depositamount,
             userid: currentUserId,
+            percentage: paymentInfo.block.rate,
             complete: false,
             date: new Date().toLocaleDateString(),
             created_at: firebase.firestore.FieldValue.serverTimestamp(),
@@ -74,21 +75,15 @@ function PaymentSuccess() {
             console.log("transaction added");
             const depositid = tr.id;
             ajax({
-              url: "https://hotblockexpressapi.herokuapp.com/ipn",
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: {
-                blockindex: blockindex,
-                deposit_amount: depositamount,
-                userid: currentUserId,
-                depositid: depositid,
-                duration: parseInt(paymentInfo.block.duration),
-                currency: currencySymbol,
-                rate: parseInt(paymentInfo.block.rate),
-              },
-            }).subscribe(() => {
+              url: `https://us-central1-hotblock-48cbf.cloudfunctions.net/app/?blockindex=${blockindex}&deposit_amount=${depositamount}&userid=${currentUserId}&depositid=${depositid}&duration=${parseInt(
+                paymentInfo.block.duration
+              )}&currency=${currencySymbol}&rate=${parseInt(
+                paymentInfo.block.rate
+              )}`,
+              method: "GET",
+              headers: {},
+            }).subscribe((data) => {
+              console.log(data.response)
               console.log("started cron");
 
               dispatch(loadingpayment$());
@@ -134,9 +129,9 @@ function PaymentSuccess() {
                         amount: referrerpercent,
                         type: "Bonus",
                       });
-                      firestore.doc(`users/${currentUserId}`).update({
-                        referrer: false,
-                      });
+                    firestore.doc(`users/${currentUserId}`).update({
+                      referrer: false,
+                    });
                   })
 
                   .then(() => {

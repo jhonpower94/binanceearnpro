@@ -36,7 +36,7 @@ function Profile() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(selectedmenuItem$(5));
+    dispatch(selectedmenuItem$(6));
   }, []);
   const submitId = (e, field) => {
     const file = e.target.files[0];

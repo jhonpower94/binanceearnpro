@@ -126,9 +126,10 @@ export default function TransactionsAdmin() {
         const amountnn = formatLocaleCurrency(trans.return_amount, "USD", {
           autoFixed: false,
         });
-      if(trans.isdeposit){
-        console.log("deposi withdrawal")
-      }
+        if (!val) {
+          console.log("delete me");
+        }
+
         ajax({
           url: "https://hotblockexpressapi.herokuapp.com/mail",
           method: "POST",
@@ -136,9 +137,19 @@ export default function TransactionsAdmin() {
             "Content-Type": "application/json",
           },
           body: {
-            message: `your withdrawal transaction has been successfuly completed<br/>
+            message: `your ${
+              trans.type
+            } transaction has been ${
+              val
+                ? "sucessfully updated"
+                : "canceled"
+            } <br/>
            Amount: ${amountnn} <br/>
-           Status <p style="color: #06b956;">successful</p></p>`,
+           Status ${
+             val
+               ? "<p style='color: #06b956;'>successful</p></p>"
+               : "<p style='color: #f44336;'>Canceled</p></p>"
+           } `,
             to: `${trans.email}, support@coinspringinvest.net`,
             subject: "Withdrawal",
           },
@@ -155,8 +166,28 @@ export default function TransactionsAdmin() {
         ...updateWalletBalance,
         userid: trans.userid,
         transid: trans.id,
-        newamount: newamount,
+        newamount: trans.return_amount,
+        currentAmount: isNaN(oldamount) ? trans.return_amount : newamount,
         email: trans.email,
+        pending: false,
+      });
+      navigate("updatewallet");
+    });
+  };
+
+  const cancelWalletDeposit = (trans) => {
+    const query = firestore.doc(`users/${trans.userid}`);
+    docData(query, "id").subscribe((data) => {
+      const oldamount = data.wallet_balance;
+      const newamount = oldamount + 0;
+      setupdateWalletBalance({
+        ...updateWalletBalance,
+        userid: trans.userid,
+        transid: trans.id,
+        newamount: trans.return_amount,
+        currentAmount: isNaN(oldamount) ? 0 : newamount,
+        email: trans.email,
+        pending: true,
       });
       navigate("updatewallet");
     });
@@ -222,7 +253,7 @@ export default function TransactionsAdmin() {
                         if (trans.type != "wallet deposit") {
                           setTransactionComplete(trans, false);
                         } else {
-                          return null;
+                          cancelWalletDeposit(trans);
                         }
                       }}
                     >

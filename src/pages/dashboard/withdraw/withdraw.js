@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import PropTypes from "prop-types";
 import firebase, { firestore } from "../../../config";
 import { useSelector, useDispatch } from "react-redux";
-import { loading$ } from "../../../redux/action";
+import { loading$, selectedmenuItem$ } from "../../../redux/action";
 import { AppContext } from "../../../App";
 import {
   makeStyles,
@@ -73,6 +73,7 @@ function Withdrawform() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    dispatch(selectedmenuItem$(5));
   }, []);
 
   const submitForm = (e) => {
@@ -130,13 +131,27 @@ function Withdrawform() {
     }
   };
 
+  const walletBalance = isNaN(userInfos.wallet_balance)
+    ? formatLocaleCurrency(0, "USD", {
+        autoFixed: false,
+      })
+    : formatLocaleCurrency(userInfos.wallet_balance, "USD", {
+        autoFixed: false,
+      });
+
   return (
     <Container maxWidth="sm">
       <Card variant="outlined">
         <CardHeader
-          title={formatLocaleCurrency(userInfos.wallet_balance, "USD", {
-            autoFixed: false,
-          })}
+          title={
+            isNaN(userInfos.wallet_balance)
+              ? formatLocaleCurrency(0, "USD", {
+                  autoFixed: false,
+                })
+              : formatLocaleCurrency(userInfos.wallet_balance, "USD", {
+                  autoFixed: false,
+                })
+          }
           subheader="Remaing balance"
         />
         <CardContent>

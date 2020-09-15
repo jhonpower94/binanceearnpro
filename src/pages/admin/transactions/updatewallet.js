@@ -3,7 +3,7 @@ import { AppContext } from "../../../App";
 import { makeStyles, Container } from "@material-ui/core";
 import { firestore } from "../../../config";
 import { navigate } from "@reach/router";
-import { CheckBoxSharp } from "@material-ui/icons";
+import { CheckBoxSharp, CancelSharp } from "@material-ui/icons";
 import { ajax } from "rxjs/ajax";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 
@@ -26,14 +26,14 @@ function UpdateWallet() {
     firestore
       .doc(`users/${updateWalletBalance.userid}`)
       .update({
-        wallet_balance: updateWalletBalance.newamount,
+        wallet_balance: updateWalletBalance.currentAmount,
       })
       .then(() => {
         setupdateWalletBalance({ status: true });
         firestore
           .doc(`transactions/${updateWalletBalance.transid}`)
           .update({
-            pending: false,
+            pending: updateWalletBalance.pending,
           })
           .then(() => {
             const amountnn = formatLocaleCurrency(
@@ -50,10 +50,18 @@ function UpdateWallet() {
                 "Content-Type": "application/json",
               },
               body: {
-                message: `your Deposit has been successfully updated <br/><br/>
+                message: `your Deposit has been ${
+                  updateWalletBalance.pending
+                    ? "canceled"
+                    : "successfully updated"
+                }  <br/><br/>
               Description: Account Wallet Deposit <br/>
               Amount: ${amountnn} <br/>
-              Status <p style="color: #06b956;">successful</p></p>`,
+              Status ${
+                updateWalletBalance.pending
+                  ? "<p style='color: #f44336;'>Canceled</p></p>"
+                  : "<p style='color: #06b956;'>successful</p></p>"
+              }`,
                 to: `${updateWalletBalance.email}, support@coinspringinvest.net`,
                 subject: "Transaction update",
               },
@@ -64,7 +72,12 @@ function UpdateWallet() {
 
   return (
     <Container className={classes.margintop}>
-      Updating wallet <CheckBoxSharp color="primary" />
+      Updating wallet{" "}
+      {updateWalletBalance.pending ? (
+        <CancelSharp color="error" />
+      ) : (
+        <CheckBoxSharp color="primary" />
+      )}
     </Container>
   );
 }

@@ -30,7 +30,7 @@ function Support() {
   const classes = useStyles();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(selectedmenuItem$(6));
+    dispatch(selectedmenuItem$(7));
   }, []);
 
   return (
