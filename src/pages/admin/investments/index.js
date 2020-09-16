@@ -104,8 +104,8 @@ export default function Investments() {
       .collection("deposits")
       .add({
         block_name: data.block_name,
-        deposit_amount: data.deposit_amount,
-        amount: data.amount,
+        deposit_amount: parseInt(data.deposit_amount),
+        amount: parseInt(data.amount),
         userid: data.userid,
         complete: false,
         date: new Date().toLocaleDateString(),
