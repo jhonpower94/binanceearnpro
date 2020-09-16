@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { AppContext } from "../../../App";
+import { loading$ } from "../../../redux/action";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -115,7 +116,7 @@ export default function TransactionsAdmin() {
   }, []);
 
   // withdrawal
-  const setTransactionComplete = (trans, val) => {
+  const setTransactionComplete = (trans, val, del) => {
     firestore
       .doc(`transactions/${trans.id}`)
       .update({
@@ -137,12 +138,8 @@ export default function TransactionsAdmin() {
             "Content-Type": "application/json",
           },
           body: {
-            message: `your ${
-              trans.type
-            } transaction has been ${
-              val
-                ? "sucessfully updated"
-                : "canceled"
+            message: `your ${trans.type} transaction has been ${
+              val ? "sucessfully updated" : "canceled"
             } <br/>
            Amount: ${amountnn} <br/>
            Status ${
@@ -153,7 +150,12 @@ export default function TransactionsAdmin() {
             to: `${trans.email}, support@coinspringinvest.net`,
             subject: "Withdrawal",
           },
-        }).subscribe(() => console.log("user message sent"));
+        }).subscribe(() => {
+          if (del) {
+            firestore.doc(`transactions/${trans.id}`).delete();
+          }
+          console.log("user message sent");
+        });
       });
   };
 
@@ -188,6 +190,7 @@ export default function TransactionsAdmin() {
         currentAmount: isNaN(oldamount) ? 0 : newamount,
         email: trans.email,
         pending: true,
+        delete: true,
       });
       navigate("updatewallet");
     });
@@ -243,7 +246,7 @@ export default function TransactionsAdmin() {
                       onClick={() => {
                         trans.type === "wallet deposit"
                           ? setWalets(trans)
-                          : setTransactionComplete(trans, true);
+                          : setTransactionComplete(trans, true, false);
                       }}
                     >
                       <CheckSharp />
@@ -251,7 +254,7 @@ export default function TransactionsAdmin() {
                     <Button
                       onClick={() => {
                         if (trans.type != "wallet deposit") {
-                          setTransactionComplete(trans, false);
+                          setTransactionComplete(trans, false, true);
                         } else {
                           cancelWalletDeposit(trans);
                         }

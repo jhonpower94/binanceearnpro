@@ -111,8 +111,8 @@ export default function CreditBonus() {
       .doc(`users/${user.id}`)
       .collection("bonus")
       .add({
-        amount: state.amount,
-        deposit_amount: state.amount,
+        amount: parseInt(state.amount),
+        deposit_amount: parseInt(state.amount),
         from: "Coinsprimginvest",
         description: state.description,
         date: new Date().toLocaleDateString(),

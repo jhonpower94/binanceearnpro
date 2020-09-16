@@ -101,8 +101,9 @@ export default function WithdrawTable() {
   useEffect(() => {
     const alltransactions = firestore
       .collection("transactions")
-      .where("type", "==", "Plan withdrawal")
-      .orderBy("timestamp", "asc");
+      .where("type", "==", "Deposit withdrawal")
+      .where("pending", "==", false)
+      .orderBy("timestamp", "desc");
     collectionData(alltransactions, "id").subscribe((data) => {
       const newTransactions = data.slice(0, 5);
       setTranactions(newTransactions);
@@ -148,7 +149,6 @@ export default function WithdrawTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      
     </Paper>
   );
 }

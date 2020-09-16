@@ -117,7 +117,7 @@ function WithdrawBonus() {
             action: "withdrawal",
             pending: true,
             name: "Bonus withdrawal",
-            return_amount: data.amount,
+            return_amount: parseInt(data.amount),
             date: new Date().toLocaleDateString(),
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             email: storageData.email,

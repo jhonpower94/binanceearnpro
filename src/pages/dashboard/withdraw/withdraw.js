@@ -91,7 +91,7 @@ function Withdrawform() {
           pending: true,
           isdeposit: true,
           name: "Wallet withdrawal",
-          return_amount: value.amount,
+          return_amount: parseInt(value.amount),
           date: new Date().toLocaleDateString(),
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           email: userInfos.email,

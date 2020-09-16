@@ -32,8 +32,9 @@ import AddIcon from "@material-ui/icons/Add";
 import Pagnition from "../../../components/pagination";
 import { navigate } from "@reach/router";
 import { FileCopySharp, CloseSharp } from "@material-ui/icons";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import Snackbar from "@material-ui/core/Snackbar";
+import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 
 const useStyles = makeStyles((theme) => ({
   column: {
@@ -112,14 +113,23 @@ function DashboardPage() {
     {
       title: "Account balance",
       balance: mainbalance.main_balance,
-      subheader: "Deposits and earning",
-      Avater: require("../icons/balance.svg"),
+      subheader: "Investment and earning",
+    },
+    {
+      title: "Wallet balance",
+      balance: isNaN(userInfos.wallet_balance)
+        ? formatLocaleCurrency(0, "USD", {
+            autoFixed: false,
+          })
+        : formatLocaleCurrency(userInfos.wallet_balance, "USD", {
+            autoFixed: false,
+          }),
+      subheader: "Total wallet deposit",
     },
     {
       title: "Bonus balance",
       balance: mainbalance.bonus_balance,
       subheader: "Awards and referral bonus",
-      Avater: require("../icons/bonus.svg"),
     },
   ];
 
@@ -129,7 +139,7 @@ function DashboardPage() {
       value: activities.totlProfit,
     },
     {
-      title: "Total deposited",
+      title: "Total investment",
       value: activities.totalDeposit,
     },
     {
@@ -193,11 +203,10 @@ function DashboardPage() {
         </Grid>
         <Grid container spacing={5} justify="center">
           {balanceData.map((data, index) => (
-            <Grid item xs={12} sm={6} key={index}>
+            <Grid item xs={12} sm={4} key={index}>
               <Card className={classes.column}>
                 <CardHeader
                   title={<Typography variant="h6">{data.title}</Typography>}
-                  action={<img src={data.Avater} width="50" />}
                   className={classes.cardheader}
                 />
 

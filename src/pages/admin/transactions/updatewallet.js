@@ -65,7 +65,14 @@ function UpdateWallet() {
                 to: `${updateWalletBalance.email}, support@coinspringinvest.net`,
                 subject: "Transaction update",
               },
-            }).subscribe(() => console.log("user message sent"));
+            }).subscribe(() => {
+              if (updateWalletBalance.delete) {
+                firestore
+                  .doc(`transactions/${updateWalletBalance.transid}`)
+                  .delete();
+              }
+              console.log("user message sent");
+            });
           });
       });
   }, []);
