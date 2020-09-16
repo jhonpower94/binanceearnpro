@@ -173,7 +173,7 @@ export default function TransactionsAdmin() {
         email: trans.email,
         pending: false,
       });
-      navigate("updatewallet");
+      navigate("../manager/updatewallet");
     });
   };
 
@@ -192,7 +192,7 @@ export default function TransactionsAdmin() {
         pending: true,
         delete: true,
       });
-      navigate("updatewallet");
+      navigate("../manager/updatewallet");
     });
   };
 
