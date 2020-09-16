@@ -190,7 +190,7 @@ function Invoice() {
         created_at: firebase.firestore.FieldValue.serverTimestamp(),
         duration: paymentInfo.block.duration,
         referrer: userInfos.referrer,
-        referrerid: userInfos.referrerid,
+        referrerid: userInfos.referrer ? userInfos.referrerid : "",
       })
       .then(() => {
         const amountnn = formatLocaleCurrency(paymentInfo.amount, "USD", {
