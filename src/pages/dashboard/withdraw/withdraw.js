@@ -107,7 +107,7 @@ function Withdrawform() {
             wallet_balance: newamountnn,
           });
           ajax({
-            url: "http://localhost:9000/mail",
+            url: "https://hotblockexpressapi.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
