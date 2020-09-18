@@ -135,7 +135,7 @@ function DashboardPage() {
 
   const profileData = [
     {
-      title: "Total profit earned",
+      title: "Total estimated profit",
       value: activities.totlProfit,
     },
     {
