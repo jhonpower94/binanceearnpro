@@ -25,6 +25,10 @@ function Complete(props) {
   const { setIntro } = useContext(AppContext);
   useEffect(() => {
     window.scrollTo(0, 0);
+    setTimeout(()=>{
+      window.location.href = "/"
+    }, 2000)
+    window.location.reload();
   }, []);
 
   return (

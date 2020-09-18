@@ -241,15 +241,6 @@ function Wallet() {
             >
               {`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
             </Typography>
-
-            <CopyToClipboard
-              text={trx_info.payment_address}
-              onCopy={handleClick("Address copied")}
-            >
-              <Typography variant="caption" display="block" gutterBottom>
-                Copy
-              </Typography>
-            </CopyToClipboard>
           </Box>
         </div>
         <Divider variant="middle" />
