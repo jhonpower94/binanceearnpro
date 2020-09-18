@@ -72,6 +72,9 @@ function UpdateWallet() {
                   .delete();
               }
               console.log("user message sent");
+              setTimeout(() => {
+                window.location.href = "../manager";
+              }, 2000);
             });
           });
       });

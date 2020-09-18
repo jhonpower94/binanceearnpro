@@ -81,7 +81,9 @@ function DashboardAdmin() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const allusers = firestore.collection("users").orderBy("registered", "desc");
+    const allusers = firestore
+      .collection("users")
+      .orderBy("registered", "desc");
     collectionData(allusers, "id").subscribe((data) => {
       data.forEach((dt, index) => {
         const getid = firestore.doc(`users/${dt.referrerid}`);
