@@ -39,8 +39,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://coinspringinvest.net">
-        coinspringinvest
+      <Link color="inherit" href="https://digitalallianceap.net">
+      digitalallianceap
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
