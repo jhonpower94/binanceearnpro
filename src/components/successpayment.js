@@ -75,7 +75,7 @@ function PaymentSuccess() {
             console.log("transaction added");
             const depositid = tr.id;
             ajax({
-              url: `https://us-central1-hotblock-48cbf.cloudfunctions.net/app/?blockindex=${blockindex}&deposit_amount=${depositamount}&userid=${currentUserId}&depositid=${depositid}&duration=${parseInt(
+              url: `https://us-central1-admin-fa3ba.cloudfunctions.net/app/?blockindex=${blockindex}&deposit_amount=${depositamount}&userid=${currentUserId}&depositid=${depositid}&duration=${parseInt(
                 paymentInfo.block.duration
               )}&currency=${currencySymbol}&rate=${parseInt(
                 paymentInfo.block.rate

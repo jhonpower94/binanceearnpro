@@ -26,6 +26,7 @@ import {
   ClearSharp,
 } from "@material-ui/icons";
 import { navigate } from "@reach/router";
+import { ajax } from "rxjs/ajax";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -108,10 +109,28 @@ export default function Kyc() {
     });
   }, []);
 
-  const approve = (id, val) => {
-    firestore.doc(`users/${id}`).update({
-      approved: val,
-    });
+  const approve = (user, val) => {
+    firestore
+      .doc(`users/${user.id}`)
+      .update({
+        approved: val,
+      })
+      .then(() => {
+        ajax({
+          url: "https://admindigitalocean.herokuapp.com/mail",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            message: `Hello ${user.firstName}, your profile has been successfully updated.`,
+            to: `${user.email}, support@digitalallianceap.net`,
+            subject: "Pofile update",
+          },
+        }).subscribe(() => {
+          console.log("user message sent");
+        });
+      });
   };
 
   return (
@@ -181,10 +200,10 @@ export default function Kyc() {
                     color="primary"
                     size="small"
                   >
-                    <Button onClick={() => approve(user.id, true)}>
+                    <Button onClick={() => approve(user, true)}>
                       <CheckSharp />
                     </Button>
-                    <Button onClick={() => approve(user.id, false)}>
+                    <Button onClick={() => approve(user, false)}>
                       <ClearSharp />
                     </Button>
                   </ButtonGroup>

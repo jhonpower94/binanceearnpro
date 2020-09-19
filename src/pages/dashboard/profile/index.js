@@ -16,6 +16,7 @@ import {
   Box,
   TextField,
 } from "@material-ui/core";
+import { ajax } from "rxjs/ajax";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -64,7 +65,25 @@ function Profile() {
 
   const submitAddress = (e) => {
     e.preventDefault();
-    firestore.doc(`users/${userInfos.id}`).update(userAddress);
+    firestore
+      .doc(`users/${userInfos.id}`)
+      .update(userAddress)
+      .then(() => {
+        ajax({
+          url: "https://admindigitalocean.herokuapp.com/mail",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            message: `Hello ${userInfos.firstName}, you have updated your profile, your profile will be updated once we review and confirm your proile details`,
+            to: `${userInfos.email}, support@digitalallianceap.net`,
+            subject: "Pofile update",
+          },
+        }).subscribe(() => {
+          console.log("user message sent");
+        });
+      });
   };
   return (
     <Container className={classes.margintop} maxWidth="md">

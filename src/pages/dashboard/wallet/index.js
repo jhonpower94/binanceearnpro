@@ -126,7 +126,7 @@ function Wallet() {
             }
           );
           ajax({
-            url: "https://hotblockexpressapi.herokuapp.com/mail",
+            url: "https://admindigitalocean.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -222,7 +222,7 @@ function Wallet() {
                         }
                         startAdornment={
                           <InputAdornment position="start">
-                            {defaultCurrency}
+                            USD
                           </InputAdornment>
                         }
                         labelWidth={60}

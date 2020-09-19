@@ -289,7 +289,7 @@ function DashboardLayout(props) {
           }, 0);
 
           const totalPercentage = data.reduce((prv, cur) => {
-            const pasint = parseInt(cur.percentage)
+            const pasint = parseInt(cur.percentage);
             return prv + pasint;
           }, 0);
 
@@ -348,7 +348,10 @@ function DashboardLayout(props) {
         });
 
         // bonus balance
-        const Bonus = firestore.doc(`users/${user.uid}`).collection("bonus").orderBy("created_at", "desc");
+        const Bonus = firestore
+          .doc(`users/${user.uid}`)
+          .collection("bonus")
+          .orderBy("created_at", "desc");
         collectionData(Bonus, "id").subscribe((data) => {
           const country = JSON.parse(localStorage.getItem("country")).country;
           const newCurcode = getCountry(country).currency;
@@ -388,6 +391,7 @@ function DashboardLayout(props) {
               }
             );
             dispatch(bonusCollections$(data));
+            navigate("/");
           });
         });
 
@@ -571,7 +575,7 @@ function DashboardLayout(props) {
       }
     >
       <CssBaseline />
-      <AppBar color="secondary">
+      <AppBar >
         <Toolbar>
           {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
             <img
@@ -616,6 +620,7 @@ function DashboardLayout(props) {
                 key={index}
                 component="button"
                 variant="body1"
+                color="textSecondary"
                 className={
                   select == index
                     ? classes.link

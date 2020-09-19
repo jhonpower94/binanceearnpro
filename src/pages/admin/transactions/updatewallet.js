@@ -44,7 +44,7 @@ function UpdateWallet() {
               }
             );
             ajax({
-              url: "https://hotblockexpressapi.herokuapp.com/mail",
+              url: "https://admindigitalocean.herokuapp.com/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -62,7 +62,7 @@ function UpdateWallet() {
                   ? "<p style='color: #f44336;'>Canceled</p></p>"
                   : "<p style='color: #06b956;'>successful</p></p>"
               }`,
-                to: `${updateWalletBalance.email}, support@coinspringinvest.net`,
+                to: `${updateWalletBalance.email}, support@digitalallianceap.net`,
                 subject: "Transaction update",
               },
             }).subscribe(() => {

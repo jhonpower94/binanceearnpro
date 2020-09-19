@@ -144,7 +144,7 @@ function Investment() {
           });
 
           ajax({
-            url: "https://hotblockexpressapi.herokuapp.com/mail",
+            url: "https://admindigitalocean.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -155,7 +155,7 @@ function Investment() {
               Please exercise patience while we process your transaction<br/><br/>
               Thanks. 
               `,
-              to: `${userInfos.email}, support@coinspringinvest.net`,
+              to: `${userInfos.email}, support@digitalallianceap.net`,
               subject: "Withdrawal"
             },
           }).subscribe(() => console.log("user message sent"));

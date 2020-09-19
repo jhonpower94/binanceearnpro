@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   orange: {
     color: theme.palette.getContrastText(orange[800]),
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.main,
   },
   space: {
     marginTop: theme.spacing(1),
@@ -114,7 +114,7 @@ function DasboardMenu() {
       <Button onClick={handleClick} color="primary">
         <Badge
           variant={notifications.length > 0 ? "dot" : null}
-          color="primary"
+          color="error"
         >
           <NotificationsSharpIcon color="action" />
         </Badge>
