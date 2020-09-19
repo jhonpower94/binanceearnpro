@@ -17,6 +17,11 @@ import {
   Box,
   CardHeader,
   Card,
+  FormControlLabel,
+  RadioGroup,
+  FormLabel,
+  FormControl,
+  Radio,
 } from "@material-ui/core";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -104,6 +109,7 @@ let converter = new Converter(
 
 function Invest() {
   const classes = useStyles();
+  const [selectedValue, setSelectedValue] = React.useState("planA");
   const currencyCode = JSON.parse(window.localStorage.getItem("country"))
     .currencycode;
   const dispatch = useDispatch();
@@ -125,6 +131,17 @@ function Invest() {
   const indexofLastpost = currentpage * postperpage;
   const indexofFirstpage = indexofLastpost - postperpage;
   const currentPost = blocks.slice(indexofFirstpage, indexofLastpost);
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+
+    const setblock =
+      event.target.value === "planA"
+        ? blocks.filter((bl) => !bl.minning)
+        : blocks.filter((bl) => bl.minning);
+    setArrays([...setblock]);
+    console.log(event.target.value);
+  };
 
   // change page
   const paginate = (pagenumber) => setCurrentpage(pagenumber);
@@ -150,6 +167,11 @@ function Invest() {
     setArrays([...blocks]);
   };
 
+  const setInvestmentType = () => {
+    blocks.filter((bl) => bl.minning == true);
+    setArrays([...blocks]);
+  };
+
   const addTrade = (index, data) => {
     console.log(data);
     setPaymentInfo({ ...paymentInfo, block: data, blockindex: index });
@@ -159,13 +181,43 @@ function Invest() {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(selectedmenuItem$(1));
+    const setblocknn = blocks.filter((bl) => !bl.minning);
+    setArrays([...setblocknn]);
   }, []);
 
   return (
     <React.Fragment>
+      <Box display="flex" justifyContent="center">
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Choose plan type</FormLabel>
+          <RadioGroup
+            row
+            aria-label="position"
+            name="position"
+            defaultValue="top"
+          >
+            <FormControlLabel
+              value="planA"
+              control={<Radio color="primary" />}
+              label="Investment plans"
+              labelPlacement="start"
+              checked={selectedValue === "planA"}
+              onChange={handleChange}
+            />
+            <FormControlLabel
+              value="planB"
+              control={<Radio color="primary" />}
+              label="Minning plans"
+              labelPlacement="start"
+              checked={selectedValue === "planB"}
+              onChange={handleChange}
+            />
+          </RadioGroup>
+        </FormControl>
+      </Box>
       <Container maxWidth="md">
         <Grid container spacing={5} justify="center">
-          {currentPost.map((trade, index) => (
+          {arrays.map((trade, index) => (
             <Fade
               in={true}
               key={index}
@@ -194,7 +246,11 @@ function Invest() {
                     </ListItem>
                     <ListItem>
                       <ListItemText primary="Duration" />
-                      <Typography variant="h5">{`${trade.duration} hrs`}</Typography>
+                      <Typography variant="h5">
+                        {trade.minning
+                          ? trade.realduration
+                          : `${trade.duration} hrs`}
+                      </Typography>
                     </ListItem>
                     <ListItem>
                       <Button

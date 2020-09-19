@@ -305,6 +305,7 @@ function DashboardLayout(props) {
             )
           );
           if (isNaN(totalPercentage)) {
+            const totlProfitx = (totalPercentage / 100) * totalDeposit;
             dispatch(
               totalprofit$(
                 formatLocaleCurrency(0, "USD", {
@@ -383,15 +384,7 @@ function DashboardLayout(props) {
 
           // bonus collections
           data.forEach((val, index) => {
-            val.deposit_amount = formatLocaleCurrency(
-              val.deposit_amount,
-              "USD",
-              {
-                autoFixed: false,
-              }
-            );
             dispatch(bonusCollections$(data));
-            navigate("/");
           });
         });
 
@@ -575,7 +568,7 @@ function DashboardLayout(props) {
       }
     >
       <CssBaseline />
-      <AppBar >
+      <AppBar>
         <Toolbar>
           {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
             <img

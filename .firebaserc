@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "hotblock-48cbf"
+    "default": "hotblock-48cbf",
+    "digitaloceanfront": "admin-fa3ba"
   }
 }

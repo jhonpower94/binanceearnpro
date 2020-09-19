@@ -125,13 +125,9 @@ function WithdrawBonus() {
             lastname: storageData.lastName,
           })
           .then(() => {
-            const amountnn = formatLocaleCurrency(
-              data.amount,
-              "USD",
-              {
-                autoFixed: false,
-              }
-            );
+            const amountnn = formatLocaleCurrency(data.amount, "USD", {
+              autoFixed: false,
+            });
             ajax({
               url: "https://admindigitalocean.herokuapp.com/mail",
               method: "POST",
@@ -176,7 +172,11 @@ function WithdrawBonus() {
                   title={<Typography variant="h5">{data.from}</Typography>}
                   subheader={`${data.description} ${data.date}`}
                   action={
-                    <Typography variant="h5">{data.deposit_amount}</Typography>
+                    <Typography variant="h5">
+                      {formatLocaleCurrency(data.deposit_amount, "USD", {
+                        autoFixed: false,
+                      })}
+                    </Typography>
                   }
                 />
 
