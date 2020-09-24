@@ -141,6 +141,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     marginRight: theme.spacing(3),
     cursor: "pointer",
+    color: "#00ffce"
   },
   linkcolor: {
     color: theme.palette.getContrastText("#000000"),
@@ -290,7 +291,7 @@ function DashboardLayout(props) {
 
           const totalPercentage = data.reduce((prv, cur) => {
             const pasint = parseInt(cur.percentage);
-            return prv + pasint;
+            return prv + cur.percentage;
           }, 0);
 
           console.log(totalPercentage);

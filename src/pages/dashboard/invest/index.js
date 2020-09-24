@@ -249,7 +249,7 @@ function Invest() {
                       <Typography variant="h5">
                         {trade.minning
                           ? trade.realduration
-                          : `${trade.duration} hrs`}
+                          : `${trade.hrs} hrs`}
                       </Typography>
                     </ListItem>
                     <ListItem>

@@ -97,6 +97,12 @@ export default function Investments() {
     });
   }, []);
 
+  function addDays(date, days) {
+    const copy = new Date(Number(date));
+    copy.setDate(date.getDate() + days);
+    return copy;
+  }
+
   const updateInvestment = (data) => {
     console.log(data);
     firestore
@@ -114,12 +120,21 @@ export default function Investments() {
       .then((tr) => {
         console.log("transaction added");
         const depositid = tr.id;
+
+        const date = new Date();
+
+        const newDate = addDays(date, data.duration);
+
         ajax({
-          url: `https://us-central1-admin-fa3ba.cloudfunctions.net/app/?blockindex=${1}&deposit_amount=${
+          url: `https://us-central1-admin-fa3ba.cloudfunctions.net/app/plans/?blockindex=${1}&deposit_amount=${
             data.deposit_amount
           }&userid=${data.userid}&depositid=${depositid}&duration=${
             data.duration
-          }&currency=${`USD`}&rate=${data.rate}`,
+          }&currency=${`USD`}&rate=${
+            data.rate
+          }&fulldate=${newDate.toLocaleDateString()}&hour=${date
+            .getUTCHours()
+            .toLocaleString()}`,
           method: "GET",
           headers: {},
         }).subscribe(() => {

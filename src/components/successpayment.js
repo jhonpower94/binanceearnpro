@@ -25,6 +25,12 @@ const paymentInfostorage = JSON.parse(
   window.localStorage.getItem("paymentInfo")
 );
 
+function addDays(date, days) {
+  const copy = new Date(Number(date));
+  copy.setDate(date.getDate() + days);
+  return copy;
+}
+
 function PaymentSuccess() {
   const classes = useStyles();
   const { paymentInfo } = useContext(AppContext);
@@ -74,16 +80,23 @@ function PaymentSuccess() {
           .then((tr) => {
             console.log("transaction added");
             const depositid = tr.id;
+
+            const date = new Date();
+
+            const newDate = addDays(date, paymentInfo.block.duration);
+
             ajax({
-              url: `https://us-central1-admin-fa3ba.cloudfunctions.net/app/?blockindex=${blockindex}&deposit_amount=${depositamount}&userid=${currentUserId}&depositid=${depositid}&duration=${parseInt(
+              url: `https://us-central1-admin-fa3ba.cloudfunctions.net/app/plans/?blockindex=${blockindex}&deposit_amount=${depositamount}&userid=${currentUserId}&depositid=${depositid}&duration=${parseInt(
                 paymentInfo.block.duration
               )}&currency=${currencySymbol}&rate=${parseInt(
                 paymentInfo.block.rate
-              )}`,
+              )}&fulldate=${newDate.toLocaleDateString()}&hour=${date
+                .getUTCHours()
+                .toLocaleString()}`,
               method: "GET",
               headers: {},
             }).subscribe((data) => {
-              console.log(data.response)
+              console.log(data.response);
               console.log("started cron");
 
               dispatch(loadingpayment$());

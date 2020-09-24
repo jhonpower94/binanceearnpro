@@ -124,7 +124,7 @@ function App() {
       type: palletType,
       primary: {
         // Purple and green play nicely together.
-        main: blue[800],
+        main: "#03cd9b",
       },
       secondary: {
         // This is green.A700 as hex.

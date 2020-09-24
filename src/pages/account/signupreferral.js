@@ -40,8 +40,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://digitalallianceap.net/">
-      digitalallianceap
+      <Link color="inherit" href="https://hotbitinvest.com/">
+        hotbitinvest
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -175,7 +175,7 @@ export default function SignUpReferral(props) {
               body: {
                 message: `Hi ${data.firstName} <Br/> This is to notiy you that your referral ${values.firstName} ${values.lastName} has successfully registered. <br/> Thank you for partnering with us `,
                 to: data.email,
-                subject: "New invitation"
+                subject: "New invitation",
               },
             }).subscribe(() => {
               console.log("message sent");
