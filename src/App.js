@@ -116,7 +116,7 @@ function App() {
     status: false,
   });
 
-  const palletType = darktheme.status ? "light" : "light";
+  const palletType = darktheme.status ? "dark" : "dark";
   const secondary = darktheme.status ? "#424242" : "#424242";
 
   const theme = createMuiTheme({
@@ -124,7 +124,7 @@ function App() {
       type: palletType,
       primary: {
         // Purple and green play nicely together.
-        main: "#03cd9b",
+        main: "#2196f3",
       },
       secondary: {
         // This is green.A700 as hex.

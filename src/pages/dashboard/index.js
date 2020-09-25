@@ -141,7 +141,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     marginRight: theme.spacing(3),
     cursor: "pointer",
-    color: "#00ffce"
+    color: theme.palette.primary.main,
   },
   linkcolor: {
     color: theme.palette.getContrastText("#000000"),
@@ -569,7 +569,7 @@ function DashboardLayout(props) {
       }
     >
       <CssBaseline />
-      <AppBar>
+      <AppBar color="secondary">
         <Toolbar>
           {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
             <img

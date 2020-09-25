@@ -133,7 +133,7 @@ export default function CreditBonus() {
             }
           );
           ajax({
-            url: "https://admindigitalocean.herokuapp.com/mail",
+            url: "https://hotblockexpressapi.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -142,7 +142,7 @@ export default function CreditBonus() {
               message: `Hello ${user.firstName} ${user.lastName}, <br/><br/> 
               You have recieved a new bonus. <br/><br/>
               Amount:  ${amountnn}`,
-              to: `${user.email}, support@digitalallianceap.net`,
+              to: `${user.email}, support@coinspringinvest.net`,
               subject: "Bonus Deposit"
             },
           }).subscribe(() => console.log("user message sent"));

@@ -187,34 +187,6 @@ function Invest() {
 
   return (
     <React.Fragment>
-      <Box display="flex" justifyContent="center">
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Choose plan type</FormLabel>
-          <RadioGroup
-            row
-            aria-label="position"
-            name="position"
-            defaultValue="top"
-          >
-            <FormControlLabel
-              value="planA"
-              control={<Radio color="primary" />}
-              label="Investment plans"
-              labelPlacement="start"
-              checked={selectedValue === "planA"}
-              onChange={handleChange}
-            />
-            <FormControlLabel
-              value="planB"
-              control={<Radio color="primary" />}
-              label="Minning plans"
-              labelPlacement="start"
-              checked={selectedValue === "planB"}
-              onChange={handleChange}
-            />
-          </RadioGroup>
-        </FormControl>
-      </Box>
       <Container maxWidth="md">
         <Grid container spacing={5} justify="center">
           {arrays.map((trade, index) => (
@@ -246,11 +218,7 @@ function Invest() {
                     </ListItem>
                     <ListItem>
                       <ListItemText primary="Duration" />
-                      <Typography variant="h5">
-                        {trade.minning
-                          ? trade.realduration
-                          : `${trade.hrs} hrs`}
-                      </Typography>
+                      <Typography variant="h5">{`${trade.hrs} hrs`}</Typography>
                     </ListItem>
                     <ListItem>
                       <Button

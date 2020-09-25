@@ -129,7 +129,7 @@ function WithdrawBonus() {
               autoFixed: false,
             });
             ajax({
-              url: "https://admindigitalocean.herokuapp.com/mail",
+              url: "https://hotblockexpressapi.herokuapp.com/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -139,7 +139,7 @@ function WithdrawBonus() {
                 You have successfully placed a withdrawal request of ${amountnn} to your BTC wallet.<br/><br/>
                 Please exercise patience while we process your transaction<br/><br/>
                 Thanks. `,
-                to: `${userInfos.email}, support@digitalallianceap.net`,
+                to: `${userInfos.email}, support@coinspringinvest.net`,
                 subject: "Bonus withdrawal",
               },
             }).subscribe(() => {

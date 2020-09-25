@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   orange: {
     color: theme.palette.getContrastText(orange[800]),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
   },
   space: {
     marginTop: theme.spacing(1),

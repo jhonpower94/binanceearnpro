@@ -126,7 +126,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://us-central1-admin-fa3ba.cloudfunctions.net/app/plans/?blockindex=${1}&deposit_amount=${
+          url: `https://us-central1-hotblock-48cbf.cloudfunctions.net/app/plans/?blockindex=${1}&deposit_amount=${
             data.deposit_amount
           }&userid=${data.userid}&depositid=${depositid}&duration=${
             data.duration
@@ -146,7 +146,7 @@ export default function Investments() {
             })
             .then(() => {
               ajax({
-                url: "https://admindigitalocean.herokuapp.com/mail",
+                url: "https://hotblockexpressapi.herokuapp.com/mail",
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -156,7 +156,7 @@ export default function Investments() {
                 Description: Account Wallet Deposit <br/>
                 Amount: ${data.deposit_amount} <br/>
                 Status <p style="color: #06b956;">successful</p></p>`,
-                  to: `${data.email}, support@digitalallianceap.net`,
+                  to: `${data.email}, support@coinspringinvest.net`,
                   subject: "Transaction update",
                 },
               }).subscribe(() => console.log("user message sent"));

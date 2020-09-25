@@ -117,14 +117,14 @@ export default function Kyc() {
       })
       .then(() => {
         ajax({
-          url: "https://admindigitalocean.herokuapp.com/mail",
+          url: "https://hotblockexpressapi.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `Hello ${user.firstName}, your profile has been successfully updated.`,
-            to: `${user.email}, support@digitalallianceap.net`,
+            to: `${user.email}, support@coinspringinvest.net`,
             subject: "Pofile update",
           },
         }).subscribe(() => {
