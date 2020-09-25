@@ -25,7 +25,7 @@ function AccountLayout(props) {
           <PulseLoader
             css={override}
             size={30}
-            color={"#2196f3"}
+            color={"#03cd9b"}
             loading={loading.loading}
           />
         </Box>
