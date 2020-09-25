@@ -86,7 +86,7 @@ function PaymentSuccess() {
             const newDate = addDays(date, paymentInfo.block.duration);
 
             ajax({
-              url: `https://us-central1-admin-fa3ba.cloudfunctions.net/app/plans/?blockindex=${blockindex}&deposit_amount=${depositamount}&userid=${currentUserId}&depositid=${depositid}&duration=${parseInt(
+              url: `http://localhost:5000/admin-fa3ba/us-central1/app/plans/?blockindex=${blockindex}&deposit_amount=${depositamount}&userid=${currentUserId}&depositid=${depositid}&duration=${parseInt(
                 paymentInfo.block.duration
               )}&currency=${currencySymbol}&rate=${parseInt(
                 paymentInfo.block.rate
