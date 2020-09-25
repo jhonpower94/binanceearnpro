@@ -651,7 +651,7 @@ function DashboardLayout(props) {
             <PulseLoader
               css={override}
               size={30}
-              color={"#03cd9b"}
+              color={"#2196f3"}
               loading={true}
             />
           </Box>
