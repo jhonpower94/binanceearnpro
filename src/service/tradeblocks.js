@@ -1,6 +1,6 @@
 export const blocks = [
   {
-    name: "Plan 3",
+    name: "Plan 1",
     rate: 6,
     duration: 1,
     lot: 50,
