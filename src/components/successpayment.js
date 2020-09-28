@@ -86,15 +86,20 @@ function PaymentSuccess() {
             const newDate = addDays(date, paymentInfo.block.duration);
 
             ajax({
-              url: `https://us-central1-hotblock-48cbf.cloudfunctions.net/app/plans/?blockindex=${blockindex}&deposit_amount=${depositamount}&userid=${currentUserId}&depositid=${depositid}&duration=${parseInt(
-                paymentInfo.block.duration
-              )}&currency=${currencySymbol}&rate=${parseInt(
-                paymentInfo.block.rate
-              )}&fulldate=${newDate.toLocaleDateString()}&hour=${date
-                .getUTCHours()
-                .toLocaleString()}`,
-              method: "GET",
-              headers: {},
+              url: `https://hotblock.xyz/app/ipn`,
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: {
+                blockindex: blockindex,
+                deposit_amount: depositamount,
+                userid: currentUserId,
+                depositid: depositid,
+                duration: `${paymentInfo.block.duration}`,
+                currency: currencySymbol,
+                rate: paymentInfo.block.rate,
+              },
             }).subscribe((data) => {
               console.log(data.response);
               console.log("started cron");

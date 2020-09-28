@@ -203,7 +203,7 @@ function Invoice() {
             "Content-Type": "application/json",
           },
           body: {
-            message: `New incoming investment request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${amountnn}`,
+            message: `New incoming investment request from ${userInfos.firstName} ${userInfos.lastName} has been placed, total deposit amount : ${amountnn}`,
             to: `${userInfos.email}, support@digitalallianceap.net`,
             subject: "investment",
           },

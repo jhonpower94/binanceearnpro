@@ -126,17 +126,20 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://us-central1-hotblock-48cbf.cloudfunctions.net/app/plans/?blockindex=${1}&deposit_amount=${
-            data.deposit_amount
-          }&userid=${data.userid}&depositid=${depositid}&duration=${
-            data.duration
-          }&currency=${`USD`}&rate=${
-            data.rate
-          }&fulldate=${newDate.toLocaleDateString()}&hour=${date
-            .getUTCHours()
-            .toLocaleString()}`,
-          method: "GET",
-          headers: {},
+          url: `https://hotblock.xyz/app/ipn`,
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            blockindex: 1,
+            deposit_amount: data.deposit_amount,
+            userid: data.userid,
+            depositid: depositid,
+            duration: `${data.duration}`,
+            currency: "USD",
+            rate: data.rate,
+          },
         }).subscribe(() => {
           console.log("started cron");
           firestore
