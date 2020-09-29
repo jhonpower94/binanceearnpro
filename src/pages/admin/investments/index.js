@@ -126,7 +126,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://hotblock.xyz/app/ipn`,
+          url: `https://hotblockexpressapi.herokuapp.com/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
