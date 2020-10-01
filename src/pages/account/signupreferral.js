@@ -40,11 +40,9 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://hotbitinvest.com/">
-        hotbitinvest
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
+      <Link color="inherit" href="https://coinspringinvest.net/">
+        coinspringinvest
+      </Link>
     </Typography>
   );
 }

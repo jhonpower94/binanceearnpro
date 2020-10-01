@@ -4,7 +4,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import { orange, blue } from "@material-ui/core/colors";
 import { Router } from "@reach/router";
 import HomeLayout from "./pages/homepage";
-import DashboardLayout from "./pages/dashboard";
+import DashboardLayout from "./pages/dashboard/index";
 import AccountLayout from "./pages/account";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
