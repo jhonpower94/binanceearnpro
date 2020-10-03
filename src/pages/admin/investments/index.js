@@ -136,7 +136,7 @@ export default function Investments() {
             deposit_amount: data.deposit_amount,
             userid: data.userid,
             depositid: depositid,
-            duration: `${data.duration}`,
+            duration: data.duration,
             currency: "USD",
             rate: data.rate,
           },

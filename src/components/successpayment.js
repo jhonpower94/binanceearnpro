@@ -96,7 +96,7 @@ function PaymentSuccess() {
                 deposit_amount: depositamount,
                 userid: currentUserId,
                 depositid: depositid,
-                duration: `${paymentInfo.block.duration}`,
+                duration: paymentInfo.block.duration,
                 currency: currencySymbol,
                 rate: paymentInfo.block.rate,
               },

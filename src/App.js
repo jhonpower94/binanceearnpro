@@ -10,7 +10,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { allreducer } from "./redux/reducer";
 import AccountSettings from "./pages/dashboard/accountsettings";
-import DashboardPage from "./pages/dashboard/accountpage";
+import DashboardPage from "./pages/dashboard/accountpage/index";
 import MyInvestments from "./pages/dashboard/allinvestments";
 import Exchange from "./pages/dashboard/currencyexchange";
 import Wallet from "./pages/dashboard/wallet";
@@ -71,7 +71,7 @@ export const AppContext = createContext();
 
 function App() {
   const [darktheme, setDarktheme] = useState({
-    status: false,
+    status: true,
   });
   const [intro, setIntro] = useState({
     layout: "layout",
@@ -116,8 +116,8 @@ function App() {
     status: false,
   });
 
-  const palletType = darktheme.status ? "dark" : "dark";
-  const secondary = darktheme.status ? "#424242" : "#424242";
+  const palletType = darktheme.status ? "dark" : "light";
+  const secondary = darktheme.status ? "#424242" : "#ffffff";
 
   const theme = createMuiTheme({
     palette: {
@@ -133,6 +133,7 @@ function App() {
       action: {
         selected: "#2196f33d",
       },
+     
     },
   });
   useEffect(() => {
@@ -198,7 +199,7 @@ function App() {
               <Invoice path="invoice" />
               <MyInvestments path="investments" />
               <WithdrawBonus path="withdraw/:page" />
-              <Withdrawform path="withdrawform"/>
+              <Withdrawform path="withdrawform" />
               <Transactions path="transactions" />
               <Wallet path="wallet" />
               <CreditWallet path="payment_wallet" />
