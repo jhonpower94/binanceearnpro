@@ -202,7 +202,7 @@ function DashboardLayout(props) {
       if (!user) {
         navigate("../account");
       } else {
-        if (user.emailVerified) {
+       // if (user.emailVerified) {
           const datas = firestore.doc(`users/${user.uid}`);
           docData(datas, "id").subscribe((val) => {
             reactLocalStorage.setObject("userdata", val); // for collecting user id on transaction
@@ -248,8 +248,8 @@ function DashboardLayout(props) {
               });
             });
           });
-        } else {
-          navigate("../account/verifyemail");
+      //  } else {
+      //    navigate("../account/verifyemail");
         }
 
         // total return collection
