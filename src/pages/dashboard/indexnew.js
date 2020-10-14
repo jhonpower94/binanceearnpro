@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -20,8 +20,45 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-import { useScrollTrigger, withStyles } from "@material-ui/core";
+import { useScrollTrigger, withStyles, Box } from "@material-ui/core";
 import { red, blue } from "@material-ui/core/colors";
+import { navigate } from "@reach/router";
+import SwitchBase from "@material-ui/core/internal/SwitchBase";
+import Account from "../dashboard/accountpage/account";
+import AccountInfo from "./accountpage/accountinfo";
+import { AppContext } from "../../App";
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`nav-tabpanel-${index}`}
+      aria-labelledby={`nav-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function allyProps(index) {
+  return {
+    id: `simple-tabs-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
 
 const drawerWidth = 240;
 
@@ -153,12 +190,15 @@ const StyledTab = withStyles((theme) => ({
 
 export default function DashboardLayout(props) {
   const classes = useStyles();
+  const { tabs, currentab, setCurrentab } = useContext(AppContext);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    setCurrentab(newValue);
+    console.log(newValue);
   };
 
   const handleDrawerOpen = () => {
@@ -251,13 +291,12 @@ export default function DashboardLayout(props) {
             onChange={handleChange}
             aria-label="styled tabs example"
           >
-            {[{ title: "Account" }, { title: "User info" }].map(
-              (tab, index) => (
-                <StyledTab label={tab.title} key={index} />
-              )
-            )}
+            {tabs.map((tab, index) => (
+              <StyledTab label={tab.title} key={index} {...allyProps(index)} />
+            ))}
           </StyledTabs>
         </div>
+
         <div className={classes.content}>{props.children}</div>
       </main>
     </div>

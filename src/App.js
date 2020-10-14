@@ -11,6 +11,8 @@ import { Provider } from "react-redux";
 import { allreducer } from "./redux/reducer";
 import AccountSettings from "./pages/dashboard/accountsettings";
 import DashboardPage from "./pages/dashboard/accountpage/index";
+import Account from "./pages/dashboard/accountpage/account";
+import AccountInfo from "./pages/dashboard/accountpage/accountinfo";
 import MyInvestments from "./pages/dashboard/allinvestments";
 import Exchange from "./pages/dashboard/currencyexchange";
 import Wallet from "./pages/dashboard/wallet";
@@ -71,7 +73,7 @@ export const AppContext = createContext();
 
 function App() {
   const [darktheme, setDarktheme] = useState({
-    status: true,
+    status: false,
   });
   const [intro, setIntro] = useState({
     layout: "layout",
@@ -111,13 +113,20 @@ function App() {
     block5: 100000,
   });
 
+  const [tabs, setTabs] = useState([
+    { title: "Account", link: "../", tab: 0 },
+    { title: "User info", link: "info", tab: 1 },
+  ]);
+
+  const [currentab, setCurrentab] = useState(0);
+
   const [user, setUser] = useState({ wallet_balance: 0 });
   const [updateWalletBalance, setupdateWalletBalance] = useState({
     status: false,
   });
 
-  const palletType = darktheme.status ? "dark" : "light";
-  const secondary = darktheme.status ? "#424242" : "#ffffff";
+  const palletType = darktheme.status ? "dark" : "dark";
+  const secondary = darktheme.status ? "#424242" : "#424242";
 
   const theme = createMuiTheme({
     palette: {
@@ -133,7 +142,7 @@ function App() {
       action: {
         selected: "#2196f33d",
       },
-     
+      
     },
   });
   useEffect(() => {
@@ -179,6 +188,10 @@ function App() {
           user,
           MinDeposits,
           updateWalletBalance,
+          tabs,
+          currentab,
+          setCurrentab,
+          setTabs,
           setupdateWalletBalance,
           setMinDeposit,
           setUser,
@@ -194,6 +207,7 @@ function App() {
           <Router>
             <DashboardLayout path="/">
               <DashboardPage path="/" />
+
               <Invest path="invest" />
               <Investment path="investments" />
               <Invoice path="invoice" />

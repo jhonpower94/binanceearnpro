@@ -53,7 +53,7 @@ function Support() {
               variant="contained"
               color="primary"
               fullWidth
-              onClick={() => navigate("https://hotbitinvest.com/support")}
+              onClick={() => navigate("https://coinspringinvest.net/support")}
             >
               Contact Us
             </Button>
