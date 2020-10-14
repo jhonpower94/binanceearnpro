@@ -202,55 +202,50 @@ function DashboardLayout(props) {
       if (!user) {
         navigate("../account");
       } else {
-       // if (user.emailVerified) {
-          const datas = firestore.doc(`users/${user.uid}`);
-          docData(datas, "id").subscribe((val) => {
-            reactLocalStorage.setObject("userdata", val); // for collecting user id on transaction
-            if (isNaN(val.wallet_balance)) {
-              setUser({ ...user, wallet_balance: 0 });
-            } else {
-              setUser({ ...user, ...val });
-            }
+        const datas = firestore.doc(`users/${user.uid}`);
+        docData(datas, "id").subscribe((val) => {
+          reactLocalStorage.setObject("userdata", val); // for collecting user id on transaction
+          if (isNaN(val.wallet_balance)) {
+            setUser({ ...user, wallet_balance: 0 });
+          } else {
+            setUser({ ...user, ...val });
+          }
 
-            const currencyandBalance = async () => {
-              await reactLocalStorage.setObject("country", {
-                country: val.country,
-              });
+          const currencyandBalance = async () => {
+            await reactLocalStorage.setObject("country", {
+              country: val.country,
+            });
 
-              await dispatch(locationinfo$(val));
-            };
+            await dispatch(locationinfo$(val));
+          };
 
-            currencyandBalance().then(() => {
-              const country = JSON.parse(localStorage.getItem("country"))
-                .country;
-              console.log(JSON.parse(localStorage.getItem("country")).country);
-              const newCurcode = getCountry(country).currency; // currency code
-              const newCursymbol = getSymbolFromCurrency(newCurcode); // currency code
+          currencyandBalance().then(() => {
+            const country = JSON.parse(localStorage.getItem("country")).country;
+            console.log(JSON.parse(localStorage.getItem("country")).country);
+            const newCurcode = getCountry(country).currency; // currency code
+            const newCursymbol = getSymbolFromCurrency(newCurcode); // currency code
 
-              setValues({
-                ...values,
-                currencyCode: newCurcode,
-                countrycodeIos2: lookup.byCountry(country).iso2,
-              });
+            setValues({
+              ...values,
+              currencyCode: newCurcode,
+              countrycodeIos2: lookup.byCountry(country).iso2,
+            });
 
-              // add currency code to storage
-              reactLocalStorage.setObject("country", {
-                ...reactLocalStorage.getObject("country"),
-                currencycode: newCurcode,
-              });
+            // add currency code to storage
+            reactLocalStorage.setObject("country", {
+              ...reactLocalStorage.getObject("country"),
+              currencycode: newCurcode,
+            });
 
-              setUserData({
-                ...userData,
-                currencyInfo: {
-                  countrycode: newCurcode,
-                  currencysymbol: newCursymbol,
-                },
-              });
+            setUserData({
+              ...userData,
+              currencyInfo: {
+                countrycode: newCurcode,
+                currencysymbol: newCursymbol,
+              },
             });
           });
-      //  } else {
-      //    navigate("../account/verifyemail");
-        }
+        });
 
         // total return collection
         const returnedbalance = firestore
