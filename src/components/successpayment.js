@@ -85,13 +85,13 @@ function PaymentSuccess() {
 
             const newDate = addDays(date, paymentInfo.block.duration);
 
-            ajax({
-              url: `https://hotblockexpressapi.herokuapp.com/plans`,
+            fetch("https://coinspringinvest.herokuapp.com/plans", {
               method: "POST",
+              mode: "cors",
               headers: {
                 "Content-Type": "application/json",
               },
-              body: {
+              body: JSON.stringify({
                 blockindex: blockindex,
                 deposit_amount: depositamount,
                 userid: currentUserId,
@@ -99,69 +99,71 @@ function PaymentSuccess() {
                 duration: paymentInfo.block.duration,
                 currency: currencySymbol,
                 rate: paymentInfo.block.rate,
-              },
-            }).subscribe((data) => {
-              console.log(data.response);
-              console.log("started cron");
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                console.log(data);
+                console.log("started cron");
 
-              dispatch(loadingpayment$());
-              const referrer = userInfos.referrer;
-              const referrerId = userInfos.referrerid;
+                dispatch(loadingpayment$());
+                const referrer = userInfos.referrer;
+                const referrerId = userInfos.referrerid;
 
-              // add to all transaction
-              firestore.collection("alldeposits").add({
-                type: "investment",
-                block_name: txn_info.block.name,
-                deposit_amount: depositamount,
-                amount: depositamount,
-                userid: currentUserId,
-                email: userInfos.email,
-                firstname: userInfos.firstName,
-                lastname: userInfos.lastName,
-                date: new Date().toLocaleDateString(),
-                created_at: firebase.firestore.FieldValue.serverTimestamp(),
-              });
-              if (referrer) {
-                //add referrer bonus is true
-                firestore
-                  .collection("users")
-                  .doc(referrerId)
-                  .collection("bonus")
-                  .add({
-                    amount: 5,
-                    deposit_amount: 5,
-                    from: `${userInfos.firstName} ${userInfos.lastName}`,
-                    description: "Referral bonus",
-                    date: new Date().toLocaleDateString(),
-                    created_at: firebase.firestore.FieldValue.serverTimestamp(),
-                  })
-                  .then(() => {
-                    //add notification to referrer database
-                    console.log(`referral added`);
-                    firestore
-                      .doc(`users/${referrerId}`)
-                      .collection("notification")
-                      .add({
-                        date: new Date().toLocaleDateString(),
-                        time: new Date().toLocaleTimeString(),
-                        amount: referrerpercent,
-                        type: "Bonus",
+                // add to all transaction
+                firestore.collection("alldeposits").add({
+                  type: "investment",
+                  block_name: txn_info.block.name,
+                  deposit_amount: depositamount,
+                  amount: depositamount,
+                  userid: currentUserId,
+                  email: userInfos.email,
+                  firstname: userInfos.firstName,
+                  lastname: userInfos.lastName,
+                  date: new Date().toLocaleDateString(),
+                  created_at: firebase.firestore.FieldValue.serverTimestamp(),
+                });
+                if (referrer) {
+                  //add referrer bonus is true
+                  firestore
+                    .collection("users")
+                    .doc(referrerId)
+                    .collection("bonus")
+                    .add({
+                      amount: 5,
+                      deposit_amount: 5,
+                      from: `${userInfos.firstName} ${userInfos.lastName}`,
+                      description: "Referral bonus",
+                      date: new Date().toLocaleDateString(),
+                      created_at: firebase.firestore.FieldValue.serverTimestamp(),
+                    })
+                    .then(() => {
+                      //add notification to referrer database
+                      console.log(`referral added`);
+                      firestore
+                        .doc(`users/${referrerId}`)
+                        .collection("notification")
+                        .add({
+                          date: new Date().toLocaleDateString(),
+                          time: new Date().toLocaleTimeString(),
+                          amount: referrerpercent,
+                          type: "Bonus",
+                        });
+                      firestore.doc(`users/${currentUserId}`).update({
+                        referrer: false,
                       });
-                    firestore.doc(`users/${currentUserId}`).update({
-                      referrer: false,
-                    });
-                  })
+                    })
 
-                  .then(() => {
-                    console.log("transactions complete");
-                    dispatch(loading$());
-                    navigate("complete");
-                  });
-              } else {
-                dispatch(loading$());
-                navigate("complete");
-              }
-            });
+                    .then(() => {
+                      console.log("transactions complete");
+                      dispatch(loading$());
+                      navigate("complete");
+                    });
+                } else {
+                  dispatch(loading$());
+                  navigate("complete");
+                }
+              });
           });
       });
     } else {

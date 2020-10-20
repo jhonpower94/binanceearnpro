@@ -4,13 +4,13 @@ import { ThemeProvider } from "@material-ui/styles";
 import { orange, blue } from "@material-ui/core/colors";
 import { Router } from "@reach/router";
 import HomeLayout from "./pages/homepage";
-import DashboardLayout from "./pages/dashboard/indexnew";
+import DashboardLayout from "./pages/dashboard/index";
 import AccountLayout from "./pages/account";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { allreducer } from "./redux/reducer";
 import AccountSettings from "./pages/dashboard/accountsettings";
-import DashboardPage from "./pages/dashboard/accountpage/indexnew";
+import DashboardPage from "./pages/dashboard/accountpage/index";
 import Account from "./pages/dashboard/accountpage/account";
 import AccountInfo from "./pages/dashboard/accountpage/accountinfo";
 import MyInvestments from "./pages/dashboard/allinvestments";
@@ -19,7 +19,7 @@ import Wallet from "./pages/dashboard/wallet";
 import Profile from "./pages/dashboard/profile";
 import CreditWallet from "./pages/dashboard/wallet/payment";
 import CreditSucess from "./pages/dashboard/wallet/creditsuccess";
-import Invest from "./pages/dashboard/invest/indexnew";
+import Invest from "./pages/dashboard/invest";
 import Investment from "./pages/dashboard/invest/myinvestments";
 import Invoice from "./pages/dashboard/invest/invoice";
 import Support from "./pages/dashboard/support";
@@ -113,7 +113,10 @@ function App() {
     block5: 100000,
   });
 
-  const [tabs, setTabs] = useState([]);
+  const [tabs, setTabs] = useState([
+    { title: "Account", link: "../", tab: 0 },
+    { title: "User info", link: "info", tab: 1 },
+  ]);
 
   const [currentab, setCurrentab] = useState(0);
 
@@ -122,22 +125,24 @@ function App() {
     status: false,
   });
 
-  const palletType = darktheme.status ? "dark" : "light";
-  const secondary = darktheme.status ? "#424242" : "#ffffff";
+  const palletType = darktheme.status ? "dark" : "dark";
+  const secondary = darktheme.status ? "#424242" : "#424242";
 
   const theme = createMuiTheme({
     palette: {
       type: palletType,
       primary: {
         // Purple and green play nicely together.
-        main: blue[800],
+        main: "#2196f3",
       },
       secondary: {
         // This is green.A700 as hex.
         main: secondary,
       },
-
-      background: "#fafafa",
+      action: {
+        selected: "#2196f33d",
+      },
+      
     },
   });
   useEffect(() => {
