@@ -6,6 +6,7 @@ import {
   Grid,
   ListItemText,
   Typography,
+  Divider,
 } from "@material-ui/core";
 import ChartsPage from "./charts";
 
@@ -24,23 +25,26 @@ function Account() {
 
   return (
     <Container maxWidth="lg">
-      <Grid container spacing={2} justify="center">
+      
+      <Grid container spacing={3} justify="center">
         <Grid item xs={12} sm={4}>
           <ListItemText
-            primary={<Typography variant="caption">Main Balance</Typography>}
-            secondary={<Typography variant="h6">77988888</Typography>}
+            primary={<Typography variant="subtitle2">Main Balance</Typography>}
+            secondary={<Typography variant="h5">77988888</Typography>}
           />
         </Grid>
         <Grid item xs={6} sm={4}>
           <ListItemText
-            primary={<Typography variant="caption">Bonus Balance</Typography>}
-            secondary={<Typography variant="h6">79789</Typography>}
+            primary={<Typography variant="subtitle2">Bonus Balance</Typography>}
+            secondary={<Typography variant="h5">79789</Typography>}
           />
         </Grid>
         <Grid item xs={6} sm={4}>
           <ListItemText
-            primary={<Typography variant="caption">Wallet Balance</Typography>}
-            secondary={<Typography variant="h6">77868689</Typography>}
+            primary={
+              <Typography variant="subtitle2">Wallet Balance</Typography>
+            }
+            secondary={<Typography variant="h5">77868689</Typography>}
           />
         </Grid>
 

@@ -25,6 +25,7 @@ import {
   Grid,
   Button,
   ListItemText,
+  Divider,
 } from "@material-ui/core";
 import {
   Chart,
@@ -239,86 +240,82 @@ function ChartsPage() {
 
   return (
     <React.Fragment>
-      <CardHeader
-        title={
-          <Grid container spacing={3} justify="flex-start">
-            <Grid item xs={6} sm={4}>
-              <FormControl
-                variant="outlined"
-                //  className={classes().formControl}
-                size="small"
-                fullWidth
-              >
-                <InputLabel id="demo-simple-select-outlined-label">
-                  Plans
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-outlined-label"
-                  id="demo-simple-select-outlined"
-                  value={state}
-                  onChange={handleChange}
-                  label="Plans"
-                >
-                  <MenuItem value="currencies">Currency</MenuItem>
-                  <MenuItem value="stock">Stock</MenuItem>
-                  <MenuItem value="realestate">Realestate</MenuItem>
-                  <MenuItem value="commodities">Commodities</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3} sm={4}>
-              95%
-            </Grid>
-            <Grid item xs={3} sm={4}>
-              <Button variant="outlined" color="primary">
-                Invset
-              </Button>
-            </Grid>
-          </Grid>
-        }
-        //  action={
-        //    <Chip label={`+${currentValue}%`} color="primary" size="medium" />
-        //F  }
-      />
-      <CardContent>
-        <Chart scale={scale} height={250} data={datannn} autoFit>
-          <Axis name="value" visible={true} />
-          <Axis name="time" visible={false} />
-          <Tooltip shared />
+      <Grid container spacing={4} justify="flex-start">
+        
+        <Grid item xs={6} sm={4}>
+          <FormControl
+            variant="outlined"
+            //  className={classes().formControl}
+            size="small"
+            fullWidth
+          >
+            <InputLabel id="demo-simple-select-outlined-label">
+              Plans
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-outlined-label"
+              id="demo-simple-select-outlined"
+              value={state}
+              onChange={handleChange}
+              label="Plans"
+            >
+              <MenuItem value="currencies">Currency</MenuItem>
+              <MenuItem value="stock">Stock</MenuItem>
+              <MenuItem value="realestate">Realestate</MenuItem>
+              <MenuItem value="commodities">Commodities</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={2} sm={4}>
+          95%
+        </Grid>
+        <Grid item xs={4} sm={4}>
+          <Button variant="outlined" color="primary">
+            Invset
+          </Button>
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <Chart scale={scale} height={250} data={datannn} autoFit>
+            <Axis name="value" visible={true} />
+            <Axis name="time" visible={false} />
+            <Tooltip shared />
 
-          <Line
-            color={[
-              "trade",
-              (xVal) => {
-                switch (xVal) {
-                  case "currency":
-                    return blue[500];
-                  case "stock":
-                    return green[500];
-                  case "realestate":
-                    return red[800];
-                  case "commodities":
-                    return yellow[800];
-                  default:
-                    return blue[800];
-                }
-              },
-            ]}
-            position="time*value"
-          />
-          <Legend
-            name="trade"
-            visible={false}
-            marker={{
-              symbol: "square",
-              style: {
-                fill: null,
-              },
-            }}
-          />
-          <Box display="flex" justifyContent="center" mt={3}></Box>
-        </Chart>
-      </CardContent>
+            <Line
+              color={[
+                "trade",
+                (xVal) => {
+                  switch (xVal) {
+                    case "currency":
+                      return blue[500];
+                    case "stock":
+                      return green[500];
+                    case "realestate":
+                      return red[800];
+                    case "commodities":
+                      return yellow[800];
+                    default:
+                      return blue[800];
+                  }
+                },
+              ]}
+              position="time*value"
+            />
+            <Legend
+              name="trade"
+              visible={false}
+              marker={{
+                symbol: "square",
+                style: {
+                  fill: null,
+                },
+              }}
+            />
+            <Box display="flex" justifyContent="center" mt={3}></Box>
+          </Chart>
+        </Grid>
+      </Grid>
+
+      <CardContent></CardContent>
     </React.Fragment>
   );
 }

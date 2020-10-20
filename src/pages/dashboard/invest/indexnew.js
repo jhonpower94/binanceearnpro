@@ -1,11 +1,7 @@
 import React, { useEffect, useContext } from "react";
-import clsx from "clsx";
 import PropTypes from "prop-types";
-
-import { makeStyles, Box, Typography } from "@material-ui/core";
 import { AppContext } from "../../../App";
-import Account from "./account";
-import AccountInfo from "./accountinfo";
+import { makeStyles, Container } from "@material-ui/core";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -27,31 +23,33 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-const useStyles = () => {
-  return makeStyles((theme) => ({}));
-};
+const useStyles = makeStyles((theme) => ({
+  margintop: {
+    marginTop: theme.spacing(5),
+  },
+}));
 
-function DashboardPage(props) {
+function Invest() {
   const classes = useStyles();
   const { tabs, setTabs, currentab } = useContext(AppContext);
-
   useEffect(() => {
+    window.scrollTo(0, 0);
     setTabs([
-      { title: "Account", tab: 0 },
-      { title: "User info", tab: 1 },
+      { title: "Invest", tab: 0 },
+      { title: "investments", tab: 1 },
     ]);
   }, []);
 
   return (
     <React.Fragment>
       <TabPanel value={currentab} index={0}>
-        <Account />
+        invest
       </TabPanel>
       <TabPanel value={currentab} index={1}>
-        <AccountInfo />
+        investments
       </TabPanel>
     </React.Fragment>
   );
 }
 
-export default DashboardPage;
+export default Invest;

@@ -72,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    color: blue[800],
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -130,7 +129,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   demo2: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
   },
 }));
 
@@ -168,7 +167,7 @@ const StyledTabs = withStyles((theme) => ({
     "& > span": {
       maxWidth: 40,
       width: "100%",
-      backgroundColor: blue[800],
+      backgroundColor: theme.palette.secondary.main,
       borderTopLeftRadius: "50px",
       borderTopRightRadius: "50px",
     },
@@ -178,7 +177,7 @@ const StyledTabs = withStyles((theme) => ({
 const StyledTab = withStyles((theme) => ({
   root: {
     textTransform: "none",
-    color: blue[800],
+    color: theme.palette.getContrastText("#2196f3"),
     fontWeight: theme.typography.fontWeightRegular,
     fontSize: theme.typography.pxToRem(15),
     marginRight: theme.spacing(1),
@@ -193,12 +192,11 @@ export default function DashboardLayout(props) {
   const { tabs, currentab, setCurrentab } = useContext(AppContext);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(currentab);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setCurrentab(newValue);
-    console.log(newValue);
   };
 
   const handleDrawerOpen = () => {
@@ -207,6 +205,12 @@ export default function DashboardLayout(props) {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const changeNav = (nav) => {
+    setValue(nav.tabindex);
+    setCurrentab(nav.tabindex);
+    navigate(`/${nav.link}`);
   };
 
   return (
@@ -218,7 +222,7 @@ export default function DashboardLayout(props) {
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
           })}
-          color="secondary"
+          color="primary"
         >
           <Toolbar>
             <IconButton
@@ -262,12 +266,15 @@ export default function DashboardLayout(props) {
         </div>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
+          {[
+            { title: "Account", link: "", tabindex: 0 },
+            { title: "Profile", link: "", tabindex: 1 },
+          ].map((link, index) => (
+            <ListItem button key={index} onClick={() => changeNav(link)}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <InboxIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={link.title} />
             </ListItem>
           ))}
         </List>

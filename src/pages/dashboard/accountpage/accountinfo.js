@@ -16,10 +16,30 @@ import {
   InputAdornment,
   IconButton,
   InputLabel,
+  Card,
+  CardContent,
+  LinearProgress,
+  withStyles,
+  Avatar,
 } from "@material-ui/core";
 import { FileCopySharp } from "@material-ui/icons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useSelector } from "react-redux";
+
+const BorderLinearProgress = withStyles((theme) => ({
+  root: {
+    height: 10,
+    borderRadius: 5,
+  },
+  colorPrimary: {
+    backgroundColor:
+      theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
+  },
+  bar: {
+    borderRadius: 5,
+    backgroundColor: "#1a90ff",
+  },
+}))(LinearProgress);
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -46,7 +66,7 @@ function AccountInfo() {
 
   const profileData = [
     {
-      title: "Total estimated profit",
+      title: "Total profit",
       value: "$000",
     },
     {
@@ -65,26 +85,31 @@ function AccountInfo() {
 
   return (
     <Container maxWidth="lg">
-      <Grid container spacing={5} justify="center">
-        <Grid item xs={12} sm={6}>
+      <Grid container spacing={2} >
+        {profileData.map((data, index) => (
+          <Grid item key={index} xs={6} sm={3}>
+            <ListItemText
+              primary={
+                <Typography variant="subtitle2">{data.title}</Typography>
+              }
+              secondary={<Typography variant="h5">{data.value}</Typography>}
+            />
+          </Grid>
+        ))}
+        <Grid item xs={12} sm={3}>
           <CardHeader
-            title={<Typography variant="h6">Activities</Typography>}
+          avatar={
+            <Avatar>J</Avatar>
+          }
+            title={
+              <Typography variant="subtitle2">Account profile</Typography>
+            }
+            subheader={
+              <BorderLinearProgress variant="determinate" value={50} />
+            }
           />
-          <List>
-            {profileData.map((data, index) => (
-              <ListItem key={index}>
-                <ListItemText primary={data.title} />
-                <ListItemSecondaryAction>
-                  <Typography variant="h6">{data.value}</Typography>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}
-          </List>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <CardHeader
-            title={<Typography variant="h6">Referral earnings</Typography>}
-          />
+        <Grid item xs={12} sm={12}>
           <List>
             {[
               { from: "jhon snow", date: "12/9/2020", deposit_amount: "$500" },
