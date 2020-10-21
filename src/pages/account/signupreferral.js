@@ -165,7 +165,7 @@ export default function SignUpReferral(props) {
           const getreferrerdata = firestore.doc(`users/${id}`);
           docData(getreferrerdata, "id").subscribe((data) => {
             ajax({
-              url: "https://hotblockexpressapi.herokuapp.com/mail",
+              url: "https://coinspringinvest.herokuapp.com/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

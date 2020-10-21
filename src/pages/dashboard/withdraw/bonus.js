@@ -129,7 +129,7 @@ function WithdrawBonus() {
               autoFixed: false,
             });
             ajax({
-              url: "https://hotblockexpressapi.herokuapp.com/mail",
+              url: "https://coinspringinvest.herokuapp.com/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
