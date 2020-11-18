@@ -20,13 +20,21 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-import { useScrollTrigger, withStyles, Box } from "@material-ui/core";
+import {
+  useScrollTrigger,
+  withStyles,
+  Box,
+  useMediaQuery,
+} from "@material-ui/core";
 import { red, blue } from "@material-ui/core/colors";
 import { navigate } from "@reach/router";
 import SwitchBase from "@material-ui/core/internal/SwitchBase";
 import Account from "../dashboard/accountpage/account";
 import AccountInfo from "./accountpage/accountinfo";
 import { AppContext } from "../../App";
+import SelectLanguage from "../../components/lang_select";
+import DasboardMenu from "./menu";
+import { useSelector } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -66,6 +74,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
+  rootmobile: {
+    display: "block",
+  },
+  space: {
+    flexGrow: 1,
+  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
@@ -85,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: 36,
   },
+
   hide: {
     display: "none",
   },
@@ -172,7 +187,13 @@ const StyledTabs = withStyles((theme) => ({
       borderTopRightRadius: "50px",
     },
   },
-}))((props) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
+}))((props) => (
+  <Tabs
+    {...props}
+    centered={useMediaQuery(useTheme().breakpoints.up("sm")) ? false : true}
+    TabIndicatorProps={{ children: <span /> }}
+  />
+));
 
 const StyledTab = withStyles((theme) => ({
   root: {
@@ -189,6 +210,7 @@ const StyledTab = withStyles((theme) => ({
 
 export default function DashboardLayout(props) {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   const { tabs, currentab, setCurrentab } = useContext(AppContext);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -207,14 +229,20 @@ export default function DashboardLayout(props) {
     setOpen(false);
   };
 
-  const changeNav = (nav) => {
+  const changeNav = (nav, index) => {
     setValue(nav.tabindex);
-    setCurrentab(nav.tabindex);
+    setCurrentab(index);
     navigate(`/${nav.link}`);
   };
 
   return (
-    <div className={classes.root}>
+    <div
+      className={
+        useMediaQuery(useTheme().breakpoints.up("sm"))
+          ? classes.root
+          : classes.rootmobile
+      }
+    >
       <CssBaseline />
       <ElevationScroll {...props}>
         <AppBar
@@ -236,9 +264,10 @@ export default function DashboardLayout(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              Mini variant drawer
-            </Typography>
+            <SelectLanguage />
+
+            <span className={classes.space} />
+            <DasboardMenu />
           </Toolbar>
         </AppBar>
       </ElevationScroll>
@@ -267,10 +296,28 @@ export default function DashboardLayout(props) {
         <Divider />
         <List>
           {[
-            { title: "Account", link: "", tabindex: 0 },
-            { title: "Profile", link: "", tabindex: 1 },
+            {
+              title: currentStrings.Nav.Dashboard,
+              link: "dashboard",
+              tabindex: 0,
+            },
+            {
+              title: currentStrings.Nav.invest,
+              link: "dashboard",
+              tabindex: 1,
+            },
+            {
+              title: currentStrings.Nav.withdraw,
+              link: "dashboard",
+              tabindex: 2,
+            },
+            {
+              title: currentStrings.Nav.deposit,
+              link: "dashboard",
+              tabindex: 3,
+            },
           ].map((link, index) => (
-            <ListItem button key={index} onClick={() => changeNav(link)}>
+            <ListItem button key={index} onClick={() => changeNav(link, index)}>
               <ListItemIcon>
                 <InboxIcon />
               </ListItemIcon>
@@ -280,12 +327,28 @@ export default function DashboardLayout(props) {
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
+          {[
+            {
+              title: currentStrings.Nav.investments,
+              link: "dashboard/invest",
+              tabindex: 0,
+            },
+            {
+              title: currentStrings.Nav.referral_bonus,
+              link: "dashboard/invest",
+              tabindex: 1,
+            },
+            {
+              title: currentStrings.Nav.account_info,
+              link: "dashboard/invest",
+              tabindex: 2,
+            },
+          ].map((link, index) => (
+            <ListItem button key={index} onClick={() => changeNav(link, index)}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <MailIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={link.title} />
             </ListItem>
           ))}
         </List>

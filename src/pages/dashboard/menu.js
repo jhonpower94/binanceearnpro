@@ -9,21 +9,22 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Fade from "@material-ui/core/Fade";
 import Avatar from "@material-ui/core/Avatar";
-import { deepOrange, orange } from "@material-ui/core/colors";
+import { deepOrange, orange, blue } from "@material-ui/core/colors";
 import { Button, Link } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
 import { locationinfo$ } from "../../redux/action";
 import { app, firestore } from "../../config";
 import { navigate } from "@reach/router";
+import { NotificationsOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
     display: "flex",
   },
   orange: {
-    color: theme.palette.getContrastText(orange[800]),
-    backgroundColor: theme.palette.primary.main,
+    color: blue[800],
+    backgroundColor: "#fafafa",
   },
   space: {
     marginTop: theme.spacing(1),
@@ -112,21 +113,14 @@ function DasboardMenu() {
   return (
     <div className={classes.sectionDesktop}>
       <Button onClick={handleClick} color="primary">
-        <Badge
-          variant={notifications.length > 0 ? "dot" : null}
-          color="error"
-        >
-          <NotificationsSharpIcon color="action" />
+        <Badge variant={notifications.length > 0 ? "dot" : null} color="error">
+          <NotificationsOutlined color="action" />
         </Badge>
       </Button>
 
       <IconButton edge="end" color="primary" onClick={handleClickUser}>
         <Badge variant={info.approved ? null : "dot"} color="primary">
-          <Avatar
-            className={classes.orange}
-            src={info.profile_image}
-            alt={info.firstName}
-          />
+          <Avatar className={classes.orange}>J</Avatar>
         </Badge>
       </IconButton>
 

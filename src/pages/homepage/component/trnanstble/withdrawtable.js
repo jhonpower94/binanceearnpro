@@ -120,11 +120,11 @@ export default function WithdrawTable() {
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table  aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell align="left">Name</TableCell>
-              <TableCell align="right">Amount</TableCell>
+              <TableCell align="left">NAME</TableCell>
+              <TableCell align="right">AMOUNT</TableCell>
             </TableRow>
           </TableHead>
 

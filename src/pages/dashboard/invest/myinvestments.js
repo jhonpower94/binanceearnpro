@@ -1,30 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Pagnition from "../../../components/pagination";
+
 import { useSelector, useDispatch } from "react-redux";
 import { selectedmenuItem$ } from "../../../redux/action";
-import firebase, { firestore } from "../../../config";
+
 import {
-  ListItem,
-  ListItemText,
   Typography,
-  Card,
   Button,
-  List,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  CardHeader,
-  Box,
-  Divider,
-  Link,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Badge,
+  TablePagination,
 } from "@material-ui/core";
-import Container from "@material-ui/core/Container";
+
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
-import { navigate } from "@reach/router";
-import { GetAppSharp, FiberManualRecordSharp } from "@material-ui/icons";
-import { Alert, AlertTitle } from "@material-ui/lab";
-import { ajax } from "rxjs/ajax";
+
+import BtcAddressInput from "./adress";
 const { Converter } = require("easy-currencies");
 
 let converter = new Converter(
@@ -40,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
   row: {
     display: "flex",
   },
-  mgright: {
-    marginRight: theme.spacing(1),
+  mgleft: {
+    marginleft: theme.spacing(1),
   },
   space: {
     flexGrow: 1,
@@ -52,198 +47,174 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const arrayDatas = [
-  {
-    name: "SHB & HZX",
-    tradeprefix: "shb",
-    days: "3 Day",
-    deposit_amount: 100,
-    return_amount: 115,
-    date: new Date().toLocaleDateString(),
-    time: new Date().toLocaleTimeString(),
-    trading: true,
-    withdrawn: true,
-    status: "Trading",
-  },
-  {
-    name: "TYU & XYT",
-    tradeprefix: "TYU",
-    days: "7 Days",
-    deposit_amount: 1000,
-    return_amount: 15000,
-    date: new Date().toLocaleDateString(),
-    time: new Date().toLocaleTimeString(),
-    trading: false,
-    withdrawn: false,
-    profit: 10,
-    status: "Complete",
-  },
-];
-
-const currenttrading = (tradeprefix) => {
-  return 15;
-};
-
 function Investment() {
   const classes = useStyles();
-  const storageData = JSON.parse(window.localStorage.getItem("userdata"));
-  const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
-    .currencycode;
+  const currentStrings = useSelector((state) => state.language);
   const investments = useSelector((state) => state.investment.trades);
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const currentUserId = userInfos.id;
   const dispatch = useDispatch();
-  const [withdrawn, setwithdrawn] = useState(false);
-  const [currentpage, setCurrentpage] = useState(1);
-  const [postperpage, setPostperpage] = useState(4);
-  // get current post
-  const indexofLastpost = currentpage * postperpage;
-  const indexofFirstpage = indexofLastpost - postperpage;
-  const currentPost = investments.slice(indexofFirstpage, indexofLastpost);
-  // change page
-  const paginate = (pagenumber) => setCurrentpage(pagenumber);
+  const [value, setValue] = useState({
+    data: {},
+    selected: false,
+  });
+
+  const changeValue = (event) => {
+    setValue({
+      ...value,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const CancelWithdraw = () => {
+    setValue({
+      ...value,
+      selected: false,
+    });
+  };
+
+  // table data
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(selectedmenuItem$(2));
-    converter.convert("500", "USD", "EUR").then((v) => console.log(v));
+    // converter.convert("500", "USD", "EUR").then((v) => console.log(v));
   }, []);
-
-  const withdraw = (data) => {
-    console.log(data.id);
-
-    firestore
-      .collection("transactions")
-      .add({
-        type: "Plan withdrawal",
-        action: "withdrawal",
-        pending: true,
-        name: data.block_name,
-        return_amount: data.return_amount,
-        date: new Date().toLocaleDateString(),
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        email: userInfos.email,
-        firstname: userInfos.firstName,
-        lastname: userInfos.lastName,
-      })
-      .then(() => {
-        const amountnn = formatLocaleCurrency(
-          data.return_amount,
-          "USD",
-          {
-            autoFixed: false,
-          }
-        );
-        firestore
-          .doc(`users/${currentUserId}`)
-          .collection("deposits")
-          .doc(data.id)
-          .update({
-            return_amount: 0,
-            withdrawn: true,
-          });
-
-          ajax({
-            url: "https://coinspringinvest.herokuapp.com/mail",
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: {
-              message: `Hi ${userInfos.firstName} ${userInfos.lastName} <br><br/>
-              You have successfully placed a withdrawal request of ${amountnn} to your BTC wallet.<br/><br/>
-              Please exercise patience while we process your transaction<br/><br/>
-              Thanks. 
-              `,
-              to: `${userInfos.email}, support@coinspringinvest.net`,
-              subject: "Withdrawal"
-            },
-          }).subscribe(() => console.log("user message sent"));
-
-      });
-  };
 
   return (
     <React.Fragment>
-      <Container maxWidth="sm">
-        <Card variant="outlined">
-          <CardHeader
-            title={<Typography variant="h6">My investments</Typography>}
-          />
-          <Box display="flex" justifyContent="center" m={1}>
-            {!userInfos.btcaddress ? (
-              <Alert severity="warning">
-                <AlertTitle>Warning</AlertTitle>
-                You have not set your BTC withdrawal address —{" "}
-                <Link component="button" onClick={()=>navigate("profile")}>
-                  Add BTC address here
-                </Link>
-              </Alert>
-            ) : null}
-            {withdrawn ? (
-              <Typography variant="caption" color="error">
-                sorry cannot withdraw 0.00 amount
-              </Typography>
-            ) : null}
-          </Box>
-          <List>
-            {currentPost.map((data, index) => (
-              <div key={index}>
-                <CardHeader
-                  title={
-                    <Typography variant="h5">{data.block_name}</Typography>
-                  }
-                  subheader={
-                    <Typography variant="subtitle2">{data.date}</Typography>
-                  }
-                  avatar={
-                    data.complete ? (
-                      <FiberManualRecordSharp color="primary" />
-                    ) : (
-                      <FiberManualRecordSharp color="disabled" />
-                    )
-                  }
-                  action={
-                    !data.return_amount ? (
-                      <Typography variant="h5">
-                        {formatLocaleCurrency(data.deposit_amount, "USD", {
-                          autoFixed: false,
-                        })}
-                      </Typography>
-                    ) : (
-                      <Typography variant="h5">
-                        {formatLocaleCurrency(data.return_amount, "USD", {
-                          autoFixed: false,
-                        })}
-                      </Typography>
-                    )
-                  }
-                />
+      {value.selected ? (
+        <BtcAddressInput
+          data={value.data}
+          selected={CancelWithdraw}
+          type="investment"
+        />
+      ) : (
+        <div>
+          <TableContainer className={classes.container}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">
+                    {currentStrings.Dashboard.investments.investment}
+                  </TableCell>
 
-                <Box display="flex" justifyContent="center">
-                  <Button
-                    variant="text"
-                    startIcon={<GetAppSharp />}
-                    color="primary"
-                    onClick={() => withdraw(data)}
-                    disabled={!data.complete || data.withdrawn}
-                  >
-                    Withdraw
-                  </Button>
-                </Box>
-                <Divider variant="inset" component="li" />
-              </div>
-            ))}
-          </List>
-        </Card>
-        <Box m={2}>
-          <Pagnition
-            postperpage={postperpage}
-            totalpost={investments.length}
-            paginate={paginate}
+                  <TableCell align="left">
+                    {currentStrings.Dashboard.investments.amount}
+                  </TableCell>
+                  <TableCell align="left">
+                    {currentStrings.Dashboard.investments.return}
+                  </TableCell>
+                  <TableCell align="left">
+                    {currentStrings.Dashboard.investments.confirm}
+                  </TableCell>
+                  <TableCell align="left">
+                    {currentStrings.Dashboard.investments.date}
+                  </TableCell>
+                  <TableCell align="center">
+                    {currentStrings.Dashboard.investments.status}
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {[
+                  {
+                    block_name: "plan 1",
+                    pending: true,
+                    deposit_amount: 500,
+                    return_amount: 550,
+                    created_at: 1324353,
+                    complete: false,
+                    withdrawn: false,
+                  },
+                  {
+                    block_name: "plan 1",
+                    pending: false,
+                    deposit_amount: 500,
+                    return_amount: 550,
+                    created_at: 1324353,
+                    complete: true,
+                    withdrawn: true,
+                  },
+                  {
+                    block_name: "plan 1",
+                    pending: false,
+                    deposit_amount: 500,
+                    return_amount: 550,
+                    created_at: 1324353,
+                    complete: true,
+                    withdrawn: false,
+                  },
+                ].map((dep, index) => (
+                  <TableRow tabIndex={-1} key={index}>
+                    <TableCell align="left">
+                      <Typography>{dep.block_name}</Typography>
+                    </TableCell>
+
+                    <TableCell align="left">
+                      {formatLocaleCurrency(dep.deposit_amount, "USD", {
+                        autoFixed: false,
+                      })}
+                    </TableCell>
+                    <TableCell align="left">
+                      {formatLocaleCurrency(dep.return_amount, "USD", {
+                        autoFixed: false,
+                      })}
+                    </TableCell>
+                    <TableCell align="left">
+                      <Button
+                        variant="contained"
+                        size="small"
+                        color="primary"
+                        disabled={!dep.complete || dep.withdrawn}
+                        onClick={() => {
+                          setValue({
+                            ...value,
+                            data: dep,
+                            selected: !value.selected,
+                          });
+                        }}
+                      >
+                        {currentStrings.Dashboard.investments.confirm}
+                      </Button>
+                    </TableCell>
+                    <TableCell align="left">
+                      {new Date(dep.created_at * 1000).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell align="center">
+                      <Badge
+                        badgeContent={dep.pending ? "PENDING" : "COMPLETE"}
+                        color={dep.pending ? "error" : "primary"}
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={15}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
           />
-        </Box>
-      </Container>
+        </div>
+      )}
     </React.Fragment>
   );
 }

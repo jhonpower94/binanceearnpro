@@ -8,6 +8,8 @@ import {
   Box,
   Typography,
   Grid,
+  CardHeader,
+  Divider,
 } from "@material-ui/core";
 import IntroHeader from "../component/introheader";
 import SectionHeader, { headings } from "../component/sectionheaders";
@@ -22,7 +24,16 @@ import BlockDatas from "../sections/blockdata";
 import Payment from "../sections/payment";
 import Locations from "../sections/locations";
 import BounceLoader from "react-spinners/BounceLoader";
-import { VerifiedUserSharp } from "@material-ui/icons";
+import {
+  AndroidSharp,
+  Apple,
+  LaptopMac,
+  ShareSharp,
+  VerifiedUserSharp,
+} from "@material-ui/icons";
+import About from "./aboutus";
+import { blue } from "@material-ui/core/colors";
+import Calculator from "./calculateinvest";
 
 const override = css`
   display: block;
@@ -33,34 +44,34 @@ const override = css`
 const downloads = [
   {
     title: "Ios",
-    image: "applelogo.svg",
+    image: <Apple />,
     link: "download",
   },
   {
     title: "Android",
-    image: "androidlogo.svg",
+    image: <AndroidSharp />,
     link: "download",
   },
   {
     title: "Windows",
-    image: "windowslogo.svg",
+    image: <LaptopMac />,
     link: "download",
   },
 ];
 
 const affiliates = [
-  { image: "paypal image" },
-  { image: "srill image" },
-  { image: "coinbase image" },
-  { image: "paxfull image" },
-  { image: "toyota image" },
-  { image: "mcdonald image" },
-  { image: "samsung image" },
+  { image: "paypal  INC" },
+  { image: "skrill INC" },
+  { image: "coinbase" },
+  { image: "paxfull" },
+  { image: "Yandex" },
+  { image: "Joomla INC" },
+  { image: "Bitpay INC" },
 ];
 
 const useStyles = makeStyles((theme) => ({
   header: {
-    backgroundColor: theme.palette.secondary.main,
+    background: "#303030",
   },
 
   margintop: {
@@ -102,110 +113,36 @@ function Home(props) {
   return (
     <React.Fragment>
       <CssBaseline>
-        <div className={classes.header}>
-          <Container id="stats" maxWidth="lg">
+        <Container maxWidth="lg">
+          <div style={{ position: "relative", top: "-200px" }}>
+            <InvestBlock blocksHome={true} page="Invest" />
+          </div>
+
+          <div
+            className={classes.margintop}
+            style={{ position: "relative", top: "-200px" }}
+          >
+            <Activities />
+          </div>
+        </Container>
+
+        <div style={{ position: "relative", top: "-100px" }}>
+          <div style={{ background: "#424242" }}>
             <Stats />
-          </Container>
+          </div>
+
+          <div id="features">
+            <Calculator />
+          </div>
         </div>
 
-        <Container id="features" maxWidth="lg" className={classes.margintop}>
-          <SectionHeader
-            title={headings.services.title}
-            subtitle={headings.services.subtitle}
-            image={headings.services.image}
-          />
-          <Features />
-        </Container>
-
-        <div className={classes.margintop}>
-          <SectionHeader
-            title={headings.addtrade.title}
-            subtitle={headings.addtrade.subtitle}
-            image={headings.addtrade.image}
-          />
-          <InvestBlock blocksHome={true} page="Invest" />
-        </div>
-
-        <div className={classes.margintop}>
-          <SectionHeader
-            title={headings.activities.title}
-            subtitle={headings.activities.subtitle}
-            image={headings.activities.image}
-          />
-          <Activities />
-        </div>
-
-        <div className={clsx(classes.margintop, classes.header)}>
-          <Container maxWidth="lg">
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="center"
-                  m={4}
-                >
-                  <img
-                    src={require("../images/blockdata.svg")}
-                    alt="image"
-                    className={classes.img}
-                  />
-                  <Typography variant="h5">Title goes here</Typography>
-                  <Typography>SubTitle goes here</Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <BlockDatas frontView={true} />
-              </Grid>
-            </Grid>
-          </Container>
-        </div>
-
-        <Container maxWidth="lg" className={classes.margintop}>
-          <SectionHeader
-            title={headings.payment.title}
-            subtitle={headings.payment.subtitle}
-            image={headings.payment.image}
-          />
+        <div
+          style={{ background: "#dfedf2", position: "relative", top: "-20px" }}
+        >
           <Payment />
-        </Container>
+        </div>
 
         <div id="aboutus" className={clsx(classes.margintop, classes.header)}>
-          <Container>
-            <Grid container spacing={3}>
-              <Grid id="Locations" item xs={12} sm={4}>
-                <Box display="flex" flexDirection="column" alignItems="center">
-                  <img src={require("../images/referral.svg")} width="150" />
-                  <Typography variant="h5">Title goes here</Typography>
-                  <Typography>SubTitle goes here</Typography>
-                </Box>
-              </Grid>
-
-              <Grid id="Locations" item xs={12} sm={4}>
-                <Box display="flex" flexDirection="column" alignItems="center">
-                  <img
-                    src={require("../images/location.svg")}
-                    width="150"
-                    alt="image"
-                  />
-                  <Locations single={true} />
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <Box display="flex" flexDirection="column" alignItems="center">
-                  <img
-                    src={require("../images/message.svg")}
-                    width="150"
-                    alt="image"
-                  />
-                  <Typography variant="h5">Message</Typography>
-                  <Typography align="center">
-                    Message our depart based on your required service
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
-          </Container>
           <Container maxWidth="md" className={classes.margintop}>
             <Box
               className={classes.margintop}
@@ -225,11 +162,7 @@ function Home(props) {
                     flexDirection="column"
                     alignItems="center"
                   >
-                    <img
-                      src={require(`../images/${download.image}`)}
-                      alt="image"
-                      width="50"
-                    />
+                    {download.image}
                     <Typography>{download.link}</Typography>
                   </Box>
                 </Grid>
@@ -237,6 +170,7 @@ function Home(props) {
             </Grid>
           </Container>
         </div>
+
         <Container maxWidth="sm" className={classes.margintop}>
           <Grid container spacing={3} justify="center">
             {affiliates.map((afl, index) => (

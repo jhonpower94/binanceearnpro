@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { HomePageStrings } from "../../lang/langhomepage";
+
 
 function AccountLayout() {
   useEffect(() => {}, []);

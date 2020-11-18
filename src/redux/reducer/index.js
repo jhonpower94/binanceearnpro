@@ -112,7 +112,7 @@ const notifications = (state = { notification: [] }, action) => {
 };
 
 const locationinfo = (
-  state = { locationinfo: [{ country: "", id: "", wallet_balance: 0 }] },
+  state = { locationinfo: { country: "", id: "", wallet_balance: 0 } },
   action
 ) => {
   const newlocation = { ...state, locationinfo: action.payload };

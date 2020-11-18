@@ -76,10 +76,9 @@ function SelectLanguage() {
     <React.Fragment>
       <Grow in={true} style={{ transitionDelay: "500ms" }}>
         <Button
-          color="inherit"
-          variant={
-            useMediaQuery(useTheme().breakpoints.up("sm")) ? "outlined" : "text"
-          }
+          color="secondary"
+          variant="text"
+          size="large"
           className={classes.button}
           onClick={handleClick}
         >
@@ -168,3 +167,23 @@ function SelectLanguage() {
 }
 
 export default SelectLanguage;
+
+/*
+<Button
+          color="inherit"
+          variant={
+            useMediaQuery(useTheme().breakpoints.up("sm")) ? "outlined" : "text"
+          }
+          className={classes.button}
+          onClick={handleClick}
+        >
+          <TranslateSharpIcon />
+
+          {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
+            <Typography className={classes.space}>
+              {currentStrings.language}
+            </Typography>
+          ) : null}
+
+          <ExpandMoreSharpIcon className={open ? "rotate" : ""} />
+        </Button> */

@@ -27,31 +27,18 @@ function IntroHeaderPages(props) {
 
   return (
     <Container id="intro">
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <Box display="flex" justifyContent="center" mt={1}>
-            <img
-              src={require(`../images/${image}`)}
-              alt="image"
-              className={classes.image}
-            />
-          </Box>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt={1}
-            className={classes.introtext}
-          >
-            <Typography variant="h4">{title}</Typography>
-            <Typography variant="h6" align="center">
-              Professional Forex trading signal and platform for traders
-            </Typography>
-          </Box>
-        </Grid>
-      </Grid>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="flex-start"
+        mt={4}
+        className={classes.introtext}
+      >
+        <Typography variant="h4">{title}</Typography>
+        <Typography variant="h6">
+          Professional Forex trading signal and platform for traders
+        </Typography>
+      </Box>
     </Container>
   );
 }

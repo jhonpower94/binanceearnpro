@@ -26,6 +26,10 @@ import {
   Button,
   ListItemText,
   Divider,
+  ButtonGroup,
+  useMediaQuery,
+  useTheme,
+  TextField,
 } from "@material-ui/core";
 import {
   Chart,
@@ -37,6 +41,8 @@ import {
   Legend,
 } from "bizcharts";
 import { navigate } from "@reach/router";
+import { useSelector } from "react-redux";
+import { Rating } from "@material-ui/lab";
 
 const useStyles = () => {
   return makeStyles((theme) => ({
@@ -122,6 +128,7 @@ function StyledRadio(props) {
 
 function ChartsPage() {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   const [state, setState] = React.useState("currencies");
   const [currentValue, setCurrentValue] = React.useState(0);
 
@@ -228,6 +235,25 @@ function ChartsPage() {
     { trade: "commodities", time: "9", value: 19 },
   ];
 
+  const plansChart = [
+    {
+      label: currentStrings.Dashboard.account.plan_titles.currency,
+      value: "currencies",
+    },
+    {
+      label: currentStrings.Dashboard.account.plan_titles.stock,
+      value: "stock",
+    },
+    {
+      label: currentStrings.Dashboard.account.plan_titles.realestate,
+      value: "realestate",
+    },
+    {
+      label: currentStrings.Dashboard.account.plan_titles.commodities,
+      value: "commodities",
+    },
+  ];
+
   const scale = {
     value: {
       min: maxvalue.min,
@@ -240,42 +266,49 @@ function ChartsPage() {
 
   return (
     <React.Fragment>
-      <Grid container spacing={4} justify="flex-start">
-        
-        <Grid item xs={6} sm={4}>
-          <FormControl
-            variant="outlined"
-            //  className={classes().formControl}
+      <Grid
+        container
+        spacing={ useMediaQuery(useTheme().breakpoints.up("sm"))
+        ? 5 : 3}
+        justify={
+          useMediaQuery(useTheme().breakpoints.up("sm"))
+            ? "flex-start"
+            : "center"
+        }
+      >
+        <Grid item xs={10} sm={4}>
+          <TextField
+            id="outlined-select-plan"
+            select
             size="small"
+            label={currentStrings.Dashboard.account.plans}
+            value={state}
+            onChange={handleChange}
+            helperText={currentStrings.Dashboard.account.plan_helpertext}
+            variant="outlined"
             fullWidth
           >
-            <InputLabel id="demo-simple-select-outlined-label">
-              Plans
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={state}
-              onChange={handleChange}
-              label="Plans"
-            >
-              <MenuItem value="currencies">Currency</MenuItem>
-              <MenuItem value="stock">Stock</MenuItem>
-              <MenuItem value="realestate">Realestate</MenuItem>
-              <MenuItem value="commodities">Commodities</MenuItem>
-            </Select>
-          </FormControl>
+            {plansChart.map((vl, index) => (
+              <MenuItem key={index} value={vl.value}>
+                {vl.label}
+              </MenuItem>
+            ))}
+          </TextField>
         </Grid>
-        <Grid item xs={2} sm={4}>
-          95%
+        <Grid item xs={10} sm={4}>
+          <Box display="flex" justifyContent={ useMediaQuery(useTheme().breakpoints.up("sm"))
+            ? "flex-start" : "center"}>
+            <Rating name="read-only" value={4} readOnly />
+          </Box>
         </Grid>
-        <Grid item xs={4} sm={4}>
-          <Button variant="outlined" color="primary">
-            Invset
-          </Button>
-        </Grid>
+
         <Grid item xs={12} sm={12}>
-          <Chart scale={scale} height={250} data={datannn} autoFit>
+          <Chart
+            scale={scale}
+            height={useMediaQuery(useTheme().breakpoints.up("sm")) ? 250 : 250}
+            data={datannn}
+            autoFit
+          >
             <Axis name="value" visible={true} />
             <Axis name="time" visible={false} />
             <Tooltip shared />

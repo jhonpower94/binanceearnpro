@@ -1,0 +1,104 @@
+.wrap
+{
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+	position:fixed;
+	z-index:10001;
+	background:  rgba(0, 73, 101, 0.35);
+	-webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+.modal_block
+{
+	width:auto;
+	min-width:100px;
+	margin:100px auto;
+	height:auto;
+	z-index:10002;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+	min-height:100px;
+	display:block;
+	padding:25px;
+	position: relative;
+	position:relative;
+	border: 2px solid rgba(255,255,255,0.5);
+	border-top:none;
+	
+}
+.modal_block>.inset
+{
+	padding: 20px;
+	z-index:3;
+	background: #fff;
+	background: url('../images/plbg.png') center bottom no-repeat, url('../images/greed1.png') center center repeat, #fcfeff;
+	margin:0;
+}
+.modal_block>.inset img { width:100%;}
+.modal-title 
+{
+	display:block; 
+	
+	height: 50px;
+	width:100%;
+	overflow: hidden;
+	padding:0px;
+    font-weight: 300;
+    cursor: pointer;
+    color: #fff;
+   
+    font-family: 'Conv_etna';
+    text-transform: uppercase;
+    line-height: 50px;
+    position: relative;
+   	top:-28px;
+   	left:0;
+   	text-align: center;
+    font-size: 18px;
+
+    position: absolute;
+}
+.modal-title  > span { display: inline-block; position: relative; padding:0 10px;}
+.modal-title  > span:after { border-top: 2px solid rgba(255,255,255,0.5);
+content: ''; width:1000px; display: block;
+height: 2px; top:28px; right:-1000px;
+position: absolute;  }
+
+.modal-title  > span:before {  border-top: 2px solid rgba(255,255,255,0.5);
+content: ''; width:1000px; display: block;
+height: 2px; top:28px; left:-1000px;
+position: absolute;  }
+
+.modal_block .close
+{
+	position: absolute;
+    cursor: pointer;
+    right: -48px;
+    top: -1px;
+    opacity: 1;
+    position: absolute;
+    outline: 0;
+    width: 35px;
+    height: 35px;
+    text-align: right;
+    z-index: 9999;
+}
+.modal_block .close:before
+{
+	height: 100%;
+	width: 100%;
+	content: '';
+	z-index: -1;
+	position: absolute; 
+	left:6px;
+	top:0;
+	background:url('../images/icons/icon-close-128.png') center center no-repeat,  url('../images/btn-bg1.png') center center no-repeat;
+	background-size: auto 60%, auto auto;
+	border-radius: 5px;
+}

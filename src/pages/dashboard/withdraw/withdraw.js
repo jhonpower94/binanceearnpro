@@ -13,15 +13,21 @@ import {
   Grid,
   TextField,
   Button,
+  Avatar,
+  Typography,
 } from "@material-ui/core";
 import NumberFormat from "react-number-format";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import { ajax } from "rxjs/ajax";
 import { navigate } from "@reach/router";
+import { AccountBalanceWallet } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
     marginTop: theme.spacing(5),
+  },
+  avatar: {
+    background: theme.palette.secondary.main,
   },
 }));
 
@@ -55,6 +61,7 @@ NumberFormatCustom.propTypes = {
 
 function Withdrawform() {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   const dispatch = useDispatch();
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const { setIntro } = useContext(AppContext);
@@ -74,6 +81,7 @@ function Withdrawform() {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(selectedmenuItem$(5));
+    console.log(userInfos.btcaddress);
   }, []);
 
   const submitForm = (e) => {
@@ -140,64 +148,88 @@ function Withdrawform() {
       });
 
   return (
-    <Container maxWidth="sm">
-      <Card variant="outlined">
-        <CardHeader
-          title={
-            isNaN(userInfos.wallet_balance)
-              ? formatLocaleCurrency(0, "USD", {
-                  autoFixed: false,
-                })
-              : formatLocaleCurrency(userInfos.wallet_balance, "USD", {
-                  autoFixed: false,
-                })
-          }
-          subheader="Remaing balance"
-        />
-        <CardContent>
+    <Container maxWidth="md">
+      <Grid container spacing={5} justify="center">
+        <Grid item xs={12} sm={12}>
+          <CardHeader
+            avatar={
+              <Avatar variant="rounded" className={classes.avatar}>
+                <AccountBalanceWallet />
+              </Avatar>
+            }
+            title={currentStrings.Dashboard.withdraw.wallet_balance}
+            subheader={
+              isNaN(userInfos.wallet_balance) ? (
+                <Typography variant="h4">
+                  {" "}
+                  {formatLocaleCurrency(0, "USD", {
+                    autoFixed: false,
+                  })}{" "}
+                </Typography>
+              ) : (
+                <Typography variant="h4">
+                  {formatLocaleCurrency(userInfos.wallet_balance, "USD", {
+                    autoFixed: false,
+                  })}
+                </Typography>
+              )
+            }
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
           <form onSubmit={submitForm}>
             <Grid container spacing={5} justify="center">
-              <Grid item xs={12} sm={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField
+                  required
+                  size="small"
                   fullWidth
                   id="outlined-read-only-input"
-                  label="BTC Address"
+                  label={currentStrings.Dashboard.withdraw.adress_label}
                   name="address"
                   defaultValue={value.address}
-                  variant="outlined"
+                  variant="standard"
                   onChange={changeValue}
+                  helperText={currentStrings.Dashboard.withdraw.helpertext_btc}
                 />
               </Grid>
-              <Grid item xs={12} sm={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField
+                  required
+                  size="small"
                   fullWidth
                   id="outlined-number"
-                  label="Amount"
+                  label={currentStrings.Dashboard.withdraw.amount}
                   name="amount"
                   defaultValue={value.amount}
-                  variant="outlined"
+                  variant="standard"
                   onChange={changeValue}
                   InputProps={{
                     inputComponent: NumberFormatCustom,
                   }}
-                  helperText={error ? "not enough amount" : ""}
+                  helperText={
+                    error
+                      ? currentStrings.Dashboard.withdraw.error_amount
+                      : currentStrings.Dashboard.withdraw.helpertext_amount
+                  }
+                  error={error ? true : false}
                 />
               </Grid>
-              <Grid item xs={12} sm={12}>
+              <Grid item xs={12} sm={6}>
                 <Button
                   type="submit"
                   variant="contained"
                   color="primary"
-                  size="small"
+                  size="large"
                   fullWidth
                 >
-                  withdraw deposits
+                  {currentStrings.Dashboard.withdraw.action}
                 </Button>
               </Grid>
             </Grid>
           </form>
-        </CardContent>
-      </Card>
+        </Grid>
+      </Grid>
     </Container>
   );
 }

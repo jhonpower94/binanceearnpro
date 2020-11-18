@@ -10,18 +10,25 @@ import {
   Link,
   Card,
   Grid,
+  Button,
+  CardContent,
+  CardHeader,
+  useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(2),
   },
   link: {
     cursor: "pointer",
   },
+  scroll: {
+    maxHeight: "300px",
+    overflowY: "scroll",
+  },
 }));
-
-const blocs = [1, 2, 3, 4, 5, 6, 7, 8];
 
 function About() {
   const classes = useStyles();
@@ -34,43 +41,45 @@ function About() {
   }, []);
 
   return (
-    <Container className={classes.margintop} maxWidth="md">
-      <Box display="flex" flexDirection="column" alignItems="center">
-        <Typography variant="h5" component="h1" align="center">
-          Best forext trading management platform you can rely on
-        </Typography>
-        <Typography variant="body1" align="center">
-          At Hotblock, our entire business is to make forex trading more better
-          and easier for traders and investors, with advance trading tools and
-          Hotbloc Expert mangers, forex trading has never been easier and safe
-        </Typography>
-
-        <Link
-          component="button"
-          variant="h6"
-          color="primary"
-          onClick={() => {}}
-          className={clsx(classes.link, classes.margintop)}
-        >
-          Trade Blocks
-        </Link>
-      </Box>
-      <Grid container spacing={3} justify="center" className={classes.margintop}>
-        {blocs.map((bloc, index) => (
-          <Grid key={index} item xs={6} sm={3}>
-            <Card variant="outlined">
-              <Box display="flex" flexDirection="column" alignItems="center">
-                Image Here
-                <Typography variant="body1" color="primary">
-                  288.63
-                </Typography>
-                <Typography variant="caption">Avg. Return</Typography>
-              </Box>
-            </Card>
-          </Grid>
-        ))}
+    <div className={classes.margintop}>
+      <Grid container spacing={3} justify="center">
+        <Grid item xs={6} sm={12}>
+          <CardHeader
+            title="ABOUT US"
+            subheader="ABOUT THE COMPANY"
+            titleTypographyProps={{
+              align: "center",
+            }}
+            subheaderTypographyProps={{ align: "center" }}
+          />
+          <CardContent>
+            <Typography align="left" variant="subtitle2">
+              Coinspringinvest.net Mining Limited is ready to propose profitable
+              cooperation for all comers. We present a high-tech and modern
+              company which is recognized industry leader in the field of
+              computer technology, software and innovations. Our technical
+              experts are involved in developing new methods and effective
+              algorithms of Bitcoin mining. Over last few years Coinspringinvest.net
+              Mining Limited has managed to build a few large mining farms in
+              the United Kingdom and Scotland.We have equipped them with the
+              most powerful and modern mining hardware that around the clock
+              provides excellent results and serves as a source for earnings.
+            </Typography>
+          </CardContent>
+        </Grid>
       </Grid>
-    </Container>
+
+      <Box display="flex" justifyContent="center" mt={4}>
+        <Button variant="contained" color="secondary">
+          Login
+        </Button>
+        <Box ml={3}>
+          <Button variant="contained" color="primary">
+            Register
+          </Button>
+        </Box>
+      </Box>
+    </div>
   );
 }
 

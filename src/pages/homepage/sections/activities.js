@@ -11,10 +11,13 @@ import {
   ListItemText,
   Container,
   makeStyles,
+  Divider,
+  CardContent,
 } from "@material-ui/core";
-import { VerifiedUserSharp } from "@material-ui/icons";
+import { ArrowUpwardSharp, VerifiedUserSharp } from "@material-ui/icons";
 import { css } from "@emotion/core";
 import PuffLoader from "react-spinners/PuffLoader";
+import WithdrawTable from "../component/trnanstble/withdrawtable";
 
 const override = css`
   display: block;
@@ -23,17 +26,27 @@ const override = css`
 `;
 
 const useStyles = makeStyles((theme) => ({
-  image: {
-    height: "3em",
+  avatar: {
+    background: theme.palette.secondary.main,
   },
 }));
 
 const TransactionAray = [
   {
-    name: "Current Deposit",
-    icon: require("../../dashboard/icons/balance.svg"),
-    color: "#f15a29",
+    name: "DEPOSITS",
     datas: [
+      {
+        name: "jhon Snow",
+        amount: 50000,
+      },
+      {
+        name: "jhon Snow",
+        amount: 50000,
+      },
+      {
+        name: "jhon Snow",
+        amount: 50000,
+      },
       {
         name: "jhon Snow",
         amount: 50000,
@@ -45,10 +58,20 @@ const TransactionAray = [
     ],
   },
   {
-    name: "Current Withdrawals",
-    icon: require("../../dashboard/icons/withdraw.svg"),
-    color: "#098b1ede",
+    name: "WITHDRAWALS",
     datas: [
+      {
+        name: "jhon Snow",
+        amount: 50000,
+      },
+      {
+        name: "jhon Snow",
+        amount: 50000,
+      },
+      {
+        name: "jhon Snow",
+        amount: 50000,
+      },
       {
         name: "jhon Snow",
         amount: 50000,
@@ -67,29 +90,26 @@ function Activities() {
 
   return (
     <Container maxWidth="lg">
-      <Grid container spacing={3}>
+      <Grid container spacing={10}>
         {TransactionAray.map((trans, index) => (
           <Grid key={index} item xs={12} sm={6}>
-            <Card variant="outlined">
-              <CardHeader
-                avatar={<img src={trans.icon} className={classes.image} />}
-                action={
-                  <PuffLoader
-                    css={override}
-                    size={50}
-                    color={trans.color}
-                    loading={true}
-                  />
-                }
-                title={<Typography variant="h6">{trans.name}</Typography>}
-              />
-              {trans.datas.map((data, index) => (
-                <ListItem key={index}>
-                  <ListItemText primary={data.name} />
-                  <Typography>{`$ ${data.amount}`}</Typography>
-                </ListItem>
-              ))}
-            </Card>
+            <CardHeader
+              title={trans.name}
+              subheader="Last 5 operations"
+              titleTypographyProps={{
+                align: "center",
+              }}
+              subheaderTypographyProps={{
+                align: "center",
+              }}
+            />
+
+            {trans.datas.map((data, index) => (
+              <ListItem key={index}>
+                <ListItemText primary={data.name} />
+                <Typography variant="h5">{`$ ${data.amount}`}</Typography>
+              </ListItem>
+            ))}
           </Grid>
         ))}
       </Grid>
@@ -98,3 +118,11 @@ function Activities() {
 }
 
 export default Activities;
+
+/* 
+
+
+               <CardContent>
+                <WithdrawTable />
+              </CardContent>
+              */

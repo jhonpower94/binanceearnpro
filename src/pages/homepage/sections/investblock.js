@@ -15,8 +15,10 @@ import {
   Fade,
   makeStyles,
   Container,
+  Divider,
 } from "@material-ui/core";
 import IntroHeaderPages from "../component/introheaderpages";
+import Background from "../images/baprice.svg";
 import { VerifiedUserSharp, AddCircleSharp } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,11 +33,9 @@ function InvestBlock(props) {
   const [arrays, setArrays] = useState([]);
   const { intro, setIntro } = useContext(AppContext);
 
-
-
   useEffect(() => {
     setIntro({
-      layout: <IntroHeaderPages title="Invest Title" image="copytradewhite.svg" />,
+      layout: <IntroHeaderPages title="Invest Title" />,
     });
     window.scrollTo(0, 0);
     const newBlock = blocks.slice(0, 3);
@@ -44,42 +44,38 @@ function InvestBlock(props) {
 
   return (
     <Container id="investblock" maxWidth="lg" className={classes.margintop}>
-      <Grid container spacing={3}>
+      <Grid container spacing={10} justify="center">
         {arrays.map((trade, index) => (
           <Fade
             in={true}
             key={index}
             style={{ transitionDelay: `${index * 200}ms` }}
           >
-            <Grid item xs={12} sm={4}>
-              <Card variant="outlined">
-                <CardHeader avatar={<Avatar>&#128176;</Avatar>} />
+            <Grid item xs={6} sm={4}>
+              <Card
+                style={{
+                  background: `url(${Background}) no-repeat`,
+                  backgroundSize: "cover",
+                }}
+              >
+                <CardHeader
+                  title={<Typography variant="h4">50%</Typography>}
+                  subheader="Daily"
+                />
                 <List dense={true}>
+                  <Divider variant="inset" component="li" />
                   <ListItem>
-                    <ListItemText primary="Return rate" />
-                    <Typography variant="h5">{`${trade.return_percentage} %`}</Typography>
+                    <ListItemText primary="Minimun stake" secondary="$1000" />
                   </ListItem>
+                  <Divider variant="inset" component="li" />
                   <ListItem>
-                    <ListItemText primary="Minimun stake" />
-                    <Typography variant="h5">{`$ ${trade.minimum_stake}`}</Typography>
+                    <ListItemText primary="Return rate" secondary="50%" />
                   </ListItem>
+                  <Divider variant="inset" component="li" />
                   <ListItem>
-                    <ListItemText primary="Investment period" />
-                    <Typography variant="h5">
-                      {trade.investment_period}
-                    </Typography>
+                    <ListItemText primary="Period" secondary="3 Days" />
                   </ListItem>
                 </List>
-                <ListItem>
-                  <Button
-                    startIcon={<AddCircleSharp />}
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                  >
-                    Add new trade
-                  </Button>
-                </ListItem>
               </Card>
             </Grid>
           </Fade>

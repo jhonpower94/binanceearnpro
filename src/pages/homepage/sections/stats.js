@@ -12,9 +12,15 @@ import {
   Container,
   makeStyles,
 } from "@material-ui/core";
-import { VerifiedUserSharp } from "@material-ui/icons";
+import {
+  GroupAddOutlined,
+  MoneyOffOutlined,
+  SearchOutlined,
+  VerifiedUserSharp,
+} from "@material-ui/icons";
 import { css } from "@emotion/core";
 import PuffLoader from "react-spinners/PuffLoader";
+import MonetizationOnOutlined from "@material-ui/icons/MonetizationOnOutlined";
 
 const override = css`
   display: block;
@@ -23,26 +29,31 @@ const override = css`
 `;
 
 const useStyles = makeStyles((theme) => ({
-  image: {
+  images: {
     height: "5em",
   },
 }));
 
 const stats = [
   {
-    title: "Trade Copied",
-    value: 10000,
-    image: require("../images/tradecopy.svg"),
+    title: "DAYS ONLINEe",
+    value: "1789",
+    icons: <SearchOutlined fontSize="large" />,
   },
   {
-    title: "Active Investors",
-    value: 50000,
-    image: require("../images/investor.svg"),
+    title: "TOTAL ACCOUNTS",
+    value: "2000",
+    icons: <GroupAddOutlined fontSize="large" />,
   },
   {
-    title: "Return Rate",
-    value: 50000,
-    image: require("../images/percent.svg"),
+    title: "TOTAL DEPOSITED",
+    value: "$4916056.84",
+    icons: <MonetizationOnOutlined fontSize="large" />,
+  },
+  {
+    title: "TOTAL WITHDRAWN",
+    value: "$9056910.81",
+    icons: <MoneyOffOutlined fontSize="large" />,
   },
 ];
 
@@ -51,19 +62,19 @@ function Stats() {
   useEffect(() => {}, []);
 
   return (
-    <React.Fragment>
+    <Container>
       <Grid container spacing={3}>
         {stats.map((stat, index) => (
-          <Grid key={index} item xs={12} sm={4}>
+          <Grid key={index} item xs={12} sm={3}>
             <CardHeader
-              avatar={<img src={stat.image} className={classes.image} />}
-              title={<Typography variant="h5">{stat.value}</Typography>}
-              subheader={<Typography variant="h5">{stat.title}</Typography>}
+              avatar={stat.icons}
+              title={stat.title}
+              subheader={stat.value}
             />
           </Grid>
         ))}
       </Grid>
-    </React.Fragment>
+    </Container>
   );
 }
 

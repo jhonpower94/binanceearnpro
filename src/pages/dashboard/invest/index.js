@@ -22,6 +22,8 @@ import {
   FormLabel,
   FormControl,
   Radio,
+  Divider,
+  CardActions,
 } from "@material-ui/core";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -30,6 +32,7 @@ import {
   ExpandLess,
   ExpandMore,
   AddCircleSharp,
+  Star,
 } from "@material-ui/icons";
 import { blocks } from "../../../service/tradeblocks";
 import Pagnition from "../../../components/pagination";
@@ -44,13 +47,13 @@ import { navigate } from "@reach/router";
 import { Converter } from "easy-currencies";
 import getSymbolFromCurrency from "currency-symbol-map";
 import { reactLocalStorage } from "reactjs-localstorage";
+import { Rating } from "@material-ui/lab";
 var getCountry = require("country-currency-map").getCountry;
 var formatLocaleCurrency = require("country-currency-map").formatLocaleCurrency;
 
 const useStyles = makeStyles((theme) => ({
   column: {
-    display: "flex",
-    flexDirection: "column",
+    background: "transparent",
   },
   row: {
     display: "flex",
@@ -107,87 +110,101 @@ let converter = new Converter(
   "67eb8de24a554b9499d1d1bf919c93a3"
 );
 
-function Invest() {
+function InvestNew() {
   const classes = useStyles();
-  const [selectedValue, setSelectedValue] = React.useState("planA");
-  const currencyCode = JSON.parse(window.localStorage.getItem("country"))
-    .currencycode;
+  const currentStrings = useSelector((state) => state.language);
   const dispatch = useDispatch();
-  const {
-    paymentInfo,
-    MinDeposits,
-    setMinDeposit,
-    setPaymentInfo,
-  } = useContext(AppContext);
+  const { paymentInfo, setPaymentInfo, setCurrentab } = useContext(AppContext);
 
-  const [currentpage, setCurrentpage] = useState(1);
-  const [postperpage, setPostperpage] = useState(8);
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const [arrays, setArrays] = useState(blocks);
-
-  // get current post
-  const indexofLastpost = currentpage * postperpage;
-  const indexofFirstpage = indexofLastpost - postperpage;
-  const currentPost = blocks.slice(indexofFirstpage, indexofLastpost);
-
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-
-    const setblock =
-      event.target.value === "planA"
-        ? blocks.filter((bl) => !bl.minning)
-        : blocks.filter((bl) => bl.minning);
-    setArrays([...setblock]);
-    console.log(event.target.value);
-  };
-
-  // change page
-  const paginate = (pagenumber) => setCurrentpage(pagenumber);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const sortFromHighest = () => {
-    blocks.sort((a, b) => {
-      return b.minimum_stake - a.minimum_stake;
-    });
-    setArrays([...blocks]);
-  };
-  const sortFromLowest = () => {
-    blocks.sort((a, b) => {
-      return a.minimum_stake - b.minimum_stake;
-    });
-    setArrays([...blocks]);
-  };
-
-  const setInvestmentType = () => {
-    blocks.filter((bl) => bl.minning == true);
-    setArrays([...blocks]);
-  };
+  const arrays = [
+    {
+      name: "Plan 1",
+      title: currentStrings.Dashboard.invest.plan_title.a,
+      rate: 6,
+      duration: 24,
+      lot: 50,
+      max: 3000,
+      hrs: 24,
+    },
+    {
+      name: "Plan 2",
+      title: currentStrings.Dashboard.invest.plan_title.b,
+      rate: 12,
+      duration: 24,
+      lot: 500,
+      max: 5000,
+      hrs: 24,
+    },
+    {
+      name: "Plan 3",
+      title: currentStrings.Dashboard.invest.plan_title.c,
+      rate: 15,
+      duration: 34,
+      lot: 1000,
+      max: 30000,
+      hrs: 34,
+    },
+    {
+      name: "Plan 4",
+      title: currentStrings.Dashboard.invest.plan_title.d,
+      rate: 20,
+      duration: 48,
+      lot: 2000,
+      max: 1000000,
+      hrs: 48,
+    },
+    {
+      name: "Vip",
+      title: currentStrings.Dashboard.invest.plan_title.e,
+      rate: 25,
+      duration: 50,
+      lot: 4000,
+      max: 20000,
+      hrs: 50,
+    },
+    {
+      name: "Hourly Vip",
+      title: currentStrings.Dashboard.invest.plan_title.f,
+      rate: 10,
+      duration: 5,
+      lot: 5000,
+      max: 30000,
+      hrs: 5,
+    },
+    {
+      name: "Hourly Vip",
+      title: currentStrings.Dashboard.invest.plan_title.g,
+      rate: 12,
+      duration: 5,
+      lot: 7000,
+      max: 30000,
+      hrs: 5,
+    },
+    {
+      name: "Hourly Vip",
+      title: currentStrings.Dashboard.invest.plan_title.h,
+      rate: 12,
+      duration: 12,
+      lot: 12000,
+      max: 30000,
+      hrs: 12,
+    },
+  ];
 
   const addTrade = (index, data) => {
     console.log(data);
     setPaymentInfo({ ...paymentInfo, block: data, blockindex: index });
-    navigate("invoice");
+    setCurrentab(4);
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(selectedmenuItem$(1));
-    const setblocknn = blocks.filter((bl) => !bl.minning);
-    setArrays([...setblocknn]);
   }, []);
 
   return (
     <React.Fragment>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Grid container spacing={5} justify="center">
           {arrays.map((trade, index) => (
             <Fade
@@ -196,41 +213,62 @@ function Invest() {
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               <Grid item xs={12} sm={4}>
-                <Card className={classes.column}>
-                  <div className={classes.headerbg}>
-                    <CardHeader
-                      title={<Typography variant="h6">{trade.name}</Typography>}
-                    />
-                  </div>
+                <Card variant="outlined" className={classes.column}>
+                  <CardHeader
+                    title={trade.title}
+                    titleTypographyProps={{ align: "center" }}
+                    subheaderTypographyProps={{ align: "center" }}
+                    subheader={
+                      <Rating
+                        name="read-only"
+                        value={4}
+                        readOnly
+                        size="small"
+                      />
+                    }
+                  />
 
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="baseline"
+                  >
+                    <Typography component="h2" variant="h3">
+                      {`${trade.rate} - 20 `}
+                    </Typography>
+                    <Typography variant="h6" color="textSecondary">
+                      %
+                    </Typography>
+                  </Box>
                   <List>
+                    <Divider variant="inset" component="li" />
+
                     <ListItem>
-                      <ListItemText primary="Minimun stake" />
-                      <Typography variant="h5">
-                        {formatLocaleCurrency(trade.lot, "USD", {
+                      <ListItemText
+                        primary={currentStrings.Dashboard.invest.duration}
+                        secondary={`${trade.hrs} %`}
+                      />
+                    </ListItem>
+                    <Divider variant="inset" component="li" />
+                    <ListItem>
+                      <ListItemText
+                        primary={currentStrings.Dashboard.invest.Minimun_stake}
+                        secondary={formatLocaleCurrency(trade.lot, "USD", {
                           autoFixed: false,
                         })}
-                      </Typography>
+                      />
                     </ListItem>
-                    <ListItem>
-                      <ListItemText primary="Return rate" />
-                      <Typography variant="h5">{`${trade.rate} %`}</Typography>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemText primary="Duration" />
-                      <Typography variant="h5">{`${trade.hrs} hrs`}</Typography>
-                    </ListItem>
-                    <ListItem>
+
+                    <CardActions>
                       <Button
-                        startIcon={<AddCircleSharp />}
-                        variant="text"
+                        variant="outlined"
                         className={classes.mgtopx}
                         fullWidth
                         onClick={() => addTrade(index, trade)}
                       >
-                        Add new trade
+                        { currentStrings.Dashboard.invest.action }
                       </Button>
-                    </ListItem>
+                    </CardActions>
                   </List>
                 </Card>
               </Grid>
@@ -242,7 +280,7 @@ function Invest() {
   );
 }
 
-export default Invest;
+export default InvestNew;
 
 /*
 custom filter and pagnation

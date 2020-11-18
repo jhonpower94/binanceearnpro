@@ -4,13 +4,13 @@ import { ThemeProvider } from "@material-ui/styles";
 import { orange, blue } from "@material-ui/core/colors";
 import { Router } from "@reach/router";
 import HomeLayout from "./pages/homepage";
-import DashboardLayout from "./pages/dashboard/index";
+import DashboardLayout from "./pages/dashboard/indexnew";
 import AccountLayout from "./pages/account";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { allreducer } from "./redux/reducer";
 import AccountSettings from "./pages/dashboard/accountsettings";
-import DashboardPage from "./pages/dashboard/accountpage/index";
+import DashboardPage from "./pages/dashboard/accountpage/indexnew";
 import Account from "./pages/dashboard/accountpage/account";
 import AccountInfo from "./pages/dashboard/accountpage/accountinfo";
 import MyInvestments from "./pages/dashboard/allinvestments";
@@ -19,7 +19,7 @@ import Wallet from "./pages/dashboard/wallet";
 import Profile from "./pages/dashboard/profile";
 import CreditWallet from "./pages/dashboard/wallet/payment";
 import CreditSucess from "./pages/dashboard/wallet/creditsuccess";
-import Invest from "./pages/dashboard/invest";
+import Invest from "./pages/dashboard/invest/indexnew";
 import Investment from "./pages/dashboard/invest/myinvestments";
 import Invoice from "./pages/dashboard/invest/invoice";
 import Support from "./pages/dashboard/support";
@@ -73,14 +73,15 @@ export const AppContext = createContext();
 
 function App() {
   const [darktheme, setDarktheme] = useState({
-    status: false,
+    status: true,
   });
   const [intro, setIntro] = useState({
-    layout: "layout",
+    layout: "",
     countrycode: "",
     mobilecode: "234",
     persistence: false,
     currency_code: "",
+    homepage: true,
   });
   const [currentblock, setCurrentBlock] = useState({ data: {} });
   const [paymentInfo, setPaymentInfo] = useState({
@@ -113,10 +114,7 @@ function App() {
     block5: 100000,
   });
 
-  const [tabs, setTabs] = useState([
-    { title: "Account", link: "../", tab: 0 },
-    { title: "User info", link: "info", tab: 1 },
-  ]);
+  const [tabs, setTabs] = useState([]);
 
   const [currentab, setCurrentab] = useState(0);
 
@@ -125,15 +123,15 @@ function App() {
     status: false,
   });
 
-  const palletType = darktheme.status ? "dark" : "dark";
-  const secondary = darktheme.status ? "#424242" : "#424242";
+  const palletType = darktheme.status ? "dark" : "light";
+  const secondary = darktheme.status ? "#fafafa" : "#ffffff";
 
   const theme = createMuiTheme({
     palette: {
       type: palletType,
       primary: {
         // Purple and green play nicely together.
-        main: "#2196f3",
+        main: blue[800],
       },
       secondary: {
         // This is green.A700 as hex.
@@ -142,7 +140,6 @@ function App() {
       action: {
         selected: "#2196f33d",
       },
-      
     },
   });
   useEffect(() => {
@@ -205,9 +202,21 @@ function App() {
       >
         <ThemeProvider theme={theme}>
           <Router>
-            <DashboardLayout path="/">
-              <DashboardPage path="/" />
+            <HomeLayout path="/">
+              <Home path="/" />
+              <InvestBlock path="invest" />
+              <Signal path="signals" />
+              <About path="about" />
+              <Locations path="locations" />
+              <BlocDatas path="tradedatas" />
+              <Downloads path="downloads/:page" />
+              <Contactus path="contact" />
+              <Guide path="guide" />
+              <Security path="security/:page" />
+            </HomeLayout>
 
+            <DashboardLayout path="dashboard">
+              <DashboardPage path="/" />
               <Invest path="invest" />
               <Investment path="investments" />
               <Invoice path="invoice" />

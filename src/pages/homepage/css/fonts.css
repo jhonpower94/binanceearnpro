@@ -1,0 +1,91 @@
+@font-face {
+  font-family: 'Geometria Light';
+  src: url('../fonts/geo/Brownfox_-_Geometria_Light.eot');
+  src: url('../fonts/geo/Brownfox_-_Geometria_Light.eot?#iefix') format('embedded-opentype'), 
+  url('../fonts/geo/Brownfox_-_Geometria_Light.otf') format('opentype'), 
+  url('../fonts/geo/Brownfox_-_Geometria_Light.woff') format('woff'), 
+  url('../fonts/geo/Brownfox_-_Geometria_Light.ttf') format('truetype'),
+   url('../fonts/geo/Brownfox_-_Geometria_Light.svg#geometria_lightlight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Geometria Medium';
+  src: url('../fonts/geo/Brownfox_-_Geometria_Medium.eot');
+  src: url('../fonts/geo/Brownfox_-_Geometria_Medium.eot?#iefix') format('embedded-opentype'), 
+  url('../fonts/geo/Brownfox_-_Geometria_Medium.otf') format('opentype'), 
+  url('../fonts/geo/Brownfox_-_Geometria_Medium.woff') format('woff'), 
+  url('../fonts/geo/Brownfox_-_Geometria_Medium.ttf') format('truetype'), 
+  url('../fonts/geo/Brownfox_-_Geometria_Medium.svg#geometria_mediummedium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Geometria';
+  src: url('../fonts/geo/Brownfox_-_Geometria.eot');
+  src: url('../fonts/geo/Brownfox_-_Geometria.eot?#iefix') format('embedded-opentype'), 
+  url('../fonts/geo/Brownfox_-_Geometria.otf') format('opentype'), 
+  url('../fonts/geo/Brownfox_-_Geometria.woff') format('woff'), 
+  url('../fonts/geo/Brownfox_-_Geometria.ttf') format('truetype'), 
+  url('../fonts/geo/Brownfox_-_Geometria.svg#geometriaregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Conv_CoreSans';
+    src: url('../fonts/CoreSansE-25ExtraLight.eot');
+    src: local('â˜º'), url('../fonts/CoreSansE-25ExtraLight.woff') format('woff'), 
+    url('../fonts/CoreSansE-25ExtraLight.ttf') format('truetype'), 
+    url('../fonts/CoreSansE-25ExtraLight.svg') format('svg');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Conthrax-sb';
+    src: url('../fonts/conthrax-sb.eot');
+    src: local('â˜º'), url('../fonts/conthrax-sb.woff') format('woff'), 
+    url('../fonts/conthrax-sb.ttf') format('truetype'), url('../fonts/conthrax-sb.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Conv_CoreSans';
+    src: url('../fonts/CoreSansE-35Light.eot');
+    src: local('â˜º'), url('../fonts/CoreSansE-35Light.woff') format('woff'), url('../fonts/CoreSansE-35Light.ttf') format('truetype'), url('../fonts/CoreSansE-35Light.svg') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Conv_CoreSans';
+    src: url('../fonts/CoreSansE-45Regular.eot');
+    src: local('â˜º'), url('../fonts/CoreSansE-45Regular.woff') format('woff'), url('../fonts/CoreSansE-45Regular.ttf') format('truetype'), url('../fonts/CoreSansE-45Regular.svg') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Conv_CoreSans';
+    src: url('../fonts/CoreSansE-55Medium.eot');
+    src: local('â˜º'), url('../fonts/CoreSansE-55Medium.woff') format('woff'), url('../fonts/CoreSansE-55Medium.ttf') format('truetype'), url('../fonts/CoreSansE-55Medium.svg') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Conv_CoreSans';
+    src: url('../fonts/CoreSansE-65Bold.eot');
+    src: local('â˜º'), url('../fonts/CoreSansE-65Bold.woff') format('woff'), url('../fonts/CoreSansE-65Bold.ttf') format('truetype'), url('../fonts/CoreSansE-65Bold.svg') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Conv_etna';
+    src: url('../fonts/etna-free-font.eot');
+    src: local('â˜º'), url('../fonts/etna-free-font.woff') format('woff'), url('../fonts/etna-free-font.ttf') format('truetype'), url('../fonts/etna-free-font.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

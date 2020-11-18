@@ -15,3 +15,13 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.title:before{
+  height: 73px;
+  width: 73px;
+  position: absolute;
+  left: 15px;
+    top: 40px;
+  background: url(../../pages/homepage/images/intrbg.svg) center center no-repeat;
+  content: ''
+}

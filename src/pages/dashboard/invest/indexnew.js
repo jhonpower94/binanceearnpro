@@ -2,6 +2,12 @@ import React, { useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { AppContext } from "../../../App";
 import { makeStyles, Container } from "@material-ui/core";
+import InvestNew from ".";
+import Invoice from "./invoice";
+import Investment from "./myinvestments";
+import AccountInfo from "../accountpage/accountinfo";
+import WithdrawBonus from "../withdraw/bonus";
+import Withdrawform from "../withdraw/withdraw";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -35,18 +41,24 @@ function Invest() {
   useEffect(() => {
     window.scrollTo(0, 0);
     setTabs([
-      { title: "Invest", tab: 0 },
-      { title: "investments", tab: 1 },
+      
+      { title: "Bonus", tab: 0 },
+      { title: "Withdraw", tab: 1 },
+      { title: "Profile", tab: 2 },
     ]);
   }, []);
 
   return (
     <React.Fragment>
+      
       <TabPanel value={currentab} index={0}>
-        invest
+        <WithdrawBonus />
       </TabPanel>
       <TabPanel value={currentab} index={1}>
-        investments
+        <Withdrawform />
+      </TabPanel>
+      <TabPanel value={currentab} index={2}>
+        <AccountInfo />
       </TabPanel>
     </React.Fragment>
   );

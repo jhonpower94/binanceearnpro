@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import clsx from "clsx";
+import PropTypes from "prop-types";
 import { AppContext } from "../../App";
 import { navigate } from "@reach/router";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import SelectLanguage from "../../components/lang_select";
+import Particles from "react-tsparticles";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import {
@@ -27,18 +29,47 @@ import {
   MenuItem,
   Collapse,
   List,
+  useScrollTrigger,
 } from "@material-ui/core";
 import { css } from "@emotion/core";
 import "./homepage.css";
 import BounceLoader from "react-spinners/BounceLoader";
 import { ExpandLessSharp, ExpandMoreSharp } from "@material-ui/icons";
 import { dataArray } from "../../service/tradeblocks";
+import { blue } from "@material-ui/core/colors";
+import Background from "../../pages/homepage/images/header-middle-bg.png";
+import Backgroundsecond from "../../pages/homepage/images/header-middle-bg1.png";
 
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
 `;
+
+function ElevationScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
+
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
+ElevationScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
 
 const useStyles = makeStyles((theme) => ({
   nav: {
@@ -54,10 +85,16 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   header: {
-    backgroundColor: theme.palette.primary.main,
+    background: `url(${Background}) center no-repeat, url(${Backgroundsecond}) center bottom no-repeat`,
+    height: "600px",
+  },
+  headerpage: {
+    background: theme.palette.primary.main,
   },
   intro: {
-    paddingTop: "80px",
+    paddingTop: "40px",
+    zIndex: 1,
+    position: "relative",
   },
   mgright: {
     marginLeft: theme.spacing(2),
@@ -246,7 +283,9 @@ function HomeLayout(props) {
     setCollapse({ ...collapse, [props]: !collps });
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(intro.homepage);
+  }, []);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -256,143 +295,149 @@ function HomeLayout(props) {
   return (
     <React.Fragment>
       <CssBaseline>
-        <AppBar color="secondary" position="fixed">
-          <Toolbar>
-            {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
-              <img
-                src={require("../../images/logodesktop.svg")}
-                alt="logo"
-                width="150px"
-              />
-            ) : (
-              <Box display="flex">
-                <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  edge="start"
-                  className={classes.menuButton}
-                  onClick={openMobileMenu}
-                >
-                  <MenuIcon />
-                </IconButton>
+        <ElevationScroll {...props}>
+          <AppBar color="primary">
+            <Toolbar>
+              {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
                 <img
                   src={require("../../images/logodesktop.svg")}
                   alt="logo"
-                  height="50px"
+                  width="150px"
                 />
-              </Box>
-            )}
-
-            {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
-              <div className={classes.mgright}>
-                {arrayDatas.map((link, index) => (
-                  <Link
-                    key={index}
-                    component="button"
-                    variant="body1"
-                    onClick={(e) => {
-                      link.submenus
-                        ? openSubmenu(e, link.submenulinks)
-                        : changePage(link.link);
-                    }}
+              ) : (
+                <Box display="flex">
+                  <IconButton
                     color="inherit"
-                    className={classes.link}
+                    aria-label="open drawer"
+                    edge="start"
+                    className={classes.menuButton}
+                    onClick={openMobileMenu}
                   >
-                    {link.name}
-                  </Link>
-                ))}
-              </div>
-            ) : null}
+                    <MenuIcon />
+                  </IconButton>
+                  <img
+                    src={require("../../images/logodesktop.svg")}
+                    alt="logo"
+                    height="50px"
+                  />
+                </Box>
+              )}
 
-            <StyledMenu // desktop Submenus
-              id="fade-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={open}
-              onClose={handleClose}
-              TransitionComponent={Fade}
-            >
-              {submenu.map((sub, index) => (
-                <Fade
-                  in={open}
-                  key={index}
-                  style={{ transitionDelay: index * 200 }}
-                >
-                  <MenuItem onClick={() => changePage(sub.link)}>
-                    <ListItemText primary={sub.title} />
-                  </MenuItem>
-                </Fade>
-              ))}
-            </StyledMenu>
-
-            <StyledMenu // mobile menu
-              id="fade-menu-mobile"
-              anchorEl={anchorElMobile}
-              keepMounted
-              open={openMobile}
-              onClose={handleClose}
-              TransitionComponent={Fade}
-            >
-              {arrayDatas.map((link, index) => (
-                <div key={index}>
-                  <Fade
-                    in={openMobile}
-                    style={{ transitionDelay: index * 100 }}
-                  >
-                    <MenuItem
-                      onClick={() => {
+              {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
+                <div className={classes.mgright}>
+                  {arrayDatas.map((link, index) => (
+                    <Link
+                      key={index}
+                      component="button"
+                      variant="body1"
+                      onClick={(e) => {
                         link.submenus
-                          ? openCollapse(link.name, link.collapse)
+                          ? openSubmenu(e, link.submenulinks)
                           : changePage(link.link);
                       }}
+                      color="inherit"
+                      className={classes.link}
                     >
-                      <ListItemText primary={link.name} />
-                      {link.submenus ? (
-                        <span>
-                          {link.collapse ? (
-                            <ExpandLessSharp />
-                          ) : (
-                            <ExpandMoreSharp />
-                          )}
-                        </span>
-                      ) : null}
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+              ) : null}
+
+              <StyledMenu // desktop Submenus
+                id="fade-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={open}
+                onClose={handleClose}
+                TransitionComponent={Fade}
+              >
+                {submenu.map((sub, index) => (
+                  <Fade
+                    in={open}
+                    key={index}
+                    style={{ transitionDelay: index * 200 }}
+                  >
+                    <MenuItem onClick={() => changePage(sub.link)}>
+                      <ListItemText primary={sub.title} />
                     </MenuItem>
                   </Fade>
+                ))}
+              </StyledMenu>
 
-                  {link.submenus ? (
-                    <Collapse in={link.collapse} timeout="auto" unmountOnExit>
-                      {link.submenulinks.map((sub, index) => (
-                        <ListItem
-                          key={index}
-                          className={classes.nested}
-                          onClick={() => {
-                            changePage(sub.link);
-                          }}
-                        >
-                          <ListItemText primary={sub.title} />
-                        </ListItem>
-                      ))}
-                    </Collapse>
-                  ) : null}
-                </div>
-              ))}
-            </StyledMenu>
+              <StyledMenu // mobile menu
+                id="fade-menu-mobile"
+                anchorEl={anchorElMobile}
+                keepMounted
+                open={openMobile}
+                onClose={handleClose}
+                TransitionComponent={Fade}
+              >
+                {arrayDatas.map((link, index) => (
+                  <div key={index}>
+                    <Fade
+                      in={openMobile}
+                      style={{ transitionDelay: index * 100 }}
+                    >
+                      <MenuItem
+                        onClick={() => {
+                          link.submenus
+                            ? openCollapse(link.name, link.collapse)
+                            : changePage(link.link);
+                        }}
+                      >
+                        <ListItemText primary={link.name} />
+                        {link.submenus ? (
+                          <span>
+                            {link.collapse ? (
+                              <ExpandLessSharp />
+                            ) : (
+                              <ExpandMoreSharp />
+                            )}
+                          </span>
+                        ) : null}
+                      </MenuItem>
+                    </Fade>
 
-            <span className={classes.space} />
+                    {link.submenus ? (
+                      <Collapse in={link.collapse} timeout="auto" unmountOnExit>
+                        {link.submenulinks.map((sub, index) => (
+                          <ListItem
+                            key={index}
+                            className={classes.nested}
+                            onClick={() => {
+                              changePage(sub.link);
+                            }}
+                          >
+                            <ListItemText primary={sub.title} />
+                          </ListItem>
+                        ))}
+                      </Collapse>
+                    ) : null}
+                  </div>
+                ))}
+              </StyledMenu>
 
-            <SelectLanguage />
+              <span className={classes.space} />
 
-            <Button variant="outlined" color="inherit">
-              <Typography> Login</Typography>
-            </Button>
-          </Toolbar>
-        </AppBar>
+              <SelectLanguage />
+
+              <Button variant="outlined" color="inherit" size="large">
+                <Typography> Login</Typography>
+              </Button>
+            </Toolbar>
+          </AppBar>
+        </ElevationScroll>
         <div className={classes.header}>
           <div className={classes.toolbar} />
-          {intro.layout}
+
+          <div>{intro.layout}</div>
         </div>
 
-        {props.children}
+        <div style={{ position: "relative", background: "#303030" }}>
+          {props.children}
+        </div>
+
         <Container maxWidth="md" className={classes.margintop}>
           <Grid container spacing={3}>
             {footerLink.map((link, index) => (

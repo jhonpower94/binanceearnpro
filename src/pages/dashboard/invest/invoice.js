@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
+import PropTypes from "prop-types";
 import { AppContext } from "../../../App";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -28,11 +29,14 @@ import {
   RadioGroup,
   FormControlLabel,
   FormLabel,
+  CardActions,
 } from "@material-ui/core";
 import { client } from "../../../config/services";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { navigate } from "@reach/router";
 import { ajax } from "rxjs/ajax";
+import { Rating } from "@material-ui/lab";
+import NumberFormat from "react-number-format";
 var formatLocaleCurrency = require("country-currency-map").formatLocaleCurrency;
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +48,34 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.getContrastText("#ef6c00"),
   },
 }));
+
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+      isNumericString
+      prefix="$"
+    />
+  );
+}
+
+NumberFormatCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 function Invoice() {
   const classes = useStyles();
@@ -69,10 +101,6 @@ function Invoice() {
   }, []);
 
   const invoiceData = [
-    {
-      name: "Trade Plan",
-      value: paymentInfo.block.name,
-    },
     {
       name: "Deposit Amount",
       value: formatLocaleCurrency(paymentInfo.amount, "USD", {
@@ -171,6 +199,36 @@ function Invoice() {
       });
       dispatch(loading$());
     }
+
+     <Box display="flex" justifyContent="center">
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Choose payment method</FormLabel>
+          <RadioGroup
+            row
+            aria-label="position"
+            name="position"
+            defaultValue="top"
+          >
+            <FormControlLabel
+              value="crypto"
+              control={<Radio color="primary" />}
+              label="Bitcoin"
+              labelPlacement="start"
+              checked={selectedValue === "crypto"}
+              onChange={handleChange}
+            />
+            <FormControlLabel
+              value="wallet"
+              control={<Radio color="primary" />}
+              label="E-Wallet"
+              labelPlacement="start"
+              checked={selectedValue === "wallet"}
+              onChange={handleChange}
+            />
+          </RadioGroup>
+        </FormControl>
+      </Box>
+      
     */
     dispatch(loading$());
     firestore
@@ -179,6 +237,7 @@ function Invoice() {
         type: "investment",
         pending: true,
         block_name: paymentInfo.block.name,
+        block_title: paymentInfo.block.title,
         rate: parseInt(paymentInfo.block.rate),
         deposit_amount: parseInt(paymentInfo.amount),
         amount: parseInt(paymentInfo.amount),
@@ -246,7 +305,8 @@ function Invoice() {
       setAmountErr({
         ...amounterr,
         status: true,
-        text: "Deposit amount must be equal or higher than the minimum stake.",
+        text:
+          "Investment amount must be equal or higher than the minimum stake.",
       });
     } else {
       removePaymentStorage().then(() => {
@@ -268,128 +328,84 @@ function Invoice() {
 
   return (
     <Container maxWidth="sm">
-      <Box display="flex" justifyContent="center">
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Choose payment method</FormLabel>
-          <RadioGroup
-            row
-            aria-label="position"
-            name="position"
-            defaultValue="top"
-          >
-            <FormControlLabel
-              value="crypto"
-              control={<Radio color="primary" />}
-              label="Bitcoin"
-              labelPlacement="start"
-              checked={selectedValue === "crypto"}
-              onChange={handleChange}
+      <CardHeader
+        title={paymentInfo.block.name}
+        subheader={<Rating name="read-only" value={4} readOnly />}
+        titleTypographyProps={{ align: "center" }}
+        subheaderTypographyProps={{ align: "center" }}
+        className={classes.headerbgss}
+      />
+      <List>
+        {invoiceData.map((data, index) => (
+          <ListItem key={index}>
+            <ListItemText primary={data.name} />
+            <Typography variant="body1">{data.value}</Typography>
+          </ListItem>
+        ))}
+        <form
+          className={classes.margintop}
+          onSubmit={
+            selectedValue === "wallet" ? submitpaymentWallet : submitPayment
+          }
+        >
+          <ListItem>
+            <TextField
+              size="small"
+              fullWidth
+              id="outlined-number"
+              label="Amount"
+              name="amount"
+              defaultValue={500}
+              variant="outlined"
+              onChange={(e) => {
+                setPaymentInfo({
+                  ...paymentInfo,
+                  amount: e.target.value,
+                });
+              }}
+              InputProps={{
+                inputComponent: NumberFormatCustom,
+              }}
+              helperText={
+                amounterr.status ? amounterr.text : "Enter investment amount"
+              }
+              error={amounterr.status ? true : false}
             />
-            <FormControlLabel
-              value="wallet"
-              control={<Radio color="primary" />}
-              label="E-Wallet"
-              labelPlacement="start"
-              checked={selectedValue === "wallet"}
-              onChange={handleChange}
-            />
-          </RadioGroup>
-        </FormControl>
-      </Box>
-      <Card variant="outlined">
-        <CardHeader
-          title={paymentInfo.block.name}
-          className={classes.headerbg}
-          action="payment"
-        />
-        <List>
-          {invoiceData.map((data, index) => (
-            <ListItem key={index}>
-              <ListItemText primary={data.name} />
-              <Typography variant="body1">{data.value}</Typography>
-            </ListItem>
-          ))}
-          <form
-            className={classes.margintop}
-            onSubmit={
-              selectedValue === "wallet" ? submitpaymentWallet : submitPayment
-            }
-          >
+          </ListItem>
+          {selectedValue === "wallet" ? null : (
             <ListItem>
-              <ListItemText primary="Change amount" />
-              <FormControl
-                className={classes.margin}
-                variant="outlined"
+              <ListItemText primary="Change currency" />
+              <TextField
+                id="outlined-select-currency"
+                select
                 size="small"
-                required
+                label="Currency"
+                value={paymentInfo.cryptoType}
+                onChange={(e) =>
+                  setPaymentInfo({
+                    ...paymentInfo,
+                    cryptoType: e.target.value,
+                  })
+                }
+                helperText="Please select your currency"
+                variant="outlined"
               >
-                <InputLabel htmlFor="outlined-adornment-amount">
-                  Amount
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-amount"
-                  value={paymentInfo.amount}
-                  onChange={(e) => {
-                    setPaymentInfo({
-                      ...paymentInfo,
-                      amount: e.target.value,
-                    });
-                  }}
-                  startAdornment={
-                    <InputAdornment position="start">USD</InputAdornment>
-                  }
-                  labelWidth={60}
-                />
-              </FormControl>
+                {currencies.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
             </ListItem>
-            {selectedValue === "wallet" ? null : (
-              <ListItem>
-                <ListItemText primary="Change currency" />
-                <TextField
-                  id="outlined-select-currency"
-                  select
-                  size="small"
-                  label="Currency"
-                  value={paymentInfo.cryptoType}
-                  onChange={(e) =>
-                    setPaymentInfo({
-                      ...paymentInfo,
-                      cryptoType: e.target.value,
-                    })
-                  }
-                  helperText="Please select your currency"
-                  variant="outlined"
-                >
-                  {currencies.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </ListItem>
-            )}
+          )}
 
-            {amounterr.status ? (
-              <Box display="flex" justifyContent="center" m={2}>
-                <Typography variant="caption" color="error">
-                  {amounterr.text}
-                </Typography>
-              </Box>
-            ) : null}
-
-            <ListItem>
-              <Button
-                type="submit"
-                variant="contained"
-                fullWidth
-                color="primary"
-              >
-                Proceed to payment
-              </Button>
-            </ListItem>
-          </form>
-        </List>
-      </Card>
+          <CardActions>
+            <Button type="submit" variant="contained" fullWidth color="primary">
+              Proceed to payment
+            </Button>
+          </CardActions>
+        </form>
+      </List>
     </Container>
   );
 }

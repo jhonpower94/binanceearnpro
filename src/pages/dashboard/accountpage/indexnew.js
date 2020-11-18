@@ -6,6 +6,12 @@ import { makeStyles, Box, Typography } from "@material-ui/core";
 import { AppContext } from "../../../App";
 import Account from "./account";
 import AccountInfo from "./accountinfo";
+import Wallet from "../wallet";
+import Withdrawform from "../withdraw/withdraw";
+import InvestNew from "../invest";
+import Invoice from "../invest/invoice";
+import Invest from "../invest/indexnew";
+import Investment from "../invest/myinvestments";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -38,7 +44,9 @@ function DashboardPage(props) {
   useEffect(() => {
     setTabs([
       { title: "Account", tab: 0 },
-      { title: "User info", tab: 1 },
+      { title: "Invest", tab: 1 },
+      { title: "Investments", tab: 2 },
+      { title: "Deposit", tab: 3 },
     ]);
   }, []);
 
@@ -48,7 +56,16 @@ function DashboardPage(props) {
         <Account />
       </TabPanel>
       <TabPanel value={currentab} index={1}>
-        <AccountInfo />
+        <InvestNew />
+      </TabPanel>
+      <TabPanel value={currentab} index={2}>
+        <Investment />
+      </TabPanel>
+      <TabPanel value={currentab} index={3}>
+        <Wallet />
+      </TabPanel>
+      <TabPanel value={currentab} index={4}>
+        <Invoice />
       </TabPanel>
     </React.Fragment>
   );

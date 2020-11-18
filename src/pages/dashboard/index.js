@@ -589,7 +589,7 @@ function DashboardLayout(props) {
                     countryCode={values.countrycodeIos2}
                     svg
                     style={{
-                      width: "em",
+                      width: "2em",
                       height: "2em",
                     }}
                     title={userData.data.country}

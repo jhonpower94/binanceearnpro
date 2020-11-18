@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { makeStyles, Box, Typography } from "@material-ui/core";
 
 export const headings = {
-  services: {
-    title: "service Title here",
-    subtitle: "service subtitle here",
-    image: "services.svg",
+  about: {
+    title: "ABOUT US",
+    subtitle: "ABOUT THE COMPANY",
   },
   payment: {
     title: "Payment Title here",
@@ -37,16 +36,11 @@ const useStyles = makeStyles((theme) => ({
 
 function SectionHeader(props) {
   const classes = useStyles();
-  const { title, subtitle, image } = props;
+  const { title, subtitle } = props;
   useEffect(() => {}, []);
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" m={4}>
-      <img
-        src={require(`../images/${image}`)}
-        className={classes.image}
-        alt="image"
-      />
       <Typography variant="h5">{title}</Typography>
       <Typography>{subtitle}</Typography>
     </Box>

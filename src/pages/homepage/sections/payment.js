@@ -12,16 +12,14 @@ import {
   Box,
   Card,
   makeStyles,
+  Container,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import { VerifiedUserSharp } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
-  image: {
-    height: "15em",
-  },
-  icon: {
-    fontSize: "5em",
+  mtop: {
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -45,48 +43,22 @@ function Payment() {
   useEffect(() => {}, []);
 
   return (
-    <React.Fragment>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <Box display="flex" flexDirection="column" alignItems="center" m={4}>
-            <img
-              src={require("../images/cryptos.svg")}
-              className={classes.image}
-              alt="image"
-            />
-            <Typography variant="h5">Title goes here</Typography>
-            <Typography>SubTitle goes here</Typography>
-          </Box>
-        </Grid>
-
-        <Grid item xs={12} sm={6}>
-          <Card variant="outlined">
-            <Box
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              m={4}
-            >
-              <VerifiedUserSharp htmlColor="#098b1e" className={classes.icon} />
-              <Typography variant="h6">Verified dealers</Typography>
+    <Container className={classes.mtop}>
+      <Grid container spacing={4}>
+        {[
+          { title: "bitcoin", image: require("../images/icons/i-btn.png") },
+          { title: "Etheriem", image: require("../images/icons/i-pmoney.png") },
+          { title: "Comodo", image: require("../images/icons/i-ssl.png") },
+          { title: "DDos", image: require("../images/icons/i-ddos.png") },
+        ].map((val, index) => (
+          <Grid item key={index} xs={6} sm={3}>
+            <Box display="flex" justifyContent="center">
+              <img src={val.image} height="30" />
             </Box>
-            <List>
-              {dealers.map((dealer, index) => (
-                <ListItem key={index}>
-                  <ListItemIcon>
-                    <Avatar>&#128176;</Avatar>
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={<Typography>{dealer.name}</Typography>}
-                  />
-                  <Rating value={dealer.value} readOnly />
-                </ListItem>
-              ))}
-            </List>
-          </Card>
-        </Grid>
+          </Grid>
+        ))}
       </Grid>
-    </React.Fragment>
+    </Container>
   );
 }
 
