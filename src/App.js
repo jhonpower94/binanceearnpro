@@ -36,7 +36,7 @@ import SignInAdmin from "./pages/admin/login";
 import DashboardAdmin from "./pages/admin/dashboard";
 import InvestBlock from "./pages/homepage/sections/investblock";
 import Home from "./pages/homepage/sections/home";
-import Signal from "./pages/homepage/sections/signal";
+import Faqs from "./pages/homepage/sections/faq";
 import About from "./pages/homepage/sections/aboutus";
 import Locations from "./pages/homepage/sections/locations";
 import BlocDatas from "./pages/homepage/sections/blockdata";
@@ -161,7 +161,7 @@ function App() {
 <HomeLayout path="/">
               <Home path="/" />
               <InvestBlock path="invest" />
-              <Signal path="signals" />
+              <Faqs path="Faqss" />
               <About path="about" />
               <Locations path="locations" />
               <BlocDatas path="tradedatas" />
@@ -205,7 +205,7 @@ function App() {
             <HomeLayout path="/">
               <Home path="/" />
               <InvestBlock path="invest" />
-              <Signal path="signals" />
+              <Faqs path="faq" />
               <About path="about" />
               <Locations path="locations" />
               <BlocDatas path="tradedatas" />

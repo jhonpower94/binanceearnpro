@@ -60,27 +60,42 @@ function InvestBlock(props) {
               >
                 <CardHeader
                   title={
-                    <Typography variant="h4">{`${trade.rate}%`}</Typography>
+                    <Typography variant="h3">{`${trade.rate}%`}</Typography>
                   }
-                  subheader={`${trade.hrs} hours`}
+                  subheader={
+                    <Typography variant="body1">{`${trade.hrs} hours`}</Typography>
+                  }
                 />
                 <List dense={true}>
                   <Divider variant="inset" component="li" />
                   <ListItem>
-                    <ListItemText primary="Name" secondary={trade.name} />
-                  </ListItem>
-                  <Divider variant="inset" component="li" />
-                  <ListItem>
                     <ListItemText
-                      primary="Minimun stake"
-                      secondary={`$${trade.lot}`}
+                      primary={<Typography variant="h6">Duration</Typography>}
+                      secondary={
+                        <Typography variant="body1">{trade.name}</Typography>
+                      }
                     />
                   </ListItem>
                   <Divider variant="inset" component="li" />
                   <ListItem>
                     <ListItemText
-                      primary="Maximun"
-                      secondary={`$${trade.max}`}
+                      primary={
+                        <Typography variant="h6">Minimun stake</Typography>
+                      }
+                      secondary={
+                        <Typography variant="body1">{`$${trade.lot}`}</Typography>
+                      }
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                  <ListItem>
+                    <ListItemText
+                      primary={
+                        <Typography variant="h6">Maximun stake</Typography>
+                      }
+                      secondary={
+                        <Typography variant="body1">{`$${trade.max}`}</Typography>
+                      }
                     />
                   </ListItem>
                 </List>

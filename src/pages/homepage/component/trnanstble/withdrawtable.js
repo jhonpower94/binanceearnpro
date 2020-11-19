@@ -125,7 +125,7 @@ export default function WithdrawTable() {
             <TableCell align="left" colSpan={2}>
               NAME
             </TableCell>
-            <TableCell align="right">WITHDRAWAL AMOUNT</TableCell>
+            <TableCell align="right">AMOUNT</TableCell>
           </TableRow>
         </TableHead>
 

@@ -154,7 +154,7 @@ const footerLink = [
       { name: "Contact us" },
       { name: "Loctions" },
       { name: "Trusted dealers" },
-      { name: "Faqs" },
+      { name: "Faq" },
     ],
   },
 ];
@@ -222,8 +222,8 @@ function HomeLayout(props) {
       link: "contact",
     },
     {
-      name: "Faqs",
-      link: "faqs",
+      name: "Faq",
+      link: "faq",
     },
     /*  {
       name: "Security",
