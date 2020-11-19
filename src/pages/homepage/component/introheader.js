@@ -181,7 +181,7 @@ function IntroHeader() {
                   color="secondary"
                   size="large"
                   onClick={() =>
-                    navigate("https://admin-fa3ba.firebaseapp.com")
+                    navigate("https://hotblock-48cbf.firebaseapp.com")
                   }
                 >
                   GET STARTED
