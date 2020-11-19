@@ -403,7 +403,7 @@ function HomeLayout(props) {
                 color="inherit"
                 size="large"
                 onClick={() =>
-                  navigate("https://https://admin-fa3ba.firebaseapp.com")
+                  navigate("https://admin-fa3ba.firebaseapp.com")
                 }
               >
                 <Typography> Login</Typography>

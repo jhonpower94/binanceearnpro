@@ -122,7 +122,9 @@ export default function WithdrawTable() {
       <Table aria-label="sticky table">
         <TableHead>
           <TableRow>
-            <TableCell align="left">NAME</TableCell>
+            <TableCell align="left" colSpan={2}>
+              NAME
+            </TableCell>
             <TableCell align="right">WITHDRAWAL AMOUNT</TableCell>
           </TableRow>
         </TableHead>
@@ -130,7 +132,7 @@ export default function WithdrawTable() {
         <TableBody>
           {transactions.map((trans, index) => (
             <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-              <TableCell align="left">
+              <TableCell align="left" colSpan={2}>
                 <Box display="flex" flexDirection="column">
                   <Typography variant="body1">{`${trans.firstname} ${trans.lastname}`}</Typography>
                 </Box>

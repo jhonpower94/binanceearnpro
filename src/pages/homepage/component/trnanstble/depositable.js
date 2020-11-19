@@ -103,16 +103,16 @@ export default function DepositTable() {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell align="left">NAME</TableCell>
+              <TableCell align="left" colSpan={2}>NAME</TableCell>
 
-              <TableCell align="right">DEPOSIT AMOUNT</TableCell>
+              <TableCell align="right"> AMOUNT</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
             {deposits.map((dep, index) => (
               <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                <TableCell align="left">
+                <TableCell align="left" colSpan={2}>
                   <Box display="flex" flexDirection="column">
                     <Typography variant="body1">{`${dep.firstname} ${dep.lastname}`}</Typography>
                   </Box>
