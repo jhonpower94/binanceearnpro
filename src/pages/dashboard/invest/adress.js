@@ -73,7 +73,7 @@ function BtcAddressInput(props) {
                 You have successfully placed a withdrawal request of ${amountnn} to your BTC wallet ${address}.<br/><br/>
                 Please exercise patience while we process your transaction<br/><br/>
                 Thanks. `,
-                to: `${userInfos.email}, support@coinspringinvest.net`,
+                to: `${userInfos.email}, support@coininvest.net`,
                 subject: "Bonus withdrawal",
               },
             }).subscribe(() => {
@@ -127,7 +127,7 @@ function BtcAddressInput(props) {
               Please exercise patience while we process your transaction<br/><br/>
               Thanks. 
               `,
-            to: `${userInfos.email}, support@coinspringinvest.net`,
+            to: `${userInfos.email}, support@coininvest.net`,
             subject: "Withdrawal",
           },
         }).subscribe(() => console.log("user message sent"));

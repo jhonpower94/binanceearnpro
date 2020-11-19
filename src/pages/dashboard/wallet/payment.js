@@ -248,7 +248,7 @@ function Wallet() {
         <CardContent>
           <Typography variant="body2" align="center">
             once payment is done send notification to live support or email
-            support @ support@coinspringinvest.net to notify us of successful
+            support @ support@coininvest.net to notify us of successful
             deposit
           </Typography>
         </CardContent>

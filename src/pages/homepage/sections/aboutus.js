@@ -54,15 +54,15 @@ function About() {
           />
           <CardContent>
             <Typography align="left" variant="subtitle2">
-              Coinspringinvest.net Mining Limited is ready to propose profitable
+              coininvest.net investment Limited is ready to propose profitable
               cooperation for all comers. We present a high-tech and modern
               company which is recognized industry leader in the field of
               computer technology, software and innovations. Our technical
               experts are involved in developing new methods and effective
-              algorithms of Bitcoin mining. Over last few years Coinspringinvest.net
-              Mining Limited has managed to build a few large mining farms in
+              algorithms of Bitcoin investment. Over last few years coininvest.net
+              investment Limited has managed to build a few large investment farms in
               the United Kingdom and Scotland.We have equipped them with the
-              most powerful and modern mining hardware that around the clock
+              most powerful and modern investment hardware that around the clock
               provides excellent results and serves as a source for earnings.
             </Typography>
           </CardContent>

@@ -98,14 +98,14 @@ export default function DepositTable() {
   }, []);
 
   return (
-    <Paper className={classes.root}>
+    
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell align="left">Name</TableCell>
+              <TableCell align="left">NAME</TableCell>
 
-              <TableCell align="right">Deposit Amount</TableCell>
+              <TableCell align="right">DEPOSIT AMOUNT</TableCell>
             </TableRow>
           </TableHead>
 
@@ -129,6 +129,6 @@ export default function DepositTable() {
           </TableBody>
         </Table>
       </TableContainer>
-    </Paper>
+    
   );
 }

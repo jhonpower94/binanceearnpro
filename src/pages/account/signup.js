@@ -39,7 +39,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://coinspringinvest.net/">
+      <Link color="inherit" href="https://coininvest.net/">
         coinspringinvest
       </Link>{" "}
     </Typography>

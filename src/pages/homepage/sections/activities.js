@@ -13,11 +13,13 @@ import {
   makeStyles,
   Divider,
   CardContent,
+  ListItemAvatar,
 } from "@material-ui/core";
 import { ArrowUpwardSharp, VerifiedUserSharp } from "@material-ui/icons";
 import { css } from "@emotion/core";
 import PuffLoader from "react-spinners/PuffLoader";
 import WithdrawTable from "../component/trnanstble/withdrawtable";
+import DepositTable from "../component/trnanstble/depositable";
 
 const override = css`
   display: block;
@@ -27,60 +29,19 @@ const override = css`
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
-    background: theme.palette.secondary.main,
+    width: theme.spacing(3),
+    height: theme.spacing(3),
   },
 }));
 
 const TransactionAray = [
   {
     name: "DEPOSITS",
-    datas: [
-      {
-        name: "jhon Snow",
-        amount: 50000,
-      },
-      {
-        name: "jhon Snow",
-        amount: 50000,
-      },
-      {
-        name: "jhon Snow",
-        amount: 50000,
-      },
-      {
-        name: "jhon Snow",
-        amount: 50000,
-      },
-      {
-        name: "jhon Snow",
-        amount: 50000,
-      },
-    ],
+    datas: <DepositTable />,
   },
   {
     name: "WITHDRAWALS",
-    datas: [
-      {
-        name: "jhon Snow",
-        amount: 50000,
-      },
-      {
-        name: "jhon Snow",
-        amount: 50000,
-      },
-      {
-        name: "jhon Snow",
-        amount: 50000,
-      },
-      {
-        name: "jhon Snow",
-        amount: 50000,
-      },
-      {
-        name: "jhon Snow",
-        amount: 50000,
-      },
-    ],
+    datas: <WithdrawTable />,
   },
 ];
 
@@ -104,12 +65,7 @@ function Activities() {
               }}
             />
 
-            {trans.datas.map((data, index) => (
-              <ListItem key={index}>
-                <ListItemText primary={data.name} />
-                <Typography variant="h5">{`$ ${data.amount}`}</Typography>
-              </ListItem>
-            ))}
+            {trans.datas}
           </Grid>
         ))}
       </Grid>
@@ -120,9 +76,12 @@ function Activities() {
 export default Activities;
 
 /* 
+{trans.datas.map((data, index) => (
+              <ListItem key={index}>
+                <ListItemText primary={data.name} />
+                <Typography variant="h5">{`$ ${data.amount}`}</Typography>
+              </ListItem>
+            ))}
 
-
-               <CardContent>
-                <WithdrawTable />
-              </CardContent>
+               
               */

@@ -17,6 +17,9 @@ import {
 import Particles from "react-tsparticles";
 import { blue } from "@material-ui/core/colors";
 import ArmChart from "./armchart";
+import Background from "../../../pages/homepage/images/header-middle-bg.png";
+import Backgroundsecond from "../../../pages/homepage/images/header-middle-bg1.png";
+import { navigate } from "@reach/router";
 
 const useStyles = makeStyles((theme) => ({
   mobileIntrolarge: {
@@ -40,6 +43,14 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1,
     position: "relative",
   },
+  header: {
+    background: `url(${Background}) center no-repeat, url(${Backgroundsecond}) center bottom no-repeat`,
+    height: "600px",
+  },
+  toolbar: theme.mixins.toolbar,
+  space: {
+    flexGrow: 1,
+  },
 }));
 function IntroHeader() {
   const classes = useStyles();
@@ -48,7 +59,8 @@ function IntroHeader() {
   useEffect(() => {}, []);
 
   return (
-    <React.Fragment >
+    <div className={classes.header}>
+      <div className={classes.toolbar} />
       <Particles
         // height="50px"
         // height={useMediaQuery(useTheme().breakpoints.up("sm")) ? "80%" : "85%"}
@@ -159,12 +171,19 @@ function IntroHeader() {
               </Box>
               <Box mt={3}>
                 <Typography variant="h6" align="center">
-                  We sincerely hope that coinspringinvest.net Investment Limited
-                  will become a partner in your life.
+                  We sincerely hope that coininvest.net Investment Limited will
+                  become a partner in your life.
                 </Typography>
               </Box>
               <Box display="flex" justifyContent="center" mt={2}>
-                <Button variant="contained" color="secondary" size="large">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  onClick={() =>
+                    navigate("https://https://admin-fa3ba.firebaseapp.com")
+                  }
+                >
                   GET STARTED
                 </Button>
               </Box>
@@ -176,7 +195,7 @@ function IntroHeader() {
           </Grid>
         </Container>
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 

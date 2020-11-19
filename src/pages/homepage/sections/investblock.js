@@ -23,7 +23,7 @@ import { VerifiedUserSharp, AddCircleSharp } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(5),
   },
 }));
 
@@ -35,7 +35,7 @@ function InvestBlock(props) {
 
   useEffect(() => {
     setIntro({
-      layout: <IntroHeaderPages title="Invest Title" />,
+      layout: <IntroHeaderPages title="INVESTMENTS" subheader="Our Plans" />,
     });
     window.scrollTo(0, 0);
     const newBlock = blocks.slice(0, 3);
@@ -43,8 +43,8 @@ function InvestBlock(props) {
   }, []);
 
   return (
-    <Container id="investblock" maxWidth="lg" className={classes.margintop}>
-      <Grid container spacing={10} justify="center">
+    <Container maxWidth="md" className={classes.margintop}>
+      <Grid container spacing={8} justify="center">
         {arrays.map((trade, index) => (
           <Fade
             in={true}
@@ -59,21 +59,29 @@ function InvestBlock(props) {
                 }}
               >
                 <CardHeader
-                  title={<Typography variant="h4">50%</Typography>}
-                  subheader="Daily"
+                  title={
+                    <Typography variant="h4">{`${trade.rate}%`}</Typography>
+                  }
+                  subheader={`${trade.hrs} hours`}
                 />
                 <List dense={true}>
                   <Divider variant="inset" component="li" />
                   <ListItem>
-                    <ListItemText primary="Minimun stake" secondary="$1000" />
+                    <ListItemText primary="Name" secondary={trade.name} />
                   </ListItem>
                   <Divider variant="inset" component="li" />
                   <ListItem>
-                    <ListItemText primary="Return rate" secondary="50%" />
+                    <ListItemText
+                      primary="Minimun stake"
+                      secondary={`$${trade.lot}`}
+                    />
                   </ListItem>
                   <Divider variant="inset" component="li" />
                   <ListItem>
-                    <ListItemText primary="Period" secondary="3 Days" />
+                    <ListItemText
+                      primary="Maximun"
+                      secondary={`$${trade.max}`}
+                    />
                   </ListItem>
                 </List>
               </Card>

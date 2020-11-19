@@ -137,7 +137,7 @@ function Home(props) {
         </div>
 
         <div
-          style={{ background: "#dfedf2", position: "relative", top: "-20px" }}
+          style={{ background: "#dfedf2", position: "relative", top: "-25px" }}
         >
           <Payment />
         </div>
@@ -170,18 +170,6 @@ function Home(props) {
             </Grid>
           </Container>
         </div>
-
-        <Container maxWidth="sm" className={classes.margintop}>
-          <Grid container spacing={3} justify="center">
-            {affiliates.map((afl, index) => (
-              <Grid key={index} item xs={6} sm={3}>
-                <Box display="flex" justifyContent="center">
-                  {afl.image}
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
       </CssBaseline>
     </React.Fragment>
   );

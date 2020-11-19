@@ -1,4 +1,5 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import PropTypes from "prop-types";
 import { AppContext } from "../../../App";
 import {
   makeStyles,
@@ -7,27 +8,69 @@ import {
   TextField,
   CardHeader,
   Typography,
+  MenuItem,
+  Avatar,
 } from "@material-ui/core";
 import Particles from "react-tsparticles";
 import Background from "../images/main2-bg.png";
 import { blue } from "@material-ui/core/colors";
 import { ShareSharp } from "@material-ui/icons";
+import NumberFormat from "react-number-format";
+import { blocks } from "../../../service/tradeblocks";
 
 const useStyles = makeStyles((theme) => ({}));
 
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+      isNumericString
+      prefix="$"
+    />
+  );
+}
+
+NumberFormatCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
 function Calculator() {
   const classes = useStyles();
+  const [value, setValue] = useState({
+    rate: 6,
+    amount: 0,
+    profit: 0,
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const updateProfit = (e) => {
+    const result = (value.rate / 100) * e.target.value;
+    setValue({ ...value, profit: result });
+  };
 
   return (
     <div>
       <Particles
         // height="50px"
         // height={useMediaQuery(useTheme().breakpoints.up("sm")) ? "80%" : "85%"}
-        style={{ position: "absolute" }}
+        style={{ position: "absolute", opacity: 0.8 }}
         id="tsparticles"
         options={{
           background: {
@@ -123,43 +166,101 @@ function Calculator() {
               subheaderTypographyProps={{ align: "center" }}
             />
           </Grid>
-          <Grid item xs={6} sm={6}>
-            one
+          <Grid item xs={4} sm={4}>
+            <TextField
+              id="outlined-select-currency"
+              select
+              size="small"
+              label="Currency"
+              value={value.rate}
+              onChange={(e) => {
+                setValue({ ...value, rate: e.target.value });
+              }}
+              helperText="Please select your currency"
+              variant="filled"
+            >
+              {blocks.map((option, index) => (
+                <MenuItem key={index} value={option.rate}>
+                  {`${option.name} - ${option.duration}hrs`}
+                </MenuItem>
+              ))}
+            </TextField>
           </Grid>
-          <Grid item xs={6} sm={6}>
-            two
+          <Grid item xs={4} sm={4}>
+            <TextField
+              size="small"
+              fullWidth
+              id="outlined-number"
+              label="Amount"
+              name="amount"
+              defaultValue={value.amount}
+              variant="filled"
+              onChange={(e) => updateProfit(e)}
+              InputProps={{
+                inputComponent: NumberFormatCustom,
+              }}
+              helperText="Enter investment amount"
+            />
           </Grid>
-          <Grid item xs={6} sm={6}>
-            three
+          <Grid item xs={4} sm={4}>
+            <TextField
+              size="small"
+              fullWidth
+              id="outlined-number"
+              label="Profit"
+              name="profit"
+              value={value.profit}
+              variant="filled"
+              onChange={(e) => {}}
+              InputProps={{
+                inputComponent: NumberFormatCustom,
+              }}
+              helperText="Estimated profit return"
+            />
           </Grid>
         </Grid>
       </Container>
       <Container>
-      <Grid container spacing={3} justify="center" style={{ position: "relative", zIndex: 1 }}>
-        <Grid item xs={6} sm={6}>
-          <CardHeader
-            avatar={<ShareSharp style={{ fontSize: "100" }} />}
-            title={<Typography variant="h5">AFFILATE PROGRAMM</Typography>}
-            subheader="Each your referral brings you reward from his deposit amount. Your own deposit is not required to attract investors and earn. Just register account and apply your referral link everywhere you can."
-          />
+        <Grid
+          container
+          spacing={3}
+          justify="center"
+          style={{ position: "relative", zIndex: 1 }}
+        >
+          <Grid item xs={6} sm={6}>
+            <CardHeader
+              avatar={
+                <Avatar
+                  variant="rounded"
+                  style={{
+                    background: "#ffffff",
+                    width: "100px",
+                    height: "100px",
+                  }}
+                >
+                  <ShareSharp style={{ fontSize: "70" }}  />
+                </Avatar>
+              }
+              title={<Typography variant="h5">AFFILATE PROGRAMM</Typography>}
+              subheader="Each your referral brings you reward from his deposit amount. Your own deposit is not required to attract investors and earn. Just register account and apply your referral link everywhere you can."
+            />
+          </Grid>
+          <Grid item xs={6} sm={6}>
+            <CardHeader
+              avatar={
+                <img src={require("../images/certificate1.png")} width="100" />
+              }
+              title={
+                <Typography variant="h5">
+                  coininvest.net investment LIMITED
+                </Typography>
+              }
+              subheader="In July 2016 coininvest.net investment Limited passed the incorporation process in the United Kingdom and is listed by Companies House."
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={6} sm={6}>
-          <CardHeader
-            avatar={
-              <img src={require("../images/certificate1.png")} width="100" />
-            }
-            title={
-              <Typography variant="h5">
-                Coinspringinvest.net MINING LIMITED
-              </Typography>
-            }
-            subheader="In July 2016 Coinspringinvest.net Mining Limited passed the incorporation process in the United Kingdom and is listed by Companies House."
-          />
-        </Grid>
-      </Grid>
-    
       </Container>
-     </div>
+    </div>
   );
 }
 

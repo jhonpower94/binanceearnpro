@@ -84,13 +84,7 @@ const useStyles = makeStyles((theme) => ({
   space: {
     flexGrow: 1,
   },
-  header: {
-    background: `url(${Background}) center no-repeat, url(${Backgroundsecond}) center bottom no-repeat`,
-    height: "600px",
-  },
-  headerpage: {
-    background: theme.palette.primary.main,
-  },
+
   intro: {
     paddingTop: "40px",
     zIndex: 1,
@@ -212,44 +206,26 @@ function HomeLayout(props) {
   const arrayDatas = [
     { name: "Home", link: "" },
     {
-      name: "Services",
-      submenus: true,
-      collapse: collapse.Services,
-      submenulinks: [
-        { title: "Invest", link: "invest" },
-        { title: "Forex Signals", link: "signals" },
-      ],
+      name: "Investment",
+      link: "invest",
     },
     {
-      name: "Info",
-      submenus: true,
-      collapse: collapse.Info,
-      submenulinks: [
-        { title: "About Us", link: "about" },
-        { title: "Trade Block Datas", link: "tradedatas" },
-        { title: "Office Locations", link: "locations" },
-      ],
+      name: "About Us",
+      link: "about",
     },
     {
-      name: "Downloads",
-      submenus: true,
-      collapse: collapse.Downloads,
-      submenulinks: [
-        { title: "Ios Web App", link: "downloads/ios" },
-        { title: "Android Web App", link: "downloads/android" },
-        { title: "Windows Web App", link: "downloads/windows" },
-      ],
+      name: "Get Started",
+      link: "guide",
     },
     {
-      name: "Help",
-      submenus: true,
-      collapse: collapse.Help,
-      submenulinks: [
-        { title: "Contact Us", link: "contact" },
-        { title: "Investment Guide", link: "guide" },
-      ],
+      name: "Support",
+      link: "contact",
     },
     {
+      name: "Faqs",
+      link: "faqs",
+    },
+    /*  {
       name: "Security",
       submenus: true,
       collapse: collapse.Security,
@@ -258,7 +234,7 @@ function HomeLayout(props) {
         { title: "Terms of Service", link: "security/terms" },
         { title: "EU Data Protection", link: "security/eu" },
       ],
-    },
+    }, */
   ];
 
   const changePage = (link) => {
@@ -300,7 +276,7 @@ function HomeLayout(props) {
             <Toolbar>
               {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
                 <img
-                  src={require("../../images/logodesktop.svg")}
+                  src={require("../../images/logonew.svg")}
                   alt="logo"
                   width="150px"
                 />
@@ -422,42 +398,44 @@ function HomeLayout(props) {
 
               <SelectLanguage />
 
-              <Button variant="outlined" color="inherit" size="large">
+              <Button
+                variant="outlined"
+                color="inherit"
+                size="large"
+                onClick={() =>
+                  navigate("https://https://admin-fa3ba.firebaseapp.com")
+                }
+              >
                 <Typography> Login</Typography>
               </Button>
             </Toolbar>
           </AppBar>
         </ElevationScroll>
-        <div className={classes.header}>
-          <div className={classes.toolbar} />
 
-          <div>{intro.layout}</div>
-        </div>
+        {intro.layout}
 
         <div style={{ position: "relative", background: "#303030" }}>
           {props.children}
         </div>
 
         <Container maxWidth="md" className={classes.margintop}>
-          <Grid container spacing={3}>
-            {footerLink.map((link, index) => (
-              <Grid key={index} item xs={12} sm={4}>
-                <Box display="flex" flexDirection="column" alignItems="center">
-                  <Typography variant="h5">{link.title}</Typography>
-                  {link.links.map((lnk, index) => (
-                    <Link
-                      key={index}
-                      component="button"
-                      variant="body1"
-                      onClick={() => {
-                        changePageFooter(lnk.name);
-                      }}
-                      color="inherit"
-                      className={classes.linkfooter}
-                    >
-                      {lnk.name}
-                    </Link>
-                  ))}
+          <Grid container spacing={3} justify="center">
+            {arrayDatas.map((link, index) => (
+              <Grid key={index} item xs={6} sm={2}>
+                <Box display="flex" justifyContent="center">
+                  <Link
+                    component="button"
+                    variant="body1"
+                    onClick={(e) => {
+                      link.submenus
+                        ? openSubmenu(e, link.submenulinks)
+                        : changePage(link.link);
+                    }}
+                    color="inherit"
+                    className={classes.link}
+                  >
+                    {link.name}
+                  </Link>
                 </Box>
               </Grid>
             ))}

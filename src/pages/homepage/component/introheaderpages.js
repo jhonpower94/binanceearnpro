@@ -18,28 +18,34 @@ const useStyles = makeStyles((theme) => ({
   introtext: {
     color: theme.palette.getContrastText("#ef6c00"),
   },
+  headerpage: {
+    background: theme.palette.primary.main,
+  },
+  toolbar: theme.mixins.toolbar,
+  space: {
+    flexGrow: 1,
+  },
 }));
 function IntroHeaderPages(props) {
   const classes = useStyles();
-  const { image, title } = props;
+  const { title, subheader } = props;
   const { darktheme, setDarktheme } = useContext(AppContext);
   useEffect(() => {}, []);
 
   return (
-    <Container id="intro">
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="flex-start"
-        mt={4}
-        className={classes.introtext}
-      >
-        <Typography variant="h4">{title}</Typography>
-        <Typography variant="h6">
-          Professional Forex trading signal and platform for traders
-        </Typography>
-      </Box>
-    </Container>
+    <div className={classes.headerpage}>
+      <div className={classes.toolbar} />
+      <Container maxWidth="md">
+        <Grid container spacing={3} justify="center">
+          <Grid item xs={12} sm={12}>
+            <Box mt={2}>
+              <Typography variant="h4">{title}</Typography>
+              <Typography variant="h6">{subheader}</Typography>
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
+    </div>
   );
 }
 

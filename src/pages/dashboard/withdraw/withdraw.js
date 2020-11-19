@@ -127,7 +127,7 @@ function Withdrawform() {
               Please exercise patience while we process your transaction<br/><br/>
               Thanks. 
               `,
-              to: `${userInfos.email}, support@coinspringinvest.net`,
+              to: `${userInfos.email}, support@coininvest.net`,
               subject: "Withdrawal",
             },
           }).subscribe(() => {

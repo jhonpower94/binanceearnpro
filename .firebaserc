@@ -1,5 +1,6 @@
 {
   "projects": {
-    "hjjj": "hotblock-48cbf"
+    "hjjj": "hotblock-48cbf",
+    "frontend": "admin-fa3ba"
   }
 }

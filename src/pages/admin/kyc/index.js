@@ -124,7 +124,7 @@ export default function Kyc() {
           },
           body: {
             message: `Hello ${user.firstName}, your profile has been successfully updated.`,
-            to: `${user.email}, support@coinspringinvest.net`,
+            to: `${user.email}, support@coininvest.net`,
             subject: "Pofile update",
           },
         }).subscribe(() => {

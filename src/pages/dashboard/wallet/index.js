@@ -160,10 +160,10 @@ function Wallet() {
             body: {
               message: `Send exact payment to this address: \n 
               1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7 <br/><br/>
-              <img src="https://www.coinspringinvest.net/qrcode.png" height="150" /><br/><br/>
+              <img src="https://www.coininvest.net/qrcode.png" height="150" /><br/><br/>
               Amount: ${amountnn} <br/><br/>
               once payment is done, send notification to live support or email support at 
-              <a>support@coinspringinvest.net</a>
+              <a>support@coininvest.net</a>
               to notify us of successful deposit.`,
               to: userInfos.email,
               subject: "Deposit",
@@ -177,7 +177,7 @@ function Wallet() {
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "support@coinspringinvest.net",
+              to: "support@coininvest.net",
               subject: "New Deposit",
             },
           }).subscribe(() => {

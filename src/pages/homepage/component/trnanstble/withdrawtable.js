@@ -118,37 +118,35 @@ export default function WithdrawTable() {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
-        <Table  aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="left">NAME</TableCell>
-              <TableCell align="right">AMOUNT</TableCell>
+    <TableContainer>
+      <Table aria-label="sticky table">
+        <TableHead>
+          <TableRow>
+            <TableCell align="left">NAME</TableCell>
+            <TableCell align="right">WITHDRAWAL AMOUNT</TableCell>
+          </TableRow>
+        </TableHead>
+
+        <TableBody>
+          {transactions.map((trans, index) => (
+            <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+              <TableCell align="left">
+                <Box display="flex" flexDirection="column">
+                  <Typography variant="body1">{`${trans.firstname} ${trans.lastname}`}</Typography>
+                </Box>
+              </TableCell>
+
+              <TableCell align="right">
+                <Typography variant="h6">
+                  {formatLocaleCurrency(trans.return_amount, "USD", {
+                    autoFixed: false,
+                  })}
+                </Typography>
+              </TableCell>
             </TableRow>
-          </TableHead>
-
-          <TableBody>
-            {transactions.map((trans, index) => (
-              <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                <TableCell align="left">
-                  <Box display="flex" flexDirection="column">
-                    <Typography variant="body1">{`${trans.firstname} ${trans.lastname}`}</Typography>
-                  </Box>
-                </TableCell>
-
-                <TableCell align="right">
-                  <Typography variant="h6">
-                    {formatLocaleCurrency(trans.return_amount, "USD", {
-                      autoFixed: false,
-                    })}
-                  </Typography>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
