@@ -474,7 +474,7 @@ function HomeLayout(props) {
             flexDirection="column"
             alignItems="center"
           >
-            <img src={require("../../images/mobile.svg")} width="30" />
+            <img src={require("../../images/logosmall.svg")} width="30" />
             <Typography variant="caption">
               &copy; Hotbloq, LLC, {new Date().toLocaleDateString()}.
             </Typography>
