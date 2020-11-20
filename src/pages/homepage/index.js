@@ -259,9 +259,7 @@ function HomeLayout(props) {
     setCollapse({ ...collapse, [props]: !collps });
   };
 
-  useEffect(() => {
-    console.log(intro.homepage);
-  }, []);
+  useEffect(() => {}, []);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -402,9 +400,15 @@ function HomeLayout(props) {
                 variant="outlined"
                 color="inherit"
                 size="large"
-                onClick={() =>
-                  navigate("https://hotblock-48cbf.firebaseapp.com")
-                }
+                onClick={() => {
+                  if (intro.refid) {
+                    navigate(
+                      `https://hotblock-48cbf.firebaseapp.com/account/register/${intro.refid}`
+                    );
+                  } else {
+                    navigate("https://hotblock-48cbf.firebaseapp.com");
+                  }
+                }}
               >
                 <Typography> Login</Typography>
               </Button>

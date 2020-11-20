@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 function IntroHeader() {
   const classes = useStyles();
 
-  const { darktheme, setDarktheme } = useContext(AppContext);
+  const { intro } = useContext(AppContext);
   useEffect(() => {}, []);
 
   return (
@@ -180,9 +180,15 @@ function IntroHeader() {
                   variant="contained"
                   color="secondary"
                   size="large"
-                  onClick={() =>
-                    navigate("https://hotblock-48cbf.firebaseapp.com")
-                  }
+                  onClick={() => {
+                    if (intro.refid) {
+                      navigate(
+                        `https://hotblock-48cbf.firebaseapp.com/account/register/${intro.refid}`
+                      );
+                    } else {
+                      navigate("https://hotblock-48cbf.firebaseapp.com");
+                    }
+                  }}
                 >
                   GET STARTED
                 </Button>

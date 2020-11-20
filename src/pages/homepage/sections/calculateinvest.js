@@ -206,7 +206,7 @@ function Calculator() {
             <TextField
               size="small"
               fullWidth
-              id="outlined-number"
+              id="outlined-number-profit"
               label="Profit"
               name="profit"
               value={value.profit}

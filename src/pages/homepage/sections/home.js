@@ -103,12 +103,12 @@ const NavLink = (props) => (
 
 function Home(props) {
   const classes = useStyles();
+  const { refid } = props;
+  const { setIntro } = useContext(AppContext);
 
   useEffect(() => {
-    setIntro({ layout: <IntroHeader /> });
+    setIntro({ layout: <IntroHeader />, refid: refid });
   }, []);
-
-  const { setIntro } = useContext(AppContext);
 
   return (
     <React.Fragment>

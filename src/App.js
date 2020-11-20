@@ -81,7 +81,7 @@ function App() {
     mobilecode: "234",
     persistence: false,
     currency_code: "",
-    homepage: true,
+    refid: "",
   });
   const [currentblock, setCurrentBlock] = useState({ data: {} });
   const [paymentInfo, setPaymentInfo] = useState({
@@ -204,6 +204,7 @@ function App() {
           <Router>
             <HomeLayout path="/">
               <Home path="/" />
+              <Home path="/:refid" />
               <InvestBlock path="invest" />
               <Faqs path="faq" />
               <About path="about" />
