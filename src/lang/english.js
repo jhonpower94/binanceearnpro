@@ -1,11 +1,11 @@
 export const english = {
   language: "English",
   Nav: {
-    Dashboard: "Dashboard",
+    Dashboard: "Account",
     withdraw: "Withdraw",
     account_info: "account info",
-    deposit: "Deposit Wallet",
-    invest: "Add investment",
+    wallet: "Wallet",
+    invest: "Invest",
     investments: "My investment",
     referral_bonus: "Referral and bonus",
   },

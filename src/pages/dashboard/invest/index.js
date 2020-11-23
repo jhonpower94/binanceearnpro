@@ -144,51 +144,6 @@ function InvestNew() {
       max: 30000,
       hrs: 34,
     },
-    {
-      name: "Plan 4",
-      title: currentStrings.Dashboard.invest.plan_title.d,
-      rate: 20,
-      duration: 48,
-      lot: 2000,
-      max: 1000000,
-      hrs: 48,
-    },
-    {
-      name: "Vip",
-      title: currentStrings.Dashboard.invest.plan_title.e,
-      rate: 25,
-      duration: 50,
-      lot: 4000,
-      max: 20000,
-      hrs: 50,
-    },
-    {
-      name: "Hourly Vip",
-      title: currentStrings.Dashboard.invest.plan_title.f,
-      rate: 10,
-      duration: 5,
-      lot: 5000,
-      max: 30000,
-      hrs: 5,
-    },
-    {
-      name: "Hourly Vip",
-      title: currentStrings.Dashboard.invest.plan_title.g,
-      rate: 12,
-      duration: 5,
-      lot: 7000,
-      max: 30000,
-      hrs: 5,
-    },
-    {
-      name: "Hourly Vip",
-      title: currentStrings.Dashboard.invest.plan_title.h,
-      rate: 12,
-      duration: 12,
-      lot: 12000,
-      max: 30000,
-      hrs: 12,
-    },
   ];
 
   const addTrade = (index, data) => {
@@ -266,7 +221,7 @@ function InvestNew() {
                         fullWidth
                         onClick={() => addTrade(index, trade)}
                       >
-                        { currentStrings.Dashboard.invest.action }
+                        {currentStrings.Dashboard.invest.action}
                       </Button>
                     </CardActions>
                   </List>

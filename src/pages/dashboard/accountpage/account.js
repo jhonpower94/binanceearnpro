@@ -7,9 +7,11 @@ import {
   ListItemText,
   Typography,
   Divider,
+  Button,
 } from "@material-ui/core";
 import ChartsPage from "./charts";
 import { useSelector } from "react-redux";
+import { navigate } from "@reach/router";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -33,13 +35,13 @@ function Account() {
       sm: 4,
       subtitle: "h4",
     },
-    /*    {
+    {
       title: currentStrings.Dashboard.account.earning,
       value: "$77",
       xs: 6,
       sm: 4,
       subtitle: "h5",
-    }, */
+    },
     {
       title: currentStrings.Dashboard.account.bonus_balance,
       value: "$79789",
@@ -78,15 +80,42 @@ function Account() {
     <Container maxWidth="lg">
       <Grid container spacing={4} justify="flex-start">
         {balanceAmount.map((vl, index) => (
-          <Grid key={index} item xs={vl.xs} sm={vl.sm}>
+          <Grid key={index} item xs={6} sm={3}>
             <ListItemText
-              primary={<Typography variant="subtitle2">{vl.title}</Typography>}
-              secondary={
-                <Typography variant={vl.subtitle}>{vl.value}</Typography>
-              }
+              primary={vl.title}
+              secondary={vl.value}
+              primaryTypographyProps={{ variant: "subtitle2" }}
+              secondaryTypographyProps={{
+                variant: vl.subtitle,
+              }}
             />
           </Grid>
         ))}
+
+        <Grid item xs={12} sm={12}>
+          <Grid container spacing={4} justify="center">
+            {[
+              { title: "Invest", icon: "", color: "primary", action: "invest" },
+              {
+                title: "Withdraw",
+                icon: "",
+                color: "secondary",
+                action: "withdraw",
+              },
+            ].map((btn, index) => (
+              <Grid item key={index} xs={6} sm={3}>
+                <Button
+                  variant="contained"
+                  color={btn.color}
+                  fullWidth
+                  onClick={() => navigate(`dashboard/${btn.action}`)}
+                >
+                  {btn.title}
+                </Button>
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
 
         <Grid item xs={12} sm={12}>
           <ChartsPage />

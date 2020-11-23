@@ -20,6 +20,7 @@ import Profile from "./pages/dashboard/profile";
 import CreditWallet from "./pages/dashboard/wallet/payment";
 import CreditSucess from "./pages/dashboard/wallet/creditsuccess";
 import Invest from "./pages/dashboard/invest/indexnew";
+import Withdrawals from "./pages/dashboard/withdraw";
 import Investment from "./pages/dashboard/invest/myinvestments";
 import Invoice from "./pages/dashboard/invest/invoice";
 import Support from "./pages/dashboard/support";
@@ -219,6 +220,7 @@ function App() {
             <DashboardLayout path="dashboard">
               <DashboardPage path="/" />
               <Invest path="invest" />
+              <Withdrawals path="withdraw" />
               <Investment path="investments" />
               <Invoice path="invoice" />
               <MyInvestments path="investments" />

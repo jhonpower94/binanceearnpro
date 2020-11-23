@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 
-import { makeStyles, Box, Typography } from "@material-ui/core";
+import { makeStyles, Box, Typography, Container } from "@material-ui/core";
 import { AppContext } from "../../../App";
 import Account from "./account";
 import AccountInfo from "./accountinfo";
@@ -12,6 +12,7 @@ import InvestNew from "../invest";
 import Invoice from "../invest/invoice";
 import Invest from "../invest/indexnew";
 import Investment from "../invest/myinvestments";
+import CustomizedTabs from "../tabs";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -33,9 +34,11 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-const useStyles = () => {
-  return makeStyles((theme) => ({}));
-};
+const useStyles = makeStyles((theme) => ({
+  margintop: {
+    marginTop: theme.spacing(4),
+  },
+}));
 
 function DashboardPage(props) {
   const classes = useStyles();
@@ -44,31 +47,45 @@ function DashboardPage(props) {
   useEffect(() => {
     setTabs([
       { title: "Account", tab: 0 },
-      { title: "Invest", tab: 1 },
-      { title: "Investments", tab: 2 },
-      { title: "Deposit", tab: 3 },
+      { title: "Account Info", tab: 1 },
     ]);
   }, []);
 
   return (
     <React.Fragment>
-      <TabPanel value={currentab} index={0}>
-        <Account />
-      </TabPanel>
-      <TabPanel value={currentab} index={1}>
-        <InvestNew />
-      </TabPanel>
-      <TabPanel value={currentab} index={2}>
-        <Investment />
-      </TabPanel>
-      <TabPanel value={currentab} index={3}>
-        <Wallet />
-      </TabPanel>
-      <TabPanel value={currentab} index={4}>
-        <Invoice />
-      </TabPanel>
+      <CustomizedTabs />
+
+      <Container className={classes.margintop}>
+        <TabPanel value={currentab} index={0}>
+          <Account />
+        </TabPanel>
+        <TabPanel value={currentab} index={1}>
+          <AccountInfo />
+        </TabPanel>
+      </Container>
     </React.Fragment>
   );
 }
 
 export default DashboardPage;
+
+/*
+ <TabPanel value={currentab} index={2}>
+          <Investment />
+        </TabPanel>
+        <TabPanel value={currentab} index={3}>
+          <Wallet />
+        </TabPanel>
+        <TabPanel value={currentab} index={4}>
+          <Invoice />
+        </TabPanel>
+        <TabPanel value={currentab} index={5}>
+        <WithdrawBonus />
+      </TabPanel>
+      <TabPanel value={currentab} index={6}>
+        <Withdrawform />
+      </TabPanel>
+      <TabPanel value={currentab} index={7}>
+        <AccountInfo />
+      </TabPanel>
+      */

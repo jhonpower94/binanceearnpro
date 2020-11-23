@@ -28,9 +28,7 @@ import {
 } from "@material-ui/core";
 import { red, blue } from "@material-ui/core/colors";
 import { navigate } from "@reach/router";
-import SwitchBase from "@material-ui/core/internal/SwitchBase";
-import Account from "../dashboard/accountpage/account";
-import AccountInfo from "./accountpage/accountinfo";
+
 import { AppContext } from "../../App";
 import SelectLanguage from "../../components/lang_select";
 import DasboardMenu from "./menu";
@@ -97,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
     color: blue[800],
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 0,
   },
 
   hide: {
@@ -190,7 +188,7 @@ const StyledTabs = withStyles((theme) => ({
 }))((props) => (
   <Tabs
     {...props}
-    centered={useMediaQuery(useTheme().breakpoints.up("sm")) ? false : true}
+    // centered={useMediaQuery(useTheme().breakpoints.up("sm")) ? false : true}
     TabIndicatorProps={{ children: <span /> }}
   />
 ));
@@ -230,8 +228,8 @@ export default function DashboardLayout(props) {
   };
 
   const changeNav = (nav, index) => {
-    setValue(nav.tabindex);
-    setCurrentab(index);
+    
+    setCurrentab(0);
     navigate(`/${nav.link}`);
   };
 
@@ -303,17 +301,17 @@ export default function DashboardLayout(props) {
             },
             {
               title: currentStrings.Nav.invest,
-              link: "dashboard",
+              link: "dashboard/invest",
               tabindex: 1,
             },
             {
               title: currentStrings.Nav.withdraw,
-              link: "dashboard",
+              link: "dashboard/withdraw",
               tabindex: 2,
             },
             {
-              title: currentStrings.Nav.deposit,
-              link: "dashboard",
+              title: currentStrings.Nav.wallet,
+              link: "dashboard/wallet",
               tabindex: 3,
             },
           ].map((link, index) => (
@@ -325,8 +323,30 @@ export default function DashboardLayout(props) {
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>
+      </Drawer>
+      <main className={classes.main}>
+        <div className={classes.toolbar} />
+
+        {props.children}
+      </main>
+    </div>
+  );
+}
+
+/*
+<div className={classes.demo2}>
+          <StyledTabs
+            value={value}
+            onChange={handleChange}
+            aria-label="styled tabs example"
+          >
+            {tabs.map((tab, index) => (
+              <StyledTab label={tab.title} key={index} {...allyProps(index)} />
+            ))}
+          </StyledTabs>
+        </div>
+
+         <List>
           {[
             {
               title: currentStrings.Nav.investments,
@@ -352,23 +372,6 @@ export default function DashboardLayout(props) {
             </ListItem>
           ))}
         </List>
-      </Drawer>
-      <main className={classes.main}>
-        <div className={classes.toolbar} />
-        <div className={classes.demo2}>
-          <StyledTabs
-            value={value}
-            onChange={handleChange}
-            aria-label="styled tabs example"
-          >
-            {tabs.map((tab, index) => (
-              <StyledTab label={tab.title} key={index} {...allyProps(index)} />
-            ))}
-          </StyledTabs>
-        </div>
+      
 
-        <div className={classes.content}>{props.children}</div>
-      </main>
-    </div>
-  );
-}
+        */

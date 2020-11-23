@@ -31,36 +31,21 @@ TabPanel.propTypes = {
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
-    marginTop: theme.spacing(5),
+    marginTop: theme.spacing(4),
   },
 }));
 
 function Invest() {
   const classes = useStyles();
-  const { tabs, setTabs, currentab } = useContext(AppContext);
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    setTabs([
-      
-      { title: "Bonus", tab: 0 },
-      { title: "Withdraw", tab: 1 },
-      { title: "Profile", tab: 2 },
-    ]);
   }, []);
 
   return (
-    <React.Fragment>
-      
-      <TabPanel value={currentab} index={0}>
-        <WithdrawBonus />
-      </TabPanel>
-      <TabPanel value={currentab} index={1}>
-        <Withdrawform />
-      </TabPanel>
-      <TabPanel value={currentab} index={2}>
-        <AccountInfo />
-      </TabPanel>
-    </React.Fragment>
+    <Container className={classes.margintop}>
+      <InvestNew />
+    </Container>
   );
 }
 
