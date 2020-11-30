@@ -26,20 +26,21 @@ function Complete(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
     setTimeout(() => {
-      window.location.href = "/";
+      //  window.location.href = "/";
+      navigate("withdraw");
     }, 5000);
   }, []);
 
   return (
     <Container className={classes.margintop}>
       <Box display="flex" flexDirection="column" alignItems="center">
-        <CheckCircle htmlColor="#1b9e2b" className={classes.icon} />
+        <CheckCircle htmlColor="#fafafa" className={classes.icon} />
         <Box m={2}>
           <Typography align="center" variant="body1">
-            Your Transaction successful and is now being processed, thank you
+            Your transaction is successful and is now being processed, thank you
             &#10084;&#65039;
-            <Link component="button" onClick={() => navigate("./")}>
-              {`go to dashboard`}
+            <Link component="button" onClick={() => navigate("withdraw")}>
+              {`See investments`}
             </Link>
           </Typography>
         </Box>

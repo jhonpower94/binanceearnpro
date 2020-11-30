@@ -49,7 +49,7 @@ const override = css`
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(4),
   },
   headerbg: {
     background: theme.palette.primary.main,
@@ -197,31 +197,30 @@ function Wallet() {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" className={classes.margintop}>
       <Card variant="outlined">
-        <div className={classes.headerbg}>
-          <CardHeader
-            avatar="&#44444;"
-            title={
-              <Typography variant="h4" className={classes.italic}>
-                {paymentInfo.cryptoType}
-              </Typography>
-            }
-          />
-          <Box display="flex" flexDirection="column" alignItems="center">
-            <Box m={2}>
-              <Card variant="outlined">
-                <CardContent>
-                  <QRCode
-                    value={`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
-                    renderAs="svg"
-                    size={150}
-                  />
-                </CardContent>
-              </Card>
-            </Box>
+        <CardHeader
+          avatar="&#44444;"
+          title={
+            <Typography variant="h4" className={classes.italic}>
+              {paymentInfo.cryptoType}
+            </Typography>
+          }
+        />
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <Box m={2}>
+            <Card variant="outlined">
+              <CardContent>
+                <QRCode
+                  value={`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
+                  renderAs="svg"
+                  size={150}
+                />
+              </CardContent>
+            </Card>
           </Box>
-        </div>
+        </Box>
+
         <div>
           <Box display="flex" flexDirection="column" alignItems="center" m={3}>
             <Typography variant="body1" align="center">
@@ -248,8 +247,7 @@ function Wallet() {
         <CardContent>
           <Typography variant="body2" align="center">
             once payment is done send notification to live support or email
-            support @ support@coininvest.net to notify us of successful
-            deposit
+            support @ support@coininvest.net to notify us of successful deposit
           </Typography>
         </CardContent>
       </Card>

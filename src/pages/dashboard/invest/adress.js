@@ -63,7 +63,7 @@ function BtcAddressInput(props) {
               autoFixed: false,
             });
             ajax({
-              url: "https://coinspringinvest.herokuapp.com/mail",
+              url: "https://coininvest.herokuapp.com/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -79,14 +79,14 @@ function BtcAddressInput(props) {
             }).subscribe(() => {
               console.log("message sent");
               dispatch(loading$());
-              navigate("../complete");
+              navigate("complete");
             });
           });
       });
   };
 
   const withdraw = (data, address) => {
-    console.log(address);
+    dispatch(loading$());
 
     firestore
       .collection("transactions")
@@ -116,7 +116,7 @@ function BtcAddressInput(props) {
           });
 
         ajax({
-          url: "https://coinspringinvest.herokuapp.com/mail",
+          url: "https://coininvest.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -130,7 +130,11 @@ function BtcAddressInput(props) {
             to: `${userInfos.email}, support@coininvest.net`,
             subject: "Withdrawal",
           },
-        }).subscribe(() => console.log("user message sent"));
+        }).subscribe(() => {
+          console.log("user message sent");
+          dispatch(loading$());
+          navigate("complete");
+        });
       });
   };
 

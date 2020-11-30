@@ -48,7 +48,7 @@ const blocks = (state = { data: [] }, action) => {
 };
 
 const activities = (
-  state = { totlProfit: 6, totalDeposit: 6, totalwithdrawn: 6 },
+  state = { totlProfit: 0, totalDeposit: 0, totalwithdrawn: 0 },
   action
 ) => {
   const profits = { ...state, totlProfit: action.payload };
@@ -112,7 +112,15 @@ const notifications = (state = { notification: [] }, action) => {
 };
 
 const locationinfo = (
-  state = { locationinfo: { country: "", id: "", wallet_balance: 0 } },
+  state = {
+    locationinfo: {
+      country: "",
+      id: "",
+      btcaddress: "",
+      address: "",
+      state: "",
+    },
+  },
   action
 ) => {
   const newlocation = { ...state, locationinfo: action.payload };

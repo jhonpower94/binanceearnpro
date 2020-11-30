@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
   orange: {
     color: blue[800],
     backgroundColor: "#fafafa",
+    textTransform: "uppercase",
   },
   space: {
     marginTop: theme.spacing(1),
@@ -90,6 +91,11 @@ function DasboardMenu() {
       });
   };
 
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+    setAnchorElUser(null);
+  };
+
   function logOut() {
     app
       .auth()
@@ -107,6 +113,7 @@ function DasboardMenu() {
   }
 
   const avaterstring = `${info.firstName}`;
+  const firstString = avaterstring.charAt(0);
 
   useEffect(() => {}, []);
 
@@ -120,7 +127,7 @@ function DasboardMenu() {
 
       <IconButton edge="end" color="primary" onClick={handleClickUser}>
         <Badge variant={info.approved ? null : "dot"} color="primary">
-          <Avatar className={classes.orange}>J</Avatar>
+          <Avatar className={classes.orange}>{firstString}</Avatar>
         </Badge>
       </IconButton>
 
@@ -129,7 +136,7 @@ function DasboardMenu() {
         anchorEl={anchorEl}
         keepMounted
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseMenu}
         TransitionComponent={Fade}
       >
         {notifications.map((lnk, index) => (
@@ -159,7 +166,7 @@ function DasboardMenu() {
         anchorEl={anchorElUser}
         keepMounted
         open={Boolean(anchorElUser)}
-        onClose={handleClose}
+        onClose={handleCloseMenu}
       >
         <Fade in={Boolean(anchorElUser)} style={{ transitionDelay: "100ms" }}>
           <MenuItem>

@@ -96,19 +96,19 @@ function Invoice() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setPaymentInfo({ ...paymentInfo, amount: paymentInfo.block.lot });
+    //  setPaymentInfo({ ...paymentInfo, amount: paymentInfo.block.lot });
     console.log(defaultCurrency);
   }, []);
 
   const invoiceData = [
-    {
+    /*  {
       name: "Deposit Amount",
       value: formatLocaleCurrency(paymentInfo.amount, "USD", {
         autoFixed: false,
       }),
-    },
+    }, */
     {
-      name: "Minimun Stake",
+      name: "Minimun stake",
       value: formatLocaleCurrency(
         Math.floor(paymentInfo.block.lot) + 1,
         "USD",
@@ -116,18 +116,30 @@ function Invoice() {
       ),
     },
     {
-      name: "Return Rate",
-      value: `${paymentInfo.block.rate} %`,
+      name: "Wallet balance",
+      value: formatLocaleCurrency(userInfos.wallet_balance, "USD", {
+        autoFixed: false,
+      }),
     },
     {
-      name:
-        selectedValue === "wallet" ? "Remaining Balance" : "Payment Currency",
-      value:
-        selectedValue === "wallet"
-          ? formatLocaleCurrency(user.wallet_balance, "USD", {
-              autoFixed: false,
-            })
-          : paymentInfo.cryptoType,
+      name: "Minimun profit",
+      value: formatLocaleCurrency(
+        (paymentInfo.block.min_rate / 100) * paymentInfo.amount,
+        "USD",
+        {
+          autoFixed: false,
+        }
+      ),
+    },
+    {
+      name: "Maximun profit",
+      value: formatLocaleCurrency(
+        (paymentInfo.block.max_rate / 100) * paymentInfo.amount,
+        "USD",
+        {
+          autoFixed: false,
+        }
+      ),
     },
   ];
   const currencies = [
@@ -294,7 +306,7 @@ function Invoice() {
 
     dispatch(loading$());
 
-    if (paymentInfo.amount > user.wallet_balance) {
+    if (paymentInfo.amount > userInfos.wallet_balance) {
       setAmountErr({
         ...amounterr,
         status: true,
@@ -314,7 +326,7 @@ function Invoice() {
           firestore
             .doc(`users/${currentUserId}`)
             .update({
-              wallet_balance: user.wallet_balance - paymentInfo.amount,
+              wallet_balance: userInfos.wallet_balance - paymentInfo.amount,
             })
             .then(() => {
               dispatch(loadingpayment$());
@@ -355,7 +367,7 @@ function Invoice() {
               id="outlined-number"
               label="Amount"
               name="amount"
-              defaultValue={500}
+              defaultValue={paymentInfo.amount}
               variant="outlined"
               onChange={(e) => {
                 setPaymentInfo({

@@ -208,7 +208,7 @@ function DashboardAdmin() {
                   setTimeout(() => {
                     resolve();
                     ajax({
-                      url: "https://coinspringinvest.herokuapp.com/delete",
+                      url: "https://coininvest.herokuapp.com/delete",
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",

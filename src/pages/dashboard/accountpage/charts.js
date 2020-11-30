@@ -143,7 +143,7 @@ function ChartsPage() {
     max: 95,
   });
 
-  /* useEffect(() => {
+ useEffect(() => {
     const getPlanDatas = firestore.doc(`plans/${12345}`);
     docData(getPlanDatas, "id").subscribe((datax) => {
       datax.currencies.sort().reverse();
@@ -154,7 +154,7 @@ function ChartsPage() {
       const maxLemgth = datax.currencies.length - 1;
       setCurrentValue(datax.currencies[maxLemgth].value);
     });
-  }, []); */
+  }, []);
 
   const data = (state) => {
     switch (state) {
@@ -258,9 +258,17 @@ function ChartsPage() {
     value: {
       min: maxvalue.min,
       max: maxvalue.max,
+      tickCount: 5,
+      formatter: (val) => {
+        return `${val} %`;
+      },
     },
     time: {
       range: [0, 1],
+      tickCount: 5,
+     /* formatter: (val) => {
+        
+      }, */
     },
   };
 
@@ -268,8 +276,7 @@ function ChartsPage() {
     <React.Fragment>
       <Grid
         container
-        spacing={ useMediaQuery(useTheme().breakpoints.up("sm"))
-        ? 5 : 3}
+        spacing={useMediaQuery(useTheme().breakpoints.up("sm")) ? 5 : 3}
         justify={
           useMediaQuery(useTheme().breakpoints.up("sm"))
             ? "flex-start"
@@ -296,8 +303,14 @@ function ChartsPage() {
           </TextField>
         </Grid>
         <Grid item xs={10} sm={4}>
-          <Box display="flex" justifyContent={ useMediaQuery(useTheme().breakpoints.up("sm"))
-            ? "flex-start" : "center"}>
+          <Box
+            display="flex"
+            justifyContent={
+              useMediaQuery(useTheme().breakpoints.up("sm"))
+                ? "flex-start"
+                : "center"
+            }
+          >
             <Rating name="read-only" value={4} readOnly />
           </Box>
         </Grid>
@@ -305,50 +318,31 @@ function ChartsPage() {
         <Grid item xs={12} sm={12}>
           <Chart
             scale={scale}
-            height={useMediaQuery(useTheme().breakpoints.up("sm")) ? 250 : 250}
-            data={datannn}
+            height={useMediaQuery(useTheme().breakpoints.up("sm")) ? 300 : 300}
+            data={data(state)}
             autoFit
           >
             <Axis name="value" visible={true} />
-            <Axis name="time" visible={false} />
+            <Axis
+              name="time"
+              visible={
+                useMediaQuery(useTheme().breakpoints.up("sm")) ? true : false
+              }
+            />
             <Tooltip shared />
 
-            <Line
-              color={[
-                "trade",
-                (xVal) => {
-                  switch (xVal) {
-                    case "currency":
-                      return blue[500];
-                    case "stock":
-                      return green[500];
-                    case "realestate":
-                      return red[800];
-                    case "commodities":
-                      return yellow[800];
-                    default:
-                      return blue[800];
-                  }
-                },
-              ]}
-              position="time*value"
-            />
+            <Line color="trade" position="time*value" />
+
             <Legend
               name="trade"
               visible={false}
               marker={{
                 symbol: "square",
-                style: {
-                  fill: null,
-                },
               }}
             />
-            <Box display="flex" justifyContent="center" mt={3}></Box>
           </Chart>
         </Grid>
       </Grid>
-
-      <CardContent></CardContent>
     </React.Fragment>
   );
 }

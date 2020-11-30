@@ -121,6 +121,8 @@ function InvestNew() {
       name: "Plan 1",
       title: currentStrings.Dashboard.invest.plan_title.a,
       rate: 6,
+      min_rate: 10,
+      max_rate: 25,
       duration: 24,
       lot: 50,
       max: 3000,
@@ -130,6 +132,8 @@ function InvestNew() {
       name: "Plan 2",
       title: currentStrings.Dashboard.invest.plan_title.b,
       rate: 12,
+      min_rate: 40,
+      max_rate: 55,
       duration: 24,
       lot: 500,
       max: 5000,
@@ -139,6 +143,8 @@ function InvestNew() {
       name: "Plan 3",
       title: currentStrings.Dashboard.invest.plan_title.c,
       rate: 15,
+      min_rate: 70,
+      max_rate: 95,
       duration: 34,
       lot: 1000,
       max: 30000,
@@ -149,7 +155,7 @@ function InvestNew() {
   const addTrade = (index, data) => {
     console.log(data);
     setPaymentInfo({ ...paymentInfo, block: data, blockindex: index });
-    setCurrentab(4);
+    navigate("/dashboard/invoice");
   };
 
   useEffect(() => {

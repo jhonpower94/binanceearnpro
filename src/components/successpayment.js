@@ -85,7 +85,7 @@ function PaymentSuccess() {
 
             const newDate = addDays(date, paymentInfo.block.duration);
 
-            fetch("https://coinspringinvest.herokuapp.com/plans", {
+            fetch("https://coininvest.herokuapp.com/plans", {
               method: "POST",
               mode: "cors",
               headers: {

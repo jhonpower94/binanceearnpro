@@ -8,10 +8,13 @@ import {
   Typography,
   Divider,
   Button,
+  useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
 import ChartsPage from "./charts";
 import { useSelector } from "react-redux";
 import { navigate } from "@reach/router";
+import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -21,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
 
 function Account() {
   const classes = useStyles();
+  const mainbalance = useSelector((state) => state.balance);
+  const userInfos = useSelector((state) => state.locationinfo.locationinfo);
+  const activities = useSelector((state) => state.activities);
   const currentStrings = useSelector((state) => state.language);
   const { tabs, setTabs } = useContext(AppContext);
   useEffect(() => {
@@ -28,59 +34,93 @@ function Account() {
   }, []);
 
   const balanceAmount = [
-    {
+    /* {
       title: currentStrings.Dashboard.account.main_balance,
-      value: "$779888",
+      value: formatLocaleCurrency(Math.floor(mainbalance.main_balance), "USD", {
+        autoFixed: false,
+      }),
       xs: 12,
       sm: 4,
       subtitle: "h4",
     },
-    {
+     {
       title: currentStrings.Dashboard.account.earning,
       value: "$77",
       xs: 6,
       sm: 4,
       subtitle: "h5",
-    },
+    }, */
     {
       title: currentStrings.Dashboard.account.bonus_balance,
-      value: "$79789",
+      value: formatLocaleCurrency(mainbalance.bonus_balance, "USD", {
+        autoFixed: false,
+      }),
       xs: 6,
       sm: 4,
       subtitle: "h5",
     },
     {
       title: currentStrings.Dashboard.account.Wallet_Balance,
-      value: "$79749",
+      value: isNaN(userInfos.wallet_balance)
+        ? formatLocaleCurrency(0, "USD", {
+            autoFixed: false,
+          })
+        : formatLocaleCurrency(userInfos.wallet_balance, "USD", {
+            autoFixed: false,
+          }),
       xs: 6,
-      sm: 3,
+      sm: 4,
       subtitle: "h5",
     },
   ];
   const profileData = [
     {
       title: currentStrings.Dashboard.account.Total_profit_amount,
-      value: "$000",
+      value: activities.totlProfit,
     },
     {
       title: currentStrings.Dashboard.account.Total_bonus_earned,
-      value: "$000",
+      value: activities.bonusTotalRecieved,
     },
     {
       title: currentStrings.Dashboard.account.Total_investment_amount,
-      value: "$000",
+      value: activities.totalDeposit,
     },
     {
       title: currentStrings.Dashboard.account.Total_withdrawn_amount,
-      value: "$000",
+      value: activities.totalwithdrawn,
     },
   ];
 
   return (
     <Container maxWidth="lg">
       <Grid container spacing={4} justify="flex-start">
+        <Grid item xs={12} sm={4}>
+          <ListItemText
+            primary={currentStrings.Dashboard.account.main_balance}
+            secondary={formatLocaleCurrency(
+              Math.floor(mainbalance.main_balance),
+              "USD",
+              {
+                autoFixed: false,
+              }
+            )}
+            primaryTypographyProps={{
+              variant: "subtitle2",
+              align: useMediaQuery(useTheme().breakpoints.up("sm"))
+                ? "left"
+                : "center",
+            }}
+            secondaryTypographyProps={{
+              variant: "h4",
+              align: useMediaQuery(useTheme().breakpoints.up("sm"))
+                ? "left"
+                : "center",
+            }}
+          />
+        </Grid>
         {balanceAmount.map((vl, index) => (
-          <Grid key={index} item xs={6} sm={3}>
+          <Grid key={index} item xs={vl.xs} sm={vl.sm}>
             <ListItemText
               primary={vl.title}
               secondary={vl.value}

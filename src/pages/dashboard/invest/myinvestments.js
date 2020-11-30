@@ -107,10 +107,6 @@ function Investment() {
               <TableHead>
                 <TableRow>
                   <TableCell align="left">
-                    {currentStrings.Dashboard.investments.investment}
-                  </TableCell>
-
-                  <TableCell align="left">
                     {currentStrings.Dashboard.investments.amount}
                   </TableCell>
                   <TableCell align="left">
@@ -118,6 +114,9 @@ function Investment() {
                   </TableCell>
                   <TableCell align="left">
                     {currentStrings.Dashboard.investments.confirm}
+                  </TableCell>
+                  <TableCell align="left">
+                    {currentStrings.Dashboard.investments.investment}
                   </TableCell>
                   <TableCell align="left">
                     {currentStrings.Dashboard.investments.date}
@@ -129,40 +128,8 @@ function Investment() {
               </TableHead>
 
               <TableBody>
-                {[
-                  {
-                    block_name: "plan 1",
-                    pending: true,
-                    deposit_amount: 500,
-                    return_amount: 550,
-                    created_at: 1324353,
-                    complete: false,
-                    withdrawn: false,
-                  },
-                  {
-                    block_name: "plan 1",
-                    pending: false,
-                    deposit_amount: 500,
-                    return_amount: 550,
-                    created_at: 1324353,
-                    complete: true,
-                    withdrawn: true,
-                  },
-                  {
-                    block_name: "plan 1",
-                    pending: false,
-                    deposit_amount: 500,
-                    return_amount: 550,
-                    created_at: 1324353,
-                    complete: true,
-                    withdrawn: false,
-                  },
-                ].map((dep, index) => (
+                {investments.map((dep, index) => (
                   <TableRow tabIndex={-1} key={index}>
-                    <TableCell align="left">
-                      <Typography>{dep.block_name}</Typography>
-                    </TableCell>
-
                     <TableCell align="left">
                       {formatLocaleCurrency(dep.deposit_amount, "USD", {
                         autoFixed: false,
@@ -189,6 +156,9 @@ function Investment() {
                       >
                         {currentStrings.Dashboard.investments.confirm}
                       </Button>
+                    </TableCell>
+                    <TableCell align="left">
+                      <Typography>{dep.block_name}</Typography>
                     </TableCell>
                     <TableCell align="left">
                       {new Date(dep.created_at * 1000).toLocaleDateString()}

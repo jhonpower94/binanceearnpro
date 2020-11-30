@@ -132,7 +132,7 @@ export default function TransactionsAdmin() {
         }
 
         ajax({
-          url: "https://coinspringinvest.herokuapp.com/mail",
+          url: "https://coininvest.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",

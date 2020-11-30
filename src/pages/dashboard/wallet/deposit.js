@@ -147,7 +147,7 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url: "https://coinspringinvest.herokuapp.com/mail",
+            url: "https://coininvest.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -165,7 +165,7 @@ function Deposit() {
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://coinspringinvest.herokuapp.com/mail",
+            url: "https://coininvest.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -178,7 +178,7 @@ function Deposit() {
           }).subscribe(() => {
             console.log("message sent");
             dispatch(loading$());
-            navigate("payment_Deposit");
+            navigate("payment");
           });
         });
     } else {
@@ -200,7 +200,7 @@ function Deposit() {
             title={currentStrings.Dashboard.withdraw.Deposit_balance}
             subheader={
               <Typography variant="h4">
-                {formatLocaleCurrency(userInfos.Deposit_balance, "USD", {
+                {formatLocaleCurrency(userInfos.wallet_balance, "USD", {
                   autoFixed: false,
                 })}
               </Typography>

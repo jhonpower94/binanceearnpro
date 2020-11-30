@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -32,7 +32,22 @@ import { navigate } from "@reach/router";
 import { AppContext } from "../../App";
 import SelectLanguage from "../../components/lang_select";
 import DasboardMenu from "./menu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import firebase, { firestore, collectionData, docData } from "../../config";
+
+import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
+import {
+  bonusbalance$,
+  bonusCollections$,
+  locationinfo$,
+  mainbalance$,
+  myinvestment$,
+  notification$,
+  totalbonusearned$,
+  totaldeposit$,
+  totalprofit$,
+  totalwithdrawn$,
+} from "../../redux/action";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -208,11 +223,154 @@ const StyledTab = withStyles((theme) => ({
 
 export default function DashboardLayout(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const currentStrings = useSelector((state) => state.language);
   const { tabs, currentab, setCurrentab } = useContext(AppContext);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(currentab);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        navigate("../account");
+      } else {
+        const datas = firestore.doc(`users/${user.uid}`);
+        docData(datas, "id").subscribe((val) => {
+          dispatch(locationinfo$(val));
+        });
+
+        // total return collection
+        const returnedbalance = firestore
+          .doc(`users/${user.uid}`)
+          .collection("deposits")
+          .where("complete", "==", true);
+
+        collectionData(returnedbalance, "id").subscribe((data) => {
+          console.log(data);
+
+          const returnTotal = data.reduce((prv, cur) => {
+            return prv + cur.return_amount;
+          }, 0);
+
+          dispatch(
+            mainbalance$(returnTotal)
+            /*   formatLocaleCurrency(Math.floor(returnTotal), "USD", {
+                autoFixed: false,
+              }) */
+          );
+        });
+
+        // totatal deposited
+        const allDeposits = firestore
+          .doc(`users/${user.uid}`)
+          .collection("deposits")
+          .orderBy("created_at", "desc");
+        collectionData(allDeposits, "id").subscribe((data) => {
+          
+          const totalDeposit = data.reduce((prv, cur) => {
+            return prv + cur.amount;
+          }, 0);
+
+          const totalPercentage = data.reduce((prv, cur) => {
+            const pasint = parseInt(cur.percentage);
+            return prv + cur.percentage;
+          }, 0);
+
+          console.log(totalPercentage);
+
+          dispatch(myinvestment$(data));
+
+          dispatch(
+            totaldeposit$(
+              formatLocaleCurrency(totalDeposit, "USD", {
+                autoFixed: false,
+              })
+            )
+          );
+          if (isNaN(totalPercentage)) {
+            const totlProfitx = (totalPercentage / 100) * totalDeposit;
+            dispatch(
+              totalprofit$(
+                formatLocaleCurrency(0, "USD", {
+                  autoFixed: false,
+                })
+              )
+            );
+          } else {
+            //total profits
+            const totlProfit = (totalPercentage / 100) * totalDeposit;
+            dispatch(
+              totalprofit$(
+                formatLocaleCurrency(totlProfit, "USD", {
+                  autoFixed: false,
+                })
+              )
+            );
+          }
+        });
+
+        //total withdrawn
+        const Total_withdrawn = firestore
+          .doc(`users/${user.uid}`)
+          .collection("deposits")
+          .where("return_amount", "==", 0);
+        collectionData(Total_withdrawn, "id").subscribe((data) => {
+          const totalwithdrawn = data.reduce((prv, cur) => {
+            return prv + cur.amount;
+          }, 0);
+
+          dispatch(
+            totalwithdrawn$(
+              formatLocaleCurrency(totalwithdrawn, "USD", {
+                autoFixed: false,
+              })
+            )
+          );
+        });
+
+        // bonus balance
+        const Bonus = firestore
+          .doc(`users/${user.uid}`)
+          .collection("bonus")
+          .orderBy("created_at", "desc");
+        collectionData(Bonus, "id").subscribe((data) => {
+          // bonus total recievede bonus
+          const bonusTotalRecieved = data.reduce((prv, cur) => {
+            return prv + cur.amount;
+          }, 0);
+          dispatch(
+            totalbonusearned$(
+              formatLocaleCurrency(bonusTotalRecieved, "USD", {
+                autoFixed: false,
+              })
+            )
+          );
+
+          // main remaining bonus balance
+          const bonusCurrentBalance = data.reduce((prv, cur) => {
+            return prv + cur.deposit_amount;
+          }, 0);
+
+          dispatch(bonusbalance$(Math.floor(bonusCurrentBalance)));
+
+          // bonus collections
+          data.forEach((val, index) => {
+            dispatch(bonusCollections$(data));
+          });
+        });
+
+        // notification
+        const notifications = firestore
+          .doc(`users/${user.uid}`)
+          .collection("notification");
+
+        collectionData(notifications, "id").subscribe((data) => {
+          dispatch(notification$(data));
+        });
+      }
+    });
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -228,7 +386,6 @@ export default function DashboardLayout(props) {
   };
 
   const changeNav = (nav, index) => {
-    
     setCurrentab(0);
     navigate(`/${nav.link}`);
   };

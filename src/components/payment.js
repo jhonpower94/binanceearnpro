@@ -49,7 +49,7 @@ const override = css`
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(4),
   },
   headerbg: {
     background: theme.palette.primary.main,
@@ -200,62 +200,48 @@ function Payment() {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Card variant="outlined">
-        <div className={classes.headerbg}>
-          <CardHeader
-            avatar="&#44444;"
-            title={
-              <Typography variant="h4" className={classes.italic}>
-                {paymentInfo.cryptoType}
-              </Typography>
-            }
+    <Container maxWidth="sm" className={classes.margintop}>
+      <Box display="flex" flexDirection="column" alignItems="center">
+        <Box m={1}>
+          <QRCode
+            value={`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
+            renderAs="svg"
+            size={200}
           />
-          <Box display="flex" flexDirection="column" alignItems="center">
-            <Box m={2}>
-              <Card variant="outlined">
-                <CardContent>
-                  <QRCode
-                    value={`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
-                    renderAs="svg"
-                    size={150}
-                  />
-                </CardContent>
-              </Card>
-            </Box>
-          </Box>
-        </div>
-        <div>
-          <Box display="flex" flexDirection="column" alignItems="center" m={3}>
-            <Typography variant="body1" align="center">
-              Send{" "}
-              <span className={classes.Showheading}>
-                {`${newanount} ${paymentInfo.cryptoType}`}
-              </span>{" "}
-              to address
-            </Typography>
-            <span className={classes.margintop} />
-            <Typography
-              variant="h6"
-              align="center"
-              color="textPrimary"
-              display="block"
-              className={classes.wordbreak}
-            >
-              {`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
-            </Typography>
-          </Box>
-        </div>
-        <Divider variant="middle" />
+        </Box>
+      </Box>
 
-        <CardContent>
-          <Typography variant="body2" align="center">
-            once payment is done send notification to live support or email
-            support @ support@coininvest.net to notify us of successful
-            deposit
+      <div>
+        <Box display="flex" flexDirection="column" alignItems="center" m={1}>
+          <Typography variant="body1" align="center">
+            Send{" "}
+            <span className={classes.Showheading}>
+              {`${newanount} ${paymentInfo.cryptoType}`}
+            </span>{" "}
+            to address
           </Typography>
-        </CardContent>
-      </Card>
+          <span style={{ marginTop: 10 }} />
+          <Typography
+            variant="h6"
+            align="center"
+            color="textPrimary"
+            display="block"
+            className={classes.wordbreak}
+          >
+            {`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
+          </Typography>
+        </Box>
+      </div>
+      <Divider variant="middle" />
+
+      <CardContent>
+        <Typography variant="body2" align="center">
+          once payment is done send notification to live support or email
+          support to support@coininvest.net, in order to notify us of your successful
+          deposit
+        </Typography>
+      </CardContent>
+
       <Snackbar
         key={messageInfo ? messageInfo.key : undefined}
         anchorOrigin={{

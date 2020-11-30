@@ -40,8 +40,8 @@ function Wallet(props) {
 
   useEffect(() => {
     setTabs([
-      { title: "Deposit", tab: 0 },
-      { title: "Withdraw", tab: 1 },
+      { title: "Wallet deposit", tab: 0 },
+      { title: "Withdraw wallet", tab: 1 },
     ]);
   }, []);
 

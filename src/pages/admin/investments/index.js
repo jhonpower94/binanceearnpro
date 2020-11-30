@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://coinspringinvest.herokuapp.com/plans`,
+          url: `https://coininvest.herokuapp.com/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -150,7 +150,7 @@ export default function Investments() {
             })
             .then(() => {
               ajax({
-                url: "https://coinspringinvest.herokuapp.com/mail",
+                url: "https://coininvest.herokuapp.com/mail",
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

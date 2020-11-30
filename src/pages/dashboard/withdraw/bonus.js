@@ -122,21 +122,7 @@ function WithdrawBonus() {
               </TableHead>
 
               <TableBody>
-                {[
-                  {
-                    from: "Jhon snow",
-                    description: "Referral Bonus",
-                    deposit_amount: 500,
-                    date: 1324353,
-                    withdrawn: false,
-                  },
-                  {
-                    from: "Jhon snow",
-                    description: "Referral Bonus",
-                    deposit_amount: 500,
-                    date: 1324353,
-                  },
-                ].map((data, index) => (
+                {bonus.map((data, index) => (
                   <TableRow tabIndex={-1} key={index}>
                     <TableCell align="left">
                       <Typography>{data.from}</Typography>
@@ -168,7 +154,7 @@ function WithdrawBonus() {
                       </Button>
                     </TableCell>
                     <TableCell align="left">
-                      {new Date(data.date * 1000).toLocaleDateString()}
+                      {new Date(data.created_at * 1000).toLocaleDateString()}
                     </TableCell>
                   </TableRow>
                 ))}
