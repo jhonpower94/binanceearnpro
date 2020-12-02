@@ -208,7 +208,7 @@ function Payment() {
         <Grid item xs={12} sm={12}>
           <Box display="flex" justifyContent="center">
             <QRCode
-              value={`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
+              value={`1NKawsJ1AsZ8jeMcJvA3kigPZU6fuFU3UX`}
               renderAs="svg"
               size={200}
             />
@@ -229,7 +229,7 @@ function Payment() {
         <Grid item xs={12} sm={5}>
           <CopyInput
             name={`${paymentInfo.cryptoType} address`}
-            value={`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
+            value={`1NKawsJ1AsZ8jeMcJvA3kigPZU6fuFU3UX`}
           />
         </Grid>
         <Grid item xs={12} sm={10}>

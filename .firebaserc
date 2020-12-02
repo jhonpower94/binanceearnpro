@@ -2,6 +2,7 @@
   "projects": {
     "hjjj": "hotblock-48cbf",
     "frontend": "admin-fa3ba",
-    "new": "coininvest-d15a3"
+    "new": "coininvest-d15a3",
+    "hotblockinvest": "hotblockinvest"
   }
 }
