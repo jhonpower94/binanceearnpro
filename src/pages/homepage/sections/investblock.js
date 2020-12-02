@@ -23,6 +23,7 @@ import IntroHeaderPages from "../component/introheaderpages";
 import Background from "../images/baprice.svg";
 import { VerifiedUserSharp, AddCircleSharp } from "@material-ui/icons";
 import { red } from "@material-ui/core/colors";
+import { Rating } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -50,7 +51,7 @@ function InvestBlock(props) {
       type: "dark",
       primary: {
         // Purple and green play nicely together.
-        main:  red[900],
+        main: red[900],
       },
       secondary: {
         // This is green.A700 as hex.
@@ -67,69 +68,77 @@ function InvestBlock(props) {
 
   return (
     <ThemeProvider theme={theme}>
-    <Container maxWidth="md" className={classes.margintop}>
-      <Grid container spacing={8} justify="center">
-        {arrays.map((trade, index) => (
-          <Fade
-            in={true}
-            key={index}
-            style={{ transitionDelay: `${index * 200}ms` }}
-          >
-            <Grid item xs={6} sm={4}>
-              <Card
-                style={{
-                  background: "#b71c1c",
-                //  backgroundSize: "cover",
-                }}
-              >
-                <CardHeader
-                  title={
-                    <Typography variant="h3">{`${trade.rate}%`}</Typography>
-                  }
-                  subheader={
-                    <Typography variant="body1">{`${trade.hrs} hours`}</Typography>
-                  }
-                />
-                <List dense={true}>
-                  <Divider variant="inset" component="li" />
-                  <ListItem>
-                    <ListItemText
-                      primary={<Typography variant="h6">Duration</Typography>}
-                      secondary={
-                        <Typography variant="body1">{trade.name}</Typography>
-                      }
-                    />
-                  </ListItem>
-                  <Divider variant="inset" component="li" />
-                  <ListItem>
-                    <ListItemText
-                      primary={
-                        <Typography variant="h6">Minimun stake</Typography>
-                      }
-                      secondary={
-                        <Typography variant="body1">{`$${trade.lot}`}</Typography>
-                      }
-                    />
-                  </ListItem>
-                  <Divider variant="inset" component="li" />
-                  <ListItem>
-                    <ListItemText
-                      primary={
-                        <Typography variant="h6">Maximun stake</Typography>
-                      }
-                      secondary={
-                        <Typography variant="body1">{`$${trade.max}`}</Typography>
-                      }
-                    />
-                  </ListItem>
-                </List>
-              </Card>
-            </Grid>
-          </Fade>
-        ))}
-      </Grid>
-    </Container>
-  </ThemeProvider>
+      <Container maxWidth="md" className={classes.margintop}>
+        <Grid container spacing={8} justify="center">
+          {arrays.map((trade, index) => (
+            <Fade
+              in={true}
+              key={index}
+              style={{ transitionDelay: `${index * 200}ms` }}
+            >
+              <Grid item xs={6} sm={4}>
+                <Card
+                  style={{
+                    background: "#b71c1c",
+                    //  backgroundSize: "cover",
+                  }}
+                >
+                  <CardHeader
+                    title={`${trade.min_rate} - ${trade.max_rate}%`}
+                    subheader={
+                      <Rating
+                        name="read-only"
+                        value={index + 3}
+                        readOnly
+                        size="small"
+                      />
+                    }
+                    titleTypographyProps={{ align: "center", variant: "h3" }}
+                    subheaderTypographyProps={{
+                      align: "center",
+                      variant: "body1",
+                    }}
+                  />
+                  <List dense={true}>
+                    <Divider variant="inset" component="li" />
+                    <ListItem>
+                      <ListItemText
+                        primary={<Typography variant="h6">Duration</Typography>}
+                        secondary={
+                          <Typography variant="body1">{`24 hrs`}</Typography>
+                        }
+                      />
+                    </ListItem>
+                    <Divider variant="inset" component="li" />
+                    <ListItem>
+                      <ListItemText
+                        primary={
+                          <Typography variant="h6">Minimun stake</Typography>
+                        }
+                        secondary={
+                          <Typography variant="body1">{`$${trade.lot}`}</Typography>
+                        }
+                      />
+                    </ListItem>
+                    <Divider variant="inset" component="li" />
+                    <ListItem>
+                      <ListItemText
+                        primary={
+                          <Typography variant="h6">Maximun stake</Typography>
+                        }
+                        secondary={
+                          <Typography variant="body1">{`$${trade.max}`}</Typography>
+                        }
+                      />
+                    </ListItem>
+                  </List>
+                </Card>
+              </Grid>
+            </Fade>
+          ))}
+        </Grid>
+      </Container>
+    </ThemeProvider>
   );
 }
 
