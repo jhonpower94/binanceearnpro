@@ -181,7 +181,7 @@ export default function SignUp() {
       <div className={classes.paper}>
         <div className={classes.avatar}>
           <img
-            src={require("../../images/logo.png")}
+            src={require("../../images/logo.svg")}
             height={
               useMediaQuery(useTheme().breakpoints.up("sm")) ? "70px" : "50px"
             }
@@ -333,6 +333,7 @@ export default function SignUp() {
                 component="button"
                 variant="body2"
                 onClick={() => navigate("../../account")}
+                color="secondary"
               >
                 Already have an account? Sign in
               </Link>

@@ -17,7 +17,7 @@ import { language$ } from "../redux/action";
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    margin: theme.spacing(1),
+   
     display: "flex",
   },
   space: {

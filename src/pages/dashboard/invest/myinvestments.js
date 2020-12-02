@@ -136,9 +136,14 @@ function Investment() {
                       })}
                     </TableCell>
                     <TableCell align="left">
-                      {formatLocaleCurrency(dep.return_amount, "USD", {
-                        autoFixed: false,
-                      })}
+                      {}
+                      {isNaN(dep.return_amount)
+                        ? formatLocaleCurrency(0, "USD", {
+                            autoFixed: false,
+                          })
+                        : formatLocaleCurrency(dep.return_amount, "USD", {
+                            autoFixed: false,
+                          })}
                     </TableCell>
                     <TableCell align="left">
                       <Button

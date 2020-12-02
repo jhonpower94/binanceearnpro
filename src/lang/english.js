@@ -24,10 +24,9 @@ export const english = {
       plans: "Plans",
       plan_helpertext: "Choose investment plan chart",
       plan_titles: {
-        currency: "currency",
-        stock: "stock",
-        realestate: "realestate",
-        commodities: "commodities",
+        plan1: "Plan 1",
+        plan2: "Plan 2",
+        plan3: "Plan 3",
       },
       action: {
         investments: "My investments",

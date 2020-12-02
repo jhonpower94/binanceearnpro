@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, createContext } from "react";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import { orange, blue } from "@material-ui/core/colors";
+import { orange, blue, red } from "@material-ui/core/colors";
 import { Router } from "@reach/router";
 import HomeLayout from "./pages/homepage";
 import DashboardLayout from "./pages/dashboard/indexnew";
@@ -76,6 +76,9 @@ function App() {
   const [darktheme, setDarktheme] = useState({
     status: true,
   });
+  const [pagetitle, setPagetitle] = useState({
+    title: "",
+  });
   const [intro, setIntro] = useState({
     layout: "",
     countrycode: "",
@@ -132,12 +135,15 @@ function App() {
       type: palletType,
       primary: {
         // Purple and green play nicely together.
-        main: blue[800],
+        main: red[900],
       },
       secondary: {
         // This is green.A700 as hex.
         main: secondary,
       },
+      /*  background: {
+        default: "#fff",
+      }, */
       action: {
         selected: "#2196f33d",
       },
@@ -188,6 +194,8 @@ function App() {
           updateWalletBalance,
           tabs,
           currentab,
+          pagetitle,
+          setPagetitle,
           setCurrentab,
           setTabs,
           setupdateWalletBalance,

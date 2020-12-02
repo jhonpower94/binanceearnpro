@@ -85,7 +85,9 @@ function Invoice() {
 
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const dispatch = useDispatch();
-  const { paymentInfo, setPaymentInfo, user, setUser } = useContext(AppContext);
+  const { paymentInfo, setPaymentInfo, pagetitle, setPagetitle } = useContext(
+    AppContext
+  );
   const [selectedValue, setSelectedValue] = React.useState("wallet");
   const [amounterr, setAmountErr] = useState({ status: false, text: "" });
 
@@ -97,7 +99,8 @@ function Invoice() {
   useEffect(() => {
     window.scrollTo(0, 0);
     //  setPaymentInfo({ ...paymentInfo, amount: paymentInfo.block.lot });
-    console.log(defaultCurrency);
+    setPagetitle({ ...pagetitle, title: "Invoice" });
+    console.log(paymentInfo.blockindex);
   }, []);
 
   const invoiceData = [
@@ -342,7 +345,9 @@ function Invoice() {
     <Container maxWidth="sm">
       <CardHeader
         title={paymentInfo.block.name}
-        subheader={<Rating name="read-only" value={4} readOnly />}
+        subheader={
+          <Rating name="read-only" value={paymentInfo.blockindex + 3} readOnly />
+        }
         titleTypographyProps={{ align: "center" }}
         subheaderTypographyProps={{ align: "center" }}
         className={classes.headerbgss}

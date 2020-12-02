@@ -122,7 +122,7 @@ export default function SignIn() {
       <div className={classes.paper}>
         <div className={classes.avatar}>
           <img
-            src={require("../../images/logo.png")}
+            src={require("../../images/logo.svg")}
             height={
               useMediaQuery(useTheme().breakpoints.up("sm")) ? "70px" : "50px"
             }
@@ -191,6 +191,7 @@ export default function SignIn() {
             <Link
               component="button"
               onClick={() => navigate("account/resetpassword")}
+              color="secondary"
             >
               Forgot password?
             </Link>
@@ -199,6 +200,7 @@ export default function SignIn() {
             <Link
               component="button"
               onClick={() => navigate("account/register")}
+              color="secondary"
             >
               {"Don't have an account? Sign Up"}
             </Link>

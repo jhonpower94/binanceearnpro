@@ -100,7 +100,7 @@ export default function DepositTable() {
   return (
     
       <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table  aria-label="sticky table">
           <TableHead>
             <TableRow>
               <TableCell align="left" colSpan={2}>NAME</TableCell>
@@ -111,7 +111,7 @@ export default function DepositTable() {
 
           <TableBody>
             {deposits.map((dep, index) => (
-              <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+              <TableRow  role="checkbox" tabIndex={-1} key={index}>
                 <TableCell align="left" colSpan={2}>
                   <Box display="flex" flexDirection="column">
                     <Typography variant="body1">{`${dep.firstname} ${dep.lastname}`}</Typography>

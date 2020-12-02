@@ -48,6 +48,13 @@ import {
   totalprofit$,
   totalwithdrawn$,
 } from "../../redux/action";
+import {
+  AccountBalanceWalletSharp,
+  AddCircleSharp,
+  GetAppSharp,
+  HomeSharp,
+} from "@material-ui/icons";
+import { Helmet } from "react-helmet";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -225,7 +232,7 @@ export default function DashboardLayout(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const currentStrings = useSelector((state) => state.language);
-  const { tabs, currentab, setCurrentab } = useContext(AppContext);
+  const { tabs, currentab, setCurrentab, pagetitle } = useContext(AppContext);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(currentab);
@@ -267,7 +274,6 @@ export default function DashboardLayout(props) {
           .collection("deposits")
           .orderBy("created_at", "desc");
         collectionData(allDeposits, "id").subscribe((data) => {
-          
           const totalDeposit = data.reduce((prv, cur) => {
             return prv + cur.amount;
           }, 0);
@@ -398,6 +404,12 @@ export default function DashboardLayout(props) {
           : classes.rootmobile
       }
     >
+      <Helmet>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Helmet>
       <CssBaseline />
       <ElevationScroll {...props}>
         <AppBar
@@ -419,9 +431,11 @@ export default function DashboardLayout(props) {
             >
               <MenuIcon />
             </IconButton>
-            <SelectLanguage />
-
+            <Typography variant="h6" noWrap>
+              {pagetitle.title}
+            </Typography>
             <span className={classes.space} />
+            <SelectLanguage />
             <DasboardMenu />
           </Toolbar>
         </AppBar>
@@ -454,28 +468,30 @@ export default function DashboardLayout(props) {
             {
               title: currentStrings.Nav.Dashboard,
               link: "dashboard",
-              tabindex: 0,
+
+              icon: <HomeSharp />,
             },
             {
               title: currentStrings.Nav.invest,
               link: "dashboard/invest",
-              tabindex: 1,
+
+              icon: <AddCircleSharp />,
             },
             {
               title: currentStrings.Nav.withdraw,
               link: "dashboard/withdraw",
-              tabindex: 2,
+
+              icon: <GetAppSharp />,
             },
             {
               title: currentStrings.Nav.wallet,
               link: "dashboard/wallet",
-              tabindex: 3,
+
+              icon: <AccountBalanceWalletSharp />,
             },
           ].map((link, index) => (
             <ListItem button key={index} onClick={() => changeNav(link, index)}>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
+              <ListItemIcon>{link.icon}</ListItemIcon>
               <ListItemText primary={link.title} />
             </ListItem>
           ))}

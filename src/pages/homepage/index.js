@@ -30,13 +30,15 @@ import {
   Collapse,
   List,
   useScrollTrigger,
+  ThemeProvider,
+  createMuiTheme,
 } from "@material-ui/core";
 import { css } from "@emotion/core";
 import "./homepage.css";
 import BounceLoader from "react-spinners/BounceLoader";
 import { ExpandLessSharp, ExpandMoreSharp } from "@material-ui/icons";
 import { dataArray } from "../../service/tradeblocks";
-import { blue } from "@material-ui/core/colors";
+import { blue, red } from "@material-ui/core/colors";
 import Background from "../../pages/homepage/images/header-middle-bg.png";
 import Backgroundsecond from "../../pages/homepage/images/header-middle-bg1.png";
 
@@ -259,6 +261,26 @@ function HomeLayout(props) {
     setCollapse({ ...collapse, [props]: !collps });
   };
 
+  const theme = createMuiTheme({
+    palette: {
+      type: "light",
+      primary: {
+        // Purple and green play nicely together.
+        main: red[900],
+      },
+      secondary: {
+        // This is green.A700 as hex.
+        main: "#fafafa",
+      },
+      /*  background: {
+        default: "#fff",
+      }, */
+      action: {
+        selected: "#2196f33d",
+      },
+    },
+  });
+
   useEffect(() => {}, []);
 
   const handleClose = () => {
@@ -267,41 +289,168 @@ function HomeLayout(props) {
   };
 
   return (
-    <React.Fragment>
-      <CssBaseline>
-        <ElevationScroll {...props}>
-          <AppBar color="primary">
-            <Toolbar>
-              {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
-                <img
-                  src={require("../../images/logonew.svg")}
-                  alt="logo"
-                  width="150px"
-                />
-              ) : (
-                <Box display="flex">
-                  <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    edge="start"
-                    className={classes.menuButton}
-                    onClick={openMobileMenu}
-                  >
-                    <MenuIcon />
-                  </IconButton>
+    <ThemeProvider theme={theme}>
+      <React.Fragment>
+        <CssBaseline>
+          <ElevationScroll {...props}>
+            <AppBar color="primary">
+              <Toolbar>
+                {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
                   <img
-                    src={require("../../images/logodesktop.svg")}
+                    src={require("../../images/logo.svg")}
                     alt="logo"
-                    height="50px"
+                    width="150px"
                   />
-                </Box>
-              )}
+                ) : (
+                  <Box display="flex">
+                    <IconButton
+                      color="inherit"
+                      aria-label="open drawer"
+                      edge="start"
+                      className={classes.menuButton}
+                      onClick={openMobileMenu}
+                    >
+                      <MenuIcon />
+                    </IconButton>
+                    <img
+                      src={require("../../images/logo.svg")}
+                      alt="logo"
+                      height="50px"
+                    />
+                  </Box>
+                )}
 
-              {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
-                <div className={classes.mgright}>
-                  {arrayDatas.map((link, index) => (
-                    <Link
+                {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
+                  <div className={classes.mgright}>
+                    {arrayDatas.map((link, index) => (
+                      <Link
+                        key={index}
+                        component="button"
+                        variant="body1"
+                        onClick={(e) => {
+                          link.submenus
+                            ? openSubmenu(e, link.submenulinks)
+                            : changePage(link.link);
+                        }}
+                        color="inherit"
+                        className={classes.link}
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
+
+                <StyledMenu // desktop Submenus
+                  id="fade-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={open}
+                  onClose={handleClose}
+                  TransitionComponent={Fade}
+                >
+                  {submenu.map((sub, index) => (
+                    <Fade
+                      in={open}
                       key={index}
+                      style={{ transitionDelay: index * 200 }}
+                    >
+                      <MenuItem onClick={() => changePage(sub.link)}>
+                        <ListItemText primary={sub.title} />
+                      </MenuItem>
+                    </Fade>
+                  ))}
+                </StyledMenu>
+
+                <StyledMenu // mobile menu
+                  id="fade-menu-mobile"
+                  anchorEl={anchorElMobile}
+                  keepMounted
+                  open={openMobile}
+                  onClose={handleClose}
+                  TransitionComponent={Fade}
+                >
+                  {arrayDatas.map((link, index) => (
+                    <div key={index}>
+                      <Fade
+                        in={openMobile}
+                        style={{ transitionDelay: index * 100 }}
+                      >
+                        <MenuItem
+                          onClick={() => {
+                            link.submenus
+                              ? openCollapse(link.name, link.collapse)
+                              : changePage(link.link);
+                          }}
+                        >
+                          <ListItemText primary={link.name} />
+                          {link.submenus ? (
+                            <span>
+                              {link.collapse ? (
+                                <ExpandLessSharp />
+                              ) : (
+                                <ExpandMoreSharp />
+                              )}
+                            </span>
+                          ) : null}
+                        </MenuItem>
+                      </Fade>
+
+                      {link.submenus ? (
+                        <Collapse
+                          in={link.collapse}
+                          timeout="auto"
+                          unmountOnExit
+                        >
+                          {link.submenulinks.map((sub, index) => (
+                            <ListItem
+                              key={index}
+                              className={classes.nested}
+                              onClick={() => {
+                                changePage(sub.link);
+                              }}
+                            >
+                              <ListItemText primary={sub.title} />
+                            </ListItem>
+                          ))}
+                        </Collapse>
+                      ) : null}
+                    </div>
+                  ))}
+                </StyledMenu>
+
+                <span className={classes.space} />
+
+                <SelectLanguage />
+
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  size="large"
+                  onClick={() => {
+                    if (intro.refid) {
+                      navigate(`account/register/${intro.refid}`);
+                    } else {
+                      navigate("/account");
+                    }
+                  }}
+                >
+                  <Typography> Login</Typography>
+                </Button>
+              </Toolbar>
+            </AppBar>
+          </ElevationScroll>
+
+          {intro.layout}
+
+          <div style={{ position: "relative" }}>{props.children}</div>
+
+          <Container maxWidth="md" className={classes.margintop}>
+            <Grid container spacing={3} justify="center">
+              {arrayDatas.map((link, index) => (
+                <Grid key={index} item xs={6} sm={2}>
+                  <Box display="flex" justifyContent="center">
+                    <Link
                       component="button"
                       variant="body1"
                       onClick={(e) => {
@@ -314,178 +463,53 @@ function HomeLayout(props) {
                     >
                       {link.name}
                     </Link>
-                  ))}
-                </div>
-              ) : null}
-
-              <StyledMenu // desktop Submenus
-                id="fade-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={open}
-                onClose={handleClose}
-                TransitionComponent={Fade}
-              >
-                {submenu.map((sub, index) => (
-                  <Fade
-                    in={open}
-                    key={index}
-                    style={{ transitionDelay: index * 200 }}
-                  >
-                    <MenuItem onClick={() => changePage(sub.link)}>
-                      <ListItemText primary={sub.title} />
-                    </MenuItem>
-                  </Fade>
-                ))}
-              </StyledMenu>
-
-              <StyledMenu // mobile menu
-                id="fade-menu-mobile"
-                anchorEl={anchorElMobile}
-                keepMounted
-                open={openMobile}
-                onClose={handleClose}
-                TransitionComponent={Fade}
-              >
-                {arrayDatas.map((link, index) => (
-                  <div key={index}>
-                    <Fade
-                      in={openMobile}
-                      style={{ transitionDelay: index * 100 }}
-                    >
-                      <MenuItem
-                        onClick={() => {
-                          link.submenus
-                            ? openCollapse(link.name, link.collapse)
-                            : changePage(link.link);
-                        }}
-                      >
-                        <ListItemText primary={link.name} />
-                        {link.submenus ? (
-                          <span>
-                            {link.collapse ? (
-                              <ExpandLessSharp />
-                            ) : (
-                              <ExpandMoreSharp />
-                            )}
-                          </span>
-                        ) : null}
-                      </MenuItem>
-                    </Fade>
-
-                    {link.submenus ? (
-                      <Collapse in={link.collapse} timeout="auto" unmountOnExit>
-                        {link.submenulinks.map((sub, index) => (
-                          <ListItem
-                            key={index}
-                            className={classes.nested}
-                            onClick={() => {
-                              changePage(sub.link);
-                            }}
-                          >
-                            <ListItemText primary={sub.title} />
-                          </ListItem>
-                        ))}
-                      </Collapse>
-                    ) : null}
-                  </div>
-                ))}
-              </StyledMenu>
-
-              <span className={classes.space} />
-
-              <SelectLanguage />
-
-              <Button
-                variant="outlined"
-                color="inherit"
-                size="large"
-                onClick={() => {
-                  if (intro.refid) {
-                    navigate(
-                      `https://hotblock-48cbf.firebaseapp.com/account/register/${intro.refid}`
-                    );
-                  } else {
-                    navigate("https://hotblock-48cbf.firebaseapp.com");
-                  }
-                }}
-              >
-                <Typography> Login</Typography>
-              </Button>
-            </Toolbar>
-          </AppBar>
-        </ElevationScroll>
-
-        {intro.layout}
-
-        <div style={{ position: "relative", background: "#303030" }}>
-          {props.children}
-        </div>
-
-        <Container maxWidth="md" className={classes.margintop}>
-          <Grid container spacing={3} justify="center">
-            {arrayDatas.map((link, index) => (
-              <Grid key={index} item xs={6} sm={2}>
-                <Box display="flex" justifyContent="center">
-                  <Link
-                    component="button"
-                    variant="body1"
-                    onClick={(e) => {
-                      link.submenus
-                        ? openSubmenu(e, link.submenulinks)
-                        : changePage(link.link);
-                    }}
-                    color="inherit"
-                    className={classes.link}
-                  >
-                    {link.name}
-                  </Link>
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-          <Divider className={classes.margintop} />
-          <Box
-            className={classes.margintop}
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-          >
-            <Typography variant="body1">
-              Made with &#10084;&#65039; at AFX
-            </Typography>
-          </Box>
-          <Box
-            className={classes.margintop}
-            display="flex"
-            justifyContent="center"
-          >
-            {security.map((links, index) => (
-              <Link
-                key={index}
-                component="button"
-                variant="caption"
-                color="textSecondary"
-                className={classes.link}
-              >
-                {links.title}
-              </Link>
-            ))}
-          </Box>
-          <Box
-            className={classes.margintop}
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-          >
-            <img src={require("../../images/logosmall.svg")} width="30" />
-            <Typography variant="caption">
-              &copy; Hotbloq, LLC, {new Date().toLocaleDateString()}.
-            </Typography>
-          </Box>
-        </Container>
-      </CssBaseline>
-    </React.Fragment>
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
+            <Divider className={classes.margintop} />
+            <Box
+              className={classes.margintop}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              <Typography variant="body1">
+                Made with &#10084;&#65039; at AFX
+              </Typography>
+            </Box>
+            <Box
+              className={classes.margintop}
+              display="flex"
+              justifyContent="center"
+            >
+              {security.map((links, index) => (
+                <Link
+                  key={index}
+                  component="button"
+                  variant="caption"
+                  color="textSecondary"
+                  className={classes.link}
+                >
+                  {links.title}
+                </Link>
+              ))}
+            </Box>
+            <Box
+              className={classes.margintop}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              <img src={require("../../images/logosmall.svg")} width="30" />
+              <Typography variant="caption">
+                &copy; Hotbloq, LLC, {new Date().toLocaleDateString()}.
+              </Typography>
+            </Box>
+          </Container>
+        </CssBaseline>
+      </React.Fragment>
+    </ThemeProvider>
   );
 }
 

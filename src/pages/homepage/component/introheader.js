@@ -12,12 +12,14 @@ import {
   makeStyles,
   CardHeader,
   Button,
+  createMuiTheme,
+  ThemeProvider,
 } from "@material-ui/core";
 
 import Particles from "react-tsparticles";
-import { blue } from "@material-ui/core/colors";
+import { blue, red } from "@material-ui/core/colors";
 import ArmChart from "./armchart";
-import Background from "../../../pages/homepage/images/header-middle-bg.png";
+import Background from "../../../pages/homepage/images/bg.jpg";
 import Backgroundsecond from "../../../pages/homepage/images/header-middle-bg1.png";
 import { navigate } from "@reach/router";
 
@@ -46,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
   header: {
     background: `url(${Background}) center no-repeat, url(${Backgroundsecond}) center bottom no-repeat`,
     height: "600px",
+    backgroundSize: "cover",
   },
   toolbar: theme.mixins.toolbar,
   space: {
@@ -58,7 +61,28 @@ function IntroHeader() {
   const { intro } = useContext(AppContext);
   useEffect(() => {}, []);
 
+  const theme = createMuiTheme({
+    palette: {
+      type: "light",
+      primary: {
+        // Purple and green play nicely together.
+        main:  red[900],
+      },
+      secondary: {
+        // This is green.A700 as hex.
+        main: "#fafafa",
+      },
+      /*  background: {
+        default: "#fff",
+      }, */
+      action: {
+        selected: "#2196f33d",
+      },
+    },
+  });
+
   return (
+    <ThemeProvider theme={theme}>
     <div className={classes.header}>
       <div className={classes.toolbar} />
       <Particles
@@ -153,14 +177,14 @@ function IntroHeader() {
       />
       <div className={classes.intro}>
         <Container>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} justify="flex-end">
             <Grid item xs={12} sm={6}>
               <Box
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
                 mt={3}
-                className={classes.introtext}
+                style={{color: "#fafafa"}}
               >
                 <Typography variant="h4" align="left">
                   INVEST WITH BITCOIN
@@ -169,7 +193,7 @@ function IntroHeader() {
                   World's best cloud investment platform
                 </Typography>
               </Box>
-              <Box mt={3}>
+              <Box mt={3} style={{color: "white"}}>
                 <Typography variant="h6" align="center">
                   We sincerely hope that coininvest.net Investment Limited will
                   become a partner in your life.
@@ -183,10 +207,10 @@ function IntroHeader() {
                   onClick={() => {
                     if (intro.refid) {
                       navigate(
-                        `https://hotblock-48cbf.firebaseapp.com/account/register/${intro.refid}`
+                        `account/register/${intro.refid}`
                       );
                     } else {
-                      navigate("https://hotblock-48cbf.firebaseapp.com");
+                      navigate("/account");
                     }
                   }}
                 >
@@ -195,14 +219,19 @@ function IntroHeader() {
               </Box>
             </Grid>
 
-            <Grid item xs={12} sm={6}>
-              <ArmChart />
-            </Grid>
+            
           </Grid>
         </Container>
       </div>
     </div>
+ </ThemeProvider>
   );
 }
 
 export default IntroHeader;
+
+/*
+<Grid item xs={12} sm={6}>
+              <ArmChart />
+            </Grid>
+            */

@@ -35,7 +35,7 @@ import firebase, { firestore } from "../../../config";
 import { ajax } from "rxjs/ajax";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import NumberFormat from "react-number-format";
-import { AccountBalanceSharp } from "@material-ui/icons";
+import { AccountBalanceSharp, AccountBalanceWallet } from "@material-ui/icons";
 var formatCurrency = require("country-currency-map").formatCurrency;
 
 let converter = new Converter(
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.getContrastText("#1835c0"),
   },
   avatar: {
-    background: theme.palette.secondary.main,
+    background: theme.palette.primary.main,
   },
 }));
 
@@ -194,7 +194,7 @@ function Deposit() {
           <CardHeader
             avatar={
               <Avatar variant="rounded" className={classes.avatar}>
-                <AccountBalanceSharp />
+                <AccountBalanceWallet />
               </Avatar>
             }
             title={currentStrings.Dashboard.withdraw.Deposit_balance}

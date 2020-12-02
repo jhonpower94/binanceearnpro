@@ -54,18 +54,20 @@ function Activities() {
       <Grid container spacing={10}>
         {TransactionAray.map((trans, index) => (
           <Grid key={index} item xs={12} sm={6}>
-            <CardHeader
-              title={trans.name}
-              subheader="Last 5 operations"
-              titleTypographyProps={{
-                align: "center",
-              }}
-              subheaderTypographyProps={{
-                align: "center",
-              }}
-            />
+            <Card variant="outlined">
+              <CardHeader
+                title={trans.name}
+                subheader="Last 5 operations"
+                titleTypographyProps={{
+                  align: "center",
+                }}
+                subheaderTypographyProps={{
+                  align: "center",
+                }}
+              />
 
-            {trans.datas}
+              <CardContent>{trans.datas}</CardContent>
+            </Card>
           </Grid>
         ))}
       </Grid>

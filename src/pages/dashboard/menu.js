@@ -57,6 +57,15 @@ const StyledMenu = withStyles({
   />
 ));
 
+const StyledBadge = withStyles((theme) => ({
+  badge: {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+  },
+}))(Badge);
+
 function DasboardMenu() {
   const classes = useStyles();
   const currentStrings = useSelector((state) => state.language);
@@ -119,11 +128,11 @@ function DasboardMenu() {
 
   return (
     <div className={classes.sectionDesktop}>
-      <Button onClick={handleClick} color="primary">
-        <Badge variant={notifications.length > 0 ? "dot" : null} color="error">
-          <NotificationsOutlined color="action" />
-        </Badge>
-      </Button>
+      <IconButton onClick={handleClick}>
+        <StyledBadge badgeContent={4} color="error">
+          <NotificationsOutlined color="secondary" />
+        </StyledBadge>
+      </IconButton>
 
       <IconButton edge="end" color="primary" onClick={handleClickUser}>
         <Badge variant={info.approved ? null : "dot"} color="primary">

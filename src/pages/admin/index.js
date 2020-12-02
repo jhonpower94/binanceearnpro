@@ -148,13 +148,13 @@ function AdminLyout(props) {
           </IconButton>
           {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
             <img
-              src={require("../../images/logo.png")}
+              src={require("../../images/logo.svg")}
               alt="logo"
               width="150px"
             />
           ) : (
             <img
-              src={require("../../images/logo.png")}
+              src={require("../../images/logo.svg")}
               alt="logo"
               height="25px"
             />

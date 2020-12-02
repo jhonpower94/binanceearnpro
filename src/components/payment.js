@@ -17,6 +17,7 @@ import {
   CircularProgress,
   Avatar,
   Button,
+  Grid,
 } from "@material-ui/core";
 import { reactLocalStorage } from "reactjs-localstorage";
 import repeat from "repeat";
@@ -33,6 +34,8 @@ import { navigate } from "@reach/router";
 import Countdown from "react-countdown";
 import { async } from "rxjs/internal/scheduler/async";
 import { Converter } from "easy-currencies";
+import CopyInput from "./copyinput";
+import { Alert } from "@material-ui/lab";
 var QRCode = require("qrcode.react");
 
 let converter = new Converter(
@@ -200,75 +203,43 @@ function Payment() {
   };
 
   return (
-    <Container maxWidth="sm" className={classes.margintop}>
-      <Box display="flex" flexDirection="column" alignItems="center">
-        <Box m={1}>
-          <QRCode
-            value={`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
-            renderAs="svg"
-            size={200}
+    <Container maxWidth="md" className={classes.margintop}>
+      <Grid container spacing={4} justify="center">
+        <Grid item xs={12} sm={12}>
+          <Box display="flex" justifyContent="center">
+            <QRCode
+              value={`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
+              renderAs="svg"
+              size={200}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} sm={10}>
+          <Alert variant="outlined" severity="info">
+            {`Send payment to the ${paymentInfo.cryptoType} address and amount provided below`}
+          </Alert>
+        </Grid>
+
+        <Grid item xs={12} sm={5}>
+          <CopyInput
+            name={`${paymentInfo.cryptoType} amount`}
+            value={newanount}
           />
-        </Box>
-      </Box>
-
-      <div>
-        <Box display="flex" flexDirection="column" alignItems="center" m={1}>
-          <Typography variant="body1" align="center">
-            Send{" "}
-            <span className={classes.Showheading}>
-              {`${newanount} ${paymentInfo.cryptoType}`}
-            </span>{" "}
-            to address
-          </Typography>
-          <span style={{ marginTop: 10 }} />
-          <Typography
-            variant="h6"
-            align="center"
-            color="textPrimary"
-            display="block"
-            className={classes.wordbreak}
-          >
-            {`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
-          </Typography>
-        </Box>
-      </div>
-      <Divider variant="middle" />
-
-      <CardContent>
-        <Typography variant="body2" align="center">
-          once payment is done send notification to live support or email
-          support to support@coininvest.net, in order to notify us of your successful
-          deposit
-        </Typography>
-      </CardContent>
-
-      <Snackbar
-        key={messageInfo ? messageInfo.key : undefined}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        onExited={handleExited}
-        message={messageInfo ? messageInfo.message : undefined}
-        action={
-          <React.Fragment>
-            <Button color="secondary" size="small" onClick={handleClose}>
-              UNDO
-            </Button>
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              className={classes.close}
-              onClick={handleClose}
-            >
-              <CloseIcon />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
+        </Grid>
+        <Grid item xs={12} sm={5}>
+          <CopyInput
+            name={`${paymentInfo.cryptoType} address`}
+            value={`1HE8YvirstUtKUVQ1khvkJ4SpHgCLW2ca7`}
+          />
+        </Grid>
+        <Grid item xs={12} sm={10}>
+          <Alert variant="filled" severity="info">
+            once payment is done send notification to live support or email
+            support to support@coininvest.net. in order to notify us of your
+            successful deposit
+          </Alert>
+        </Grid>
+      </Grid>
     </Container>
   );
 }

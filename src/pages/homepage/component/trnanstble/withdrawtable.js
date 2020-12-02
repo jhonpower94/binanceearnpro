@@ -131,7 +131,7 @@ export default function WithdrawTable() {
 
         <TableBody>
           {transactions.map((trans, index) => (
-            <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+            <TableRow  role="checkbox" tabIndex={-1} key={index}>
               <TableCell align="left" colSpan={2}>
                 <Box display="flex" flexDirection="column">
                   <Typography variant="body1">{`${trans.firstname} ${trans.lastname}`}</Typography>

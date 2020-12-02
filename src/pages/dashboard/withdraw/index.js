@@ -35,13 +35,14 @@ const useStyles = makeStyles((theme) => ({
 
 function Withdrawals(props) {
   const classes = useStyles();
-  const { tabs, setTabs, currentab } = useContext(AppContext);
+  const { setTabs, currentab, pagetitle, setPagetitle } = useContext(AppContext);
 
   useEffect(() => {
     setTabs([
       { title: "Investments", tab: 0 },
       { title: "Bonus", tab: 1 },
     ]);
+    setPagetitle({ ...pagetitle, title: "Withdraw" });
   }, []);
 
   return (

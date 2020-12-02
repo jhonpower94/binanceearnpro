@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(5),
   },
   avatar: {
-    background: theme.palette.secondary.main,
+    background: theme.palette.primary.main,
   },
 }));
 

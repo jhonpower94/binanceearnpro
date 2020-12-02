@@ -28,7 +28,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link to="../../" className={classes.link}>
-        Your Website
+        Hotblockinvest
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -76,9 +76,9 @@ export default function ResetPassword() {
   };
   const resetpass = (event) => {
     event.preventDefault();
-    auth.sendPasswordResetEmail(values.email).then(()=>{
-      console.log("sent")
-    })
+    auth.sendPasswordResetEmail(values.email).then(() => {
+      console.log("sent");
+    });
   };
 
   useEffect(() => {
@@ -100,7 +100,7 @@ export default function ResetPassword() {
       <div className={classes.paper}>
         <div className={classes.avatar}>
           <img
-            src={require("../../images/logo.png")}
+            src={require("../../images/logo.svg")}
             height={
               useMediaQuery(useTheme().breakpoints.up("sm")) ? "70px" : "50px"
             }
@@ -136,7 +136,7 @@ export default function ResetPassword() {
           <Grid container>
             <Grid item xs>
               <Box display="flex" justifyContent="center">
-                <Link to="../" className={clsx(classes.link, classes.fontsize)}>
+                <Link to="../" className={clsx(classes.link, classes.fontsize)}  color="secondary">
                   Sign in
                 </Link>
               </Box>

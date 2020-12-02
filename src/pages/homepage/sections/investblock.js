@@ -16,10 +16,13 @@ import {
   makeStyles,
   Container,
   Divider,
+  createMuiTheme,
+  ThemeProvider,
 } from "@material-ui/core";
 import IntroHeaderPages from "../component/introheaderpages";
 import Background from "../images/baprice.svg";
 import { VerifiedUserSharp, AddCircleSharp } from "@material-ui/icons";
+import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -42,7 +45,28 @@ function InvestBlock(props) {
     blocksHome ? setArrays(newBlock) : setArrays(blocks);
   }, []);
 
+  const theme = createMuiTheme({
+    palette: {
+      type: "dark",
+      primary: {
+        // Purple and green play nicely together.
+        main:  red[900],
+      },
+      secondary: {
+        // This is green.A700 as hex.
+        main: "#fafafa",
+      },
+      /*  background: {
+        default: "#fff",
+      }, */
+      action: {
+        selected: "#2196f33d",
+      },
+    },
+  });
+
   return (
+    <ThemeProvider theme={theme}>
     <Container maxWidth="md" className={classes.margintop}>
       <Grid container spacing={8} justify="center">
         {arrays.map((trade, index) => (
@@ -54,8 +78,8 @@ function InvestBlock(props) {
             <Grid item xs={6} sm={4}>
               <Card
                 style={{
-                  background: `url(${Background}) no-repeat`,
-                  backgroundSize: "cover",
+                  background: "#b71c1c",
+                //  backgroundSize: "cover",
                 }}
               >
                 <CardHeader
@@ -105,6 +129,7 @@ function InvestBlock(props) {
         ))}
       </Grid>
     </Container>
+  </ThemeProvider>
   );
 }
 

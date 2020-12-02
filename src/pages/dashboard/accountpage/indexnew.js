@@ -42,13 +42,14 @@ const useStyles = makeStyles((theme) => ({
 
 function DashboardPage(props) {
   const classes = useStyles();
-  const { tabs, setTabs, currentab } = useContext(AppContext);
+  const { tabs, setTabs, currentab, pagetitle, setPagetitle } = useContext(AppContext);
 
   useEffect(() => {
     setTabs([
       { title: "Account", tab: 0 },
       { title: "Account Info", tab: 1 },
     ]);
+    setPagetitle({ ...pagetitle, title: "Account" });
   }, []);
 
   return (

@@ -95,14 +95,13 @@ const useStyles = () => {
 
 const radioColor = (key) => {
   switch (key) {
-    case "currencies":
+    case "plan1":
       return "#137cbd";
-    case "stock":
+    case "plan2":
       return green[500];
-    case "realestate":
+    case "plan3":
       return "#2d2d2d";
-    case "commodities":
-      return yellow[800];
+
     default:
       return blue[800];
   }
@@ -129,43 +128,41 @@ function StyledRadio(props) {
 function ChartsPage() {
   const classes = useStyles();
   const currentStrings = useSelector((state) => state.language);
-  const [state, setState] = React.useState("currencies");
+  const [state, setState] = React.useState("plan1");
+  const [star, setStar] = React.useState(3);
   const [currentValue, setCurrentValue] = React.useState(0);
 
   /* const [data, setData] = React.useState([]); */
 
   const [dataType, setDataType] = React.useState({
-    currencies: [],
+    plan1: [],
   });
 
   const [maxvalue, setMaxvalue] = React.useState({
-    min: 75,
-    max: 95,
+    min: 10,
+    max: 25,
   });
 
- useEffect(() => {
+  useEffect(() => {
     const getPlanDatas = firestore.doc(`plans/${12345}`);
     docData(getPlanDatas, "id").subscribe((datax) => {
-      datax.currencies.sort().reverse();
-      datax.stock.sort().reverse();
-      datax.realestate.sort().reverse();
-      datax.commodities.sort().reverse();
+      datax.plan1.sort().reverse();
+      datax.plan2.sort().reverse();
+      datax.plan3.sort().reverse();
       setDataType({ ...datax });
-      const maxLemgth = datax.currencies.length - 1;
-      setCurrentValue(datax.currencies[maxLemgth].value);
+      const maxLemgth = datax.plan1.length - 1;
+      setCurrentValue(datax.plan1[maxLemgth].value);
     });
   }, []);
 
   const data = (state) => {
     switch (state) {
-      case "currencies":
-        return dataType.currencies;
-      case "stock":
-        return dataType.stock;
-      case "realestate":
-        return dataType.realestate;
-      case "commodities":
-        return dataType.commodities;
+      case "plan1":
+        return dataType.plan1;
+      case "plan2":
+        return dataType.plan2;
+      case "plan3":
+        return dataType.plan3;
       default:
         return [];
     }
@@ -174,83 +171,39 @@ function ChartsPage() {
   const handleChange = (event) => {
     setState(event.target.value);
     switch (event.target.value) {
-      case "currencies":
-        return setMinMaxData(75, 95, dataType.currencies);
-      case "stock":
-        return setMinMaxData(54, 74, dataType.stock);
-      case "realestate":
-        return setMinMaxData(26, 54, dataType.realestate);
-      case "commodities":
-        return setMinMaxData(5, 30, dataType.commodities);
+      case "plan1":
+        return setMinMaxData(10, 25, dataType.plan1, 3);
+      case "plan2":
+        return setMinMaxData(35, 50, dataType.plan2, 4);
+      case "plan3":
+        return setMinMaxData(60, 95, dataType.plan3, 5);
       default:
         return null;
     }
   };
 
-  const setMinMaxData = (min, max, array) => {
+  const setMinMaxData = (min, max, array, star) => {
     const maxLength = array.length - 1;
     setCurrentValue(array[maxLength].value);
     setMaxvalue({
       min: min,
       max: max,
     });
+    setStar(star);
   };
-
-  const datannn = [
-    { trade: "currency", time: "1", value: 75 },
-    { trade: "currency", time: "2", value: 80 },
-    { trade: "currency", time: "3", value: 77 },
-    { trade: "currency", time: "4", value: 91 },
-    { trade: "currency", time: "5", value: 88 },
-    { trade: "currency", time: "6", value: 80 },
-    { trade: "currency", time: "7", value: 75 },
-    { trade: "currency", time: "8", value: 95 },
-    { trade: "currency", time: "9", value: 85 },
-    { trade: "stock", time: "1", value: 55 },
-    { trade: "stock", time: "2", value: 60 },
-    { trade: "stock", time: "3", value: 64 },
-    { trade: "stock", time: "4", value: 70 },
-    { trade: "stock", time: "5", value: 69 },
-    { trade: "stock", time: "6", value: 55 },
-    { trade: "stock", time: "7", value: 60 },
-    { trade: "stock", time: "8", value: 58 },
-    { trade: "stock", time: "9", value: 60 },
-    { trade: "realestate", time: "1", value: 30 },
-    { trade: "realestate", time: "2", value: 49 },
-    { trade: "realestate", time: "3", value: 54 },
-    { trade: "realestate", time: "4", value: 50 },
-    { trade: "realestate", time: "5", value: 40 },
-    { trade: "realestate", time: "6", value: 39 },
-    { trade: "realestate", time: "7", value: 35 },
-    { trade: "realestate", time: "8", value: 48 },
-    { trade: "realestate", time: "9", value: 38 },
-    { trade: "commodities", time: "1", value: 20 },
-    { trade: "commodities", time: "2", value: 25 },
-    { trade: "commodities", time: "3", value: 22 },
-    { trade: "commodities", time: "4", value: 31 },
-    { trade: "commodities", time: "5", value: 34 },
-    { trade: "commodities", time: "6", value: 20 },
-    { trade: "commodities", time: "7", value: 25 },
-    { trade: "commodities", time: "8", value: 28 },
-    { trade: "commodities", time: "9", value: 19 },
-  ];
 
   const plansChart = [
     {
-      label: currentStrings.Dashboard.account.plan_titles.currency,
-      value: "currencies",
+      label: currentStrings.Dashboard.account.plan_titles.plan1,
+      value: "plan1",
     },
     {
-      label: currentStrings.Dashboard.account.plan_titles.stock,
-      value: "stock",
+      label: currentStrings.Dashboard.account.plan_titles.plan2,
+      value: "plan2",
     },
     {
-      label: currentStrings.Dashboard.account.plan_titles.realestate,
-      value: "realestate",
-    },
-    {
-      label: currentStrings.Dashboard.account.plan_titles.commodities,
-      value: "commodities",
+      label: currentStrings.Dashboard.account.plan_titles.plan3,
+      value: "plan3",
     },
   ];
 
@@ -266,9 +219,11 @@ function ChartsPage() {
     time: {
       range: [0, 1],
       tickCount: 5,
-     /* formatter: (val) => {
-        
-      }, */
+      formatter: (val) => {
+        const hour = new Date(val * 1000).getUTCDate();
+        const time = new Date(val * 1000).getHours();
+        return `${hour} : 00`;
+      },
     },
   };
 
@@ -311,14 +266,14 @@ function ChartsPage() {
                 : "center"
             }
           >
-            <Rating name="read-only" value={4} readOnly />
+            <Rating name="read-only" value={star} readOnly />
           </Box>
         </Grid>
 
         <Grid item xs={12} sm={12}>
           <Chart
             scale={scale}
-            height={useMediaQuery(useTheme().breakpoints.up("sm")) ? 300 : 300}
+            height={useMediaQuery(useTheme().breakpoints.up("sm")) ? 250 : 200}
             data={data(state)}
             autoFit
           >
@@ -348,3 +303,35 @@ function ChartsPage() {
 }
 
 export default ChartsPage;
+
+/* 
+  const datannn = [
+    { trade: "currency", time: "1", value: 75 },
+    { trade: "currency", time: "2", value: 80 },
+    { trade: "currency", time: "3", value: 77 },
+    { trade: "currency", time: "4", value: 91 },
+    { trade: "currency", time: "5", value: 88 },
+    { trade: "currency", time: "6", value: 80 },
+    { trade: "currency", time: "7", value: 75 },
+    { trade: "currency", time: "8", value: 95 },
+    { trade: "currency", time: "9", value: 85 },
+    { trade: "plan2", time: "1", value: 55 },
+    { trade: "plan2", time: "2", value: 60 },
+    { trade: "plan2", time: "3", value: 64 },
+    { trade: "plan2", time: "4", value: 70 },
+    { trade: "plan2", time: "5", value: 69 },
+    { trade: "plan2", time: "6", value: 55 },
+    { trade: "plan2", time: "7", value: 60 },
+    { trade: "plan2", time: "8", value: 58 },
+    { trade: "plan2", time: "9", value: 60 },
+    { trade: "plan3", time: "1", value: 30 },
+    { trade: "plan3", time: "2", value: 49 },
+    { trade: "plan3", time: "3", value: 54 },
+    { trade: "plan3", time: "4", value: 50 },
+    { trade: "plan3", time: "5", value: 40 },
+    { trade: "plan3", time: "6", value: 39 },
+    { trade: "plan3", time: "7", value: 35 },
+    { trade: "plan3", time: "8", value: 48 },
+    { trade: "plan3", time: "9", value: 38 },
+  ];
+ */

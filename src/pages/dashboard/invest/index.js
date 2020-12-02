@@ -132,8 +132,8 @@ function InvestNew() {
       name: "Plan 2",
       title: currentStrings.Dashboard.invest.plan_title.b,
       rate: 12,
-      min_rate: 40,
-      max_rate: 55,
+      min_rate: 35,
+      max_rate: 50,
       duration: 24,
       lot: 500,
       max: 5000,
@@ -143,7 +143,7 @@ function InvestNew() {
       name: "Plan 3",
       title: currentStrings.Dashboard.invest.plan_title.c,
       rate: 15,
-      min_rate: 70,
+      min_rate: 60,
       max_rate: 95,
       duration: 34,
       lot: 1000,
@@ -182,7 +182,7 @@ function InvestNew() {
                     subheader={
                       <Rating
                         name="read-only"
-                        value={4}
+                        value={index + 3}
                         readOnly
                         size="small"
                       />
@@ -195,7 +195,7 @@ function InvestNew() {
                     alignItems="baseline"
                   >
                     <Typography component="h2" variant="h3">
-                      {`${trade.rate} - 20 `}
+                      {`${trade.min_rate} - ${trade.max_rate} `}
                     </Typography>
                     <Typography variant="h6" color="textSecondary">
                       %

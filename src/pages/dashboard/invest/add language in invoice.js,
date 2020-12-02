@@ -1,0 +1,5 @@
+add language in invoice.js,
+add language in complete.js,
+add language in payment.js,
+
+fix delete notification in menu ( handleClose() ) 

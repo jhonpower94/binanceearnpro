@@ -201,7 +201,7 @@ export default function SignUpReferral(props) {
       <div className={classes.paper}>
         <div className={classes.avatar}>
           <img
-            src={require("../../images/logo.png")}
+            src={require("../../images/logo.svg")}
             height={
               useMediaQuery(useTheme().breakpoints.up("sm")) ? "70px" : "50px"
             }

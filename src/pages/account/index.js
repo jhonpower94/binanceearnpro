@@ -4,6 +4,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { css } from "@emotion/core";
 import { useSelector } from "react-redux";
 import { Box } from "@material-ui/core";
+import { Helmet } from "react-helmet";
 
 const override = css`
   display: block;
@@ -17,9 +18,16 @@ function AccountLayout(props) {
   useEffect(() => {
     console.log(loading.loading);
   }, []);
+  
 
   return (
     <React.Fragment>
+      <Helmet>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Helmet>
       {loading.loading ? (
         <Box display="flex" flexDirection="column" alignItems="center" mt={20}>
           <PulseLoader

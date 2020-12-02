@@ -37,9 +37,11 @@ const useStyles = makeStyles((theme) => ({
 
 function Invest() {
   const classes = useStyles();
+  const { pagetitle, setPagetitle } = useContext(AppContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setPagetitle({ ...pagetitle, title: "Invest" });
   }, []);
 
   return (

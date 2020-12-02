@@ -140,7 +140,7 @@ p.error {
     display: block; 
     height: 117px; 
 
-    background: url('../images/logo.png') center center no-repeat;
+    background: url('../images/logo.svg') center center no-repeat;
     
 }
 .logo  > a { display: block; height: 117px; width: 100%; }
