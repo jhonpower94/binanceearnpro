@@ -1,41 +1,12 @@
 import React, { useEffect, useContext, useState } from "react";
 import { AppContext } from "../App";
 import { useDispatch, useSelector } from "react-redux";
-import { loading$, loadingpayment$ } from "../redux/action";
-import { auth, firestore, docData } from "../config";
-import {
-  makeStyles,
-  Container,
-  ListItem,
-  ListItemText,
-  Card,
-  Box,
-  CardHeader,
-  Typography,
-  CardContent,
-  Divider,
-  CircularProgress,
-  Avatar,
-  Button,
-  Grid,
-} from "@material-ui/core";
+import { makeStyles, Container, Box, Grid } from "@material-ui/core";
 import { reactLocalStorage } from "reactjs-localstorage";
-import repeat from "repeat";
-import { client } from "../config/services";
-import { ajax } from "rxjs/ajax";
-import { map, catchError } from "rxjs/operators";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import { css } from "@emotion/core";
-import PulseLoader from "react-spinners/PulseLoader";
-import Snackbar from "@material-ui/core/Snackbar";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import { navigate } from "@reach/router";
-import Countdown from "react-countdown";
-import { async } from "rxjs/internal/scheduler/async";
 import { Converter } from "easy-currencies";
 import CopyInput from "./copyinput";
 import { Alert } from "@material-ui/lab";
+
 var QRCode = require("qrcode.react");
 
 let converter = new Converter(
@@ -43,12 +14,8 @@ let converter = new Converter(
   "67eb8de24a554b9499d1d1bf919c93a3"
 );
 
-// Can be a string as well. Need to ensure each key-value pair ends with ;
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`;
+let CurrencyConverter = require("@y2nk4/currency-converter");
+let converterxx = new CurrencyConverter("b994e84c139607702789");
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -78,9 +45,7 @@ const storagedata = reactLocalStorage.getObject("paymentInfo");
 function Payment() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const currentUserId = useSelector(
-    (state) => state.locationinfo.locationinfo.id
-  );
+  const currentStrings = useSelector((state) => state.language);
   const txn_info = useSelector((state) => state.trxinfo);
   const [snackPack, setSnackPack] = React.useState([]);
   const [open, setOpen] = React.useState(false);
@@ -121,9 +86,12 @@ function Payment() {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    converter.convert(paymentInfo.amount, "USD", "BTC").then((data) => {
+    converterxx
+      .convert("NGN", "BTC", paymentInfo.amount)
+      .then((data) => setNewamount(data));
+    /* converter.convert(paymentInfo.amount, "USD", "BTC").then((data) => {
       setNewamount(data);
-    });
+    }); */
 
     /*
     console.log(JSON.parse(window.localStorage.getItem("paymentInfo")));
@@ -216,7 +184,7 @@ function Payment() {
         </Grid>
         <Grid item xs={12} sm={10}>
           <Alert variant="outlined" severity="info">
-            {`Send payment to the ${paymentInfo.cryptoType} address and amount provided below`}
+            {`${currentStrings.Dashboard.payment.send} ${paymentInfo.cryptoType} ${currentStrings.Dashboard.payment.send_}`}
           </Alert>
         </Grid>
 
@@ -224,19 +192,19 @@ function Payment() {
           <CopyInput
             name={`${paymentInfo.cryptoType} amount`}
             value={newanount}
+            id="outlined-adornment-amount"
           />
         </Grid>
         <Grid item xs={12} sm={5}>
           <CopyInput
             name={`${paymentInfo.cryptoType} address`}
             value={`1NKawsJ1AsZ8jeMcJvA3kigPZU6fuFU3UX`}
+            id="outlined-adornment-crypto"
           />
         </Grid>
         <Grid item xs={12} sm={10}>
-          <Alert variant="filled" severity="info">
-            once payment is done send notification to live support or email
-            support to support@coininvest.net. in order to notify us of your
-            successful deposit
+          <Alert variant="filled" severity="warning">
+            {currentStrings.Dashboard.payment.info}
           </Alert>
         </Grid>
       </Grid>

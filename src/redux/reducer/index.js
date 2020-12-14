@@ -21,9 +21,12 @@ const darkMode = (state = true, action) => {
 
 const loading = (state = { loading: false }, action) => {
   const newLoadState = { ...state, loading: !state.loading };
+  const stoploading = { ...state, loading: action.payload };
   switch (action.type) {
     case "LOADING":
       return newLoadState;
+    case "STOPLOADING":
+      return stoploading;
     default:
       return state;
   }
@@ -119,6 +122,8 @@ const locationinfo = (
       btcaddress: "",
       address: "",
       state: "",
+      currencycode: "USD",
+      wallet_balance: 0,
     },
   },
   action

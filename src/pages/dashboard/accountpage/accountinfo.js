@@ -6,18 +6,12 @@ import {
   Container,
   CardHeader,
   Typography,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
   Grid,
   FormControl,
   OutlinedInput,
   InputAdornment,
   IconButton,
   InputLabel,
-  Card,
-  CardContent,
   LinearProgress,
   withStyles,
   Avatar,
@@ -27,15 +21,12 @@ import {
   TextField,
   Snackbar,
 } from "@material-ui/core";
-import {
-  CloseSharp,
-  FileCopySharp,
-  VerifiedUserSharp,
-} from "@material-ui/icons";
+import { CloseSharp, FileCopySharp } from "@material-ui/icons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useDispatch, useSelector } from "react-redux";
 import { firestore } from "../../../config";
 import { ajax } from "rxjs/ajax";
+import { orange } from "@material-ui/core/colors";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -48,7 +39,7 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
   bar: {
     borderRadius: 5,
-    backgroundColor: "#1a90ff",
+    backgroundColor: orange[900],
   },
 }))(LinearProgress);
 
@@ -119,15 +110,15 @@ function AccountInfo() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://coininvest.herokuapp.com/mail",
+          url: "https://hotblockinvest.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
-            message: `Hello ${userInfos.firstName}, you have updated your profile, your profile will be updated once we review and confirm your proile details`,
-            to: `${userInfos.email}, support@coininvest.net`,
-            subject: "Pofile update",
+            message: `${currentStrings.emailmessages.hello} ${userInfos.firstName}, ${currentStrings.emailmessages.accountinfo.text}.`,
+            to: `${userInfos.email}, support@hotblockinvest.com`,
+            subject: currentStrings.emailmessages.accountinfo.subject,
           },
         }).subscribe(() => {
           console.log("user message sent");
@@ -137,10 +128,10 @@ function AccountInfo() {
 
   return (
     <Container maxWidth="md">
-      <Grid container spacing={5} justify="center">
+      <Grid container spacing={5} justify="flex-start">
         <Grid item xs={12} sm={8}>
           <CardHeader
-            avatar={<Avatar className={classes.avatar}>J</Avatar>}
+            //  avatar={<Avatar className={classes.avatar}>J</Avatar>}
             title={
               <Typography variant="body1">
                 {currentStrings.Dashboard.account_info.profile_status}
@@ -149,10 +140,15 @@ function AccountInfo() {
             subheader={
               <Box display="flex" alignItems="center">
                 <Box width="100%" mr={1}>
-                  <BorderLinearProgress variant="determinate" value={50} />
+                  <BorderLinearProgress
+                    variant="determinate"
+                    value={isNaN(userInfos.btcaddress) ? 70 : 100}
+                  />
                 </Box>
                 <Box minWidth={35}>
-                  <Typography variant="body2">50%</Typography>
+                  <Typography variant="body1">
+                    {isNaN(userInfos.btcaddress) ? "70%" : "100%"}
+                  </Typography>
                 </Box>
               </Box>
             }
@@ -179,7 +175,9 @@ function AccountInfo() {
                   <InputAdornment position="end">
                     <CopyToClipboard
                       text={`http://${window.location.hostname}/account/register/${userInfos.id}`}
-                      onCopy={handleClick("Link copied")}
+                      onCopy={handleClick(
+                        currentStrings.Dashboard.account_info.copy_link
+                      )}
                     >
                       <IconButton
                         aria-label="toggle password visibility"

@@ -135,9 +135,7 @@ function DasboardMenu() {
       </IconButton>
 
       <IconButton edge="end" color="primary" onClick={handleClickUser}>
-        <Badge variant={info.approved ? null : "dot"} color="primary">
-          <Avatar className={classes.orange}>{firstString}</Avatar>
-        </Badge>
+        <Avatar className={classes.orange}>{firstString}</Avatar>
       </IconButton>
 
       <StyledMenu

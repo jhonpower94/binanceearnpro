@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import "./component.css";
 import { Strings } from "../lang/language";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -14,10 +14,10 @@ import Fade from "@material-ui/core/Fade";
 import Grow from "@material-ui/core/Grow";
 import { useDispatch, useSelector } from "react-redux";
 import { language$ } from "../redux/action";
+import { AppContext } from "../App";
 
 const useStyles = makeStyles((theme) => ({
   button: {
-   
     display: "flex",
   },
   space: {
@@ -52,6 +52,9 @@ const StyledMenu = withStyles({
 function SelectLanguage() {
   const classes = useStyles();
   const currentStrings = useSelector((state) => state.language);
+  const { setRightoleft, currentlanguage, setCurrentlanguage } = useContext(
+    AppContext
+  );
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -64,9 +67,25 @@ function SelectLanguage() {
     setAnchorEl(null);
   };
 
-  const setLanguage = (lang) => {
+  // right to left function
+  function setRtl(lang) {
+    switch (lang) {
+      case "ar":
+        return setRightoleft({ status: true });
+      case "he":
+        return setRightoleft({ status: true });
+      case "fa":
+        return setRightoleft({ status: true });
+      default:
+        return setRightoleft({ status: false });
+    }
+  }
+
+  const setLanguage = (lang, country) => {
     Strings.setLanguage(lang);
     dispatch(language$(Strings));
+    setRtl(lang); // set right to left fuction
+    setCurrentlanguage(country);
     setAnchorEl(null);
   };
 
@@ -85,9 +104,7 @@ function SelectLanguage() {
           <TranslateSharpIcon />
 
           {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
-            <Typography className={classes.space}>
-              {currentStrings.language}
-            </Typography>
+            <Typography className={classes.space}>{currentlanguage}</Typography>
           ) : null}
 
           <ExpandMoreSharpIcon className={open ? "rotate" : ""} />
@@ -104,60 +121,168 @@ function SelectLanguage() {
       >
         {[
           {
-            title: "DE",
-            countrycode: "DE",
-            duration: "100ms",
-            languagecode: "de",
+            countryname: "عربى",
+            languagecode: "ar",
           },
           {
-            title: "EN",
-            countrycode: "US",
-            duration: "200ms",
+            countryname: "English",
             languagecode: "en",
           },
+          /*       {
+            countryname: "azərbaycan",
+            languagecode: "az",
+          },
           {
-            title: "ES",
-            countrycode: "ES",
-            duration: "300ms",
+            countryname: "белар",
+            languagecode: "be",
+          },
+          {
+            countryname: "বাংলা",
+            languagecode: "bn",
+          },
+          {
+            countryname: "български",
+            languagecode: "bg",
+          },
+          {
+            countryname: "català",
+            languagecode: "ca",
+          },
+          {
+            countryname: "中文",
+            languagecode: "zh",
+          },
+          {
+            countryname: "中文",
+            languagecode: "nl",
+          },
+          {
+            countryname: "hrvatski",
+            languagecode: "hr",
+          },
+          {
+            countryname: "čeština",
+            languagecode: "cs",
+          },
+          {
+            countryname: "Deutsche",
+            languagecode: "de",
+          },
+         
+          {
+            countryname: "español",
             languagecode: "es",
           },
           {
-            title: "FR",
-            countrycode: "FR",
-            duration: "400ms",
+            countryname: "français",
             languagecode: "fr",
           },
           {
-            title: "IT",
-            countrycode: "IT",
-            duration: "500ms",
-            languagecode: "IT",
+            countryname: "עִברִית",
+            languagecode: "he",
           },
           {
-            title: "PT",
-            countrycode: "BR",
-            duration: "600ms",
+            countryname: "हिंदी",
+            languagecode: "hi",
+          },
+          {
+            countryname: "Magyar",
+            languagecode: "hu",
+          },
+          {
+            countryname: "bahasa Indonesia",
+            languagecode: "id",
+          },
+          {
+            countryname: "Italia",
+            languagecode: "it",
+          },
+          {
+            countryname: "日本人",
+            languagecode: "ja",
+          },
+          {
+            countryname: "ქართველი",
+            languagecode: "ka",
+          },
+          {
+            countryname: "қазақ",
+            languagecode: "kk",
+          },
+          {
+            countryname: "한국어",
+            languagecode: "ko",
+          },
+          {
+            countryname: "македонија",
+            languagecode: "mk",
+          },
+          {
+            countryname: "norsk",
+            languagecode: "nn",
+          },
+          {
+            countryname: "Bokmål",
+            languagecode: "nb",
+          },
+          {
+            countryname: "فارسی",
+            languagecode: "fa",
+          },
+          {
+            countryname: "Português",
             languagecode: "pt",
           },
           {
-            title: "RU",
-            countrycode: "RU",
-            duration: "700ms",
+            countryname: "Polskie",
+            languagecode: "pl",
+          },
+          {
+            countryname: "Română",
+            languagecode: "ro",
+          },
+          {
+            countryname: "Россия",
             languagecode: "ru",
           },
+          {
+            countryname: "Српски",
+            languagecode: "sr",
+          },
+          {
+            countryname: "svenska",
+            languagecode: "sv",
+          },
+          {
+            countryname: "ไทย",
+            languagecode: "th",
+          },
+          {
+            countryname: "Türk",
+            languagecode: "tr",
+          },
+          {
+            countryname: "український",
+            languagecode: "uk",
+          },
+          {
+            countryname: "o'zbekcha",
+            languagecode: "uz",
+          },
+
+          */
         ].map((lnk, index) => (
-          <Fade in={open} key={index} style={{ transitionDelay: lnk.duration }}>
-            <MenuItem onClick={() => setLanguage(lnk.languagecode)}>
-              <ReactCountryFlag
-                countryCode={lnk.countrycode}
-                svg
-                style={{
-                  width: "2em",
-                  height: "2em",
-                }}
-                title={lnk.title}
-              />
-              <Typography className={classes.flag}>{lnk.title}</Typography>
+          <Fade
+            in={open}
+            key={index}
+            style={{ transitionDelay: `${index * 100}ms` }}
+          >
+            <MenuItem
+              onClick={() => setLanguage(lnk.languagecode, lnk.countryname)}
+            >
+              <Typography className={classes.flag}>
+                {lnk.countryname}
+              </Typography>
             </MenuItem>
           </Fade>
         ))}
@@ -169,6 +294,16 @@ function SelectLanguage() {
 export default SelectLanguage;
 
 /*
+
+<ReactCountryFlag
+                countryCode={lnk.countrycode}
+                svg
+                style={{
+                  width: "2em",
+                  height: "2em",
+                }}
+                title={lnk.title}
+              />
 <Button
           color="inherit"
           variant={

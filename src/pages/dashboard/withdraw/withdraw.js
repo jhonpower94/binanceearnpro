@@ -21,6 +21,7 @@ import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import { ajax } from "rxjs/ajax";
 import { navigate } from "@reach/router";
 import { AccountBalanceWallet } from "@material-ui/icons";
+import getSymbolFromCurrency from "currency-symbol-map";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -33,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
-
+  const userInfos = useSelector((state) => state.locationinfo.locationinfo);
+  const prefix = getSymbolFromCurrency(userInfos.currencycode);
   return (
     <NumberFormat
       {...other}
@@ -48,7 +50,7 @@ function NumberFormatCustom(props) {
       }}
       thousandSeparator
       isNumericString
-      prefix="$"
+      prefix={prefix}
     />
   );
 }
@@ -105,6 +107,7 @@ function Withdrawform() {
           email: userInfos.email,
           firstname: userInfos.firstName,
           lastname: userInfos.lastName,
+          currency: userInfos.currencycode,
         })
         .then(() => {
           const newamountnn = userInfos.wallet_balance - parseInt(value.amount);
@@ -115,20 +118,19 @@ function Withdrawform() {
             wallet_balance: newamountnn,
           });
           ajax({
-            url: "https://coininvest.herokuapp.com/mail",
+            url: "https://hotblockinvest.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: {
-              message: `Hi ${userInfos.firstName} ${userInfos.lastName} <br><br/>
-              You have successfully placed a wallet withdrawal request of ${amountnn} to your BTC wallet 
-              (${value.address}).<br/><br/>
-              Please exercise patience while we process your transaction<br/><br/>
-              Thanks. 
+              message: `${currentStrings.emailmessages.hello} ${userInfos.firstName} ${userInfos.lastName} <br><br/>
+              ${currentStrings.emailmessages.withdraw.a} ${amountnn} ${currentStrings.emailmessages.withdraw.b} 
+              (${value.address}).<br/>
+              ${currentStrings.emailmessages.withdraw.a}.
               `,
-              to: `${userInfos.email}, support@coininvest.net`,
-              subject: "Withdrawal",
+              to: `${userInfos.email}, support@hotblockinvest.com`,
+              subject: currentStrings.emailmessages.withdraw.subject,
             },
           }).subscribe(() => {
             dispatch(loading$());
@@ -161,16 +163,19 @@ function Withdrawform() {
             subheader={
               isNaN(userInfos.wallet_balance) ? (
                 <Typography variant="h4">
-                  {" "}
-                  {formatLocaleCurrency(0, "USD", {
+                  {formatLocaleCurrency(0, userInfos.currencycode, {
                     autoFixed: false,
-                  })}{" "}
+                  })}
                 </Typography>
               ) : (
                 <Typography variant="h4">
-                  {formatLocaleCurrency(userInfos.wallet_balance, "USD", {
-                    autoFixed: false,
-                  })}
+                  {formatLocaleCurrency(
+                    userInfos.wallet_balance,
+                    userInfos.currencycode,
+                    {
+                      autoFixed: false,
+                    }
+                  )}
                 </Typography>
               )
             }

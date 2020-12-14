@@ -57,24 +57,24 @@ function BtcAddressInput(props) {
             email: userInfos.email,
             firstname: userInfos.firstName,
             lastname: userInfos.lastName,
+            currency: "USD",
           })
           .then(() => {
             const amountnn = formatLocaleCurrency(data.amount, "USD", {
               autoFixed: false,
             });
             ajax({
-              url: "https://coininvest.herokuapp.com/mail",
+              url: "https://hotblockinvest.herokuapp.com/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
               body: {
-                message: `Hi ${userInfos.firstName} ${userInfos.lastName} <br><br/>
-                You have successfully placed a withdrawal request of ${amountnn} to your BTC wallet ${address}.<br/><br/>
-                Please exercise patience while we process your transaction<br/><br/>
-                Thanks. `,
-                to: `${userInfos.email}, support@coininvest.net`,
-                subject: "Bonus withdrawal",
+                message: `${currentStrings.emailmessages.hello} ${userInfos.firstName} ${userInfos.lastName} <br><br/>
+                ${currentStrings.emailmessages.address.a} ${amountnn} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
+                ${currentStrings.emailmessages.address.c}`,
+                to: `${userInfos.email}, support@hotblockinvest.com`,
+                subject: currentStrings.emailmessages.address.subject_bonus,
               },
             }).subscribe(() => {
               console.log("message sent");
@@ -101,6 +101,7 @@ function BtcAddressInput(props) {
         email: userInfos.email,
         firstname: userInfos.firstName,
         lastname: userInfos.lastName,
+        currency: userInfos.currencycode,
       })
       .then(() => {
         const amountnn = formatLocaleCurrency(data.return_amount, "USD", {
@@ -116,19 +117,18 @@ function BtcAddressInput(props) {
           });
 
         ajax({
-          url: "https://coininvest.herokuapp.com/mail",
+          url: "https://hotblockinvest.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
-            message: `Hi ${userInfos.firstName} ${userInfos.lastName} <br><br/>
-              You have successfully placed a withdrawal request of ${amountnn} to your this bitcoin address ${address}.<br/><br/>
-              Please exercise patience while we process your transaction<br/><br/>
-              Thanks. 
+            message: `${currentStrings.emailmessages.hello} ${userInfos.firstName} ${userInfos.lastName} <br><br/>
+              ${currentStrings.emailmessages.address.a} ${amountnn} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
+              ${currentStrings.emailmessages.address.c}
               `,
-            to: `${userInfos.email}, support@coininvest.net`,
-            subject: "Withdrawal",
+            to: `${userInfos.email}, support@hotblockinvest.com`,
+            subject: currentStrings.emailmessages.address.subject_withdraw,
           },
         }).subscribe(() => {
           console.log("user message sent");

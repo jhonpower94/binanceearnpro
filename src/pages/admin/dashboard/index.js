@@ -71,7 +71,8 @@ function DashboardAdmin() {
     columns: [
       { title: "Name", field: "firstName" },
       { title: "Surname", field: "lastName" },
-      { title: "$ Wallet balance", field: "wallet_balance", type: "numeric" },
+      { title: "currency", field: "currencycode" },
+      { title: "Wallet balance", field: "wallet_balance", type: "numeric" },
       { title: "Referred", field: "referrer" },
       { title: "Referrer Name", field: "referrername" },
       { title: "Email", field: "email" },
@@ -119,9 +120,7 @@ function DashboardAdmin() {
         return prv + cur.deposit_amount;
       }, 0);
       settotaldeposit(
-        formatLocaleCurrency(totalDeposits, "USD", {
-          autoFixed: false,
-        })
+        totalDeposits
       );
     });
 
@@ -208,7 +207,7 @@ function DashboardAdmin() {
                   setTimeout(() => {
                     resolve();
                     ajax({
-                      url: "https://coininvest.herokuapp.com/delete",
+                      url: "https://hotblockinvest.herokuapp.com/delete",
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",

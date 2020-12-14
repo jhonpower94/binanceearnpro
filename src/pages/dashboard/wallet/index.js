@@ -7,6 +7,7 @@ import { AppContext } from "../../../App";
 import CustomizedTabs from "../tabs";
 import Deposit from "./deposit";
 import Withdrawform from "../withdraw/withdraw";
+import { useSelector } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,14 +37,15 @@ const useStyles = makeStyles((theme) => ({
 
 function Wallet(props) {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   const { setTabs, currentab, pagetitle, setPagetitle } = useContext(AppContext);
 
   useEffect(() => {
     setTabs([
-      { title: "Wallet deposit", tab: 0 },
-      { title: "Withdraw wallet", tab: 1 },
+      { title: currentStrings.Dashboard.tabs.deposit, tab: 0 },
+      { title: currentStrings.Dashboard.tabs.withdraw, tab: 1 },
     ]);
-    setPagetitle({ ...pagetitle, title: "Wallet" });
+    setPagetitle({ ...pagetitle, title: currentStrings.Dashboard.titles.wallet });
   }, []);
 
   return (

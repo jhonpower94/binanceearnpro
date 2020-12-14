@@ -14,6 +14,12 @@ export const loading$ = () => {
     type: "LOADING",
   };
 };
+export const stopload$ = (data) => {
+  return {
+    type: "STOPLOADING",
+    payload: data,
+  };
+};
 export const loadingpayment$ = () => {
   return {
     type: "LOADINGPAYMENT",

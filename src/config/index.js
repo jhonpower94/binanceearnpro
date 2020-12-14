@@ -7,14 +7,13 @@ import { collectionData, docData } from "rxfire/firestore";
 import { filter } from "rxjs/operators";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAvue4Nuo9hVT9ex5TGGsx0EB-fDxkATbQ",
-  authDomain: "hotblock-48cbf.firebaseapp.com",
-  databaseURL: "https://hotblock-48cbf.firebaseio.com",
-  projectId: "hotblock-48cbf",
-  storageBucket: "hotblock-48cbf.appspot.com",
-  messagingSenderId: "569044229872",
-  appId: "1:569044229872:web:bf02b30a0da2239f286c35",
-  measurementId: "G-1PJ3688ZV0"
+  apiKey: "AIzaSyAhzbLFtj3J_ubXZmtkVH61S3aqbzHfK2Y",
+  authDomain: "hotblockinvest.firebaseapp.com",
+  databaseURL: "https://hotblockinvest.firebaseio.com",
+  projectId: "hotblockinvest",
+  storageBucket: "hotblockinvest.appspot.com",
+  messagingSenderId: "468239244770",
+  appId: "1:468239244770:web:035adf1ad39d02a9ea2dbb",
 };
 const app = firebase.initializeApp(firebaseConfig);
 

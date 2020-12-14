@@ -13,6 +13,7 @@ import Invoice from "../invest/invoice";
 import Invest from "../invest/indexnew";
 import Investment from "../invest/myinvestments";
 import CustomizedTabs from "../tabs";
+import { useSelector } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -42,14 +43,20 @@ const useStyles = makeStyles((theme) => ({
 
 function DashboardPage(props) {
   const classes = useStyles();
-  const { tabs, setTabs, currentab, pagetitle, setPagetitle } = useContext(AppContext);
+  const currentStrings = useSelector((state) => state.language);
+  const { tabs, setTabs, currentab, pagetitle, setPagetitle } = useContext(
+    AppContext
+  );
 
   useEffect(() => {
     setTabs([
-      { title: "Account", tab: 0 },
-      { title: "Account Info", tab: 1 },
+      { title: currentStrings.Dashboard.tabs.account, tab: 0 },
+      { title: currentStrings.Dashboard.tabs.acount_info, tab: 1 },
     ]);
-    setPagetitle({ ...pagetitle, title: "Account" });
+    setPagetitle({
+      ...pagetitle,
+      title: currentStrings.Dashboard.titles.home,
+    });
   }, []);
 
   return (

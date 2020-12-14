@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { CloseSharp, FileCopySharp } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -21,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
 
 function CopyInput(props) {
   const classes = useStyles();
-  const {name, value} = props;
+  const currentStrings = useSelector((state) => state.language);
+  const { name, value, id } = props;
   const [snackPack, setSnackPack] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const [messageInfo, setMessageInfo] = React.useState(undefined);
@@ -54,20 +56,18 @@ function CopyInput(props) {
 
   return (
     <div>
-      <FormControl
-        variant="outlined"
-        fullWidth
-        disabled
-        size="small"
-      >
+      <FormControl variant="outlined" fullWidth disabled size="small">
         <InputLabel htmlFor="outlined-adornment-password">{name}</InputLabel>
         <OutlinedInput
-          id="outlined-adornment-password"
+          id={id}
           type="text"
           value={value}
           endAdornment={
             <InputAdornment position="end">
-              <CopyToClipboard text={value} onCopy={handleClick("Link copied")}>
+              <CopyToClipboard
+                text={value}
+                onCopy={handleClick(currentStrings.Dashboard.payment.copy)}
+              >
                 <IconButton aria-label="toggle password visibility" edge="end">
                   <FileCopySharp />
                 </IconButton>

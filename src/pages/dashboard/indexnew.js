@@ -25,6 +25,7 @@ import {
   withStyles,
   Box,
   useMediaQuery,
+  CircularProgress,
 } from "@material-ui/core";
 import { red, blue } from "@material-ui/core/colors";
 import { navigate } from "@reach/router";
@@ -39,10 +40,12 @@ import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import {
   bonusbalance$,
   bonusCollections$,
+  loading$,
   locationinfo$,
   mainbalance$,
   myinvestment$,
   notification$,
+  stopload$,
   totalbonusearned$,
   totaldeposit$,
   totalprofit$,
@@ -55,6 +58,9 @@ import {
   HomeSharp,
 } from "@material-ui/icons";
 import { Helmet } from "react-helmet";
+import { investmentplans } from "../../service/plansashboard";
+import { Converter } from "easy-currencies";
+import { doc } from "rxfire/firestore";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -114,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    color: blue[800],
+    //  color: blue[800],
   },
   menuButton: {
     marginRight: 0,
@@ -228,16 +234,70 @@ const StyledTab = withStyles((theme) => ({
   },
 }))((props) => <Tab disableRipple {...props} />);
 
+// Inspired by the former Facebook spinners.
+const useStylesFacebook = makeStyles((theme) => ({
+  root: {
+    position: "relative",
+  },
+  bottom: {
+    color: theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
+  },
+  top: {
+    color: theme.palette.primary.main,
+    animationDuration: "550ms",
+    position: "absolute",
+    left: 0,
+  },
+  circle: {
+    strokeLinecap: "round",
+  },
+}));
+
+function FacebookCircularProgress(props) {
+  const classes = useStylesFacebook();
+
+  return (
+    <div className={classes.root}>
+      <CircularProgress
+        variant="determinate"
+        className={classes.bottom}
+        size={40}
+        thickness={4}
+        {...props}
+        value={100}
+      />
+      <CircularProgress
+        variant="indeterminate"
+        disableShrink
+        className={classes.top}
+        classes={{
+          circle: classes.circle,
+        }}
+        size={40}
+        thickness={4}
+        {...props}
+      />
+    </div>
+  );
+}
+
+let converter = new Converter(
+  "OpenExchangeRates",
+  "67eb8de24a554b9499d1d1bf919c93a3"
+);
+
 export default function DashboardLayout(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const currentStrings = useSelector((state) => state.language);
+  const loading = useSelector((state) => state.loading);
   const { tabs, currentab, setCurrentab, pagetitle } = useContext(AppContext);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(currentab);
 
   useEffect(() => {
+    dispatch(loading$());
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         navigate("../account");
@@ -245,6 +305,25 @@ export default function DashboardLayout(props) {
         const datas = firestore.doc(`users/${user.uid}`);
         docData(datas, "id").subscribe((val) => {
           dispatch(locationinfo$(val));
+
+          dispatch(stopload$(false));
+        });
+
+        datas.get().then((data) => {
+          console.log(data.data());
+          const val = data.data();
+          // convert investment plan for dashboard
+          const currency = val.currencycode;
+          investmentplans.forEach((plan, inex) => {
+            converter.convert(plan.lot, "USD", currency).then((data) => {
+              plan.lot = Math.floor(data);
+              navigate("");
+            });
+            converter.convert(plan.max, "USD", currency).then((data) => {
+              plan.max = Math.floor(data);
+              navigate("");
+            });
+          });
         });
 
         // total return collection
@@ -287,32 +366,15 @@ export default function DashboardLayout(props) {
 
           dispatch(myinvestment$(data));
 
-          dispatch(
-            totaldeposit$(
-              formatLocaleCurrency(totalDeposit, "USD", {
-                autoFixed: false,
-              })
-            )
-          );
+          dispatch(totaldeposit$(totalDeposit));
+
           if (isNaN(totalPercentage)) {
             const totlProfitx = (totalPercentage / 100) * totalDeposit;
-            dispatch(
-              totalprofit$(
-                formatLocaleCurrency(0, "USD", {
-                  autoFixed: false,
-                })
-              )
-            );
+            dispatch(totalprofit$(0));
           } else {
             //total profits
             const totlProfit = (totalPercentage / 100) * totalDeposit;
-            dispatch(
-              totalprofit$(
-                formatLocaleCurrency(totlProfit, "USD", {
-                  autoFixed: false,
-                })
-              )
-            );
+            dispatch(totalprofit$(totlProfit));
           }
         });
 
@@ -326,13 +388,7 @@ export default function DashboardLayout(props) {
             return prv + cur.amount;
           }, 0);
 
-          dispatch(
-            totalwithdrawn$(
-              formatLocaleCurrency(totalwithdrawn, "USD", {
-                autoFixed: false,
-              })
-            )
-          );
+          dispatch(totalwithdrawn$(totalwithdrawn));
         });
 
         // bonus balance
@@ -345,13 +401,7 @@ export default function DashboardLayout(props) {
           const bonusTotalRecieved = data.reduce((prv, cur) => {
             return prv + cur.amount;
           }, 0);
-          dispatch(
-            totalbonusearned$(
-              formatLocaleCurrency(bonusTotalRecieved, "USD", {
-                autoFixed: false,
-              })
-            )
-          );
+          dispatch(totalbonusearned$(bonusTotalRecieved));
 
           // main remaining bonus balance
           const bonusCurrentBalance = data.reduce((prv, cur) => {
@@ -394,6 +444,7 @@ export default function DashboardLayout(props) {
   const changeNav = (nav, index) => {
     setCurrentab(0);
     navigate(`/${nav.link}`);
+    handleDrawerClose();
   };
 
   return (
@@ -431,9 +482,7 @@ export default function DashboardLayout(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              {pagetitle.title}
-            </Typography>
+            <Typography variant="h6">{pagetitle.title}</Typography>
             <span className={classes.space} />
             <SelectLanguage />
             <DasboardMenu />
@@ -454,6 +503,7 @@ export default function DashboardLayout(props) {
         }}
       >
         <div className={classes.toolbar}>
+          <img src={require("../homepage/images/logo.svg")} height="50" />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
@@ -500,7 +550,18 @@ export default function DashboardLayout(props) {
       <main className={classes.main}>
         <div className={classes.toolbar} />
 
-        {props.children}
+        {loading.loading ? (
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt={20}
+          >
+            <FacebookCircularProgress />
+          </Box>
+        ) : (
+          props.children
+        )}
       </main>
     </div>
   );

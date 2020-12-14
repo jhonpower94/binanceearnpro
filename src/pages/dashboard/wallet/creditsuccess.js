@@ -70,18 +70,23 @@ function CreditSucess() {
         email: userInfos.email,
         firstname: userInfos.firstName,
         lastname: userInfos.lastName,
-      })
-      firestore.collection("transactions").add({
-        type: "wallet deposit",
-        pending: false,
-        name: "wallet Deposit",
-        return_amount: depositamount,
-        date: new Date().toLocaleDateString(),
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        email: userInfos.email,
-        firstname: userInfos.firstName,
-        lastname: userInfos.lastName,
-      }).then(()=>navigate("complete"));
+        currency: userInfos.currencycode,
+      });
+      firestore
+        .collection("transactions")
+        .add({
+          type: "wallet deposit",
+          pending: false,
+          name: "wallet Deposit",
+          return_amount: depositamount,
+          date: new Date().toLocaleDateString(),
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          email: userInfos.email,
+          firstname: userInfos.firstName,
+          lastname: userInfos.lastName,
+          currency: userInfos.currencycode,
+        })
+        .then(() => navigate("complete"));
     } else {
       navigate("invest");
     }

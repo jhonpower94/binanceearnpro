@@ -8,6 +8,7 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -17,11 +18,15 @@ const useStyles = makeStyles((theme) => ({
 
 function Contactus() {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   const { setIntro } = useContext(AppContext);
   useEffect(() => {
     setIntro({
       layout: (
-        <IntroHeaderPages title="Contactus Us" subheader="Support form" />
+        <IntroHeaderPages
+          title={currentStrings.homepage.pages.support.title}
+          subheader={currentStrings.homepage.pages.support.subheader}
+        />
       ),
     });
     window.scrollTo(0, 0);

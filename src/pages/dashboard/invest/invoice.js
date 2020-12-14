@@ -37,6 +37,7 @@ import { navigate } from "@reach/router";
 import { ajax } from "rxjs/ajax";
 import { Rating } from "@material-ui/lab";
 import NumberFormat from "react-number-format";
+import getSymbolFromCurrency from "currency-symbol-map";
 var formatLocaleCurrency = require("country-currency-map").formatLocaleCurrency;
 
 const useStyles = makeStyles((theme) => ({
@@ -52,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
 
+  const userInfos = useSelector((state) => state.locationinfo.locationinfo);
+  const prefix = getSymbolFromCurrency(userInfos.currencycode);
+
   return (
     <NumberFormat
       {...other}
@@ -66,7 +70,7 @@ function NumberFormatCustom(props) {
       }}
       thousandSeparator
       isNumericString
-      prefix="$"
+      prefix={prefix}
     />
   );
 }
@@ -79,9 +83,7 @@ NumberFormatCustom.propTypes = {
 
 function Invoice() {
   const classes = useStyles();
-  const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
-    .currencycode;
-  const currentUserId = JSON.parse(window.localStorage.getItem("userdata")).id;
+  const currentStrings = useSelector((state) => state.language);
 
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const dispatch = useDispatch();
@@ -99,46 +101,57 @@ function Invoice() {
   useEffect(() => {
     window.scrollTo(0, 0);
     //  setPaymentInfo({ ...paymentInfo, amount: paymentInfo.block.lot });
-    setPagetitle({ ...pagetitle, title: "Invoice" });
+    setPagetitle({
+      ...pagetitle,
+      title: currentStrings.Dashboard.titles.invoice,
+    });
     console.log(paymentInfo.blockindex);
   }, []);
 
   const invoiceData = [
     /*  {
       name: "Deposit Amount",
-      value: formatLocaleCurrency(paymentInfo.amount, "USD", {
+      value: formatLocaleCurrency(paymentInfo.amount, userInfos.currencycode, {
         autoFixed: false,
       }),
     }, */
     {
-      name: "Minimun stake",
+      name: currentStrings.Dashboard.invest.invoice.min,
       value: formatLocaleCurrency(
         Math.floor(paymentInfo.block.lot) + 1,
-        "USD",
+        userInfos.currencycode,
         { autoFixed: false }
       ),
     },
     {
-      name: "Wallet balance",
-      value: formatLocaleCurrency(userInfos.wallet_balance, "USD", {
-        autoFixed: false,
-      }),
+      name: currentStrings.Dashboard.invest.invoice.wallet_balance,
+      value: isNaN(userInfos.wallet_balance)
+        ? formatLocaleCurrency(0, userInfos.currencycode, {
+            autoFixed: false,
+          })
+        : formatLocaleCurrency(
+            userInfos.wallet_balance,
+            userInfos.currencycode,
+            {
+              autoFixed: false,
+            }
+          ),
     },
     {
-      name: "Minimun profit",
+      name: currentStrings.Dashboard.invest.invoice.min_profit,
       value: formatLocaleCurrency(
         (paymentInfo.block.min_rate / 100) * paymentInfo.amount,
-        "USD",
+        userInfos.currencycode,
         {
           autoFixed: false,
         }
       ),
     },
     {
-      name: "Maximun profit",
+      name: currentStrings.Dashboard.invest.invoice.max_profit,
       value: formatLocaleCurrency(
         (paymentInfo.block.max_rate / 100) * paymentInfo.amount,
-        "USD",
+        userInfos.currencycode,
         {
           autoFixed: false,
         }
@@ -165,7 +178,7 @@ function Invoice() {
   ];
 
   const CoinpaymentsCreateTransactionOpts = {
-    currency1: "USD",
+    currency1: userInfos.currencycode,
     currency2: paymentInfo.cryptoType,
     amount: paymentInfo.amount,
     buyer_email: "jhonsnow751@gmail.com",
@@ -267,9 +280,13 @@ function Invoice() {
         referrerid: userInfos.referrer ? userInfos.referrerid : "",
       })
       .then(() => {
-        const amountnn = formatLocaleCurrency(paymentInfo.amount, "USD", {
-          autoFixed: false,
-        });
+        const amountnn = formatLocaleCurrency(
+          paymentInfo.amount,
+          userInfos.currencycode,
+          {
+            autoFixed: false,
+          }
+        );
         ajax({
           url: "https://admindigitalocean.herokuapp.com/mail",
           method: "POST",
@@ -327,7 +344,7 @@ function Invoice() {
       removePaymentStorage().then(() => {
         addToStorage().then(() => {
           firestore
-            .doc(`users/${currentUserId}`)
+            .doc(`users/${userInfos.id}`)
             .update({
               wallet_balance: userInfos.wallet_balance - paymentInfo.amount,
             })
@@ -346,7 +363,11 @@ function Invoice() {
       <CardHeader
         title={paymentInfo.block.name}
         subheader={
-          <Rating name="read-only" value={paymentInfo.blockindex + 3} readOnly />
+          <Rating
+            name="read-only"
+            value={paymentInfo.blockindex + 3}
+            readOnly
+          />
         }
         titleTypographyProps={{ align: "center" }}
         subheaderTypographyProps={{ align: "center" }}
@@ -359,12 +380,7 @@ function Invoice() {
             <Typography variant="body1">{data.value}</Typography>
           </ListItem>
         ))}
-        <form
-          className={classes.margintop}
-          onSubmit={
-            selectedValue === "wallet" ? submitpaymentWallet : submitPayment
-          }
-        >
+        <form className={classes.margintop} onSubmit={submitpaymentWallet}>
           <ListItem>
             <TextField
               size="small"
@@ -418,7 +434,7 @@ function Invoice() {
 
           <CardActions>
             <Button type="submit" variant="contained" fullWidth color="primary">
-              Proceed to payment
+              {currentStrings.Dashboard.invest.invoice.action}
             </Button>
           </CardActions>
         </form>

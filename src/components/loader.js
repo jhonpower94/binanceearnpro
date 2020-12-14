@@ -1,16 +1,6 @@
-import React, { useEffect, useContext } from "react";
-import { AppContext } from "../../App";
-import PulseLoader from "react-spinners/PulseLoader";
-import { css } from "@emotion/core";
-import { useSelector } from "react-redux";
-import { Box, CircularProgress, CssBaseline, makeStyles } from "@material-ui/core";
+import React, { useEffect } from "react";
+import { Box, CircularProgress, makeStyles } from "@material-ui/core";
 import { Helmet } from "react-helmet";
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-  top: 15em;
-`;
 
 // Inspired by the former Facebook spinners.
 const useStylesFacebook = makeStyles((theme) => ({
@@ -59,31 +49,22 @@ function FacebookCircularProgress(props) {
   );
 }
 
-function AccountLayout(props) {
-  const { intro } = useContext(AppContext);
-  const loading = useSelector((state) => state.loading);
-  useEffect(() => {
-    console.log(loading.loading);
-  }, []);
+function Loader() {
+  useEffect(() => {}, []);
 
   return (
     <React.Fragment>
-      <CssBaseline />
       <Helmet>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
       </Helmet>
-      {loading.loading ? (
-        <Box display="flex" flexDirection="column" alignItems="center" mt={20}>
-          <FacebookCircularProgress />
-        </Box>
-      ) : (
-        props.children
-      )}
+      <Box display="flex" flexDirection="column" alignItems="center" mt={20}>
+        <FacebookCircularProgress />
+      </Box>
     </React.Fragment>
   );
 }
 
-export default AccountLayout;
+export default Loader;

@@ -8,8 +8,8 @@ function GetCustomInterfaceLanguage() {
 
 export const Strings = new LocalizedStrings(
   {
-    en: english,
-    IT: italy,
+    en: require("./languages/english.json"),
+    ar: require("./languages/ar.json"),
   },
   {
     customLanguageInterface: GetCustomInterfaceLanguage,

@@ -89,7 +89,8 @@ function Investment() {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(selectedmenuItem$(2));
-    // converter.convert("500", "USD", "EUR").then((v) => console.log(v));
+    console.log(investments);
+    // converter.convert("500", userInfos.currencycode, "EUR").then((v) => console.log(v));
   }, []);
 
   return (
@@ -131,19 +132,27 @@ function Investment() {
                 {investments.map((dep, index) => (
                   <TableRow tabIndex={-1} key={index}>
                     <TableCell align="left">
-                      {formatLocaleCurrency(dep.deposit_amount, "USD", {
-                        autoFixed: false,
-                      })}
+                      {formatLocaleCurrency(
+                        dep.deposit_amount,
+                        userInfos.currencycode,
+                        {
+                          autoFixed: false,
+                        }
+                      )}
                     </TableCell>
                     <TableCell align="left">
                       {}
                       {isNaN(dep.return_amount)
-                        ? formatLocaleCurrency(0, "USD", {
+                        ? formatLocaleCurrency(0, userInfos.currencycode, {
                             autoFixed: false,
                           })
-                        : formatLocaleCurrency(dep.return_amount, "USD", {
-                            autoFixed: false,
-                          })}
+                        : formatLocaleCurrency(
+                            dep.return_amount,
+                            userInfos.currencycode,
+                            {
+                              autoFixed: false,
+                            }
+                          )}
                     </TableCell>
                     <TableCell align="left">
                       <Button
@@ -166,13 +175,10 @@ function Investment() {
                       <Typography>{dep.block_name}</Typography>
                     </TableCell>
                     <TableCell align="left">
-                      {new Date(dep.created_at * 1000).toLocaleDateString()}
+                      {new Date(dep.created_at.seconds * 1000).toLocaleDateString()}
                     </TableCell>
                     <TableCell align="center">
-                      <Badge
-                        badgeContent={dep.pending ? "PENDING" : "COMPLETE"}
-                        color={dep.pending ? "error" : "primary"}
-                      />
+                      {dep.pending ? "PENDING" : "COMPLETE"}
                     </TableCell>
                   </TableRow>
                 ))}

@@ -36,7 +36,7 @@ function Account() {
   const balanceAmount = [
     /* {
       title: currentStrings.Dashboard.account.main_balance,
-      value: formatLocaleCurrency(Math.floor(mainbalance.main_balance), "USD", {
+      value: formatLocaleCurrency(Math.floor(mainbalance.main_balance), userInfos.currencycode, {
         autoFixed: false,
       }),
       xs: 12,
@@ -51,23 +51,31 @@ function Account() {
       subtitle: "h5",
     }, */
     {
-      title: currentStrings.Dashboard.account.bonus_balance,
-      value: formatLocaleCurrency(mainbalance.bonus_balance, "USD", {
-        autoFixed: false,
-      }),
+      title: currentStrings.Dashboard.account.Wallet_Balance,
+      value: isNaN(userInfos.wallet_balance)
+        ? formatLocaleCurrency(0, userInfos.currencycode, {
+            autoFixed: false,
+          })
+        : formatLocaleCurrency(
+            userInfos.wallet_balance,
+            userInfos.currencycode,
+            {
+              autoFixed: false,
+            }
+          ),
       xs: 6,
       sm: 4,
       subtitle: "h5",
     },
     {
-      title: currentStrings.Dashboard.account.Wallet_Balance,
-      value: isNaN(userInfos.wallet_balance)
-        ? formatLocaleCurrency(0, "USD", {
-            autoFixed: false,
-          })
-        : formatLocaleCurrency(userInfos.wallet_balance, "USD", {
-            autoFixed: false,
-          }),
+      title: currentStrings.Dashboard.account.bonus_balance,
+      value: formatLocaleCurrency(
+        mainbalance.bonus_balance,
+        userInfos.currencycode,
+        {
+          autoFixed: false,
+        }
+      ),
       xs: 6,
       sm: 4,
       subtitle: "h5",
@@ -76,19 +84,31 @@ function Account() {
   const profileData = [
     {
       title: currentStrings.Dashboard.account.Total_profit_amount,
-      value: activities.totlProfit,
+      value: formatLocaleCurrency(
+        Math.floor(activities.totlProfit),
+        userInfos.currencycode
+      ),
     },
     {
       title: currentStrings.Dashboard.account.Total_bonus_earned,
-      value: activities.bonusTotalRecieved,
+      value: formatLocaleCurrency(
+        Math.floor(activities.bonusTotalRecieved),
+        userInfos.currencycode
+      ),
     },
     {
       title: currentStrings.Dashboard.account.Total_investment_amount,
-      value: activities.totalDeposit,
+      value: formatLocaleCurrency(
+        Math.floor(activities.totalDeposit),
+        userInfos.currencycode
+      ),
     },
     {
       title: currentStrings.Dashboard.account.Total_withdrawn_amount,
-      value: activities.totalwithdrawn,
+      value: formatLocaleCurrency(
+        Math.floor(activities.totalwithdrawn),
+        userInfos.currencycode
+      ),
     },
   ];
 
@@ -97,22 +117,22 @@ function Account() {
       <Grid container spacing={4} justify="flex-start">
         <Grid item xs={12} sm={4}>
           <ListItemText
-            primary={currentStrings.Dashboard.account.main_balance}
-            secondary={formatLocaleCurrency(
+            primary={formatLocaleCurrency(
               Math.floor(mainbalance.main_balance),
-              "USD",
+              userInfos.currencycode,
               {
                 autoFixed: false,
               }
             )}
+            secondary={currentStrings.Dashboard.account.main_balance}
             primaryTypographyProps={{
-              variant: "subtitle2",
+              variant: "h4",
               align: useMediaQuery(useTheme().breakpoints.up("sm"))
                 ? "left"
                 : "center",
             }}
             secondaryTypographyProps={{
-              variant: "h4",
+              //  variant: "h4",
               align: useMediaQuery(useTheme().breakpoints.up("sm"))
                 ? "left"
                 : "center",
@@ -122,11 +142,11 @@ function Account() {
         {balanceAmount.map((vl, index) => (
           <Grid key={index} item xs={vl.xs} sm={vl.sm}>
             <ListItemText
-              primary={vl.title}
-              secondary={vl.value}
-              primaryTypographyProps={{ variant: "subtitle2" }}
+              primary={vl.value}
+              secondary={vl.title}
+              primaryTypographyProps={{ variant: vl.subtitle, align: "center" }}
               secondaryTypographyProps={{
-                variant: vl.subtitle,
+                align: "center",
               }}
             />
           </Grid>

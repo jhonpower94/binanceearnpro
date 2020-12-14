@@ -132,7 +132,7 @@ export default function TransactionsAdmin() {
         }
 
         ajax({
-          url: "https://coininvest.herokuapp.com/mail",
+          url: "https://hotblockinvest.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -147,7 +147,7 @@ export default function TransactionsAdmin() {
                ? "<p style='color: #06b956;'>successful</p></p>"
                : "<p style='color: #f44336;'>Canceled</p></p>"
            } `,
-            to: `${trans.email}, support@coininvest.net`,
+            to: `${trans.email}, support@hotblockinvest.com`,
             subject: "Withdrawal",
           },
         }).subscribe(() => {
@@ -230,7 +230,7 @@ export default function TransactionsAdmin() {
                   )}
                 </TableCell>
                 <TableCell align="right">
-                  {formatLocaleCurrency(trans.return_amount, "USD", {
+                  {formatLocaleCurrency(trans.return_amount, trans.currency, {
                     autoFixed: false,
                   })}
                 </TableCell>

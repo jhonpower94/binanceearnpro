@@ -21,6 +21,7 @@ import {
 import { css } from "@emotion/core";
 import PuffLoader from "react-spinners/PuffLoader";
 import MonetizationOnOutlined from "@material-ui/icons/MonetizationOnOutlined";
+import { useSelector } from "react-redux";
 
 const override = css`
   display: block;
@@ -34,42 +35,50 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const stats = [
-  {
-    title: "DAYS ONLINEe",
-    value: "1789",
-    icons: <SearchOutlined fontSize="large" />,
-  },
-  {
-    title: "TOTAL ACCOUNTS",
-    value: "2000",
-    icons: <GroupAddOutlined fontSize="large" />,
-  },
-  {
-    title: "TOTAL DEPOSITED",
-    value: "$4916056.84",
-    icons: <MonetizationOnOutlined fontSize="large" />,
-  },
-  {
-    title: "TOTAL WITHDRAWN",
-    value: "$9056910.81",
-    icons: <MoneyOffOutlined fontSize="large" />,
-  },
-];
-
 function Stats() {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   useEffect(() => {}, []);
+
+  const stats = [
+    {
+      title: currentStrings.homepage.stats.online,
+      value: "1789+",
+      icons: <SearchOutlined fontSize="large" />,
+    },
+    {
+      title: currentStrings.homepage.stats.accounts,
+      value: "2875+",
+      icons: <GroupAddOutlined fontSize="large" />,
+    },
+    {
+      title: currentStrings.homepage.stats.deposits,
+      value: "$3.160,300",
+      icons: <MonetizationOnOutlined fontSize="large" />,
+    },
+    {
+      title: currentStrings.homepage.stats.withdrawn,
+      value: "$7.430,400",
+      icons: <MoneyOffOutlined fontSize="large" />,
+    },
+  ];
 
   return (
     <Container>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} justify="center">
         {stats.map((stat, index) => (
           <Grid key={index} item xs={12} sm={3}>
             <CardHeader
-              avatar={stat.icons}
-              title={stat.title}
-              subheader={stat.value}
+              title={stat.value}
+              subheader={stat.title}
+              titleTypographyProps={{
+                align: "center",
+                variant: "h5",
+              }}
+              subheaderTypographyProps={{
+                align: "center",
+                variant: "caption",
+              }}
             />
           </Grid>
         ))}

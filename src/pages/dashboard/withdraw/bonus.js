@@ -154,7 +154,7 @@ function WithdrawBonus() {
                       </Button>
                     </TableCell>
                     <TableCell align="left">
-                      {new Date(data.created_at * 1000).toLocaleDateString()}
+                      {new Date(data.created_at.seconds * 1000).toLocaleDateString()}
                     </TableCell>
                   </TableRow>
                 ))}

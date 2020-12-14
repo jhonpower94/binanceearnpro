@@ -1,5 +1,6 @@
+import Grid from "@material-ui/core/Grid";
 export const english = {
-  language: "English",
+  language: "Language",
   Nav: {
     Dashboard: "Account",
     withdraw: "Withdraw",
@@ -39,19 +40,19 @@ export const english = {
       Total_withdrawn_amount: "Total withdrawn amount",
     },
     invest: {
-      plan_title: {
-        a: "plan 1",
-        b: "plan 2",
-        c: "plan 3",
-        d: "plan 4",
-        e: "Vip",
-        f: "Hourly Vip",
-        g: "Hourly Vip",
-        h: "Hourly Vip",
-      },
+      plan_title: "Plan",
       duration: "Duration",
+      hour: "Hours",
       Minimun_stake: "Minimun stake",
-      action: "Invest Now",
+      Maximun_stake: "Maximun stake",
+      action: "Select",
+      invoice: {
+        min: "Minimun stake",
+        wallet_balance: "Wallet balance",
+        min_profit: "Minimun profit",
+        max_profit: "Maximun profit",
+        action: "Proceed to payment",
+      },
     },
     withdraw: {
       wallet_balance: "Remaining wallet balance",
@@ -67,7 +68,7 @@ export const english = {
       error_amount: "Deposit Amount is low",
       currency_lable: "Currency",
       helpertext_currency: "Please select payment coin",
-      action_btn: "Add credit",
+      action_btn: "credit wallet",
       alert_title: "Minimum deposit",
     },
     investments: {
@@ -90,12 +91,214 @@ export const english = {
       confirm: "Confirm",
     },
     account_info: {
-      profile_status: "Account profile status",
+      profile_status: "Profile status",
       Current_running_investments: "Current running investments",
       Matured_investments: "Matured investments",
       Total_invested: "Total invested",
       Total_withdrawn: "Total withdrawn",
       Referral_link: "Referral link",
+      copy_link: "Link copied",
+    },
+    payment: {
+      send: "Send payment to the",
+      send_: "address and amount provided below",
+      info:
+        "once payment is done send notification to live support or email support to support@hotblockinvest.com. in order to notify us of your successful deposit",
+      copy: "copied",
+    },
+    tabs: {
+      account: "Account",
+      acount_info: "Account Info",
+      investments: "Investments",
+      bonus: "Bonus",
+      deposit: "Wallet deposit",
+      withdraw: "Withdraw wallet",
+    },
+    titles: {
+      home: "Account",
+      invest: "Invest",
+      invoice: "Invoice",
+      withdraw: "Withdraw",
+      wallet: "Wallet",
+    },
+  },
+
+  homepage: {
+    menus: {
+      home: "Home",
+      investment: "investment",
+      about: "About us",
+      get_started: "Get started",
+      support: "Support",
+      faq: "Faq",
+      header: {
+        title: "Menus",
+        subheader: "Site menus and available web app",
+      },
+    },
+    intro: {
+      title: "INVEST WITH BITCOIN",
+      subheader: "World's best cloud investment platform",
+      body:
+        "We sincerely hope that our company will become a partner in your life.",
+      button: "Get started",
+    },
+    activities: {
+      deposit: "DEPOSITS",
+      withdrawal: "WITHDRAWALS",
+      subheader: "Last 5 operations",
+      name: "USER",
+      amount: "AMOUNT",
+    },
+    stats: {
+      online: "DAYS ONLINE",
+      accounts: "TOTAL ACCOUNTS",
+      deposits: "TOTAL DEPOSITED",
+      withdrawn: "TOTAL WITHDRAWN",
+    },
+    calculate_invest: {
+      title: "Calculate investment",
+      subheader: "Calculcale investment total profits",
+      plan: {
+        title: "Plan",
+        helpertext: "Choose investment plan",
+      },
+      amount: {
+        title: "Amount",
+        helpertext: "Enter investment Amount",
+      },
+      profit: {
+        title: "Profit",
+        helpertext: "your profit return",
+      },
+    },
+    affilate: {
+      title: "referral commission",
+      subheader:
+        "Each your referral brings you reward from his deposit amount. Your own deposit is not required to attract investors and earn. Just register account and apply your referral link everywhere you can.",
+    },
+    cac: {
+      title: "investment LIMITED",
+      subheader:
+        "In July 2016 our organization passed the incorporation process in the United Kingdom and is listed by Companies House, with the following corporate affairs commision number 10634443.",
+    },
+    footer: {
+      made: "Made with",
+      securities: {
+        privacy: "Privacy Policy",
+        terms: "Terms of service",
+        Eu: "EU data protection",
+      },
+    },
+
+    pages: {
+      investments: {
+        title: "INVESTMENTS",
+        subheader: "Our Plans",
+      },
+      about_us: {
+        title: "About Us",
+        subheader: "About",
+        typeA:
+          "investment Limited is ready to propose profitable cooperation for all comers. We present a high-tech and modern company which is recognized industry leader in the field of computer technology, software and innovations. Our technical experts are involved in developing new methods and effective algorithms of Bitcoin investment. Over last few years our company has managed to build a few large investment farms in the United Kingdom and Scotland.We have equipped them with the most powerful and modern investment hardware that around the clock provides excellent results and serves as a source for earnings.",
+        typeB:
+          "is ready to propose profitable cooperation for all comers. We present a high-tech and modern company which is recognized industry leader in the field of computer technology, software and innovations. Our technical experts are involved in developing new methods and effective algorithms of Bitcoin investment. Over last few years our company has managed to build a few large investment farms in the United Kingdom and Scotland.We have equipped them with the most powerful and modern investment hardware that around the clock provides excellent results and serves as a source for earnings. In the summer of 2016 our team has made a successful attempt to enter international investment market with to offer cooperation for clients and partners.Currently, our goalis to develop wider European network of Bitcoin investment farms to provide everyone.the opportunity to participate in processes of investment and earning. If you want to make today, we invite you to join our pool of investors. Our offer is valid on a permanent basis as well as your profits will be always accrued after you make a deposit, from 10% to 20% on a daily basis with the possibility to withdraw instantly.Many of you have been waiting for such a proposal,and we are confident that you will not be disappointed with our service. With the advent of cryptocurrency many entrepreneurs have noticed that this is not only a convenient payment method but also great source of income in the area of online investment. Today, you can find dozens of tempting offers, but you should carefully consider each of them. First of all, pay attention to the legality of the company work as well as the previous experience and their history. A reliable partner that offers asset management services never hides anything. We sincerely hope that our company will become a partner in your life. The main activity of the company is professional software developing by experienced experts who were directly involved in the development and testing of most famous classical investment algorithms for investment. Their extensive knowledge and practical skills are a guarantee of success of our company. Since the summer of 2016, we offer high quality investment services. The company's profit is the result of close cooperation between the technical staff and traders to cryptocurrency exchange. We have our own technical base and investment farm on the basis of high-end graphics cards and ASIC hardware which is gaining popularity in the sphere of Bitcoin investment through optimal power consumption and high performance. An investment strategy which we propose is clear enough and terms can be acceptable for all. Undoubtedly, the company of this level must be registered officially registered to meet all the criteria of investors. In July 2016 our company passed the incorporation process in the United Kingdom and is listed by Companies House.",
+      },
+      get_started: {
+        title: "Getting staerted",
+        subheader: "Guides",
+        typeA:
+          "To make your first deposit and start earning, you have to be registered user on the website of",
+        typeB:
+          "You should have personal account which you will be able to make an investment in the cryptocurrency markets, get daily profits on an ongoing investment and withdraw as well, you can also use affiliate link to increase your income.",
+        typeC:
+          "Registration process is quite simple and fast enough. Just specify your personal details and Bitcoin address. It's free and doesn't require any email confirmation or some your documents.",
+      },
+      support: {
+        title: "Support",
+        subheader: "message us",
+      },
+      faq: {
+        title: "Faq",
+        subheader: "freqently asked questions",
+        questions: {
+          a: {
+            title: "What is our goal",
+            subheader:
+              "Hotblockinvest investment Limited is ready to propose profitable cooperation for all comers. We present a high-tech and modern company which is recognized industry leader in the field of computer technology, software and innovations. Our technical experts are involved in developing new methods and effective algorithms of Bitcoin mining.",
+          },
+          b: {
+            title: "How long do you plan to work",
+            subheader: "We plan our activities for the next few years",
+          },
+          c: {
+            title: "How safe is my personal data, which I send to this website",
+            subheader:
+              "The site is on a dedicated server with round the clock protection against DDoS attacks, it is scanned daily for malware. In addition, all data is encrypted by SSL certificate",
+          },
+          d: {
+            title: "Who can join your investment company",
+            subheader:
+              "To become a client you have to register account. Enter username, set password, add your email and Bitcoin address to make an account",
+          },
+          e: {
+            title: "Where can I register Bitcoin address",
+            subheader:
+              "Visit https://blockchain.info to register unique Bitcoin address.https://blockchain.info",
+          },
+          f: {
+            title: "How many accounts can I register",
+            subheader: "We suggest to register only one account",
+          },
+          g: {
+            title: "Can I register a few accounts even from one IP address?",
+            subheader:
+              "Yes, in case these accounts belong your family members of your friends",
+          },
+          h: {
+            title: "Will I receive profit every calendar day",
+            subheader:
+              "Yes, correct. Your profit is accrued every 24 hours, 7 days a week",
+          },
+          i: {
+            title: "Are you paying even on weekends",
+            subheader: "Yes, of course, we are paying on weekends and holidays",
+          },
+          j: {
+            title: "How long does my deposit work",
+            subheader:
+              "Your deposit runs forever. This means that you will never get it back",
+          },
+          k: {
+            title: "What currency can I invest",
+            subheader: "We only accept Bitcoins, etherium and litecoin",
+          },
+        },
+      },
+    },
+  },
+
+  account: {
+    email: "Email Address",
+    password: "Password",
+    copyright: "Copyright",
+    signin: {
+      title: "Sign in",
+      remember: "Remember me",
+      forgot_pass: "Forgot password",
+      redir: "Don't have an account",
+    },
+    signup: {
+      title: "Sign up",
+      fname: "First name",
+      lname: "Last name",
+      country: "Country",
+      mobile: "Mobile",
+      terms: "I agree to terms, privacy and policy",
+      redir: "Already have an account",
+    },
+    reset_pass: {
+      title: "Reset password",
     },
   },
 };

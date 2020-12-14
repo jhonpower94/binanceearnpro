@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loading$ } from "../../redux/action";
 import { AppContext } from "../../App";
 import Button from "@material-ui/core/Button";
@@ -34,13 +34,14 @@ import { addUsers } from "../../config/services";
 import { dispatch } from "rxjs/internal/observable/pairs";
 import { navigate } from "@reach/router";
 import { ajax } from "rxjs/ajax";
+import { reactLocalStorage } from "reactjs-localstorage";
 var cc = require("currency-codes");
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://coininvest.net/">
+      <Link color="inherit" href="https://hotblockinvest.com/">
         coinspringinvest
       </Link>
     </Typography>
@@ -106,9 +107,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUpReferral(props) {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   const { intro, setIntro } = useContext(AppContext);
   const { id } = props;
   const dispatch = useDispatch();
+  const currentCountry = reactLocalStorage.getObject("country");
   const [values, setValues] = React.useState({
     numberformat: "",
     firstName: "",
@@ -116,7 +119,7 @@ export default function SignUpReferral(props) {
     email: "",
     password: "",
     showPassword: false,
-    country: countrylist[0].name,
+    country: currentCountry.country,
     mobilecode: intro.mobilecode,
     referrerid: "",
   });
@@ -149,11 +152,14 @@ export default function SignUpReferral(props) {
       lastName: values.lastName,
       email: values.email,
       password: values.password,
+      wallet_balance: 0,
       country: values.country,
       mobilecode: intro.mobilecode,
       referrer: true,
       registered: firebase.firestore.FieldValue.serverTimestamp(),
       referrerid: id,
+      countrycode: intro.countrycode,
+      currencycode: currentCountry.currencycode,
     };
     app
       .auth()
@@ -165,13 +171,13 @@ export default function SignUpReferral(props) {
           const getreferrerdata = firestore.doc(`users/${id}`);
           docData(getreferrerdata, "id").subscribe((data) => {
             ajax({
-              url: "https://coininvest.herokuapp.com/mail",
+              url: "https://hotblockinvest.herokuapp.com/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
               body: {
-                message: `Hi ${data.firstName} <Br/> This is to notiy you that your referral ${values.firstName} ${values.lastName} has successfully registered. <br/> Thank you for partnering with us `,
+                message: `${currentStrings.emailmessages.hello} ${data.firstName} <Br/> ${currentStrings.emailmessages.signup_referral.a} ${values.firstName} ${values.lastName} ${currentStrings.emailmessages.signup_referral.b}. <br/> ${currentStrings.emailmessages.signup_referral.c} `,
                 to: data.email,
                 subject: "New invitation",
               },
@@ -190,8 +196,8 @@ export default function SignUpReferral(props) {
   };
   useEffect(() => {
     setIntro({
-      countrycode: countrylist[0].code,
-      mobilecode: countrylist[0].dial_code,
+      countrycode: currentCountry.code,
+      mobilecode: currentCountry.dail_coe,
     });
   }, []);
 
@@ -220,7 +226,7 @@ export default function SignUpReferral(props) {
                 required
                 fullWidth
                 id="firstName"
-                label="first name"
+                label={currentStrings.account.signup.fname}
                 autoFocus
                 onChange={handleChange}
               />
@@ -231,7 +237,7 @@ export default function SignUpReferral(props) {
                 required
                 fullWidth
                 id="lastName"
-                label="last name"
+                label={currentStrings.account.signup.lname}
                 name="lastName"
                 autoComplete="lname"
                 onChange={handleChange}
@@ -243,7 +249,7 @@ export default function SignUpReferral(props) {
                 required
                 fullWidth
                 id="email"
-                label="email dddress"
+                label={currentStrings.account.email}
                 name="email"
                 autoComplete="email"
                 onChange={handleChange}
@@ -252,7 +258,7 @@ export default function SignUpReferral(props) {
             <Grid item xs={12}>
               <FormControl variant="outlined" fullWidth>
                 <InputLabel htmlFor="outlined-adornment-password">
-                  Password
+                  {currentStrings.account.password}
                 </InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password"
@@ -287,7 +293,7 @@ export default function SignUpReferral(props) {
                 select
                 required
                 variant="outlined"
-                label="country"
+                label={currentStrings.account.signup.country}
                 name="country"
                 value={values.country}
                 id="standard-select-currency"
@@ -319,7 +325,7 @@ export default function SignUpReferral(props) {
               <TextField
                 variant="outlined"
                 fullWidth
-                label="mobile"
+                label={currentStrings.account.signup.mobile}
                 value={values.numberformat}
                 onChange={handleChange}
                 name="numberformat"
@@ -334,7 +340,7 @@ export default function SignUpReferral(props) {
                 variant="outlined"
                 fullWidth
                 id="refId"
-                label="Referrer ID"
+                label={currentStrings.account.signup.ref_id}
                 name="referrerid"
                 autoComplete="referrer"
                 value={id}
@@ -348,7 +354,7 @@ export default function SignUpReferral(props) {
                 control={
                   <Checkbox value="allowExtraEmails" color="primary" required />
                 }
-                label="I agree to term, privacy and policy."
+                label={currentStrings.account.signup.terms}
               />
             </Grid>
           </Grid>

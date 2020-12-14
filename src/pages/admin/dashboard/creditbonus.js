@@ -133,7 +133,7 @@ export default function CreditBonus() {
             }
           );
           ajax({
-            url: "https://coininvest.herokuapp.com/mail",
+            url: "https://hotblockinvest.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -142,7 +142,7 @@ export default function CreditBonus() {
               message: `Hello ${user.firstName} ${user.lastName}, <br/><br/> 
               You have recieved a new bonus. <br/><br/>
               Amount:  ${amountnn}`,
-              to: `${user.email}, support@coininvest.net`,
+              to: `${user.email}, support@hotblockinvest.com`,
               subject: "Bonus Deposit"
             },
           }).subscribe(() => console.log("user message sent"));

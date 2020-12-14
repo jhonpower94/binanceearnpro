@@ -6,6 +6,7 @@ import { AppContext } from "../../../App";
 import CustomizedTabs from "../tabs";
 import Investment from "../invest/myinvestments";
 import WithdrawBonus from "./bonus";
+import { useSelector } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -35,14 +36,15 @@ const useStyles = makeStyles((theme) => ({
 
 function Withdrawals(props) {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   const { setTabs, currentab, pagetitle, setPagetitle } = useContext(AppContext);
 
   useEffect(() => {
     setTabs([
-      { title: "Investments", tab: 0 },
-      { title: "Bonus", tab: 1 },
+      { title: currentStrings.Dashboard.tabs.investments, tab: 0 },
+      { title: currentStrings.Dashboard.tabs.bonus, tab: 1 },
     ]);
-    setPagetitle({ ...pagetitle, title: "Withdraw" });
+    setPagetitle({ ...pagetitle, title: currentStrings.Dashboard.titles.withdraw });
   }, []);
 
   return (

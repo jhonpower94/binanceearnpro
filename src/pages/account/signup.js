@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loading$ } from "../../redux/action";
 import { AppContext } from "../../App";
 import Button from "@material-ui/core/Button";
@@ -33,18 +33,9 @@ import firebase, { app } from "../../config";
 import { addUsers } from "../../config/services";
 import { dispatch } from "rxjs/internal/observable/pairs";
 import { navigate } from "@reach/router";
+import Copyright from "./copyright";
+import { reactLocalStorage } from "reactjs-localstorage";
 var cc = require("currency-codes");
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://coininvest.net/">
-        coinspringinvest
-      </Link>{" "}
-    </Typography>
-  );
-}
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
@@ -105,8 +96,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   const { intro, setIntro } = useContext(AppContext);
   const dispatch = useDispatch();
+  const currentCountry = reactLocalStorage.getObject("country");
   const [values, setValues] = React.useState({
     numberformat: "",
     firstName: "",
@@ -114,7 +107,7 @@ export default function SignUp() {
     email: "",
     password: "",
     showPassword: false,
-    country: countrylist[0].name,
+    country: currentCountry.country, // set up with reactlocalstorage
     mobilecode: intro.mobilecode,
   });
 
@@ -146,11 +139,13 @@ export default function SignUp() {
       lastName: values.lastName,
       email: values.email,
       password: values.password,
+      wallet_balance: 0,
       country: values.country,
       mobilecode: intro.mobilecode,
       referrer: false,
       registered: firebase.firestore.FieldValue.serverTimestamp(),
       countrycode: intro.countrycode,
+      currencycode: currentCountry.currencycode,
     };
     app
       .auth()
@@ -169,10 +164,17 @@ export default function SignUp() {
       });
   };
   useEffect(() => {
+    // set up with reactlocalstorage
+    setIntro({
+      countrycode: currentCountry.code,
+      mobilecode: currentCountry.dail_coe,
+    });
+    /* 
     setIntro({
       countrycode: countrylist[0].code,
       mobilecode: countrylist[0].dial_code,
     });
+    */
   }, []);
 
   return (
@@ -188,7 +190,7 @@ export default function SignUp() {
           />
         </div>
         <Typography component="h1" variant="h5">
-          Sign up
+          {currentStrings.account.signup.title}
         </Typography>
         <form className={classes.form} onSubmit={submitForm}>
           <Grid container spacing={2}>
@@ -200,7 +202,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="firstName"
-                label="first name"
+                label={currentStrings.account.signup.fname}
                 autoFocus
                 onChange={handleChange}
               />
@@ -211,7 +213,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="lastName"
-                label="last name"
+                label={currentStrings.account.signup.lname}
                 name="lastName"
                 autoComplete="lname"
                 onChange={handleChange}
@@ -223,7 +225,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="email"
-                label="email dddress"
+                label={currentStrings.account.email}
                 name="email"
                 autoComplete="email"
                 onChange={handleChange}
@@ -232,7 +234,7 @@ export default function SignUp() {
             <Grid item xs={12}>
               <FormControl variant="outlined" fullWidth>
                 <InputLabel htmlFor="outlined-adornment-password">
-                  Password
+                  {currentStrings.account.password}
                 </InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password"
@@ -267,7 +269,7 @@ export default function SignUp() {
                 select
                 required
                 variant="outlined"
-                label="country"
+                label={currentStrings.account.signup.country}
                 name="country"
                 value={values.country}
                 id="standard-select-currency"
@@ -299,7 +301,7 @@ export default function SignUp() {
               <TextField
                 variant="outlined"
                 fullWidth
-                label="mobile"
+                label={currentStrings.account.signup.mobile}
                 value={values.numberformat}
                 onChange={handleChange}
                 name="numberformat"
@@ -314,7 +316,7 @@ export default function SignUp() {
                 control={
                   <Checkbox value="allowExtraEmails" color="primary" required />
                 }
-                label="I agree to term, privacy and policy."
+                label={currentStrings.account.signup.terms}
               />
             </Grid>
           </Grid>
@@ -325,7 +327,7 @@ export default function SignUp() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            {currentStrings.account.signup.title}
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
@@ -335,7 +337,7 @@ export default function SignUp() {
                 onClick={() => navigate("../../account")}
                 color="secondary"
               >
-                Already have an account? Sign in
+                {`${currentStrings.account.signup.redir}? ${currentStrings.account.signin.title}`}
               </Link>
             </Grid>
           </Grid>

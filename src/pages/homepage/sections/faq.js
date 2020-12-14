@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { AppContext } from "../../../App";
 import IntroHeaderPages from "../component/introheaderpages";
 import { makeStyles, Container, Grid, CardHeader } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -9,76 +10,78 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const faqs = [
-  {
-    title: "What is cryptonet.trade Mining Limited",
-    subheader:
-      "cryptonet.trade Mining Limited is ready to propose profitable cooperation for all comers. We present a high-tech and modern company which is recognized industry leader in the field of computer technology, software and innovations. Our technical experts are involved in developing new methods and effective algorithms of Bitcoin mining.",
-  },
-  {
-    title: "How long do you plan to work",
-    subheader: "We plan our activities for the next few years.",
-  },
-  {
-    title: "How safe is my personal data, which I send to this website?",
-    subheader: "The site is on a dedicated server with round the clock protection against DDoS attacks, it is scanned daily for malware. In addition, all data is encrypted by SSL certificate",
-  },
-  {
-    title: "Who can join your investment company?",
-    subheader: "Anyone can become our client. We offer international investment.",
-  },
-  {
-    title: "How can I become an investor?",
-    subheader: "To become a client you have to register account. Enter username, set password, add your email and Bitcoin address to make an account.",
-  },
-  {
-    title: "Where can I register Bitcoin address?",
-    subheader: "Visit https://blockchain.info to register unique Bitcoin address.https://blockchain.info",
-  },
-  {
-    title: "How many accounts can I register?",
-    subheader: "We suggest to register only one account.",
-  },
-  {
-    title: "Can I register a few accounts even from one IP address?",
-    subheader: "Yes, in case these accounts belong your family members of your friends.",
-  },
-  {
-    title: "Will I receive profit every calendar day?",
-    subheader: "Yes, correct. Your profit is accrued every 24 hours, 7 days a week.",
-  },
-  {
-    title: "Are you paying even on weekends?",
-    subheader: "Yes, of course, we are paying on weekends and holidays.",
-  },
-  {
-    title: "How long does my deposit work?",
-    subheader: "Your deposit runs forever. This means that you will never get it back.",
-  },
-  {
-    title: "What currency can I invest?",
-    subheader: "We only accept Bitcoins, etherium and litecoin",
-  },
-];
-
 function Faqs() {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   const { setIntro } = useContext(AppContext);
   useEffect(() => {
     setIntro({
       layout: (
-        <IntroHeaderPages title="Faqs Title" image="tradecopywhite.svg" />
+        <IntroHeaderPages
+          title={currentStrings.homepage.pages.faq.title}
+          subheader={currentStrings.homepage.pages.faq.subheader}
+        />
       ),
     });
     window.scrollTo(0, 0);
   }, []);
 
+  const faqs = [
+    {
+      title: currentStrings.homepage.pages.faq.questions.a.title,
+      subheader: currentStrings.homepage.pages.faq.questions.a.subheader,
+    },
+    {
+      title: currentStrings.homepage.pages.faq.questions.b.title,
+      subheader: currentStrings.homepage.pages.faq.questions.b.subheader,
+    },
+    {
+      title: currentStrings.homepage.pages.faq.questions.c.title,
+      subheader: currentStrings.homepage.pages.faq.questions.c.subheader,
+    },
+    {
+      title: currentStrings.homepage.pages.faq.questions.d.title,
+      subheader: currentStrings.homepage.pages.faq.questions.d.subheader,
+    },
+    {
+      title: currentStrings.homepage.pages.faq.questions.e.title,
+      subheader: currentStrings.homepage.pages.faq.questions.e.subheader,
+    },
+    {
+      title: currentStrings.homepage.pages.faq.questions.f.title,
+      subheader: currentStrings.homepage.pages.faq.questions.f.subheader,
+    },
+    {
+      title: currentStrings.homepage.pages.faq.questions.g.title,
+      subheader: currentStrings.homepage.pages.faq.questions.g.subheader,
+    },
+    {
+      title: currentStrings.homepage.pages.faq.questions.h.title,
+      subheader: currentStrings.homepage.pages.faq.questions.h.subheader,
+    },
+    {
+      title: currentStrings.homepage.pages.faq.questions.i.title,
+      subheader: currentStrings.homepage.pages.faq.questions.i.subheader,
+    },
+    {
+      title: currentStrings.homepage.pages.faq.questions.j.title,
+      subheader: currentStrings.homepage.pages.faq.questions.j.subheader,
+    },
+    {
+      title: currentStrings.homepage.pages.faq.questions.k.title,
+      subheader: currentStrings.homepage.pages.faq.questions.k.subheader,
+    },
+  ];
+
   return (
     <Container className={classes.margintop}>
       <Grid container spacing={4} justify="center">
         {faqs.map((faq, index) => (
-          <Grid item xs={12} sm={12}>
-            <CardHeader title={faq.title} subheader={faq.subheader} />
+          <Grid key={index} item xs={12} sm={12}>
+            <CardHeader
+              title={`${faq.title}?`}
+              subheader={`${faq.subheader}.`}
+            />
           </Grid>
         ))}
       </Grid>

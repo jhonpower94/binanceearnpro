@@ -21,6 +21,7 @@ import {
   InputLabel,
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 
 function Copyright() {
   const classes = useStyles();
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     textDecoration: "none",
-    color: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
   },
   fontsize: {
     fontSize: "large",
@@ -67,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ResetPassword() {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   const [values, setValues] = React.useState({
     email: "",
   });
@@ -107,7 +109,7 @@ export default function ResetPassword() {
           />
         </div>
         <Typography component="h1" variant="h5">
-          Reset password
+          {currentStrings.account.reset_pass.title}
         </Typography>
         <form className={classes.form} onSubmit={resetpass}>
           <TextField
@@ -116,7 +118,7 @@ export default function ResetPassword() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label={currentStrings.account.email}
             name="email"
             autoComplete="email"
             autoFocus
@@ -131,13 +133,13 @@ export default function ResetPassword() {
             color="primary"
             className={classes.submit}
           >
-            reset password
+            {currentStrings.account.reset_pass.title}
           </Button>
           <Grid container>
             <Grid item xs>
               <Box display="flex" justifyContent="center">
-                <Link to="../" className={clsx(classes.link, classes.fontsize)}  color="secondary">
-                  Sign in
+                <Link to="../" className={clsx(classes.link, classes.fontsize)}>
+                  {currentStrings.account.signin.title}
                 </Link>
               </Box>
             </Grid>

@@ -41,12 +41,17 @@ import { dataArray } from "../../service/tradeblocks";
 import { blue, red } from "@material-ui/core/colors";
 import Background from "../../pages/homepage/images/header-middle-bg.png";
 import Backgroundsecond from "../../pages/homepage/images/header-middle-bg1.png";
+import { useDispatch, useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
+import { Strings } from "../../lang/language";
+import { language$, loading$ } from "../../redux/action";
+import detectBrowserLanguage from "detect-browser-language";
+import { ajax } from "rxjs/ajax";
+import { countrylist } from "../../config/countrylist";
+import { reactLocalStorage } from "reactjs-localstorage";
+import Loader from "../../components/loader";
 
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`;
+var getCountry = require("country-currency-map").getCountry;
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -125,12 +130,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const security = [
-  { title: "Privacy Policy" },
-  { title: "Terms of Service" },
-  { title: "EU Data Protection" },
-];
-
 const footerLink = [
   {
     title: "Trading",
@@ -192,6 +191,9 @@ function HomeLayout(props) {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const currentStrings = useSelector((state) => state.language);
+  const loading = useSelector((state) => state.loading);
+  const dispatch = useDispatch();
   const [anchorElMobile, setAnchorElMobile] = React.useState(null);
   const open = Boolean(anchorEl);
   const openMobile = Boolean(anchorElMobile);
@@ -203,40 +205,36 @@ function HomeLayout(props) {
     Downloads: false,
     Info: false,
   });
-  const { intro, darktheme, setDarktheme } = useContext(AppContext);
+  const { intro, rightoleft, setRightoleft } = useContext(AppContext);
 
   const arrayDatas = [
-    { name: "Home", link: "" },
+    { name: currentStrings.homepage.menus.home, link: "" },
     {
-      name: "Investment",
+      name: currentStrings.homepage.menus.investment,
       link: "invest",
     },
     {
-      name: "About Us",
+      name: currentStrings.homepage.menus.about,
       link: "about",
     },
     {
-      name: "Get Started",
+      name: currentStrings.homepage.menus.get_started,
       link: "guide",
     },
     {
-      name: "Support",
+      name: currentStrings.homepage.menus.support,
       link: "contact",
     },
     {
-      name: "Faq",
+      name: currentStrings.homepage.menus.faq,
       link: "faq",
     },
-    /*  {
-      name: "Security",
-      submenus: true,
-      collapse: collapse.Security,
-      submenulinks: [
-        { title: "Privacy Policy", link: "security/privacy" },
-        { title: "Terms of Service", link: "security/terms" },
-        { title: "EU Data Protection", link: "security/eu" },
-      ],
-    }, */
+  ];
+
+  const security = [
+    { title: currentStrings.homepage.footer.securities.privacy },
+    { title: currentStrings.homepage.footer.securities.terms },
+    { title: currentStrings.homepage.footer.securities.Eu },
   ];
 
   const changePage = (link) => {
@@ -261,26 +259,6 @@ function HomeLayout(props) {
     setCollapse({ ...collapse, [props]: !collps });
   };
 
-  const theme = createMuiTheme({
-    palette: {
-      type: "light",
-      primary: {
-        // Purple and green play nicely together.
-        main: red[900],
-      },
-      secondary: {
-        // This is green.A700 as hex.
-        main: "#fafafa",
-      },
-      /*  background: {
-        default: "#fff",
-      }, */
-      action: {
-        selected: "#2196f33d",
-      },
-    },
-  });
-
   useEffect(() => {}, []);
 
   const handleClose = () => {
@@ -289,57 +267,42 @@ function HomeLayout(props) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <React.Fragment>
-        <CssBaseline>
+    <React.Fragment>
+      <CssBaseline />
+      {loading.loading ? (
+        <Loader />
+      ) : (
+        <div>
+          <Helmet>
+            <meta name="viewport" content="user-scalable=no" />
+          </Helmet>
           <ElevationScroll {...props}>
             <AppBar color="primary">
               <Toolbar>
-                {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
-                  <img
-                    src={require("../../images/logo.svg")}
-                    alt="logo"
-                    width="150px"
-                  />
-                ) : (
-                  <Box display="flex">
-                    <IconButton
-                      color="inherit"
-                      aria-label="open drawer"
-                      edge="start"
-                      className={classes.menuButton}
-                      onClick={openMobileMenu}
-                    >
-                      <MenuIcon />
-                    </IconButton>
-                    <img
-                      src={require("../../images/logo.svg")}
-                      alt="logo"
-                      height="50px"
-                    />
-                  </Box>
-                )}
+                <img
+                  src={require("../../images/logo.svg")}
+                  alt="logo"
+                  width="150px"
+                />
 
-                {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
-                  <div className={classes.mgright}>
-                    {arrayDatas.map((link, index) => (
-                      <Link
-                        key={index}
-                        component="button"
-                        variant="body1"
-                        onClick={(e) => {
-                          link.submenus
-                            ? openSubmenu(e, link.submenulinks)
-                            : changePage(link.link);
-                        }}
-                        color="inherit"
-                        className={classes.link}
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
-                  </div>
-                ) : null}
+                <div className={classes.mgright}>
+                  {arrayDatas.map((link, index) => (
+                    <Link
+                      key={index}
+                      component="button"
+                      variant="body1"
+                      onClick={(e) => {
+                        link.submenus
+                          ? openSubmenu(e, link.submenulinks)
+                          : changePage(link.link);
+                      }}
+                      color="inherit"
+                      className={classes.link}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
 
                 <StyledMenu // desktop Submenus
                   id="fade-menu"
@@ -443,7 +406,7 @@ function HomeLayout(props) {
 
           {intro.layout}
 
-          <div style={{ position: "relative" }}>{props.children}</div>
+          {props.children}
 
           <Container maxWidth="md" className={classes.margintop}>
             <Grid container spacing={3} justify="center">
@@ -475,7 +438,8 @@ function HomeLayout(props) {
               alignItems="center"
             >
               <Typography variant="body1">
-                Made with &#10084;&#65039; at AFX
+                {`${currentStrings.homepage.footer.made}`} &#10084;&#65039; @
+                AFX
               </Typography>
             </Box>
             <Box
@@ -501,15 +465,15 @@ function HomeLayout(props) {
               flexDirection="column"
               alignItems="center"
             >
-              <img src={require("../../images/logosmall.svg")} width="30" />
+              <img src={require("../../images/logo.svg")} width="100" />
               <Typography variant="caption">
-                &copy; Hotbloq, LLC, {new Date().toLocaleDateString()}.
+                &copy; Hotbloq LLC, {new Date().getFullYear()}.
               </Typography>
             </Box>
           </Container>
-        </CssBaseline>
-      </React.Fragment>
-    </ThemeProvider>
+        </div>
+      )}
+    </React.Fragment>
   );
 }
 

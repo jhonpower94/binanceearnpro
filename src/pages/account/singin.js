@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import clsx from "clsx";
 import firebase from "../../config";
 import { AppContext } from "../../App";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loading$ } from "../../redux/action";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -27,17 +27,7 @@ import {
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { navigate } from "@reach/router";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://coininvest.net/">
-        coinspringinvest
-      </Link>
-    </Typography>
-  );
-}
+import Copyright from "./copyright";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -63,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   const dispatch = useDispatch();
   const { intro, setIntro } = useContext(AppContext);
   const [values, setValues] = React.useState({
@@ -104,7 +95,7 @@ export default function SignIn() {
           .signInWithEmailAndPassword(values.email, values.password)
           .then(() => {
             dispatch(loading$());
-            navigate("/");
+            navigate("/dashboard");
           })
           .catch((err) => {
             dispatch(loading$());
@@ -129,7 +120,7 @@ export default function SignIn() {
           />
         </div>
         <Typography component="h1" variant="h5">
-          Sign in
+          {currentStrings.account.signin.title}
         </Typography>
         <form className={classes.form} onSubmit={submitLogin}>
           <TextField
@@ -138,7 +129,7 @@ export default function SignIn() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label={currentStrings.account.email}
             onChange={handleChange("email")}
             autoComplete="email"
             autoFocus
@@ -149,7 +140,7 @@ export default function SignIn() {
             fullWidth
           >
             <InputLabel htmlFor="outlined-adornment-password">
-              Password
+              {currentStrings.account.password}
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-password"
@@ -174,7 +165,7 @@ export default function SignIn() {
 
           <FormControlLabel
             control={<Checkbox color="primary" onChange={persistance} />}
-            label="Remember me"
+            label={currentStrings.account.signin.remember}
           />
           <Button
             type="submit"
@@ -183,7 +174,7 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            {currentStrings.account.signin.title}
           </Button>
         </form>
         <Grid container>
@@ -193,7 +184,7 @@ export default function SignIn() {
               onClick={() => navigate("account/resetpassword")}
               color="secondary"
             >
-              Forgot password?
+              {`${currentStrings.account.signin.forgot_pass}`}
             </Link>
           </Grid>
           <Grid item>
@@ -202,7 +193,7 @@ export default function SignIn() {
               onClick={() => navigate("account/register")}
               color="secondary"
             >
-              {"Don't have an account? Sign Up"}
+              {`${currentStrings.account.signin.redir}? ${currentStrings.account.signup.title}`}
             </Link>
           </Grid>
         </Grid>

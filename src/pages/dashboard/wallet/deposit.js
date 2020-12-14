@@ -35,7 +35,8 @@ import firebase, { firestore } from "../../../config";
 import { ajax } from "rxjs/ajax";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import NumberFormat from "react-number-format";
-import { AccountBalanceSharp, AccountBalanceWallet } from "@material-ui/icons";
+import { AccountBalanceWallet } from "@material-ui/icons";
+import getSymbolFromCurrency from "currency-symbol-map";
 var formatCurrency = require("country-currency-map").formatCurrency;
 
 let converter = new Converter(
@@ -78,6 +79,9 @@ const currencies = [
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
 
+  const userInfos = useSelector((state) => state.locationinfo.locationinfo);
+  const prefix = getSymbolFromCurrency(userInfos.currencycode);
+
   return (
     <NumberFormat
       {...other}
@@ -92,7 +96,7 @@ function NumberFormatCustom(props) {
       }}
       thousandSeparator
       isNumericString
-      prefix="$"
+      prefix={prefix}
     />
   );
 }
@@ -120,7 +124,9 @@ function Deposit() {
     dispatch(selectedmenuItem$(4));
 
     // setPaymentInfo({ ...paymentInfo, amount: 50 });
-    setMinimum_deposit(50);
+    converter
+      .convert(50, "USD", userInfos.currencycode)
+      .then((data) => setMinimum_deposit(data));
   }, []);
 
   const addcredit = (e) => {
@@ -132,47 +138,48 @@ function Deposit() {
         .collection("transactions")
         .add({
           userid: userInfos.id,
-          type: "Deposit deposit",
+          type: "wallet deposit",
           pending: true,
-          name: "Deposit Deposit",
+          name: "wallet deposit",
           return_amount: parseInt(paymentInfo.amount),
           date: new Date().toLocaleDateString(),
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           email: userInfos.email,
           firstname: userInfos.firstName,
           lastname: userInfos.lastName,
+          currency: userInfos.currencycode,
         })
         .then(() => {
           const amountnn = formatLocaleCurrency(paymentInfo.amount, "USD", {
             autoFixed: false,
           });
           ajax({
-            url: "https://coininvest.herokuapp.com/mail",
+            url: "https://hotblockinvest.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: {
-              message: `Send exact payment to this address: \n 
+              message: `${currentStrings.emailmessages.deposit.a}: \n 
               1NKawsJ1AsZ8jeMcJvA3kigPZU6fuFU3UX <br/><br/>
-              <img src="https://www.coininvest.net/qrcode.png" height="150" /><br/><br/>
-              Amount: ${amountnn} <br/><br/>
-              once payment is done, send notification to live support or email support at 
-              <a>support@coininvest.net</a>
-              to notify us of successful deposit.`,
+              <img src="https://firebasestorage.googleapis.com/v0/b/hotblockinvest.appspot.com/o/qrcode%2Fqr-code%20(1).png?alt=media&token=10de5943-e7e3-42ec-b982-59aa03c5648c" height="150" /><br/><br/>
+              ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
+              ${currentStrings.emailmessages.deposit.b} 
+              <a>support@hotblockinvest.com</a>
+              ${currentStrings.emailmessages.deposit.c}.`,
               to: userInfos.email,
-              subject: "Deposit",
+              subject: currentStrings.emailmessages.deposit.subject,
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://coininvest.herokuapp.com/mail",
+            url: "https://hotblockinvest.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "support@coininvest.net",
+              to: "support@hotblockinvest.com",
               subject: "New Deposit",
             },
           }).subscribe(() => {
@@ -197,12 +204,20 @@ function Deposit() {
                 <AccountBalanceWallet />
               </Avatar>
             }
-            title={currentStrings.Dashboard.withdraw.Deposit_balance}
+            title={currentStrings.Dashboard.withdraw.wallet_balance}
             subheader={
               <Typography variant="h4">
-                {formatLocaleCurrency(userInfos.wallet_balance, "USD", {
-                  autoFixed: false,
-                })}
+                {isNaN(userInfos.wallet_balance)
+                  ? formatLocaleCurrency(0, userInfos.currencycode, {
+                      autoFixed: false,
+                    })
+                  : formatLocaleCurrency(
+                      userInfos.wallet_balance,
+                      userInfos.currencycode,
+                      {
+                        autoFixed: false,
+                      }
+                    )}
               </Typography>
             }
           />
@@ -284,7 +299,7 @@ function Deposit() {
               {currentStrings.Dashboard.deposit.alert_title}
             </AlertTitle>
 
-            {formatLocaleCurrency(minimum_deposit, "USD", {
+            {formatLocaleCurrency(minimum_deposit, userInfos.currencycode, {
               autoFixed: false,
             })}
           </Alert>

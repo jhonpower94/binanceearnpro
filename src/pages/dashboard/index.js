@@ -223,7 +223,7 @@ function DashboardLayout(props) {
             const country = JSON.parse(localStorage.getItem("country")).country;
             console.log(JSON.parse(localStorage.getItem("country")).country);
             const newCurcode = getCountry(country).currency; // currency code
-            const newCursymbol = getSymbolFromCurrency(newCurcode); // currency code
+            const newCursymbol = getSymbolFromCurrency(newCurcode); // currency symbol
 
             setValues({
               ...values,

@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://coininvest.herokuapp.com/plans`,
+          url: `https://hotblockinvest.herokuapp.com/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -150,7 +150,7 @@ export default function Investments() {
             })
             .then(() => {
               ajax({
-                url: "https://coininvest.herokuapp.com/mail",
+                url: "https://hotblockinvest.herokuapp.com/mail",
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -160,7 +160,7 @@ export default function Investments() {
                 Description: Account Wallet Deposit <br/>
                 Amount: ${data.deposit_amount} <br/>
                 Status <p style="color: #06b956;">successful</p></p>`,
-                  to: `${data.email}, support@coininvest.net`,
+                  to: `${data.email}, support@hotblockinvest.com`,
                   subject: "Transaction update",
                 },
               }).subscribe(() => console.log("user message sent"));
@@ -232,7 +232,7 @@ export default function Investments() {
                   )}
                 </TableCell>
                 <TableCell align="right">
-                  {formatLocaleCurrency(dep.deposit_amount, "USD", {
+                  {formatLocaleCurrency(dep.deposit_amount, dep.currency, {
                     autoFixed: false,
                   })}
                 </TableCell>

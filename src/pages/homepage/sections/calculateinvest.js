@@ -19,6 +19,7 @@ import { blue } from "@material-ui/core/colors";
 import { ShareSharp } from "@material-ui/icons";
 import NumberFormat from "react-number-format";
 import { blocks } from "../../../service/tradeblocks";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -52,6 +53,7 @@ NumberFormatCustom.propTypes = {
 
 function Calculator() {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   const [value, setValue] = useState({
     rate: 6,
     amount: 0,
@@ -169,8 +171,8 @@ function Calculator() {
           <Grid container spacing={5} justify="center">
             <Grid item xs={12} sm={12}>
               <CardHeader
-                title="Calculate investment"
-                subheader="Calculcale investment total profits"
+                title={currentStrings.homepage.calculate_invest.title}
+                subheader={currentStrings.homepage.calculate_invest.subheader}
                 titleTypographyProps={{ align: "center", variant: "h4" }}
                 subheaderTypographyProps={{ align: "center" }}
                 style={{ color: "#fff" }}
@@ -181,12 +183,14 @@ function Calculator() {
                 id="outlined-select-currency"
                 select
                 size="small"
-                label="Currency"
+                label={currentStrings.homepage.calculate_invest.plan.title}
                 value={value.rate}
                 onChange={(e) => {
                   setValue({ ...value, rate: e.target.value });
                 }}
-                helperText="Please select your currency"
+                helperText={
+                  currentStrings.homepage.calculate_invest.plan.helpertext
+                }
                 variant="filled"
               >
                 {blocks.map((option, index) => (
@@ -201,7 +205,7 @@ function Calculator() {
                 size="small"
                 fullWidth
                 id="outlined-number"
-                label="Amount"
+                label={currentStrings.homepage.calculate_invest.amount.title}
                 name="amount"
                 defaultValue={value.amount}
                 variant="filled"
@@ -209,7 +213,9 @@ function Calculator() {
                 InputProps={{
                   inputComponent: NumberFormatCustom,
                 }}
-                helperText="Enter investment amount"
+                helperText={
+                  currentStrings.homepage.calculate_invest.amount.helpertext
+                }
               />
             </Grid>
             <Grid item xs={4} sm={4}>
@@ -217,7 +223,7 @@ function Calculator() {
                 size="small"
                 fullWidth
                 id="outlined-number-profit"
-                label="Profit"
+                label={currentStrings.homepage.calculate_invest.profit.title}
                 name="profit"
                 value={value.profit}
                 variant="filled"
@@ -225,7 +231,9 @@ function Calculator() {
                 InputProps={{
                   inputComponent: NumberFormatCustom,
                 }}
-                helperText="Estimated profit return"
+                helperText={
+                  currentStrings.homepage.calculate_invest.profit.helpertext
+                }
               />
             </Grid>
           </Grid>
@@ -239,37 +247,23 @@ function Calculator() {
           >
             <Grid item xs={6} sm={6}>
               <CardHeader
-                avatar={
-                  <Avatar
-                    variant="rounded"
-                    style={{
-                      background: "#ffffff",
-                      width: "100px",
-                      height: "100px",
-                    }}
-                  >
-                    <ShareSharp style={{ fontSize: "70" }} />
-                  </Avatar>
+                title={
+                  <Typography variant="h4">
+                    {`$5.00 ${currentStrings.homepage.affilate.title}`}
+                  </Typography>
                 }
-                title={<Typography variant="h5">AFFILATE PROGRAMM</Typography>}
-                subheader="Each your referral brings you reward from his deposit amount. Your own deposit is not required to attract investors and earn. Just register account and apply your referral link everywhere you can."
+                subheader={currentStrings.homepage.affilate.subheader}
                 style={{ color: "#fff" }}
               />
             </Grid>
             <Grid item xs={6} sm={6}>
               <CardHeader
-                avatar={
-                  <img
-                    src={require("../images/certificate1.png")}
-                    width="100"
-                  />
-                }
                 title={
                   <Typography variant="h5">
-                    coininvest.net investment LIMITED
+                    {`hotblockinvest.com ${currentStrings.homepage.cac.title}`}
                   </Typography>
                 }
-                subheader="In July 2016 coininvest.net investment Limited passed the incorporation process in the United Kingdom and is listed by Companies House."
+                subheader={currentStrings.homepage.cac.subheader}
                 style={{ color: "#fff" }}
               />
             </Grid>
@@ -281,3 +275,26 @@ function Calculator() {
 }
 
 export default Calculator;
+
+/*
+avatar={
+                  <Avatar
+                    variant="rounded"
+                    style={{
+                      background: "#ffffff",
+                      width: "100px",
+                      height: "100px",
+                    }}
+                  >
+                    <ShareSharp style={{ fontSize: "70" }} />
+                  </Avatar>
+                }
+
+                avatar={
+                  <img
+                    src={require("../images/certificate1.png")}
+                    width="100"
+                  />
+                }
+
+*/

@@ -35,7 +35,7 @@ function IntroHeaderPages(props) {
   return (
     <div className={classes.headerpage}>
       <div className={classes.toolbar} />
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Grid container spacing={3} justify="center">
           <Grid item xs={12} sm={12}>
             <Box mt={2}>

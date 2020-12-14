@@ -1,20 +1,16 @@
 import React, { useEffect, useState, useContext, createContext } from "react";
 import { createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
-import { orange, blue, red } from "@material-ui/core/colors";
-import { Router } from "@reach/router";
+import { create } from "jss";
+import rtl from "jss-rtl";
+import { jssPreset, StylesProvider, ThemeProvider } from "@material-ui/styles";
+import { red } from "@material-ui/core/colors";
+import { navigate, Router } from "@reach/router";
 import HomeLayout from "./pages/homepage";
 import DashboardLayout from "./pages/dashboard/indexnew";
 import AccountLayout from "./pages/account";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-import { allreducer } from "./redux/reducer";
 import AccountSettings from "./pages/dashboard/accountsettings";
 import DashboardPage from "./pages/dashboard/accountpage/indexnew";
-import Account from "./pages/dashboard/accountpage/account";
-import AccountInfo from "./pages/dashboard/accountpage/accountinfo";
 import MyInvestments from "./pages/dashboard/allinvestments";
-import Exchange from "./pages/dashboard/currencyexchange";
 import Wallet from "./pages/dashboard/wallet";
 import Profile from "./pages/dashboard/profile";
 import CreditWallet from "./pages/dashboard/wallet/payment";
@@ -60,22 +56,37 @@ import Tables from "./pages/homepage/component/trnanstble";
 import DepositTable from "./pages/homepage/component/trnanstble/depositable";
 import WithdrawTable from "./pages/homepage/component/trnanstble/withdrawtable";
 import { ajax } from "rxjs/ajax";
-import { map, catchError } from "rxjs/operators";
-import { of } from "rxjs";
-import { useDispatch } from "react-redux";
-import { blocks$ } from "./redux/action";
-var cc = require("currency-codes");
+import { useDispatch, useSelector } from "react-redux";
+import { language$, loading$ } from "./redux/action";
+import { countrylist } from "./config/countrylist";
+import { Converter } from "easy-currencies";
+import { blocks } from "./service/tradeblocks";
+import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
+import { Strings } from "./lang/language";
+import detectBrowserLanguage from "detect-browser-language";
+import { firestore } from "./config";
 
-const store = createStore(allreducer);
-store.subscribe(() => console.log(store.getState()));
-const dark = store.getState().darkMode;
+let converter = new Converter(
+  "OpenExchangeRates",
+  "67eb8de24a554b9499d1d1bf919c93a3"
+);
+
+var getCountry = require("country-currency-map").getCountry;
 
 export const AppContext = createContext();
 
 function App() {
+  const dispatch = useDispatch();
+  const currentStrings = useSelector((state) => state.language);
   const [darktheme, setDarktheme] = useState({
     status: true,
   });
+  const [rightoleft, setRightoleft] = useState({
+    status: false,
+  });
+  const [currentlanguage, setCurrentlanguage] = useState(
+    currentStrings.language
+  );
   const [pagetitle, setPagetitle] = useState({
     title: "",
   });
@@ -119,6 +130,7 @@ function App() {
   });
 
   const [tabs, setTabs] = useState([]);
+  const [transactiondatas, setTransactiondatas] = useState([]);
 
   const [currentab, setCurrentab] = useState(0);
 
@@ -126,11 +138,16 @@ function App() {
   const [updateWalletBalance, setupdateWalletBalance] = useState({
     status: false,
   });
+  const [converted, setConverted] = useState({ status: false });
 
   const palletType = darktheme.status ? "dark" : "light";
   const secondary = darktheme.status ? "#fafafa" : "#ffffff";
 
+  // Configure JSS
+  const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
+
   const theme = createMuiTheme({
+    direction: rightoleft.status ? "rtl" : "ltr",
     palette: {
       type: palletType,
       primary: {
@@ -149,19 +166,90 @@ function App() {
       },
     },
   });
+
+  // right to left function
+  function setRtl(lang) {
+    switch (lang) {
+      case "ar":
+        return setRightoleft({ status: true });
+      default:
+        return setRightoleft({ status: false });
+    }
+  }
+
   useEffect(() => {
-    /*
-    ajax({
-      url: "http://localhost:9000/ip",
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: {},
-    }).subscribe((vl) => {
-      console.log(vl);
-    });
-    */
+    console.log(detectBrowserLanguage());
+    Strings.setLanguage(detectBrowserLanguage());
+    dispatch(language$(Strings));
+    setRtl(detectBrowserLanguage()); // set right to left fuction
+
+    const localstore = reactLocalStorage.getObject("country").country;
+
+    if (localstore) {
+      dispatch(loading$());
+      console.log(reactLocalStorage.getObject("country"));
+      //  reactLocalStorage.clear();
+      // convert investment plan
+      const currency = reactLocalStorage.getObject("country").currencycode;
+      blocks.forEach((val, inex) => {
+        converter.convert(val.lot, "USD", currency).then((data) => {
+          val.lot = formatLocaleCurrency(Math.floor(data), currency);
+          navigate("");
+        });
+        converter.convert(val.max, "USD", currency).then((data) => {
+          val.max = formatLocaleCurrency(Math.floor(data), currency);
+          navigate("");
+        });
+      });
+      // end convert investment plan
+
+      firestore
+        .collection("fakerator")
+        .doc("12345")
+        .get()
+        .then((dataval) => {
+          const waittransaction = async () => {
+            await dataval.data().data.forEach((data) => {
+              transactiondatas.push(data);
+            });
+          };
+          waittransaction().then(() => {
+            transactiondatas.forEach((vl) => {
+              converter.convert(vl.amount, "USD", currency).then((rt) => {
+                vl.amount = rt;
+                navigate("");
+              });
+            });
+            dispatch(loading$());
+          });
+        });
+    } else {
+      dispatch(loading$());
+      ajax({
+        url: "https://hotblockinvest.herokuapp.com/ip",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: {},
+      }).subscribe((vl) => {
+        /*
+        filter and get country with val.country through countrylist
+        */
+        const country = countrylist.filter(function (obj) {
+          return obj.code == vl.response.country;
+        })[0];
+        const currencyCode = getCountry(country.name).currency; // get currenvy code
+
+        reactLocalStorage.setObject("country", {
+          country: country.name,
+          dail_coe: country.dial_code,
+          code: country.code,
+          currencycode: currencyCode,
+        });
+        window.location.reload(false);
+      });
+    }
   }, []);
 
   /*
@@ -180,100 +268,110 @@ function App() {
   */
 
   return (
-    <Provider store={store}>
-      <AppContext.Provider
-        value={{
-          darktheme,
-          intro,
-          currentblock,
-          paymentInfo,
-          userData,
-          balance,
-          user,
-          MinDeposits,
-          updateWalletBalance,
-          tabs,
-          currentab,
-          pagetitle,
-          setPagetitle,
-          setCurrentab,
-          setTabs,
-          setupdateWalletBalance,
-          setMinDeposit,
-          setUser,
-          setBalance,
-          setUserData,
-          setPaymentInfo,
-          setCurrentBlock,
-          setDarktheme,
-          setIntro,
-        }}
-      >
-        <ThemeProvider theme={theme}>
-          <Router>
-            <HomeLayout path="/">
-              <Home path="/" />
-              <Home path="/:refid" />
-              <InvestBlock path="invest" />
-              <Faqs path="faq" />
-              <About path="about" />
-              <Locations path="locations" />
-              <BlocDatas path="tradedatas" />
-              <Downloads path="downloads/:page" />
-              <Contactus path="contact" />
-              <Guide path="guide" />
-              <Security path="security/:page" />
-            </HomeLayout>
+    <AppContext.Provider
+      value={{
+        darktheme,
+        intro,
+        currentblock,
+        paymentInfo,
+        userData,
+        balance,
+        user,
+        MinDeposits,
+        updateWalletBalance,
+        tabs,
+        currentab,
+        pagetitle,
+        rightoleft,
+        converted,
+        currentlanguage,
+        transactiondatas,
+        setTransactiondatas,
+        setCurrentlanguage,
+        setConverted,
+        setRightoleft,
+        setPagetitle,
+        setCurrentab,
+        setTabs,
+        setupdateWalletBalance,
+        setMinDeposit,
+        setUser,
+        setBalance,
+        setUserData,
+        setPaymentInfo,
+        setCurrentBlock,
+        setDarktheme,
+        setIntro,
+      }}
+    >
+      <div dir={rightoleft.status ? "rtl" : "ltr"}>
+        <StylesProvider jss={jss}>
+          <ThemeProvider theme={theme}>
+            <Router>
+              <HomeLayout path="/">
+                <Home path="/" />
+                <Home path="/:refid" />
+                <InvestBlock path="invest" />
+                <Faqs path="faq" />
+                <About path="about" />
+                <Locations path="locations" />
+                <BlocDatas path="tradedatas" />
+                <Downloads path="downloads/:page" />
+                <Contactus path="contact" />
+                <Guide path="guide" />
+                <Security path="security/:page" />
+              </HomeLayout>
 
-            <DashboardLayout path="dashboard">
-              <DashboardPage path="/" />
-              <Invest path="invest" />
-              <Withdrawals path="withdraw" />
-              <Investment path="investments" />
-              <Invoice path="invoice" />
-              <MyInvestments path="investments" />
-              <WithdrawBonus path="withdraw/:page" />
-              <Withdrawform path="withdrawform" />
-              <Transactions path="transactions" />
-              <Wallet path="wallet" />
-              <CreditWallet path="payment_wallet" />
-              <CreditSucess path="credit_success" />
-              <Profile path="profile" />
-              <AccountSettings path="settings/:page" />
-              <Support path="support" />
-              <Payment path="payment" />
-              <PaymentSuccess path="success" />
-              <Complete path="complete" />
-            </DashboardLayout>
+              <DashboardLayout path="dashboard">
+                <DashboardPage path="/" />
+                <Invest path="invest" />
+                <Withdrawals path="withdraw" />
+                <Investment path="investments" />
+                <Invoice path="invoice" />
+                <MyInvestments path="investments" />
+                <WithdrawBonus path="withdraw/:page" />
+                <Withdrawform path="withdrawform" />
+                <Transactions path="transactions" />
+                <Wallet path="wallet" />
+                <CreditWallet path="payment_wallet" />
+                <CreditSucess path="credit_success" />
+                <Profile path="profile" />
+                <AccountSettings path="settings/:page" />
+                <Support path="support" />
+                <Payment path="payment" />
+                <PaymentSuccess path="success" />
+                <Complete path="complete" />
+              </DashboardLayout>
 
-            <AccountLayout path="account">
-              <SignIn path="/" />
-              <SignInAdmin path="admin" />
-              <SignUp path="register" />
-              <SignUpReferral path="register/:id" />
-              <VerifyEmail path="verifyemail" />
-              <VerifyEmailSent path="emailsent/:email" />
-              <ResetPassword path="resetpassword" />
-            </AccountLayout>
+              <AccountLayout path="account">
+                <SignIn path="/" />
+                <SignInAdmin path="admin" />
+                <SignUp path="register" />
+                <SignUpReferral path="register/:id" />
+                <VerifyEmail path="verifyemail" />
+                <VerifyEmailSent path="emailsent/:email" />
+                <ResetPassword path="resetpassword" />
+              </AccountLayout>
 
-            <AdminLayout path="manager">
-              <DashboardAdmin path="/" />
-              <CreditBonus path="creditbonus" />
-              <DeleteUsers path="deleteuser" />
-              <TransactionsAdmin path="transactions" />
-              <UpdateWallet path="updatewallet" />
-              <Kyc path="kyc" />
-              <Investments path="investments" />
-            </AdminLayout>
+              <AdminLayout path="manager">
+                <DashboardAdmin path="/" />
+                <CreditBonus path="creditbonus" />
+                <DeleteUsers path="deleteuser" />
+                <TransactionsAdmin path="transactions" />
+                <UpdateWallet path="updatewallet" />
+                <Kyc path="kyc" />
+                <Investments path="investments" />
+              </AdminLayout>
 
-            <Tables path="tables">
-              <WithdrawTable path="withdrawtable" />
-              <DepositTable path="depositable" />
-            </Tables>
-          </Router>
-        </ThemeProvider>
-      </AppContext.Provider>
-    </Provider>
+              <Tables path="tables">
+                <WithdrawTable path="withdrawtable" />
+                <DepositTable path="depositable" />
+              </Tables>
+            </Router>
+          </ThemeProvider>
+        </StylesProvider>
+      </div>
+    </AppContext.Provider>
   );
 }
 

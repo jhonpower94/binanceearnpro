@@ -85,7 +85,7 @@ function PaymentSuccess() {
 
             const newDate = addDays(date, paymentInfo.block.duration);
 
-            fetch("https://coininvest.herokuapp.com/plans", {
+            fetch("https://hotblockinvest.herokuapp.com/plans", {
               method: "POST",
               mode: "cors",
               headers: {
@@ -120,6 +120,7 @@ function PaymentSuccess() {
                   email: userInfos.email,
                   firstname: userInfos.firstName,
                   lastname: userInfos.lastName,
+                  currency: userInfos.currencycode,
                   date: new Date().toLocaleDateString(),
                   created_at: firebase.firestore.FieldValue.serverTimestamp(),
                 });

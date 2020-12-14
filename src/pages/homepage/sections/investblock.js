@@ -7,11 +7,9 @@ import {
   Grid,
   Card,
   CardHeader,
-  Avatar,
   ListItem,
   ListItemText,
   List,
-  Button,
   Fade,
   makeStyles,
   Container,
@@ -20,10 +18,11 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import IntroHeaderPages from "../component/introheaderpages";
-import Background from "../images/baprice.svg";
-import { VerifiedUserSharp, AddCircleSharp } from "@material-ui/icons";
 import { red } from "@material-ui/core/colors";
 import { Rating } from "@material-ui/lab";
+import { useSelector } from "react-redux";
+import { reactLocalStorage } from "reactjs-localstorage";
+import { Converter } from "easy-currencies";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -35,15 +34,18 @@ function InvestBlock(props) {
   const classes = useStyles();
   const { blocksHome, page } = props;
   const [arrays, setArrays] = useState([]);
-  const { intro, setIntro } = useContext(AppContext);
+  const currentStrings = useSelector((state) => state.language);
+  const { setIntro } = useContext(AppContext);
 
   useEffect(() => {
     setIntro({
-      layout: <IntroHeaderPages title="INVESTMENTS" subheader="Our Plans" />,
+      layout: (
+        <IntroHeaderPages
+          title={currentStrings.homepage.pages.investments.title}
+          subheader={currentStrings.homepage.pages.investments.subheader}
+        />
+      ),
     });
-    window.scrollTo(0, 0);
-    const newBlock = blocks.slice(0, 3);
-    blocksHome ? setArrays(newBlock) : setArrays(blocks);
   }, []);
 
   const theme = createMuiTheme({
@@ -70,7 +72,7 @@ function InvestBlock(props) {
     <ThemeProvider theme={theme}>
       <Container maxWidth="md" className={classes.margintop}>
         <Grid container spacing={8} justify="center">
-          {arrays.map((trade, index) => (
+          {blocks.map((trade, index) => (
             <Fade
               in={true}
               key={index}
@@ -84,7 +86,7 @@ function InvestBlock(props) {
                   }}
                 >
                   <CardHeader
-                    title={`${trade.min_rate} - ${trade.max_rate}%`}
+                    title={`Plan ${index + 1}`}
                     subheader={
                       <Rating
                         name="read-only"
@@ -93,42 +95,51 @@ function InvestBlock(props) {
                         size="small"
                       />
                     }
-                    titleTypographyProps={{ align: "center", variant: "h3" }}
+                    titleTypographyProps={{ align: "center" }}
                     subheaderTypographyProps={{
                       align: "center",
                       variant: "body1",
                     }}
                   />
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="baseline"
+                  >
+                    <Typography component="h2" variant="h3">
+                      {`${trade.min_rate}-${trade.max_rate}%`}
+                    </Typography>
+                  </Box>
                   <List dense={true}>
                     <Divider variant="inset" component="li" />
+
                     <ListItem>
                       <ListItemText
-                        primary={<Typography variant="h6">Duration</Typography>}
-                        secondary={
-                          <Typography variant="body1">{`24 hrs`}</Typography>
-                        }
+                        primary={currentStrings.Dashboard.invest.Minimun_stake}
+                        secondary={trade.lot}
+                        primaryTypographyProps={{
+                          align: "center",
+                          variant: "h6",
+                        }}
+                        secondaryTypographyProps={{
+                          align: "center",
+                          variant: "h5",
+                        }}
                       />
                     </ListItem>
                     <Divider variant="inset" component="li" />
                     <ListItem>
                       <ListItemText
-                        primary={
-                          <Typography variant="h6">Minimun stake</Typography>
-                        }
-                        secondary={
-                          <Typography variant="body1">{`$${trade.lot}`}</Typography>
-                        }
-                      />
-                    </ListItem>
-                    <Divider variant="inset" component="li" />
-                    <ListItem>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6">Maximun stake</Typography>
-                        }
-                        secondary={
-                          <Typography variant="body1">{`$${trade.max}`}</Typography>
-                        }
+                        primary={currentStrings.Dashboard.invest.Maximun_stake}
+                        secondary={trade.max}
+                        primaryTypographyProps={{
+                          align: "center",
+                          variant: "h6",
+                        }}
+                        secondaryTypographyProps={{
+                          align: "center",
+                          variant: "h5",
+                        }}
                       />
                     </ListItem>
                   </List>
@@ -143,3 +154,19 @@ function InvestBlock(props) {
 }
 
 export default InvestBlock;
+
+/*
+ <ListItem>
+                      <ListItemText
+                        primary={
+                          <Typography variant="h6">
+                            {currentStrings.Dashboard.invest.duration}
+                          </Typography>
+                        }
+                        secondary={
+                          <Typography variant="body1">{`24 hrs`}</Typography>
+                        }
+                      />
+                    </ListItem>
+                    <Divider variant="inset" component="li" />
+*/

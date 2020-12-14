@@ -8,6 +8,7 @@ import Investment from "./myinvestments";
 import AccountInfo from "../accountpage/accountinfo";
 import WithdrawBonus from "../withdraw/bonus";
 import Withdrawform from "../withdraw/withdraw";
+import { useSelector } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -37,11 +38,12 @@ const useStyles = makeStyles((theme) => ({
 
 function Invest() {
   const classes = useStyles();
+  const currentStrings = useSelector((state) => state.language);
   const { pagetitle, setPagetitle } = useContext(AppContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setPagetitle({ ...pagetitle, title: "Invest" });
+    setPagetitle({ ...pagetitle, title: currentStrings.Dashboard.titles.invest });
   }, []);
 
   return (

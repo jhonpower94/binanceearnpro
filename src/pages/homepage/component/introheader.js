@@ -19,9 +19,10 @@ import {
 import Particles from "react-tsparticles";
 import { blue, red } from "@material-ui/core/colors";
 import ArmChart from "./armchart";
-import Background from "../../../pages/homepage/images/bg.jpg";
-import Backgroundsecond from "../../../pages/homepage/images/header-middle-bg1.png";
+import Background from "../../../pages/homepage/images/bg2.jpg";
+import Backgroundsecond from "../../../pages/homepage/images/bg.jpg";
 import { navigate } from "@reach/router";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   mobileIntrolarge: {
@@ -46,7 +47,12 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   header: {
-    background: `url(${Background}) center no-repeat, url(${Backgroundsecond}) center bottom no-repeat`,
+    background: `url(${Background}) center no-repeat`,
+    height: "600px",
+    backgroundSize: "cover",
+  },
+  headerRtl: {
+    background: `url(${Backgroundsecond}) center no-repeat`,
     height: "600px",
     backgroundSize: "cover",
   },
@@ -57,8 +63,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 function IntroHeader() {
   const classes = useStyles();
-
-  const { intro } = useContext(AppContext);
+  const currentStrings = useSelector((state) => state.language);
+  const { intro, rightoleft } = useContext(AppContext);
   useEffect(() => {}, []);
 
   const theme = createMuiTheme({
@@ -66,7 +72,7 @@ function IntroHeader() {
       type: "light",
       primary: {
         // Purple and green play nicely together.
-        main:  red[900],
+        main: red[900],
       },
       secondary: {
         // This is green.A700 as hex.
@@ -82,11 +88,10 @@ function IntroHeader() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-    <div className={classes.header}>
+    <div className={rightoleft.status ? classes.headerRtl : classes.header}>
       <div className={classes.toolbar} />
       <Particles
-        // height="50px"
+        height="auto"
         // height={useMediaQuery(useTheme().breakpoints.up("sm")) ? "80%" : "85%"}
         style={{ position: "absolute", opacity: 0.8 }}
         id="tsparticles"
@@ -177,26 +182,25 @@ function IntroHeader() {
       />
       <div className={classes.intro}>
         <Container>
-          <Grid container spacing={3} justify="flex-end">
+          <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <Box
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
                 mt={3}
-                style={{color: "#fafafa"}}
+                style={{ color: "#fafafa" }}
               >
                 <Typography variant="h4" align="left">
-                  INVEST WITH BITCOIN
+                  {currentStrings.homepage.intro.title}
                 </Typography>
                 <Typography variant="h6" align="left">
-                  World's best cloud investment platform
+                  {currentStrings.homepage.intro.subheader}
                 </Typography>
               </Box>
-              <Box mt={3} style={{color: "white"}}>
+              <Box mt={3}>
                 <Typography variant="h6" align="center">
-                  We sincerely hope that coininvest.net Investment Limited will
-                  become a partner in your life.
+                  {currentStrings.homepage.intro.body}
                 </Typography>
               </Box>
               <Box display="flex" justifyContent="center" mt={2}>
@@ -206,25 +210,20 @@ function IntroHeader() {
                   size="large"
                   onClick={() => {
                     if (intro.refid) {
-                      navigate(
-                        `account/register/${intro.refid}`
-                      );
+                      navigate(`account/register/${intro.refid}`);
                     } else {
                       navigate("/account");
                     }
                   }}
                 >
-                  GET STARTED
+                  {currentStrings.homepage.intro.button}
                 </Button>
               </Box>
             </Grid>
-
-            
           </Grid>
         </Container>
       </div>
     </div>
- </ThemeProvider>
   );
 }
 
