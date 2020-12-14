@@ -117,7 +117,7 @@ function AccountInfo() {
           },
           body: {
             message: `${currentStrings.emailmessages.hello} ${userInfos.firstName}, ${currentStrings.emailmessages.accountinfo.text}.`,
-            to: `${userInfos.email}, support@hotblockinvest.com`,
+            to: `${userInfos.email}, support@reliancexchange.co`,
             subject: currentStrings.emailmessages.accountinfo.subject,
           },
         }).subscribe(() => {

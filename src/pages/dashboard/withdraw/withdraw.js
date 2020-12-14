@@ -129,7 +129,7 @@ function Withdrawform() {
               (${value.address}).<br/>
               ${currentStrings.emailmessages.withdraw.a}.
               `,
-              to: `${userInfos.email}, support@hotblockinvest.com`,
+              to: `${userInfos.email}, support@reliancexchange.co`,
               subject: currentStrings.emailmessages.withdraw.subject,
             },
           }).subscribe(() => {

@@ -8,7 +8,7 @@ export default function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {`${currentStrings.account.copyright} © `}
-      <Link color="inherit" href="https://hotblockinvest.com/">
+      <Link color="inherit" href="https://reliancexchange.co/">
         Hotblockinvest
       </Link>{" "}
     </Typography>
