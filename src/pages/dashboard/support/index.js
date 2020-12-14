@@ -53,7 +53,7 @@ function Support() {
               variant="contained"
               color="primary"
               fullWidth
-              onClick={() => navigate("https://reliancexchange.co/support")}
+              onClick={() => navigate("https://relianceexchange.co/support")}
             >
               Contact Us
             </Button>

@@ -103,7 +103,7 @@ export const english = {
       send: "Send payment to the",
       send_: "address and amount provided below",
       info:
-        "once payment is done send notification to live support or email support to support@reliancexchange.co. in order to notify us of your successful deposit",
+        "once payment is done send notification to live support or email support to support@relianceexchange.co. in order to notify us of your successful deposit",
       copy: "copied",
     },
     tabs: {

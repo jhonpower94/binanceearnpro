@@ -29,7 +29,7 @@ function Guide() {
   return (
     <Container className={classes.margintop} maxWidth="lg">
       <Typography variant="body1">
-        {`${currentStrings.homepage.pages.get_started.typeA} reliancexchange.co investment Limited.`}
+        {`${currentStrings.homepage.pages.get_started.typeA} relianceexchange.co investment Limited.`}
       </Typography>
       <br />
       <Typography variant="body1">

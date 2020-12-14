@@ -29,7 +29,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link to="../../" className={classes.link}>
-        Hotblockinvest
+        relianceexchange
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

@@ -40,7 +40,7 @@ function About() {
       layout: (
         <IntroHeaderPages
           title={currentStrings.homepage.pages.about_us.title}
-          subheader={`${currentStrings.homepage.pages.about_us.subheader} reliancexchange.co`}
+          subheader={`${currentStrings.homepage.pages.about_us.subheader} relianceexchange.co`}
         />
       ),
     });
@@ -53,11 +53,11 @@ function About() {
         <Grid item xs={6} sm={12}>
           <CardContent>
             <Typography align="left" variant="subtitle2">
-              {`reliancexchange.co ${currentStrings.homepage.pages.about_us.typeA}`}
+              {`relianceexchange.co ${currentStrings.homepage.pages.about_us.typeA}`}
             </Typography>
             <br />
             <Typography align="left" variant="subtitle2">
-              {`reliancexchange.co ${currentStrings.homepage.pages.about_us.typeB}`}
+              {`relianceexchange.co ${currentStrings.homepage.pages.about_us.typeB}`}
             </Typography>
           </CardContent>
         </Grid>

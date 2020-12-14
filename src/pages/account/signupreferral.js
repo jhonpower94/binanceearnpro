@@ -41,8 +41,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://reliancexchange.co/">
-        coinspringinvest
+      <Link color="inherit" href="https://relianceexchange.co/">
+      relianceexchange
       </Link>
     </Typography>
   );

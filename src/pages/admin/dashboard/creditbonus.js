@@ -142,7 +142,7 @@ export default function CreditBonus() {
               message: `Hello ${user.firstName} ${user.lastName}, <br/><br/> 
               You have recieved a new bonus. <br/><br/>
               Amount:  ${amountnn}`,
-              to: `${user.email}, support@reliancexchange.co`,
+              to: `${user.email}, support@relianceexchange.co`,
               subject: "Bonus Deposit"
             },
           }).subscribe(() => console.log("user message sent"));

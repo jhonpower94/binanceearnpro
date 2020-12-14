@@ -124,7 +124,7 @@ export default function Kyc() {
           },
           body: {
             message: `Hello ${user.firstName}, your profile has been successfully updated.`,
-            to: `${user.email}, support@reliancexchange.co`,
+            to: `${user.email}, support@relianceexchange.co`,
             subject: "Pofile update",
           },
         }).subscribe(() => {
