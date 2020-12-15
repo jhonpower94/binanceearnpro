@@ -113,7 +113,7 @@ export default function CreditBonus() {
       .add({
         amount: parseInt(state.amount),
         deposit_amount: parseInt(state.amount),
-        from: "Coinsprimginvest",
+        from: "Relianceexchange",
         description: state.description,
         date: new Date().toLocaleDateString(),
         created_at: firebase.firestore.FieldValue.serverTimestamp(),

@@ -33,7 +33,7 @@ import firebase, { app } from "../../config";
 import { addUsers } from "../../config/services";
 import { dispatch } from "rxjs/internal/observable/pairs";
 import { navigate } from "@reach/router";
-import Copyright from "./copyright";
+import Copyright  from "./copyright";
 import { reactLocalStorage } from "reactjs-localstorage";
 var cc = require("currency-codes");
 

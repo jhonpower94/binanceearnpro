@@ -262,7 +262,7 @@
   "account": {
     "email": "Email Address",
     "password": "Password",
-    "copyright": "Copyright",
+    "": "",
     "signin": {
       "title": "Sign in",
       "remember": "Remember me",

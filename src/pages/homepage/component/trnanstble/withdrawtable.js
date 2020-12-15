@@ -5,20 +5,42 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
-import { Box, Typography } from "@material-ui/core";
+import { Box, createMuiTheme, ThemeProvider, Typography } from "@material-ui/core";
 import { firestore, collectionData } from "../../../../config";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import { AppContext } from "../../../../App";
 import { reactLocalStorage } from "reactjs-localstorage";
+import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles({
   root: {
     width: "100%",
   },
   container: {
-    maxHeight: 200,
+    maxHeight: 440,
   },
 });
+
+const theme = createMuiTheme({
+  palette: {
+    type: "light",
+    primary: {
+      // Purple and green play nicely together.
+      main: red[900],
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: "#fff",
+    },
+    /*  background: {
+      default: "#fff",
+    }, */
+    action: {
+      selected: "#2196f33d",
+    },
+  },
+});
+
 
 export default function WithdrawTable() {
   const classes = useStyles();
@@ -42,28 +64,30 @@ export default function WithdrawTable() {
   }, []);
 
   return (
-    <TableContainer>
-      <Table aria-label="sticky table" className={classes.container}>
-        <TableBody>
-          {withdrawal.slice(0, 5).map((trans, index) => (
-            <TableRow role="checkbox" tabIndex={-1} key={index}>
-              <TableCell align="left" colSpan={2}>
-                <Box display="flex" flexDirection="column">
-                  <Typography variant="h6">{`${trans.name}`}</Typography>
-                </Box>
-              </TableCell>
+    <ThemeProvider theme={theme}>
+      <TableContainer className={classes.container}>
+        <Table aria-label="sticky table">
+          <TableBody>
+            {withdrawal.slice(0, 5).map((trans, index) => (
+              <TableRow role="checkbox" tabIndex={-1} key={index}>
+                <TableCell align="left" colSpan={2}>
+                  <Box display="flex" flexDirection="column">
+                    <Typography variant="h6">{`${trans.name}`}</Typography>
+                  </Box>
+                </TableCell>
 
-              <TableCell align="right">
-                <Typography variant="h5">
-                  {formatLocaleCurrency(trans.amount, currency, {
-                    autoFixed: false,
-                  })}
-                </Typography>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                <TableCell align="right">
+                  <Typography variant="h5">
+                    {formatLocaleCurrency(trans.amount, currency, {
+                      autoFixed: false,
+                    })}
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </ThemeProvider>
   );
 }

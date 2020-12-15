@@ -92,11 +92,12 @@ function DasboardMenu() {
       .doc(link.id)
       .delete()
       .then(() => {
-        if (link.type === "investment") {
+        /*  if (link.type === "investment") {
           navigate("invest");
         } else {
           navigate("bonus");
-        }
+        } */
+        navigate("dashboard/withdraw");
       });
   };
 
@@ -109,7 +110,7 @@ function DasboardMenu() {
     app
       .auth()
       .signOut()
-      .then(function () {
+      .then(function Copyright() {
         navigate("../account");
       })
       .catch(function (error) {
@@ -129,7 +130,10 @@ function DasboardMenu() {
   return (
     <div className={classes.sectionDesktop}>
       <IconButton onClick={handleClick}>
-        <StyledBadge badgeContent={4} color="error">
+        <StyledBadge
+          badgeContent={notifications.length < 1 ? "0" : notifications.length}
+          color="error"
+        >
           <NotificationsOutlined color="secondary" />
         </StyledBadge>
       </IconButton>

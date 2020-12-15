@@ -27,7 +27,7 @@ function Copyright() {
   const classes = useStyles();
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
+      {" © "}
       <Link to="../../" className={classes.link}>
         relianceexchange
       </Link>{" "}

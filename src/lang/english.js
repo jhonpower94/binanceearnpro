@@ -281,7 +281,7 @@ export const english = {
   account: {
     email: "Email Address",
     password: "Password",
-    copyright: "Copyright",
+    copyright: "",
     signin: {
       title: "Sign in",
       remember: "Remember me",

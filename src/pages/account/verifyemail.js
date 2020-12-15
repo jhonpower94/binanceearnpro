@@ -48,7 +48,7 @@ function VerifyEmail() {
   //  auth.languageCode = "fr";
     auth.currentUser
       .sendEmailVerification()
-      .then(function () {
+      .then(function Copyright() {
         console.log("email sent");
         navigate(`emailsent/${email}`);
       })

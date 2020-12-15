@@ -467,7 +467,7 @@ function HomeLayout(props) {
             >
               <img src={require("../../images/logo.svg")} width="100" />
               <Typography variant="caption">
-                &copy; Hotbloq LLC, {new Date().getFullYear()}.
+                &copy; Relianceexchange LLC, {new Date().getFullYear()}.
               </Typography>
             </Box>
           </Container>

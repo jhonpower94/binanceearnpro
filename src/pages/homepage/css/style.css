@@ -596,7 +596,7 @@ background-size: auto 40px;}
     background: linear-gradient(left, #018fb8, #00668f);
     background-color: #018fb8;
 }
-.copyright { display: block;text-align: right;  padding-right:15px;  font-size:10px; color:#ccc; text-transform: uppercase; font-weight: 100; }
+. { display: block;text-align: right;  padding-right:15px;  font-size:10px; color:#ccc; text-transform: uppercase; font-weight: 100; }
 
 
 .footer-menu { display: block; float:right; margin-top:20px;}

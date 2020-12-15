@@ -297,7 +297,7 @@ export default function DashboardLayout(props) {
   const [value, setValue] = React.useState(currentab);
 
   useEffect(() => {
-    dispatch(loading$());
+  //  dispatch(loading$());
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         navigate("../account");
@@ -306,7 +306,7 @@ export default function DashboardLayout(props) {
         docData(datas, "id").subscribe((val) => {
           dispatch(locationinfo$(val));
 
-          dispatch(stopload$(false));
+         // dispatch(stopload$(false));
         });
 
         datas.get().then((data) => {

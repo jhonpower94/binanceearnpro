@@ -5,11 +5,17 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
-import { Box, Typography } from "@material-ui/core";
+import {
+  Box,
+  createMuiTheme,
+  ThemeProvider,
+  Typography,
+} from "@material-ui/core";
 import { firestore, collectionData } from "../../../../config";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import { AppContext } from "../../../../App";
 import { reactLocalStorage } from "reactjs-localstorage";
+import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles({
   root: {
@@ -17,6 +23,26 @@ const useStyles = makeStyles({
   },
   container: {
     maxHeight: 440,
+  },
+});
+
+const theme = createMuiTheme({
+  palette: {
+    type: "light",
+    primary: {
+      // Purple and green play nicely together.
+      main: red[900],
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: "#fff",
+    },
+    /*  background: {
+      default: "#fff",
+    }, */
+    action: {
+      selected: "#2196f33d",
+    },
   },
 });
 
@@ -44,27 +70,29 @@ export default function DepositTable() {
   }, []);
 
   return (
-    <TableContainer className={classes.container}>
-      <Table aria-label="sticky table">
-        <TableBody>
-          {deposits.slice(0, 5).map((dep, index) => (
-            <TableRow role="checkbox" tabIndex={-1} key={index}>
-              <TableCell align="left" colSpan={2}>
-                <Box display="flex" flexDirection="column">
-                  <Typography variant="h6">{`${dep.name}`}</Typography>
-                </Box>
-              </TableCell>
-              <TableCell align="right">
-                <Typography variant="h5">
-                  {formatLocaleCurrency(dep.amount, currency, {
-                    autoFixed: false,
-                  })}
-                </Typography>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <ThemeProvider theme={theme}>
+      <TableContainer className={classes.container}>
+        <Table aria-label="sticky table">
+          <TableBody>
+            {deposits.slice(0, 5).map((dep, index) => (
+              <TableRow role="checkbox" tabIndex={-1} key={index}>
+                <TableCell align="left" colSpan={2}>
+                  <Box display="flex" flexDirection="column">
+                    <Typography variant="h6">{`${dep.name}`}</Typography>
+                  </Box>
+                </TableCell>
+                <TableCell align="right">
+                  <Typography variant="h5">
+                    {formatLocaleCurrency(dep.amount, currency, {
+                      autoFixed: false,
+                    })}
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </ThemeProvider>
   );
 }
