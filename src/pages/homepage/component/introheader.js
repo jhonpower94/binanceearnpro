@@ -198,7 +198,7 @@ function IntroHeader() {
                   {currentStrings.homepage.intro.subheader}
                 </Typography>
               </Box>
-              <Box mt={3}>
+              <Box mt={3} style={{ color: "#fafafa" }}>
                 <Typography variant="h6" align="center">
                   {currentStrings.homepage.intro.body}
                 </Typography>
