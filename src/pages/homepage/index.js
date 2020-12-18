@@ -205,9 +205,9 @@ function HomeLayout(props) {
         // This is green.A700 as hex.
         main: "#fff",
       },
-      /*  background: {
-          default: "#fff",
-        }, */
+      background: {
+        default: "#fafafa",
+      },
       action: {
         selected: "#2196f33d",
       },
@@ -269,17 +269,18 @@ function HomeLayout(props) {
 
   return (
     <React.Fragment>
-      {loading.loading ? (
-        <Loader />
-      ) : (
-        <div>
-          <Helmet>
-            <meta name="viewport" content="user-scalable=no" />
-          </Helmet>
-          <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        {loading.loading ? (
+          <Loader />
+        ) : (
+          <div>
+            <Helmet>
+              <meta name="viewport" content="user-scalable=yes" />
+            </Helmet>
+
             <CssBaseline />
             <ElevationScroll {...props}>
-              <AppBar color="primary">
+              <AppBar color="secondary">
                 <Toolbar>
                   <img
                     src={require("../../images/logo.svg")}
@@ -389,8 +390,8 @@ function HomeLayout(props) {
                   <SelectLanguage />
 
                   <Button
-                    variant="outlined"
-                    color="inherit"
+                    variant="contained"
+                    color="primary"
                     size="large"
                     onClick={() => {
                       if (intro.refid) {
@@ -400,7 +401,7 @@ function HomeLayout(props) {
                       }
                     }}
                   >
-                    <Typography> Login</Typography>
+                    <Typography>{currentStrings.homepage.button}</Typography>
                   </Button>
                 </Toolbar>
               </AppBar>
@@ -411,9 +412,9 @@ function HomeLayout(props) {
             {props.children}
 
             <FooterHomepage />
-          </ThemeProvider>
-        </div>
-      )}
+          </div>
+        )}
+      </ThemeProvider>
     </React.Fragment>
   );
 }

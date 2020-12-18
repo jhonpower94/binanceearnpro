@@ -1,10 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "@reach/router";
-import {
-  CssBaseline,
-  Container,
-} from "@material-ui/core";
+import { CssBaseline, Container } from "@material-ui/core";
 import IntroHeader from "../component/introheader";
 import { AppContext } from "../../../App";
 import { css } from "@emotion/core";
@@ -88,7 +85,7 @@ function Home(props) {
       </Container>
 
       <div style={{ position: "relative", top: "-100px" }}>
-        <div>
+        <div style={{ background: "#fff" }}>
           <Stats />
         </div>
 
@@ -97,9 +94,7 @@ function Home(props) {
         </div>
       </div>
 
-      <div
-        style={{ background: "#fcd19f", position: "relative", top: "-25px" }}
-      >
+      <div style={{ background: "#fff", position: "relative", top: "-25px" }}>
         <Payment />
       </div>
     </React.Fragment>

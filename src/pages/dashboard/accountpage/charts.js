@@ -1,46 +1,18 @@
 import React, { useEffect } from "react";
 import clsx from "clsx";
-import { withStyles } from "@material-ui/core/styles";
-import { green, yellow, blue, red } from "@material-ui/core/colors";
+import { green, blue } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-
 import { docData, firestore } from "../../../config";
-
 import {
-  useScrollTrigger,
-  Card,
-  CardContent,
-  CardHeader,
   makeStyles,
-  Typography,
   Box,
-  Chip,
   MenuItem,
-  Select,
-  InputLabel,
   Grid,
-  Button,
-  ListItemText,
-  Divider,
-  ButtonGroup,
   useMediaQuery,
   useTheme,
   TextField,
 } from "@material-ui/core";
-import {
-  Chart,
-  Line,
-  Area,
-  Tooltip,
-  Axis,
-  Coordinate,
-  Legend,
-} from "bizcharts";
-import { navigate } from "@reach/router";
+import { Chart, Line, Area, Tooltip, Axis, Legend } from "bizcharts";
 import { useSelector } from "react-redux";
 import { Rating } from "@material-ui/lab";
 
@@ -194,15 +166,15 @@ function ChartsPage() {
 
   const plansChart = [
     {
-      label: currentStrings.Dashboard.account.plan_titles.plan1,
+      label: `${currentStrings.Dashboard.account.plan_titles.title} 1`,
       value: "plan1",
     },
     {
-      label: currentStrings.Dashboard.account.plan_titles.plan2,
+      label: `${currentStrings.Dashboard.account.plan_titles.title} 2`,
       value: "plan2",
     },
     {
-      label: currentStrings.Dashboard.account.plan_titles.plan3,
+      label: `${currentStrings.Dashboard.account.plan_titles.title} 3`,
       value: "plan3",
     },
   ];

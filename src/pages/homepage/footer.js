@@ -1,10 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../App";
-import {
-  AndroidSharp,
-  Apple,
-  LaptopMac,
-} from "@material-ui/icons";
+import { AndroidSharp, Apple, LaptopMac, Telegram, Twitter } from "@material-ui/icons";
 
 import {
   makeStyles,
@@ -14,34 +10,42 @@ import {
   Grid,
   Link,
   Divider,
+  CardHeader,
+  Icon,
+  Avatar,
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { navigate } from "@reach/router";
+import { blue, grey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
     marginTop: theme.spacing(4),
   },
+  link: {
+    marginRight: theme.spacing(2),
+
+    cursor: "pointer",
+  },
 }));
 
 const downloads = [
   {
-    title: "Ios",
-    image: <Apple />,
-    link: "Ios downlaad",
+    title: "Facebook",
+    image: <Icon className="fa fa-facebook-f" />,
+    color: blue[800],
   },
   {
-    title: "Android",
-    image: <AndroidSharp />,
-    link: "Android download",
+    title: "Twitter",
+    image: <Twitter htmlColor={blue[500]} />,
+    color: "#fff",
   },
   {
-    title: "Windows",
-    image: <LaptopMac />,
-    link: "PC download",
+    title: "Telegram",
+    image: <Telegram />,
+    color: blue[500],
   },
 ];
-
 
 function FooterHomepage() {
   const classes = useStyles();
@@ -83,32 +87,15 @@ function FooterHomepage() {
 
   return (
     <Container maxWidth="md" className={classes.margintop}>
-      <Box
-        className={classes.margintop}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-      >
-        <Typography variant="h5">Menus</Typography>
-        <Typography variant="body1">menus and available web app</Typography>
-      </Box>
       <Grid container spacing={3} justify="center">
-        {downloads.map((download, index) => (
-          <Grid key={index} item xs={6} sm={4}>
-            <Box
-              className={classes.margintop}
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-            >
-              {download.image}
-              <Typography>{download.link}</Typography>
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
-
-      <Grid container spacing={3} justify="center">
+        <Grid item xs={12} sm={12}>
+          <CardHeader
+            title="Links and contacts"
+            subheader="website menus, socials and email contacts"
+            titleTypographyProps={{ align: "center" }}
+            subheaderTypographyProps={{ align: "center" }}
+          />
+        </Grid>
         {arrayDatas.map((link, index) => (
           <Grid key={index} item xs={6} sm={2}>
             <Box display="flex" justifyContent="center">
@@ -127,7 +114,27 @@ function FooterHomepage() {
           </Grid>
         ))}
       </Grid>
+      <Divider variant="middle" />
+      <Grid container spacing={3} justify="center">
+        {downloads.map((download, index) => (
+          <Grid key={index} item xs={6} sm={2}>
+            <Box
+              className={classes.margintop}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              <Avatar style={{ background: download.color }}>
+                {download.image}
+              </Avatar>
+              <Typography>{download.title}</Typography>
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
+
       <Divider className={classes.margintop} />
+
       <Box
         className={classes.margintop}
         display="flex"

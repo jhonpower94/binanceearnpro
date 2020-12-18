@@ -86,7 +86,9 @@ function InvestBlock(props) {
                   }}
                 >
                   <CardHeader
-                    title={`Plan ${index + 1}`}
+                    title={`${
+                      currentStrings.Dashboard.account.plan_titles.title
+                    } ${index + 1}`}
                     subheader={
                       <Rating
                         name="read-only"

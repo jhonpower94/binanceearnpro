@@ -1,14 +1,8 @@
 import React, { useEffect } from "react";
 import {
-  Card,
   Grid,
-  ListItem,
   CardHeader,
   Avatar,
-  Paper,
-  Typography,
-  Box,
-  ListItemText,
   Container,
   makeStyles,
 } from "@material-ui/core";
@@ -16,10 +10,8 @@ import {
   GroupAddOutlined,
   MoneyOffOutlined,
   SearchOutlined,
-  VerifiedUserSharp,
 } from "@material-ui/icons";
 import { css } from "@emotion/core";
-import PuffLoader from "react-spinners/PuffLoader";
 import MonetizationOnOutlined from "@material-ui/icons/MonetizationOnOutlined";
 import { useSelector } from "react-redux";
 
@@ -32,6 +24,11 @@ const override = css`
 const useStyles = makeStyles((theme) => ({
   images: {
     height: "5em",
+  },
+  avatar: {
+    background: theme.palette.primary.main,
+    height: theme.spacing(7),
+    width: theme.spacing(7),
   },
 }));
 
@@ -69,6 +66,7 @@ function Stats() {
         {stats.map((stat, index) => (
           <Grid key={index} item xs={12} sm={3}>
             <CardHeader
+              avatar={<Avatar className={classes.avatar}>{stat.icons}</Avatar>}
               title={stat.value}
               subheader={stat.title}
               titleTypographyProps={{

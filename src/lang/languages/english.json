@@ -24,6 +24,7 @@
       "plans": "Plans",
       "plan_helpertext": "Choose investment plan chart",
       "plan_titles": {
+        "title": "Plan",
         "plan1": "Plan 1",
         "plan2": "Plan 2",
         "plan3": "Plan 3"
@@ -132,6 +133,7 @@
         "subheader": "Site menus and available web app"
       }
     },
+    "button": "Login",
     "intro": {
       "title": "INVEST WITH BITCOIN",
       "subheader": "World's best cloud investment platform",
@@ -212,7 +214,7 @@
         "questions": {
           "a": {
             "title": "What is our goal",
-            "subheader": "Hotblockinvest investment Limited is ready to propose profitable cooperation for all comers. We present a high-tech and modern company which is recognized industry leader in the field of computer technology, software and innovations. Our technical experts are involved in developing new methods and effective algorithms of Bitcoin mining."
+            "subheader": "investment is ready to propose profitable cooperation for all comers. We present a high-tech and modern company which is recognized industry leader in the field of computer technology, software and innovations. Our technical experts are involved in developing new methods and effective algorithms of Bitcoin mining."
           },
           "b": {
             "title": "How long do you plan to work",

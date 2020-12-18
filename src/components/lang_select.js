@@ -95,7 +95,6 @@ function SelectLanguage() {
     <React.Fragment>
       <Grow in={true} style={{ transitionDelay: "500ms" }}>
         <Button
-          color="secondary"
           variant="text"
           size="large"
           className={classes.button}

@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useContext, createContext } from "react";
-import { createMuiTheme } from "@material-ui/core/styles";
+import React, { useEffect, useState, createContext } from "react";
+import clsx from "clsx";
+import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 import { create } from "jss";
 import rtl from "jss-rtl";
 import { jssPreset, StylesProvider, ThemeProvider } from "@material-ui/styles";
@@ -65,17 +66,49 @@ import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import { Strings } from "./lang/language";
 import detectBrowserLanguage from "detect-browser-language";
 import { firestore } from "./config";
+import { Fab, useMediaQuery, useTheme } from "@material-ui/core";
+import { WhatsApp } from "@material-ui/icons";
 
 let converter = new Converter(
   "OpenExchangeRates",
   "67eb8de24a554b9499d1d1bf919c93a3"
 );
 
+const useStyles = makeStyles((theme) => ({
+  floaticon: {
+    position: "fixed",
+    width: "60px",
+    height: "60px",
+    bottom: "20px",
+    left: "20px",
+    backgroundColor: "#25d366",
+    color: "#fff",
+    borderRadius: "50px",
+    textAlign: "center",
+    fontSize: "30px",
+    zIndex: "100",
+  },
+  floaticonmobile: {
+    position: "fixed",
+    width: "60px",
+    height: "60px",
+    bottom: "20px",
+    left: "80px",
+    backgroundColor: "#25d366",
+    color: "#fff",
+    borderRadius: "50px",
+    textAlign: "center",
+    fontSize: "30px",
+    zIndex: "100",
+  },
+}));
+
 var getCountry = require("country-currency-map").getCountry;
 
 export const AppContext = createContext();
 
 function App() {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const currentStrings = useSelector((state) => state.language);
   const [darktheme, setDarktheme] = useState({
@@ -222,9 +255,55 @@ function App() {
             });
             dispatch(loading$());
           });
+        })
+        .catch((err) => {
+          console.log(err);
         });
     } else {
-      dispatch(loading$());
+      var requestOptions = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      fetch("https://ip.relianceexchange.co", requestOptions)
+        .then((response) => response.json())
+        .then((ip) => {
+          console.log(ip);
+          var myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+
+          var raw = JSON.stringify({ ip: ip.ip });
+
+          var requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow",
+          };
+
+          // get country info from ip
+          fetch("https://hotblockinvest.herokuapp.com/ip/country", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+              console.log(result);
+              const country = countrylist.filter(function (obj) {
+                return obj.code == result.country;
+              })[0];
+              const currencyCode = getCountry(country.name).currency; // get currenvy code
+
+              // set localstorage country data
+              reactLocalStorage.setObject("country", {
+                country: country.name,
+                dail_coe: country.dial_code,
+                code: country.code,
+                currencycode: currencyCode,
+              });
+              window.location.reload(false);
+            })
+            .catch((error) => console.log("error", error));
+        })
+        .catch((error) => console.log("error", error));
+      /*  dispatch(loading$());
       ajax({
         url: "https://hotblockinvest.herokuapp.com/ip",
         method: "GET",
@@ -233,9 +312,7 @@ function App() {
         },
         body: {},
       }).subscribe((vl) => {
-        /*
-        filter and get country with val.country through countrylist
-        */
+        
         const country = countrylist.filter(function (obj) {
           return obj.code == vl.response.country;
         })[0];
@@ -248,7 +325,7 @@ function App() {
           currencycode: currencyCode,
         });
         window.location.reload(false);
-      });
+      }); */
     }
   }, []);
 
@@ -371,6 +448,21 @@ function App() {
           </ThemeProvider>
         </StylesProvider>
       </div>
+
+      <Fab
+        className={
+          useMediaQuery(useTheme().breakpoints.up("sm"))
+            ? classes.floaticonmobile
+            : classes.floaticon
+        }
+        onClick={() =>
+          navigate(
+            "https://api.whatsapp.com/send?phone=19174263618&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202."
+          )
+        }
+      >
+        <WhatsApp fontSize="large" />
+      </Fab>
     </AppContext.Provider>
   );
 }

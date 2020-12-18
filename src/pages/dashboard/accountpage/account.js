@@ -155,9 +155,14 @@ function Account() {
         <Grid item xs={12} sm={12}>
           <Grid container spacing={4} justify="center">
             {[
-              { title: "Invest", icon: "", color: "primary", action: "invest" },
               {
-                title: "Withdraw",
+                title: currentStrings.Dashboard.titles.invest,
+                icon: "",
+                color: "primary",
+                action: "invest",
+              },
+              {
+                title: currentStrings.Dashboard.titles.withdraw,
                 icon: "",
                 color: "secondary",
                 action: "withdraw",

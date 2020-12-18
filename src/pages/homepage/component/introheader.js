@@ -6,14 +6,10 @@ import {
   Container,
   Grid,
   Box,
-  useTheme,
-  useMediaQuery,
   Typography,
   makeStyles,
-  CardHeader,
   Button,
   createMuiTheme,
-  ThemeProvider,
 } from "@material-ui/core";
 
 import Particles from "react-tsparticles";
