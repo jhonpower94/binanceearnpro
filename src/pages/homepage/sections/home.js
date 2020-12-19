@@ -12,6 +12,7 @@ import Activities from "../sections/activities";
 import Payment from "../sections/payment";
 
 import Calculator from "./calculateinvest";
+import { red } from "@material-ui/core/colors";
 
 const override = css`
   display: block;
@@ -85,7 +86,7 @@ function Home(props) {
       </Container>
 
       <div style={{ position: "relative", top: "-100px" }}>
-        <div style={{ background: "#fff" }}>
+        <div style={{ background: red[900], color: "#fff" }}>
           <Stats />
         </div>
 
@@ -94,7 +95,7 @@ function Home(props) {
         </div>
       </div>
 
-      <div style={{ background: "#fff", position: "relative", top: "-25px" }}>
+      <div style={{ background: "#fff", position: "relative", top: "-10px" }}>
         <Payment />
       </div>
     </React.Fragment>

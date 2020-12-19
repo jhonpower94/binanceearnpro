@@ -5,6 +5,8 @@ import {
   Avatar,
   Container,
   makeStyles,
+  createMuiTheme,
+  ThemeProvider,
 } from "@material-ui/core";
 import {
   GroupAddOutlined,
@@ -14,6 +16,7 @@ import {
 import { css } from "@emotion/core";
 import MonetizationOnOutlined from "@material-ui/icons/MonetizationOnOutlined";
 import { useSelector } from "react-redux";
+import { red } from "@material-ui/core/colors";
 
 const override = css`
   display: block;
@@ -26,11 +29,31 @@ const useStyles = makeStyles((theme) => ({
     height: "5em",
   },
   avatar: {
-    background: theme.palette.primary.main,
+    background: theme.palette.secondary.main,
     height: theme.spacing(7),
     width: theme.spacing(7),
   },
 }));
+
+const theme = createMuiTheme({
+  palette: {
+    type: "dark",
+    primary: {
+      // Purple and green play nicely together.
+      main: red[900],
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: "#fafafa",
+    },
+    /*  background: {
+      default: "#fff",
+    }, */
+    action: {
+      selected: "#2196f33d",
+    },
+  },
+});
 
 function Stats() {
   const classes = useStyles();
@@ -61,27 +84,31 @@ function Stats() {
   ];
 
   return (
-    <Container>
-      <Grid container spacing={3} justify="center">
-        {stats.map((stat, index) => (
-          <Grid key={index} item xs={12} sm={3}>
-            <CardHeader
-              avatar={<Avatar className={classes.avatar}>{stat.icons}</Avatar>}
-              title={stat.value}
-              subheader={stat.title}
-              titleTypographyProps={{
-                align: "center",
-                variant: "h5",
-              }}
-              subheaderTypographyProps={{
-                align: "center",
-                variant: "caption",
-              }}
-            />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <Grid container spacing={3} justify="center">
+          {stats.map((stat, index) => (
+            <Grid key={index} item xs={12} sm={3}>
+              <CardHeader
+                avatar={
+                  <Avatar className={classes.avatar}>{stat.icons}</Avatar>
+                }
+                title={stat.value}
+                subheader={stat.title}
+                titleTypographyProps={{
+                  align: "center",
+                  variant: "h5",
+                }}
+                subheaderTypographyProps={{
+                  align: "center",
+                  variant: "caption",
+                }}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </ThemeProvider>
   );
 }
 

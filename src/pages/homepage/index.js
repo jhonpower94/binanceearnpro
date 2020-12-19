@@ -410,8 +410,9 @@ function HomeLayout(props) {
             {intro.layout}
 
             {props.children}
-
-            <FooterHomepage />
+            <div id="footer" style={{background: red[900], color: "#fff"}}>
+              <FooterHomepage />
+            </div>
           </div>
         )}
       </ThemeProvider>

@@ -282,7 +282,10 @@ function App() {
           };
 
           // get country info from ip
-          fetch("https://hotblockinvest.herokuapp.com/ip/country", requestOptions)
+          fetch(
+            "https://hotblockinvest.herokuapp.com/ip/country",
+            requestOptions
+          )
             .then((response) => response.json())
             .then((result) => {
               console.log(result);
@@ -303,29 +306,6 @@ function App() {
             .catch((error) => console.log("error", error));
         })
         .catch((error) => console.log("error", error));
-      /*  dispatch(loading$());
-      ajax({
-        url: "https://hotblockinvest.herokuapp.com/ip",
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: {},
-      }).subscribe((vl) => {
-        
-        const country = countrylist.filter(function (obj) {
-          return obj.code == vl.response.country;
-        })[0];
-        const currencyCode = getCountry(country.name).currency; // get currenvy code
-
-        reactLocalStorage.setObject("country", {
-          country: country.name,
-          dail_coe: country.dial_code,
-          code: country.code,
-          currencycode: currencyCode,
-        });
-        window.location.reload(false);
-      }); */
     }
   }, []);
 
