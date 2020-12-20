@@ -94,7 +94,8 @@
       "Matured_investments": "الاستثمارات المستحقة الدفع",
       "Total_invested": "إجمالي الاستثمار",
       "Total_withdrawn": "إجمالي المسحوب",
-      "Referral_link": "رابط الإحالة"
+      "Referral_link": "رابط الإحالة",
+      "copy_link": "تم نسخ الرابط"
     },
     "payment": {
       "send": "إرسال الدفعة إلى",

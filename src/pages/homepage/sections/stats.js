@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     height: "5em",
   },
   avatar: {
-    background: theme.palette.secondary.main,
+    background: theme.palette.background.default,
     height: theme.spacing(7),
     width: theme.spacing(7),
   },

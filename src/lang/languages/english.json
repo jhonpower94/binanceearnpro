@@ -96,7 +96,8 @@
       "Matured_investments": "Matured investments",
       "Total_invested": "Total invested",
       "Total_withdrawn": "Total withdrawn",
-      "Referral_link": "Referral link"
+      "Referral_link": "Referral link",
+      "copy_link": "Link copied"
     },
     "payment": {
       "send": "Send payment to the",

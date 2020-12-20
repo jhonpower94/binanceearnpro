@@ -36,6 +36,18 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(3),
     height: theme.spacing(3),
   },
+  cardone: {
+    position: "absolute",
+    top: "-10px",
+    background: theme.palette.background.default,
+    left: "65px",
+  },
+  cardtwoe: {
+    position: "absolute",
+    top: "-10px",
+    background: theme.palette.background.default,
+    right: "65px",
+  },
 }));
 
 const theme = createMuiTheme({
@@ -80,17 +92,28 @@ function Activities() {
         <Grid container spacing={10}>
           {TransactionAray.map((trans, index) => (
             <Grid key={index} item xs={12} sm={6}>
-              <CardHeader
-                title={trans.name}
-                subheader={currentStrings.homepage.activities.subheader}
-                titleTypographyProps={{
-                  align: "center",
-                }}
-                subheaderTypographyProps={{
-                  align: "center",
-                }}
-              />
-              {trans.datas}
+              <Card variant="outlined" style={{ background: "transparent" }}>
+                <div
+                  className={
+                    trans.name === currentStrings.homepage.activities.deposit
+                      ? classes.cardone
+                      : classes.cardtwoe
+                  }
+                >
+                  <CardHeader
+                    title={trans.name}
+                    subheader={currentStrings.homepage.activities.subheader}
+                    titleTypographyProps={{
+                      align: "center",
+                    }}
+                    subheaderTypographyProps={{
+                      align: "center",
+                    }}
+                  />
+                </div>
+
+                <CardContent>{trans.datas}</CardContent>
+              </Card>
             </Grid>
           ))}
         </Grid>

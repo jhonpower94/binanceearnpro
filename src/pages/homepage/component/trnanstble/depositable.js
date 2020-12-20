@@ -22,7 +22,8 @@ const useStyles = makeStyles({
     width: "100%",
   },
   container: {
-    maxHeight: 440,
+    maxHeight: 400,
+    marginTop: "10px"
   },
 });
 
@@ -82,7 +83,7 @@ export default function DepositTable() {
                   </Box>
                 </TableCell>
                 <TableCell align="right">
-                  <Typography variant="h5">
+                  <Typography variant="h5" color="primary">
                     {formatLocaleCurrency(dep.amount, currency, {
                       autoFixed: false,
                     })}

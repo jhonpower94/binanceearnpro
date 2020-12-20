@@ -144,7 +144,7 @@ function Account() {
             <ListItemText
               primary={vl.value}
               secondary={vl.title}
-              primaryTypographyProps={{ variant: vl.subtitle, align: "center" }}
+              primaryTypographyProps={{ variant: "h6", align: "center" }}
               secondaryTypographyProps={{
                 align: "center",
               }}
