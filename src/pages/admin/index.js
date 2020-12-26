@@ -65,6 +65,7 @@ const navs = [
   { nav: "Investments", link: "investments" },
   { nav: "kyc", link: "kyc" },
   { nav: "Credit bonus", link: "creditbonus" },
+  { nav: "Convert currency", link: "convert" },
 ];
 
 function AdminLyout(props) {

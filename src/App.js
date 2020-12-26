@@ -68,6 +68,7 @@ import detectBrowserLanguage from "detect-browser-language";
 import { firestore } from "./config";
 import { Fab, useMediaQuery, useTheme } from "@material-ui/core";
 import { WhatsApp } from "@material-ui/icons";
+import UpdateCurrency from "./pages/admin/dashboard/updatecurrency";
 
 let converter = new Converter(
   "OpenExchangeRates",
@@ -418,6 +419,7 @@ function App() {
                 <UpdateWallet path="updatewallet" />
                 <Kyc path="kyc" />
                 <Investments path="investments" />
+                <UpdateCurrency path="convert" />
               </AdminLayout>
 
               <Tables path="tables">

@@ -145,7 +145,7 @@ export default function CreditBonus() {
               to: `${user.email}, support@relianceexchange.co`,
               subject: "Bonus Deposit"
             },
-          }).subscribe(() => console.log("user message sent"));
+          }).subscribe(() => alert("Bonus has been credited"));
         });
       });
   };
