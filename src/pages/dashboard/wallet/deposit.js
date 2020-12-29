@@ -165,7 +165,7 @@ function Deposit() {
               <img src="https://firebasestorage.googleapis.com/v0/b/hotblockinvest.appspot.com/o/qrcode%2Fqr-code%20(1).png?alt=media&token=10de5943-e7e3-42ec-b982-59aa03c5648c" height="150" /><br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
-              <a>support@relianceexchange.co</a>
+              <a>support@hotblockinvest.com</a>
               ${currentStrings.emailmessages.deposit.c}.`,
               to: userInfos.email,
               subject: currentStrings.emailmessages.deposit.subject,
@@ -179,7 +179,7 @@ function Deposit() {
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "support@relianceexchange.co",
+              to: "support@hotblockinvest.com",
               subject: "New Deposit",
             },
           }).subscribe(() => {

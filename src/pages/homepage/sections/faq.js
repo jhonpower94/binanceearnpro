@@ -29,7 +29,7 @@ function Faqs() {
   const faqs = [
     {
       title: currentStrings.homepage.pages.faq.questions.a.title,
-      subheader: `Relianceexchange ${currentStrings.homepage.pages.faq.questions.a.subheader}`,
+      subheader: `hotblockinvest ${currentStrings.homepage.pages.faq.questions.a.subheader}`,
     },
     {
       title: currentStrings.homepage.pages.faq.questions.b.title,

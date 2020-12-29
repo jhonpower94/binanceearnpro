@@ -9,7 +9,7 @@ export default function Copyright() {
   return (
     <Typography variant="body2" color="primary" align="center">
       {` © `}
-      <Link color="primary" href="https://relianceexchange.co/">
+      <Link color="primary" href="https://hotblockinvest.com/">
         RELIANCEEXCHAGE
       </Link>
     </Typography>

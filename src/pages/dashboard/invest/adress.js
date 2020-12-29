@@ -73,7 +73,7 @@ function BtcAddressInput(props) {
                 message: `${currentStrings.emailmessages.hello} ${userInfos.firstName} ${userInfos.lastName} <br><br/>
                 ${currentStrings.emailmessages.address.a} ${amountnn} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
                 ${currentStrings.emailmessages.address.c}`,
-                to: `${userInfos.email}, support@relianceexchange.co`,
+                to: `${userInfos.email}, support@hotblockinvest.com`,
                 subject: currentStrings.emailmessages.address.subject_bonus,
               },
             }).subscribe(() => {
@@ -127,7 +127,7 @@ function BtcAddressInput(props) {
               ${currentStrings.emailmessages.address.a} ${amountnn} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
               ${currentStrings.emailmessages.address.c}
               `,
-            to: `${userInfos.email}, support@relianceexchange.co`,
+            to: `${userInfos.email}, support@hotblockinvest.com`,
             subject: currentStrings.emailmessages.address.subject_withdraw,
           },
         }).subscribe(() => {
