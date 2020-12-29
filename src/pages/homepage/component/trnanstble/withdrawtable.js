@@ -5,7 +5,12 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
-import { Box, createMuiTheme, ThemeProvider, Typography } from "@material-ui/core";
+import {
+  Box,
+  createMuiTheme,
+  ThemeProvider,
+  Typography,
+} from "@material-ui/core";
 import { firestore, collectionData } from "../../../../config";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import { AppContext } from "../../../../App";
@@ -18,7 +23,7 @@ const useStyles = makeStyles({
   },
   container: {
     maxHeight: 400,
-    marginTop: "10px"
+    marginTop: "10px",
   },
 });
 
@@ -42,7 +47,6 @@ const theme = createMuiTheme({
   },
 });
 
-
 export default function WithdrawTable() {
   const classes = useStyles();
   const { transactiondatas } = useContext(AppContext);
@@ -65,30 +69,28 @@ export default function WithdrawTable() {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <TableContainer className={classes.container}>
-        <Table aria-label="sticky table">
-          <TableBody>
-            {withdrawal.slice(0, 5).map((trans, index) => (
-              <TableRow role="checkbox" tabIndex={-1} key={index}>
-                <TableCell align="left" colSpan={2}>
-                  <Box display="flex" flexDirection="column">
-                    <Typography variant="h6">{`${trans.name}`}</Typography>
-                  </Box>
-                </TableCell>
+    <TableContainer className={classes.container}>
+      <Table aria-label="sticky table">
+        <TableBody>
+          {withdrawal.slice(0, 5).map((trans, index) => (
+            <TableRow role="checkbox" tabIndex={-1} key={index}>
+              <TableCell align="left" colSpan={2}>
+                <Box display="flex" flexDirection="column">
+                  <Typography variant="h6">{`${trans.name}`}</Typography>
+                </Box>
+              </TableCell>
 
-                <TableCell align="right">
-                  <Typography variant="h5" color="primary">
-                    {formatLocaleCurrency(trans.amount, currency, {
-                      autoFixed: false,
-                    })}
-                  </Typography>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </ThemeProvider>
+              <TableCell align="right">
+                <Typography variant="h5" color="primary">
+                  {formatLocaleCurrency(trans.amount, currency, {
+                    autoFixed: false,
+                  })}
+                </Typography>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }

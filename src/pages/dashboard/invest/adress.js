@@ -64,7 +64,7 @@ function BtcAddressInput(props) {
               autoFixed: false,
             });
             ajax({
-              url: "https://hotblockinvest.herokuapp.com/mail",
+              url: "https://hotblockinvestmain.herokuapp.com/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -117,7 +117,7 @@ function BtcAddressInput(props) {
           });
 
         ajax({
-          url: "https://hotblockinvest.herokuapp.com/mail",
+          url: "https://hotblockinvestmain.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",

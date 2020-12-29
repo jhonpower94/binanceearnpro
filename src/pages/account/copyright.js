@@ -7,9 +7,9 @@ export default function Copyright() {
   const currentStrings = useSelector((state) => state.language);
 
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="primary" align="center">
       {` © `}
-      <Link color="inherit" href="https://relianceexchange.co/">
+      <Link color="primary" href="https://relianceexchange.co/">
         RELIANCEEXCHAGE
       </Link>
     </Typography>

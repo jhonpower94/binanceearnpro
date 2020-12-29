@@ -245,7 +245,7 @@ function ChartsPage() {
         <Grid item xs={12} sm={12}>
           <Chart
             scale={scale}
-            height={useMediaQuery(useTheme().breakpoints.up("sm")) ? 250 : 200}
+            height={useMediaQuery(useTheme().breakpoints.up("sm")) ? 350 : 200}
             data={data(state)}
             autoFit
           >

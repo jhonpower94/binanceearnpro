@@ -85,7 +85,7 @@ function PaymentSuccess() {
 
             const newDate = addDays(date, paymentInfo.block.duration);
 
-            fetch("https://hotblockinvest.herokuapp.com/plans", {
+            fetch("https://us-central1-hotblocks-140ad.cloudfunctions.net/app/plans", {
               method: "POST",
               mode: "cors",
               headers: {

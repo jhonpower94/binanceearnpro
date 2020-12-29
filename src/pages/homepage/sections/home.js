@@ -86,7 +86,7 @@ function Home(props) {
       </Container>
 
       <div style={{ position: "relative", top: "-100px" }}>
-        <div style={{ background: red[900], color: "#fff" }}>
+        <div style={{ background: "#161b22", color: "#fff" }}>
           <Stats />
         </div>
 

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.getContrastText("#ef6c00"),
   },
   headerpage: {
-    background: theme.palette.primary.main,
+    background: theme.palette.secondary.main,
   },
   toolbar: theme.mixins.toolbar,
   space: {
@@ -39,12 +39,8 @@ function IntroHeaderPages(props) {
         <Grid container spacing={3} justify="center">
           <Grid item xs={12} sm={12}>
             <Box mt={2}>
-              <Typography variant="h4" color="secondary">
-                {title}
-              </Typography>
-              <Typography variant="h6" color="secondary">
-                {subheader}
-              </Typography>
+              <Typography variant="h4">{title}</Typography>
+              <Typography variant="h6">{subheader}</Typography>
             </Box>
           </Grid>
         </Grid>

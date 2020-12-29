@@ -94,6 +94,8 @@
       "Matured_investments": "الاستثمارات المستحقة الدفع",
       "Total_invested": "إجمالي الاستثمار",
       "Total_withdrawn": "إجمالي المسحوب",
+      "name": "أسم الحساب",
+      "mobile": "الهاتف الخلوي",
       "Referral_link": "رابط الإحالة",
       "copy_link": "تم نسخ الرابط"
     },

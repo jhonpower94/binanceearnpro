@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://hotblockinvest.herokuapp.com/plans`,
+          url: `https://us-central1-hotblocks-140ad.cloudfunctions.net/app/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -150,7 +150,7 @@ export default function Investments() {
             })
             .then(() => {
               ajax({
-                url: "https://hotblockinvest.herokuapp.com/mail",
+                url: "https://hotblockinvestmain.herokuapp.com/mail",
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

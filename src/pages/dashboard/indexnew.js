@@ -468,7 +468,7 @@ export default function DashboardLayout(props) {
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
           })}
-          color="primary"
+          color="secondary"
         >
           <Toolbar>
             <IconButton

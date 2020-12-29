@@ -96,6 +96,8 @@
       "Matured_investments": "Matured investments",
       "Total_invested": "Total invested",
       "Total_withdrawn": "Total withdrawn",
+      "name": "Account name",
+      "mobile": "Mobile",
       "Referral_link": "Referral link",
       "copy_link": "Link copied"
     },

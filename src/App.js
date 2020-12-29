@@ -4,7 +4,7 @@ import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 import { create } from "jss";
 import rtl from "jss-rtl";
 import { jssPreset, StylesProvider, ThemeProvider } from "@material-ui/styles";
-import { red } from "@material-ui/core/colors";
+import { blue, red } from "@material-ui/core/colors";
 import { navigate, Router } from "@reach/router";
 import HomeLayout from "./pages/homepage";
 import DashboardLayout from "./pages/dashboard/indexnew";
@@ -67,8 +67,11 @@ import { Strings } from "./lang/language";
 import detectBrowserLanguage from "detect-browser-language";
 import { firestore } from "./config";
 import { Fab, useMediaQuery, useTheme } from "@material-ui/core";
-import { WhatsApp } from "@material-ui/icons";
+import { Telegram, WhatsApp } from "@material-ui/icons";
 import UpdateCurrency from "./pages/admin/dashboard/updatecurrency";
+
+const tawkTo = require("tawkto-react");
+const tawkToPropertyId = "5feb0864df060f156a91965a";
 
 let converter = new Converter(
   "OpenExchangeRates",
@@ -81,9 +84,9 @@ const useStyles = makeStyles((theme) => ({
     width: "60px",
     height: "60px",
     bottom: "20px",
-    left: "20px",
-    backgroundColor: "#25d366",
-    color: "#fff",
+    right: "10px",
+    backgroundColor: "#fff",
+
     borderRadius: "50px",
     textAlign: "center",
     fontSize: "30px",
@@ -95,8 +98,8 @@ const useStyles = makeStyles((theme) => ({
     height: "60px",
     bottom: "20px",
     left: "80px",
-    backgroundColor: "#25d366",
-    color: "#fff",
+    backgroundColor: "#fff",
+
     borderRadius: "50px",
     textAlign: "center",
     fontSize: "30px",
@@ -175,7 +178,7 @@ function App() {
   const [converted, setConverted] = useState({ status: false });
 
   const palletType = darktheme.status ? "dark" : "light";
-  const secondary = darktheme.status ? "#fafafa" : "#ffffff";
+  const secondary = darktheme.status ? "#161b22" : "#fff";
 
   // Configure JSS
   const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -186,15 +189,16 @@ function App() {
       type: palletType,
       primary: {
         // Purple and green play nicely together.
-        main: red[900],
+        main: blue[800],
       },
       secondary: {
         // This is green.A700 as hex.
         main: secondary,
       },
-      /*  background: {
-        default: "#fff",
-      }, */
+      background: {
+        default: "#0d1117",
+        paper: secondary,
+      },
       action: {
         selected: "#2196f33d",
       },
@@ -284,7 +288,7 @@ function App() {
 
           // get country info from ip
           fetch(
-            "https://hotblockinvest.herokuapp.com/ip/country",
+            "https://hotblockinvestmain.herokuapp.com/ip/country",
             requestOptions
           )
             .then((response) => response.json())
@@ -430,23 +434,23 @@ function App() {
           </ThemeProvider>
         </StylesProvider>
       </div>
-
       <Fab
-        className={
-          useMediaQuery(useTheme().breakpoints.up("sm"))
-            ? classes.floaticonmobile
-            : classes.floaticon
-        }
-        onClick={() =>
-          navigate(
-            "https://api.whatsapp.com/send?phone=19174263618&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202."
-          )
-        }
+        className={classes.floaticon}
+        onClick={() => {
+          window.open(
+            "https://tawk.to/chat/5feb0864df060f156a91965a/default",
+            "_blank"
+          );
+        }}
       >
-        <WhatsApp fontSize="large" />
+        <Telegram color="primary" fontSize="large" />
       </Fab>
     </AppContext.Provider>
   );
 }
 
 export default App;
+
+/*
+ 
+      */

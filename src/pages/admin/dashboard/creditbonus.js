@@ -133,7 +133,7 @@ export default function CreditBonus() {
             }
           );
           ajax({
-            url: "https://hotblockinvest.herokuapp.com/mail",
+            url: "https://hotblockinvestmain.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",

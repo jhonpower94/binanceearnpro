@@ -8,19 +8,10 @@ import TextField from "@material-ui/core/TextField";
 import { Link } from "@reach/router";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import {
-  IconButton,
-  Input,
-  OutlinedInput,
-  FormControl,
-  InputLabel,
-} from "@material-ui/core";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 
 function Copyright() {
@@ -59,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     textDecoration: "none",
-    color: theme.palette.secondary.main,
+    color: theme.palette.primary.main,
   },
   fontsize: {
     fontSize: "large",
@@ -104,7 +95,7 @@ export default function ResetPassword() {
           <img
             src={require("../../images/logo.svg")}
             height={
-              useMediaQuery(useTheme().breakpoints.up("sm")) ? "70px" : "50px"
+              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "80px"
             }
           />
         </div>
@@ -138,7 +129,7 @@ export default function ResetPassword() {
           <Grid container>
             <Grid item xs>
               <Box display="flex" justifyContent="center">
-                <Link to="../" className={clsx(classes.link, classes.fontsize)}>
+                <Link to="../" className={clsx(classes.link, classes.fontsize)} color="primary">
                   {currentStrings.account.signin.title}
                 </Link>
               </Box>

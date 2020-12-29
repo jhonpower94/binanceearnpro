@@ -185,7 +185,7 @@ export default function SignUp() {
           <img
             src={require("../../images/logo.svg")}
             height={
-              useMediaQuery(useTheme().breakpoints.up("sm")) ? "70px" : "50px"
+              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "80px"
             }
           />
         </div>
@@ -335,7 +335,7 @@ export default function SignUp() {
                 component="button"
                 variant="body2"
                 onClick={() => navigate("../../account")}
-                color="secondary"
+                color="primary"
               >
                 {`${currentStrings.account.signup.redir}? ${currentStrings.account.signin.title}`}
               </Link>

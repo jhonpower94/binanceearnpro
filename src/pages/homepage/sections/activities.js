@@ -87,38 +87,36 @@ function Activities() {
   ];
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container maxWidth="lg">
-        <Grid container spacing={10}>
-          {TransactionAray.map((trans, index) => (
-            <Grid key={index} item xs={12} sm={6}>
-              <Card variant="outlined" style={{ background: "transparent" }}>
-                <div
-                  className={
-                    trans.name === currentStrings.homepage.activities.deposit
-                      ? classes.cardone
-                      : classes.cardtwoe
-                  }
-                >
-                  <CardHeader
-                    title={trans.name}
-                    subheader={currentStrings.homepage.activities.subheader}
-                    titleTypographyProps={{
-                      align: "center",
-                    }}
-                    subheaderTypographyProps={{
-                      align: "center",
-                    }}
-                  />
-                </div>
+    <Container maxWidth="lg">
+      <Grid container spacing={10}>
+        {TransactionAray.map((trans, index) => (
+          <Grid key={index} item xs={12} sm={6}>
+            <Card variant="outlined" style={{ background: "transparent" }}>
+              <div
+                className={
+                  trans.name === currentStrings.homepage.activities.deposit
+                    ? classes.cardone
+                    : classes.cardtwoe
+                }
+              >
+                <CardHeader
+                  title={trans.name}
+                  subheader={currentStrings.homepage.activities.subheader}
+                  titleTypographyProps={{
+                    align: "center",
+                  }}
+                  subheaderTypographyProps={{
+                    align: "center",
+                  }}
+                />
+              </div>
 
-                <CardContent>{trans.datas}</CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </ThemeProvider>
+              <CardContent>{trans.datas}</CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 }
 

@@ -96,6 +96,7 @@ export const english = {
       Matured_investments: "Matured investments",
       Total_invested: "Total invested",
       Total_withdrawn: "Total withdrawn",
+      name: "Name",
       Referral_link: "Referral link",
       copy_link: "Link copied",
     },

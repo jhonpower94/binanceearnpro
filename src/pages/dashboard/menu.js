@@ -132,9 +132,9 @@ function DasboardMenu() {
       <IconButton onClick={handleClick}>
         <StyledBadge
           badgeContent={notifications.length < 1 ? "0" : notifications.length}
-          color="error"
+          color="primary"
         >
-          <NotificationsOutlined color="secondary" />
+          <NotificationsOutlined color="inherit" />
         </StyledBadge>
       </IconButton>
 

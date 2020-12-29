@@ -49,7 +49,8 @@
     "redux": "^4.0.5",
     "repeat": "^1.2.0",
     "rxfire": "^3.13.4",
-    "rxjs": "^6.5.5"
+    "rxjs": "^6.5.5",
+    "tawkto-react": "^1.0.11"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -115,7 +115,7 @@ export default function SignIn() {
           <img
             src={require("../../images/logo.svg")}
             height={
-              useMediaQuery(useTheme().breakpoints.up("sm")) ? "70px" : "50px"
+              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "80px"
             }
           />
         </div>
@@ -182,7 +182,7 @@ export default function SignIn() {
             <Link
               component="button"
               onClick={() => navigate("account/resetpassword")}
-              color="secondary"
+              color="primary"
             >
               {`${currentStrings.account.signin.forgot_pass}`}
             </Link>
@@ -191,7 +191,7 @@ export default function SignIn() {
             <Link
               component="button"
               onClick={() => navigate("account/register")}
-              color="secondary"
+              color="primary"
             >
               {`${currentStrings.account.signin.redir}? ${currentStrings.account.signup.title}`}
             </Link>

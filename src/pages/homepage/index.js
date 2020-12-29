@@ -269,153 +269,151 @@ function HomeLayout(props) {
 
   return (
     <React.Fragment>
-      <ThemeProvider theme={theme}>
-        {loading.loading ? (
-          <Loader />
-        ) : (
-          <div>
-            <Helmet>
-              <meta name="viewport" content="user-scalable=yes" />
-            </Helmet>
+      {loading.loading ? (
+        <Loader />
+      ) : (
+        <div>
+          <Helmet>
+            <meta name="viewport" content="user-scalable=yes" />
+          </Helmet>
 
-            <CssBaseline />
-            <ElevationScroll {...props}>
-              <AppBar color="secondary">
-                <Toolbar>
-                  <img
-                    src={require("../../images/logo.svg")}
-                    alt="logo"
-                    width="150px"
-                  />
+          <CssBaseline />
+          <ElevationScroll {...props}>
+            <AppBar color="secondary">
+              <Toolbar>
+                <img
+                  src={require("../../images/logo.svg")}
+                  alt="logo"
+                  width="150px"
+                />
 
-                  <div className={classes.mgright}>
-                    {arrayDatas.map((link, index) => (
-                      <Link
-                        key={index}
-                        component="button"
-                        variant="body1"
-                        onClick={(e) => {
-                          link.submenus
-                            ? openSubmenu(e, link.submenulinks)
-                            : changePage(link.link);
-                        }}
-                        color="inherit"
-                        className={classes.link}
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
-                  </div>
+                <div className={classes.mgright}>
+                  {arrayDatas.map((link, index) => (
+                    <Link
+                      key={index}
+                      component="button"
+                      variant="body1"
+                      onClick={(e) => {
+                        link.submenus
+                          ? openSubmenu(e, link.submenulinks)
+                          : changePage(link.link);
+                      }}
+                      color="inherit"
+                      className={classes.link}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
 
-                  <StyledMenu // desktop Submenus
-                    id="fade-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={open}
-                    onClose={handleClose}
-                    TransitionComponent={Fade}
-                  >
-                    {submenu.map((sub, index) => (
+                <StyledMenu // desktop Submenus
+                  id="fade-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={open}
+                  onClose={handleClose}
+                  TransitionComponent={Fade}
+                >
+                  {submenu.map((sub, index) => (
+                    <Fade
+                      in={open}
+                      key={index}
+                      style={{ transitionDelay: index * 200 }}
+                    >
+                      <MenuItem onClick={() => changePage(sub.link)}>
+                        <ListItemText primary={sub.title} />
+                      </MenuItem>
+                    </Fade>
+                  ))}
+                </StyledMenu>
+
+                <StyledMenu // mobile menu
+                  id="fade-menu-mobile"
+                  anchorEl={anchorElMobile}
+                  keepMounted
+                  open={openMobile}
+                  onClose={handleClose}
+                  TransitionComponent={Fade}
+                >
+                  {arrayDatas.map((link, index) => (
+                    <div key={index}>
                       <Fade
-                        in={open}
-                        key={index}
-                        style={{ transitionDelay: index * 200 }}
+                        in={openMobile}
+                        style={{ transitionDelay: index * 100 }}
                       >
-                        <MenuItem onClick={() => changePage(sub.link)}>
-                          <ListItemText primary={sub.title} />
+                        <MenuItem
+                          onClick={() => {
+                            link.submenus
+                              ? openCollapse(link.name, link.collapse)
+                              : changePage(link.link);
+                          }}
+                        >
+                          <ListItemText primary={link.name} />
+                          {link.submenus ? (
+                            <span>
+                              {link.collapse ? (
+                                <ExpandLessSharp />
+                              ) : (
+                                <ExpandMoreSharp />
+                              )}
+                            </span>
+                          ) : null}
                         </MenuItem>
                       </Fade>
-                    ))}
-                  </StyledMenu>
 
-                  <StyledMenu // mobile menu
-                    id="fade-menu-mobile"
-                    anchorEl={anchorElMobile}
-                    keepMounted
-                    open={openMobile}
-                    onClose={handleClose}
-                    TransitionComponent={Fade}
-                  >
-                    {arrayDatas.map((link, index) => (
-                      <div key={index}>
-                        <Fade
-                          in={openMobile}
-                          style={{ transitionDelay: index * 100 }}
+                      {link.submenus ? (
+                        <Collapse
+                          in={link.collapse}
+                          timeout="auto"
+                          unmountOnExit
                         >
-                          <MenuItem
-                            onClick={() => {
-                              link.submenus
-                                ? openCollapse(link.name, link.collapse)
-                                : changePage(link.link);
-                            }}
-                          >
-                            <ListItemText primary={link.name} />
-                            {link.submenus ? (
-                              <span>
-                                {link.collapse ? (
-                                  <ExpandLessSharp />
-                                ) : (
-                                  <ExpandMoreSharp />
-                                )}
-                              </span>
-                            ) : null}
-                          </MenuItem>
-                        </Fade>
+                          {link.submenulinks.map((sub, index) => (
+                            <ListItem
+                              key={index}
+                              className={classes.nested}
+                              onClick={() => {
+                                changePage(sub.link);
+                              }}
+                            >
+                              <ListItemText primary={sub.title} />
+                            </ListItem>
+                          ))}
+                        </Collapse>
+                      ) : null}
+                    </div>
+                  ))}
+                </StyledMenu>
 
-                        {link.submenus ? (
-                          <Collapse
-                            in={link.collapse}
-                            timeout="auto"
-                            unmountOnExit
-                          >
-                            {link.submenulinks.map((sub, index) => (
-                              <ListItem
-                                key={index}
-                                className={classes.nested}
-                                onClick={() => {
-                                  changePage(sub.link);
-                                }}
-                              >
-                                <ListItemText primary={sub.title} />
-                              </ListItem>
-                            ))}
-                          </Collapse>
-                        ) : null}
-                      </div>
-                    ))}
-                  </StyledMenu>
+                <span className={classes.space} />
 
-                  <span className={classes.space} />
+                <SelectLanguage />
 
-                  <SelectLanguage />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  onClick={() => {
+                    if (intro.refid) {
+                      navigate(`account/register/${intro.refid}`);
+                    } else {
+                      navigate("/account");
+                    }
+                  }}
+                >
+                  <Typography>{currentStrings.homepage.button}</Typography>
+                </Button>
+              </Toolbar>
+            </AppBar>
+          </ElevationScroll>
 
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    onClick={() => {
-                      if (intro.refid) {
-                        navigate(`account/register/${intro.refid}`);
-                      } else {
-                        navigate("/account");
-                      }
-                    }}
-                  >
-                    <Typography>{currentStrings.homepage.button}</Typography>
-                  </Button>
-                </Toolbar>
-              </AppBar>
-            </ElevationScroll>
+          {intro.layout}
 
-            {intro.layout}
-
-            {props.children}
-            <div id="footer" style={{background: red[900], color: "#fff"}}>
-              <FooterHomepage />
-            </div>
+          {props.children}
+          <div id="footer">
+            <FooterHomepage />
           </div>
-        )}
-      </ThemeProvider>
+        </div>
+      )}
     </React.Fragment>
   );
 }

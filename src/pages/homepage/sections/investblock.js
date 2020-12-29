@@ -69,89 +69,82 @@ function InvestBlock(props) {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container maxWidth="md" className={classes.margintop}>
-        <Grid container spacing={8} justify="center">
-          {blocks.map((trade, index) => (
-            <Fade
-              in={true}
-              key={index}
-              style={{ transitionDelay: `${index * 200}ms` }}
-            >
-              <Grid item xs={6} sm={4}>
-                <Card
-                  style={{
-                    background: "#b71c1c",
-                    //  backgroundSize: "cover",
+    <Container maxWidth="md" className={classes.margintop}>
+      <Grid container spacing={8} justify="center">
+        {blocks.map((trade, index) => (
+          <Fade
+            in={true}
+            key={index}
+            style={{ transitionDelay: `${index * 200}ms` }}
+          >
+            <Grid item xs={6} sm={4}>
+              <Card>
+                <CardHeader
+                  title={`${
+                    currentStrings.Dashboard.account.plan_titles.title
+                  } ${index + 1}`}
+                  subheader={
+                    <Rating
+                      name="read-only"
+                      value={index + 3}
+                      readOnly
+                      size="small"
+                    />
+                  }
+                  titleTypographyProps={{ align: "center" }}
+                  subheaderTypographyProps={{
+                    align: "center",
+                    variant: "body1",
                   }}
+                />
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="baseline"
                 >
-                  <CardHeader
-                    title={`${
-                      currentStrings.Dashboard.account.plan_titles.title
-                    } ${index + 1}`}
-                    subheader={
-                      <Rating
-                        name="read-only"
-                        value={index + 3}
-                        readOnly
-                        size="small"
-                      />
-                    }
-                    titleTypographyProps={{ align: "center" }}
-                    subheaderTypographyProps={{
-                      align: "center",
-                      variant: "body1",
-                    }}
-                  />
-                  <Box
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="baseline"
-                  >
-                    <Typography component="h2" variant="h3">
-                      {`${trade.min_rate}-${trade.max_rate}%`}
-                    </Typography>
-                  </Box>
-                  <List dense={true}>
-                    <Divider variant="inset" component="li" />
+                  <Typography component="h2" variant="h3">
+                    {`${trade.min_rate}-${trade.max_rate}%`}
+                  </Typography>
+                </Box>
+                <List dense={true}>
+                  <Divider variant="inset" component="li" />
 
-                    <ListItem>
-                      <ListItemText
-                        primary={currentStrings.Dashboard.invest.Minimun_stake}
-                        secondary={trade.lot}
-                        primaryTypographyProps={{
-                          align: "center",
-                          variant: "h6",
-                        }}
-                        secondaryTypographyProps={{
-                          align: "center",
-                          variant: "h5",
-                        }}
-                      />
-                    </ListItem>
-                    <Divider variant="inset" component="li" />
-                    <ListItem>
-                      <ListItemText
-                        primary={currentStrings.Dashboard.invest.Maximun_stake}
-                        secondary={trade.max}
-                        primaryTypographyProps={{
-                          align: "center",
-                          variant: "h6",
-                        }}
-                        secondaryTypographyProps={{
-                          align: "center",
-                          variant: "h5",
-                        }}
-                      />
-                    </ListItem>
-                  </List>
-                </Card>
-              </Grid>
-            </Fade>
-          ))}
-        </Grid>
-      </Container>
-    </ThemeProvider>
+                  <ListItem>
+                    <ListItemText
+                      primary={currentStrings.Dashboard.invest.Minimun_stake}
+                      secondary={trade.lot}
+                      primaryTypographyProps={{
+                        align: "center",
+                        variant: "h6",
+                      }}
+                      secondaryTypographyProps={{
+                        align: "center",
+                        variant: "h5",
+                      }}
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                  <ListItem>
+                    <ListItemText
+                      primary={currentStrings.Dashboard.invest.Maximun_stake}
+                      secondary={trade.max}
+                      primaryTypographyProps={{
+                        align: "center",
+                        variant: "h6",
+                      }}
+                      secondaryTypographyProps={{
+                        align: "center",
+                        variant: "h5",
+                      }}
+                    />
+                  </ListItem>
+                </List>
+              </Card>
+            </Grid>
+          </Fade>
+        ))}
+      </Grid>
+    </Container>
   );
 }
 

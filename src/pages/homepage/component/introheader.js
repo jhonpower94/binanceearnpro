@@ -15,8 +15,8 @@ import {
 import Particles from "react-tsparticles";
 import { blue, red } from "@material-ui/core/colors";
 import ArmChart from "./armchart";
-import Background from "../../../pages/homepage/images/bg2.jpg";
-import Backgroundsecond from "../../../pages/homepage/images/bg.jpg";
+import Background from "../../../pages/homepage/images/header-middle-bg.png";
+import Backgroundsecond from "../../../pages/homepage/images/header-middle-bg1.png";
 import { navigate } from "@reach/router";
 import { useSelector } from "react-redux";
 
@@ -84,7 +84,7 @@ function IntroHeader() {
   });
 
   return (
-    <div className={rightoleft.status ? classes.headerRtl : classes.header}>
+    <div className={classes.header}>
       <div className={classes.toolbar} />
       <Particles
         height="auto"

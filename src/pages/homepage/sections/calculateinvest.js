@@ -14,7 +14,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import Particles from "react-tsparticles";
-import Background from "../images/Sun-Tornado.svg";
+import Background from "../images/Sun-Tornadoblue.svg";
 import { blue } from "@material-ui/core/colors";
 import { ShareSharp } from "@material-ui/icons";
 import NumberFormat from "react-number-format";

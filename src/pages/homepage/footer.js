@@ -114,7 +114,7 @@ function FooterHomepage() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    
       <Container maxWidth="md" className={classes.margintop}>
         <Grid container spacing={3} justify="center">
           <Grid item xs={12} sm={12}>
@@ -203,7 +203,7 @@ function FooterHomepage() {
           </Typography>
         </Box>
       </Container>
-    </ThemeProvider>
+    
   );
 }
 

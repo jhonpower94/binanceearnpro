@@ -71,7 +71,7 @@ export default function DepositTable() {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
+   
       <TableContainer className={classes.container}>
         <Table aria-label="sticky table">
           <TableBody>
@@ -94,6 +94,6 @@ export default function DepositTable() {
           </TableBody>
         </Table>
       </TableContainer>
-    </ThemeProvider>
+    
   );
 }

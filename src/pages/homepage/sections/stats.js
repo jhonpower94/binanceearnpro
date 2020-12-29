@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     background: theme.palette.background.default,
+    color: theme.palette.primary.main,
     height: theme.spacing(7),
     width: theme.spacing(7),
   },
@@ -84,31 +85,27 @@ function Stats() {
   ];
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container>
-        <Grid container spacing={3} justify="center">
-          {stats.map((stat, index) => (
-            <Grid key={index} item xs={12} sm={3}>
-              <CardHeader
-                avatar={
-                  <Avatar className={classes.avatar}>{stat.icons}</Avatar>
-                }
-                title={stat.value}
-                subheader={stat.title}
-                titleTypographyProps={{
-                  align: "center",
-                  variant: "h5",
-                }}
-                subheaderTypographyProps={{
-                  align: "center",
-                  variant: "caption",
-                }}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </ThemeProvider>
+    <Container>
+      <Grid container spacing={3} justify="center">
+        {stats.map((stat, index) => (
+          <Grid key={index} item xs={12} sm={3}>
+            <CardHeader
+              avatar={<Avatar className={classes.avatar}>{stat.icons}</Avatar>}
+              title={stat.value}
+              subheader={stat.title}
+              titleTypographyProps={{
+                align: "center",
+                variant: "h5",
+              }}
+              subheaderTypographyProps={{
+                align: "center",
+                variant: "caption",
+              }}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 }
 

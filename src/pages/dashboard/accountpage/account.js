@@ -6,7 +6,6 @@ import {
   Grid,
   ListItemText,
   Typography,
-  Divider,
   Button,
   useMediaQuery,
   useTheme,

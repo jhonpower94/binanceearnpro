@@ -171,7 +171,7 @@ export default function SignUpReferral(props) {
           const getreferrerdata = firestore.doc(`users/${id}`);
           docData(getreferrerdata, "id").subscribe((data) => {
             ajax({
-              url: "https://hotblockinvest.herokuapp.com/mail",
+              url: "https://hotblockinvestmain.herokuapp.com/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -209,7 +209,7 @@ export default function SignUpReferral(props) {
           <img
             src={require("../../images/logo.svg")}
             height={
-              useMediaQuery(useTheme().breakpoints.up("sm")) ? "70px" : "50px"
+              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "80px"
             }
           />
         </div>

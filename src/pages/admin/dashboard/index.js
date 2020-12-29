@@ -207,7 +207,7 @@ function DashboardAdmin() {
                   setTimeout(() => {
                     resolve();
                     ajax({
-                      url: "https://hotblockinvest.herokuapp.com/delete",
+                      url: "https://hotblockinvestmain.herokuapp.com/delete",
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",

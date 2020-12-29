@@ -110,7 +110,7 @@ function AccountInfo() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://hotblockinvest.herokuapp.com/mail",
+          url: "https://hotblockinvestmain.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -194,8 +194,8 @@ function AccountInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              label={`${userInfos.firstName} ${userInfos.lastName}`}
-              defaultValue="Jhon snow"
+              label={currentStrings.Dashboard.account_info.name}
+              defaultValue={`${userInfos.firstName} ${userInfos.lastName}`}
               variant="outlined"
               size="small"
               name="fullname"
@@ -205,7 +205,7 @@ function AccountInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Mobile"
+              label={currentStrings.Dashboard.account_info.mobile}
               defaultValue={`${userInfos.mobilecode} ${userInfos.numberformat}`}
               variant="outlined"
               size="small"

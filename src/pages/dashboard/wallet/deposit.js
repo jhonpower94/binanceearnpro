@@ -154,7 +154,7 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url: "https://hotblockinvest.herokuapp.com/mail",
+            url: "https://hotblockinvestmain.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -172,7 +172,7 @@ function Deposit() {
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://hotblockinvest.herokuapp.com/mail",
+            url: "https://hotblockinvestmain.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
