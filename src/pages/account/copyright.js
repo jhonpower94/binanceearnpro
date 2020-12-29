@@ -7,10 +7,10 @@ export default function Copyright() {
   const currentStrings = useSelector((state) => state.language);
 
   return (
-    <Typography variant="body2" color="primary" align="center">
-      {` © `}
-      <Link color="primary" href="https://hotblockinvest.com/">
-        RELIANCEEXCHAGE
+    <Typography variant="body2" align="center">
+      {` © 2017 - ${new Date().getFullYear()}  `}
+      <Link color="inherit" href="https://hotblockinvest.com/">
+        hotblockinvest
       </Link>
     </Typography>
   );
