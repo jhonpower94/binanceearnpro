@@ -303,8 +303,8 @@
       "text": "you have updated your profile, your profile will be updated once we review and confirm your proile details"
     },
     "deposit": {
-      "subject": "Credit wallet",
-      "a": "Send exact payment to this address",
+      "subject": "Fund wallet",
+      "a": "transfer exact amount to this address",
       "b": "once payment is done, send notification to live support or email support at ",
       "c": "to notify us of successful deposit"
     },
