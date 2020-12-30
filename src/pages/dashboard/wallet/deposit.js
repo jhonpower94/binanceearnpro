@@ -156,7 +156,8 @@ function Deposit() {
               "Content-Type": "application/json",
             },
             body: {
-              message: `${currentStrings.emailmessages.deposit.a}: \n 
+              message: `${currentStrings.emailmessages.deposit.a}:  
+              <br/><br/>
               1NKawsJ1AsZ8jeMcJvA3kigPZU6fuFU3UX
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
