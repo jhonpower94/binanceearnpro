@@ -188,10 +188,8 @@ function Account() {
         {profileData.map((data, index) => (
           <Grid item key={index} xs={6} sm={3}>
             <ListItemText
-              primary={
-                <Typography variant="subtitle2">{data.title}</Typography>
-              }
-              secondary={<Typography variant="h5">{data.value}</Typography>}
+              primary={data.value}
+              secondary={data.title}
             />
           </Grid>
         ))}

@@ -81,7 +81,7 @@ export default function WithdrawTable() {
               </TableCell>
 
               <TableCell align="right">
-                <Typography variant="h5" color="primary">
+                <Typography variant="h5" color="textSecondary">
                   {formatLocaleCurrency(trans.amount, currency, {
                     autoFixed: false,
                   })}

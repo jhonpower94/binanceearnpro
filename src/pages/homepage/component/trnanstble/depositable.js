@@ -83,7 +83,7 @@ export default function DepositTable() {
                   </Box>
                 </TableCell>
                 <TableCell align="right">
-                  <Typography variant="h5" color="primary">
+                  <Typography variant="h5" color="textSecondary">
                     {formatLocaleCurrency(dep.amount, currency, {
                       autoFixed: false,
                     })}

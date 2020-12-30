@@ -86,14 +86,69 @@ function IntroHeader() {
   return (
     <div className={classes.header}>
       <div className={classes.toolbar} />
-      <Particles
+
+      <div className={classes.intro}>
+        <Container>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                mt={3}
+                style={{ color: "#fafafa" }}
+              >
+                <Typography variant="h4" align="left">
+                  {currentStrings.homepage.intro.title}
+                </Typography>
+                <Typography variant="h6" align="left">
+                  {currentStrings.homepage.intro.subheader}
+                </Typography>
+              </Box>
+              <Box mt={3} style={{ color: "#fafafa" }}>
+                <Typography variant="h6" align="center">
+                  {currentStrings.homepage.intro.body}
+                </Typography>
+              </Box>
+              <Box display="flex" justifyContent="center" mt={2}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  onClick={() => {
+                    if (intro.refid) {
+                      navigate(`account/register/${intro.refid}`);
+                    } else {
+                      navigate("/account");
+                    }
+                  }}
+                >
+                  {currentStrings.homepage.intro.button}
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </div>
+    </div>
+  );
+}
+
+export default IntroHeader;
+
+/*
+<Grid item xs={12} sm={6}>
+              <ArmChart />
+            </Grid>
+
+              <Particles
         height="auto"
         // height={useMediaQuery(useTheme().breakpoints.up("sm")) ? "80%" : "85%"}
         style={{ position: "absolute", opacity: 0.8 }}
         id="tsparticles"
         options={{
           background: {
-            /* color: {
+             color: {
               value: blue[800],
             }, 
             image: `url(${Background})`,
@@ -101,7 +156,7 @@ function IntroHeader() {
             size: "100% 100%",
             repeat: "no-repeat",
             position: "center bottom",
-            */
+            
           },
           fpsLimit: 60,
           interactivity: {
@@ -176,57 +231,4 @@ function IntroHeader() {
           detectRetina: true,
         }}
       />
-      <div className={classes.intro}>
-        <Container>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
-              <Box
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                mt={3}
-                style={{ color: "#fafafa" }}
-              >
-                <Typography variant="h4" align="left">
-                  {currentStrings.homepage.intro.title}
-                </Typography>
-                <Typography variant="h6" align="left">
-                  {currentStrings.homepage.intro.subheader}
-                </Typography>
-              </Box>
-              <Box mt={3} style={{ color: "#fafafa" }}>
-                <Typography variant="h6" align="center">
-                  {currentStrings.homepage.intro.body}
-                </Typography>
-              </Box>
-              <Box display="flex" justifyContent="center" mt={2}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  size="large"
-                  onClick={() => {
-                    if (intro.refid) {
-                      navigate(`account/register/${intro.refid}`);
-                    } else {
-                      navigate("/account");
-                    }
-                  }}
-                >
-                  {currentStrings.homepage.intro.button}
-                </Button>
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
-      </div>
-    </div>
-  );
-}
-
-export default IntroHeader;
-
-/*
-<Grid item xs={12} sm={6}>
-              <ArmChart />
-            </Grid>
             */

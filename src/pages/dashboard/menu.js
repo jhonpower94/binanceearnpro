@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import NotificationsSharpIcon from "@material-ui/icons/NotificationsSharp";
@@ -17,6 +17,7 @@ import { locationinfo$ } from "../../redux/action";
 import { app, firestore } from "../../config";
 import { navigate } from "@reach/router";
 import { NotificationsOutlined } from "@material-ui/icons";
+import { AppContext } from "../../App";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
@@ -71,6 +72,7 @@ function DasboardMenu() {
   const currentStrings = useSelector((state) => state.language);
   const notifications = useSelector((state) => state.notification.notification);
   const info = useSelector((state) => state.locationinfo.locationinfo);
+  const { setCurrentab } = useContext(AppContext);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -92,12 +94,13 @@ function DasboardMenu() {
       .doc(link.id)
       .delete()
       .then(() => {
-        /*  if (link.type === "investment") {
-          navigate("invest");
+        if (link.type === "investment") {
+          setCurrentab(0);
+          navigate("../dashboard/withdraw");
         } else {
-          navigate("bonus");
-        } */
-        navigate("dashboard/withdraw");
+          setCurrentab(1);
+          navigate("../dashboard/withdraw");
+        }
       });
   };
 
