@@ -85,7 +85,7 @@ function Calculator() {
               value: blue[800],
             }, */
             image: `url("${Background}")`,
-            color: "#cb491d",
+            
             size: "cover",
             repeat: "no-repeat",
             position: "center center",

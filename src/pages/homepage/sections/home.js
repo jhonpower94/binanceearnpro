@@ -90,7 +90,7 @@ function Home(props) {
           <Stats />
         </div>
 
-        <div>
+        <div >
           <Calculator />
         </div>
       </div>
