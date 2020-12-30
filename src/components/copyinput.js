@@ -66,7 +66,7 @@ function CopyInput(props) {
             <InputAdornment position="end">
               <CopyToClipboard
                 text={value}
-                onCopy={handleClick(currentStrings.Dashboard.payment.copy)}
+                onCopy={handleClick(currentStrings.Dashboard.account_info.copy_link)}
               >
                 <IconButton aria-label="toggle password visibility" edge="end">
                   <FileCopySharp />

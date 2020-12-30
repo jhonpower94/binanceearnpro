@@ -25,3 +25,16 @@ const loggedIn$ = authState(auth).pipe(filter((user) => !!user));
 
 export { app, auth, firestore, storage, collectionData, docData, loggedIn$ };
 export default firebase;
+
+export const addresses = (crypto) => {
+  switch (crypto) {
+    case "BTC":
+      return "1EepRbmuMDmXdpDKynB8TaMMT2zZF2EPyw";
+    case "ETH":
+      return "0x7D62Fac09F1991F613127cE3158B1B5d7FcE521b";
+    case "BTCC":
+      return "qz2up8g2chgarrrynaw0q25rhqkw2reyss84fcxdl4";
+    default:
+      return "1EepRbmuMDmXdpDKynB8TaMMT2zZF2EPyw";
+  }
+};

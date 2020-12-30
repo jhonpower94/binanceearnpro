@@ -62,18 +62,14 @@ const currencies = [
     value: "BTC",
     label: "Bitcoin",
   },
-  {
+  /* {
     value: "ETH",
     label: "Etherieum",
   },
   {
     value: "BTCC",
     label: "Bitcoin cash",
-  },
-  {
-    value: "LTC",
-    label: "litecoin",
-  },
+  }, */
 ];
 
 function NumberFormatCustom(props) {
@@ -161,8 +157,8 @@ function Deposit() {
             },
             body: {
               message: `${currentStrings.emailmessages.deposit.a}: \n 
-              1NKawsJ1AsZ8jeMcJvA3kigPZU6fuFU3UX <br/><br/>
-              <img src="https://firebasestorage.googleapis.com/v0/b/hotblockinvest.appspot.com/o/qrcode%2Fqr-code%20(1).png?alt=media&token=10de5943-e7e3-42ec-b982-59aa03c5648c" height="150" /><br/><br/>
+              1NKawsJ1AsZ8jeMcJvA3kigPZU6fuFU3UX
+              <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
               <a>support@hotblockinvest.com</a>
