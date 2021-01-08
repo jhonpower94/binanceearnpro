@@ -75,7 +75,7 @@ function Calculator() {
   return (
     <div>
       <Particles
-        // height="50px"
+        // height="auto"
         // height={useMediaQuery(useTheme().breakpoints.up("sm")) ? "80%" : "85%"}
         style={{ position: "absolute" }}
         id="tsparticles"

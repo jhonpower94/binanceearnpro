@@ -175,10 +175,14 @@ function Investment() {
                       <Typography>{dep.block_name}</Typography>
                     </TableCell>
                     <TableCell align="left">
-                      {new Date(dep.created_at.seconds * 1000).toLocaleDateString()}
+                      {new Date(
+                        dep.created_at.seconds * 1000
+                      ).toLocaleDateString()}
                     </TableCell>
                     <TableCell align="center">
-                      {dep.pending ? "PENDING" : "COMPLETE"}
+                      {dep.pending
+                        ? currentStrings.Dashboard.investments.pending
+                        : currentStrings.Dashboard.investments.complete}
                     </TableCell>
                   </TableRow>
                 ))}

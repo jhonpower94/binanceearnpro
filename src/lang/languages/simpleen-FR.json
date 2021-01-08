@@ -1,0 +1,324 @@
+{
+  "language": "langue",
+  "Nav": {
+    "Dashboard": "Compte",
+    "withdraw": "Retrait",
+    "account_info": "informations sur le compte",
+    "wallet": "Portefeuille",
+    "invest": "Investir",
+    "investments": "Mon investissement",
+    "referral_bonus": "Recommandation et prime"
+  },
+  "usermenu": {
+    "logout": "Déconnexion",
+    "settings": "Paramètres du compte",
+    "light_mode": "Mode léger"
+  },
+  "Dashboard": {
+    "account": {
+      "main_balance": "Solde principal",
+      "earning": "Gains actifs",
+      "bonus_balance": "Solde des primes",
+      "Wallet_Balance": "Solde du portefeuille",
+      "plans": "Plans",
+      "plan_helpertext": "Choisir un plan d'investissement",
+      "plan_titles": {
+        "title": "Plan",
+        "plan1": "Plan 1",
+        "plan2": "Plan 2",
+        "plan3": "Plan 3"
+      },
+      "action": {
+        "investments": "Mes investissements",
+        "invest": "invest"
+      },
+      "Total_profit_amount": "Montant total du bénéfice",
+      "Total_bonus_earned": "Prime totale gagnée",
+      "Total_investment_amount": "Montant total de l'investissement",
+      "Total_withdrawn_amount": "Montant total retiré"
+    },
+    "invest": {
+      "plan_title": "Plan",
+      "duration": "Durée",
+      "hour": "Heures d'ouverture",
+      "Minimun_stake": "Investissement minimum",
+      "Maximun_stake": "Investissement maximal",
+      "action": "Sélectionnez",
+      "invoice": {
+        "min": "Mise minimale",
+        "wallet_balance": "Solde du portefeuille",
+        "min_profit": "Profit minimum",
+        "max_profit": "Profit maximum",
+        "action": "Procéder au paiement",
+        "amount": "Montant",
+        "helpertext": "Indiquer le montant de l'investissement"
+      }
+    },
+    "withdraw": {
+      "wallet_balance": "Solde du portefeuille",
+      "adress_label": "Adresse de Bitcoin",
+      "helpertext_btc": "Entrez votre adresse de bitcoin",
+      "amount": "Montant",
+      "helpertext_amount": "Saisir le montant du retrait",
+      "error_amount": "Montant insuffisant",
+      "action": "retirer des dépôts"
+    },
+    "deposit": {
+      "helpertext_amount": "Indiquer le montant de la caution",
+      "error_amount": "Le montant des dépôts est faible",
+      "currency_lable": "Monnaie",
+      "helpertext_currency": "Veuillez sélectionner la pièce de monnaie de paiement",
+      "action_btn": "portefeuille de crédit",
+      "alert_title": "Dépôt minimum"
+    },
+    "investments": {
+      "investment": "Investissement",
+      "amount": "Montant",
+      "return": "Retour",
+      "confirm": "Retrait",
+      "date": "Date de dépôt",
+      "status": "Statut",
+      "pending": "EN ATTENTE",
+      "complete": "COMPLÉTÉ"
+    },
+    "bonus": {
+      "from": "Tiré de",
+      "description": "Description",
+      "amount": "Montant",
+      "confirm": "Retrait",
+      "date": "Date"
+    },
+    "address": {
+      "cancel": "Annuler",
+      "confirm": "Confirmer"
+    },
+    "account_info": {
+      "profile_status": "Statut du profil",
+      "Current_running_investments": "Investissements courants en cours",
+      "Matured_investments": "Investissements matures",
+      "Total_invested": "Total investi",
+      "Total_withdrawn": "Total des retraits",
+      "name": "Nom du compte",
+      "mobile": "Mobile",
+      "Referral_link": "Lien de renvoi",
+      "copy_link": "Lien copié"
+    },
+    "payment": {
+      "send": "Envoyer le paiement à l",
+      "send_": "adresse et montant indiqués ci-dessous",
+      "info": "une fois le paiement effectué, envoyez une notification à l'assistance en direct ou par courrier électronique à support@hotblockinvest.com. afin de nous informer de la réussite de votre dépôt"
+    },
+    "tabs": {
+      "account": "Compte",
+      "acount_info": "Informations sur les comptes",
+      "investments": "Investissements",
+      "bonus": "Points bonus",
+      "deposit": "Dépôt",
+      "withdraw": "Retirer son portefeuille"
+    },
+    "titles": {
+      "home": "Compte",
+      "invest": "Investir",
+      "invoice": "Facture",
+      "withdraw": "Retrait",
+      "wallet": "Portefeuille"
+    }
+  },
+  "homepage": {
+    "menus": {
+      "home": "Accueil",
+      "investment": "investissement",
+      "about": "À propos de nous",
+      "get_started": "Démarrer",
+      "support": "Soutien",
+      "faq": "Faq",
+      "header": {
+        "title": "Menus",
+        "subheader": "Menus du site et application web disponible"
+      }
+    },
+    "button": "Connexion",
+    "intro": {
+      "title": "INVESTIR DANS LA CRYPTOCURRENCE",
+      "subheader": "La meilleure plateforme d'investissement dans le nuage au monde",
+      "body": "Nous espérons sincèrement que notre entreprise deviendra un partenaire dans votre vie.",
+      "button": "Démarrer"
+    },
+    "activities": {
+      "deposit": "DÉPÔTS",
+      "withdrawal": "RETRAITS",
+      "subheader": "Les 5 dernières opérations",
+      "name": "UTILISATEUR",
+      "amount": "MONTANT"
+    },
+    "stats": {
+      "online": "JOURS EN LIGNE",
+      "accounts": "COMPTES TOTAUX",
+      "deposits": "TOTAL DÉPOSÉ",
+      "withdrawn": "TOTAL RETIRÉ"
+    },
+    "calculate_invest": {
+      "title": "Calculer l'investissement",
+      "subheader": "Calculer le total des bénéfices de l'investissement",
+      "plan": {
+        "title": "Plan",
+        "helpertext": "Choisir un plan d'investissement"
+      },
+      "amount": {
+        "title": "Montant",
+        "helpertext": "Inscrire l'investissement Montant"
+      },
+      "profit": {
+        "title": "Profit",
+        "helpertext": "votre rentabilité"
+      }
+    },
+    "affilate": {
+      "title": "commission de renvoi",
+      "subheader": "Chacun de vos filleuls vous apporte une récompense à partir du montant de son dépôt. Votre propre dépôt n'est pas nécessaire pour attirer les investisseurs et gagner de l'argent. Il vous suffit d'ouvrir un compte et d'appliquer votre lien de parrainage partout où vous le pouvez."
+    },
+    "cac": {
+      "title": "investissement LIMITÉ",
+      "subheader": "En juillet 2016, notre organisation a passé le processus d'incorporation au Royaume-Uni et est répertoriée par la Companies House, avec le numéro suivant de la commission des affaires corporatives : 10634443."
+    },
+    "footer": {
+      "menu": "Liens et contacts",
+      "submenu": "les menus du site web, les activités sociales et les contacts par courriel",
+      "made": "Fabriqué avec",
+      "securities": {
+        "privacy": "Politique de confidentialité",
+        "terms": "Conditions de service",
+        "Eu": "Protection des données dans l'UE"
+      }
+    },
+    "pages": {
+      "investments": {
+        "title": "INVESTISSEMENTS",
+        "subheader": "Nos projets"
+      },
+      "about_us": {
+        "title": "À propos de nous",
+        "subheader": "À propos de",
+        "typeA": "investment Limited est prêt à proposer une coopération profitable pour tous les arrivants. Nous vous présentons une entreprise de haute technologie et moderne qui est reconnue comme leader dans le domaine de la technologie informatique, des logiciels et des innovations. Nos experts techniques sont impliqués dans le développement de nouvelles méthodes et d'algorithmes efficaces d'investissement Bitcoin. Au cours des dernières années, notre société a réussi à construire quelques grandes fermes d'investissement au Royaume-Uni et en Écosse, que nous avons équipées du matériel d'investissement le plus puissant et le plus moderne, qui fournit d'excellents résultats et sert de source de revenus 24 heures sur 24.",
+        "typeB": "est prête à proposer une coopération profitable pour tous les arrivants. Nous vous présentons une entreprise de haute technologie et moderne qui est reconnue comme leader dans le domaine de la technologie informatique, des logiciels et des innovations. Nos experts techniques sont impliqués dans le développement de nouvelles méthodes et d'algorithmes efficaces d'investissement de Bitcoin. Au cours des dernières années, notre société a réussi à construire quelques grandes fermes d'investissement au Royaume-Uni et en Écosse, que nous avons équipées du matériel d'investissement le plus puissant et le plus moderne, qui fournit d'excellents résultats et sert de source de revenus 24 heures sur 24. Au cours de l'été 2016, notre équipe a tenté avec succès de pénétrer le marché international de l'investissement en offrant une coopération aux clients et aux partenaires. Actuellement, notre objectif est de développer un réseau européen plus large de fermes d'investissement Bitcoin afin de donner à chacun la possibilité de participer aux processus d'investissement et de revenus. Si vous voulez faire aujourd'hui, nous vous invitons à rejoindre notre pool d'investisseurs. Notre offre est valable en permanence et vos bénéfices seront toujours cumulés après avoir effectué un dépôt, de 10 à 20 % par jour avec la possibilité de se retirer instantanément. Beaucoup d'entre vous attendent une telle proposition et nous sommes convaincus que vous ne serez pas déçus par notre service. Avec l'avènement de la cryptoconnaissance, de nombreux entrepreneurs ont remarqué qu'il s'agit non seulement d'un moyen de paiement pratique, mais aussi d'une source de revenus importante dans le domaine des investissements en ligne. Aujourd'hui, vous pouvez trouver des dizaines d'offres alléchantes, mais vous devriez examiner attentivement chacune d'entre elles. Tout d'abord, faites attention à la légalité du travail de l'entreprise ainsi qu'à l'expérience antérieure et à son histoire. Un partenaire fiable qui propose des services de gestion de patrimoine ne cache jamais rien. Nous espérons sincèrement que notre société deviendra un partenaire dans votre vie. L'activité principale de la société est le développement de logiciels professionnels par des experts expérimentés qui ont été directement impliqués dans le développement et le test des plus célèbres algorithmes classiques d'investissement pour l'investissement. Leurs connaissances approfondies et leurs compétences pratiques sont une garantie de succès pour notre société. Depuis l'été 2016, nous offrons des services d'investissement de haute qualité. Le bénéfice de la société est le résultat d'une étroite coopération entre le personnel technique et les traders pour crypter les échanges de devises. Nous disposons de notre propre base technique et de notre ferme d'investissement sur la base de cartes graphiques haut de gamme et de matériel ASIC qui gagne en popularité dans le domaine de l'investissement Bitcoin grâce à une consommation d'énergie optimale et à des performances élevées. La stratégie d'investissement que nous proposons est suffisamment claire et les conditions peuvent être acceptables pour tous. Il ne fait aucun doute que la société de ce niveau doit être officiellement enregistrée pour répondre à tous les critères des investisseurs. En juillet 2016, notre société a passé le processus de constitution au Royaume-Uni et est cotée à la Companies House."
+      },
+      "get_started": {
+        "title": "S'affirmer",
+        "subheader": "Guides",
+        "typeA": "Pour effectuer votre premier dépôt et commencer à gagner de l'argent, vous devez être un utilisateur enregistré sur le site web de",
+        "typeB": "Vous devez disposer d'un compte personnel qui vous permettra d'investir sur les marchés des cryptocurrences, d'obtenir des bénéfices quotidiens sur un investissement en cours et de faire des retraits. Vous pouvez également utiliser le lien d'affiliation pour augmenter vos revenus.",
+        "typeC": "La procédure d'inscription est assez simple et rapide. Il vous suffit d'indiquer vos coordonnées personnelles et votre adresse Bitcoin. C'est gratuit et ne nécessite pas de confirmation par e-mail ou de documents."
+      },
+      "support": {
+        "title": "Support",
+        "subheader": "nous envoyer un message"
+      },
+      "faq": {
+        "title": "Faq",
+        "subheader": "questions fréquemment posées",
+        "questions": {
+          "a": {
+            "title": "Quel est notre objectif",
+            "subheader": "est prêt à proposer une coopération fructueuse pour tous les arrivants. Nous vous présentons une entreprise de haute technologie et moderne, reconnue comme leader dans le domaine de la technologie informatique, des logiciels et des innovations. Nos experts techniques participent au développement de nouvelles méthodes et d'algorithmes efficaces d'extraction de bitcoin."
+          },
+          "b": {
+            "title": "Combien de temps prévoyez-vous de travailler",
+            "subheader": "Nous planifions nos activités pour les prochaines années"
+          },
+          "c": {
+            "title": "Quel est le degré de sécurité des données personnelles que j'envoie à ce site web",
+            "subheader": "Le site est sur un serveur dédié avec une protection 24h/24 contre les attaques DDoS, il est scanné quotidiennement pour détecter les logiciels malveillants. En outre, toutes les données sont cryptées par un certificat SSL"
+          },
+          "d": {
+            "title": "Qui peut rejoindre votre société d'investissement",
+            "subheader": "Pour devenir client, vous devez ouvrir un compte. Entrez votre nom d'utilisateur, définissez un mot de passe, ajoutez votre adresse électronique et votre adresse Bitcoin pour créer un compte"
+          },
+          "e": {
+            "title": "Où puis-je enregistrer l'adresse Bitcoin",
+            "subheader": "Visitez le site https://blockchain.info pour enregistrer une adresse Bitcoin unique."
+          },
+          "f": {
+            "title": "Combien de comptes puis-je enregistrer ?",
+            "subheader": "Nous vous suggérons de n'enregistrer qu'un seul compte"
+          },
+          "g": {
+            "title": "Puis-je enregistrer quelques comptes, même à partir d'une seule adresse IP ?",
+            "subheader": "Oui, si ces comptes appartiennent à des membres de votre famille ou à des amis"
+          },
+          "h": {
+            "title": "Recevrai-je un bénéfice chaque jour civil",
+            "subheader": "Oui, c'est exact. Votre bénéfice est comptabilisé toutes les 24 heures, 7 jours sur 7"
+          },
+          "i": {
+            "title": "Vous payez même le week-end",
+            "subheader": "Oui, bien sûr, nous payons les week-ends et les jours fériés"
+          },
+          "j": {
+            "title": "Combien de temps mon dépôt fonctionne-t-il",
+            "subheader": "Votre dépôt est à durée indéterminée. Cela signifie que vous ne le récupérerez jamais"
+          },
+          "k": {
+            "title": "Quelle devise puis-je investir ?",
+            "subheader": "Nous n'acceptons que les bitcoins, l'éthérium et les litecoin"
+          }
+        }
+      }
+    }
+  },
+  "account": {
+    "email": "Adresse électronique",
+    "password": "Mot de passe",
+    "signin": {
+      "title": "S'identifier",
+      "remember": "Se souvenir de moi",
+      "forgot_pass": "Mot de passe oublié",
+      "redir": "Vous n'avez pas de compte"
+    },
+    "signup": {
+      "title": "S'inscrire",
+      "fname": "Prénom",
+      "lname": "Nom de famille",
+      "country": "Pays",
+      "mobile": "Mobile",
+      "ref_id": "ID du référent",
+      "terms": "J'accepte les conditions, la vie privée et la politique",
+      "redir": "Vous avez déjà un compte"
+    },
+    "reset_pass": {
+      "title": "Réinitialisation du mot de passe"
+    }
+  },
+  "emailmessages": {
+    "hello": "hello",
+    "amount": "Montant",
+    "signup_referral": {
+      "subject": "Nouvelle invitation",
+      "a": "Il s'agit de vous informer que votre recommandation",
+      "b": "a enregistré avec succès",
+      "c": "Merci de votre partenariat avec nous"
+    },
+    "accountinfo": {
+      "subject": "mise à jour du profil",
+      "text": "vous avez mis à jour votre profil, votre profil sera mis à jour une fois que nous aurons examiné et confirmé les détails de votre profil"
+    },
+    "deposit": {
+      "subject": "Portefeuille du fonds",
+      "a": "transférer le montant exact à cette adresse",
+      "b": "une fois le paiement effectué, envoyez une notification à l'assistance en direct ou par courrier électronique à ",
+      "c": "pour nous informer du dépôt réussi"
+    },
+    "withdraw": {
+      "subject": "Demande de retrait",
+      "a": "Vous avez placé avec succès une demande de retrait de portefeuille de",
+      "b": "à votre portefeuille de la CTB",
+      "c": "Veuillez faire preuve de patience pendant que nous traitons votre transaction, Merci"
+    },
+    "address": {
+      "subject_bonus": "Retrait du bonus",
+      "subject_withdraw": "retrait des investissements",
+      "a": "Vous avez introduit avec succès une demande de retrait de",
+      "b": "à votre portefeuille de la CTB",
+      "c": "Veuillez faire preuve de patience pendant que nous traitons votre transaction, merci"
+    }
+  }
+}

@@ -1,0 +1,324 @@
+{
+  "language": "taal",
+  "Nav": {
+    "Dashboard": "Rekening",
+    "withdraw": "Terugtrekken",
+    "account_info": "rekeninginfo",
+    "wallet": "Portemonnee",
+    "invest": "Investeer",
+    "investments": "Mijn investering",
+    "referral_bonus": "Verwijzing en bonus"
+  },
+  "usermenu": {
+    "logout": "Uitloggen",
+    "settings": "Account instellingen",
+    "light_mode": "Lichtmodus"
+  },
+  "Dashboard": {
+    "account": {
+      "main_balance": "Hoofdsaldo",
+      "earning": "Actieve verdiensten",
+      "bonus_balance": "Bonussaldo",
+      "Wallet_Balance": "Portemonnee Balans",
+      "plans": "Plannen",
+      "plan_helpertext": "Kies investeringsplan grafiek",
+      "plan_titles": {
+        "title": "Plan",
+        "plan1": "Plan 1",
+        "plan2": "Plan 2",
+        "plan3": "Plan 3"
+      },
+      "action": {
+        "investments": "Mijn investeringen",
+        "invest": "investeren"
+      },
+      "Total_profit_amount": "Totaal winstbedrag",
+      "Total_bonus_earned": "Totaal verdiende bonus",
+      "Total_investment_amount": "Totaal investeringsbedrag",
+      "Total_withdrawn_amount": "Totaal opgenomen bedrag"
+    },
+    "invest": {
+      "plan_title": "Plan",
+      "duration": "Duur",
+      "hour": "Uren",
+      "Minimun_stake": "Minimale investering",
+      "Maximun_stake": "Maximale investering",
+      "action": "Selecteer",
+      "invoice": {
+        "min": "Minimale inzet",
+        "wallet_balance": "Portemonnee evenwicht",
+        "min_profit": "Minimale winst",
+        "max_profit": "Maximale winst",
+        "action": "Ga verder met de betaling",
+        "amount": "Bedrag",
+        "helpertext": "Vul het investeringsbedrag in"
+      }
+    },
+    "withdraw": {
+      "wallet_balance": "Resterende portemonnee evenwicht",
+      "adress_label": "Bitcoin-adres",
+      "helpertext_btc": "Voer uw bitcoin-adres in",
+      "amount": "Bedrag",
+      "helpertext_amount": "Voer het opnamebedrag in",
+      "error_amount": "Niet genoeg bedrag",
+      "action": "stortingen opnemen"
+    },
+    "deposit": {
+      "helpertext_amount": "Vul het stortingsbedrag in",
+      "error_amount": "Borg Bedrag is laag",
+      "currency_lable": "Valuta",
+      "helpertext_currency": "Kies a.u.b. een betaalmunt",
+      "action_btn": "kredietportefeuille",
+      "alert_title": "Minimale inleg"
+    },
+    "investments": {
+      "investment": "Investering",
+      "amount": "Bedrag",
+      "return": "Stuur terug naar",
+      "confirm": "Terugtrekken",
+      "date": "Datum van storting",
+      "status": "Status",
+      "pending": "HANGEN",
+      "complete": "VERKLARINGEN"
+    },
+    "bonus": {
+      "from": "Van",
+      "description": "Beschrijving",
+      "amount": "Bedrag",
+      "confirm": "Terugtrekken",
+      "date": "Datum"
+    },
+    "address": {
+      "cancel": "Annuleer",
+      "confirm": "Bevestig"
+    },
+    "account_info": {
+      "profile_status": "Profielstatus",
+      "Current_running_investments": "Lopende investeringen",
+      "Matured_investments": "Rijpe investeringen",
+      "Total_invested": "Totaal geïnvesteerd",
+      "Total_withdrawn": "Totaal teruggetrokken",
+      "name": "Naam van de rekening",
+      "mobile": "Mobiel",
+      "Referral_link": "Verwijzingslink",
+      "copy_link": "Link gekopieerd"
+    },
+    "payment": {
+      "send": "Stuur de betaling naar de",
+      "send_": "adres en het bedrag dat hieronder wordt vermeld",
+      "info": "zodra de betaling is gedaan, stuur een bericht naar de live-support of stuur een e-mail naar support@hotblockinvest.com. om ons op de hoogte te stellen van uw succesvolle storting."
+    },
+    "tabs": {
+      "account": "Rekening",
+      "acount_info": "Rekeninginfo",
+      "investments": "Investeringen",
+      "bonus": "Bonuspunten",
+      "deposit": "Storten",
+      "withdraw": "Trek de portemonnee terug"
+    },
+    "titles": {
+      "home": "Rekening",
+      "invest": "Investeer",
+      "invoice": "Factuur",
+      "withdraw": "Terugtrekken",
+      "wallet": "Portemonnee"
+    }
+  },
+  "homepage": {
+    "menus": {
+      "home": "Home",
+      "investment": "investering",
+      "about": "Over ons",
+      "get_started": "Aan de slag",
+      "support": "Ondersteuning",
+      "faq": "Faq",
+      "header": {
+        "title": "Menu's",
+        "subheader": "Site menu's en beschikbare web app"
+      }
+    },
+    "button": "Inloggen",
+    "intro": {
+      "title": "INVESTEREN IN CRYPTOCURRENCY",
+      "subheader": "s Werelds beste wolkenbeleggingsplatform",
+      "body": "Wij hopen van harte dat ons bedrijf een partner in uw leven wordt.",
+      "button": "Aan de slag"
+    },
+    "activities": {
+      "deposit": "DEPOSITS",
+      "withdrawal": "INTREKKINGEN",
+      "subheader": "Laatste 5 bewerkingen",
+      "name": "GEBRUIKER",
+      "amount": "AMOUNT"
+    },
+    "stats": {
+      "online": "DAGEN ALLEEN",
+      "accounts": "TOTAALREKENINGEN",
+      "deposits": "TOTAAL GEDEPONEERD",
+      "withdrawn": "VOLLEDIG TERUGGETROKKEN"
+    },
+    "calculate_invest": {
+      "title": "Bereken de investering",
+      "subheader": "Berekening van de totale winst van de investering",
+      "plan": {
+        "title": "Plan",
+        "helpertext": "Kies investeringsplan"
+      },
+      "amount": {
+        "title": "Bedrag",
+        "helpertext": "Voer de investering in Bedrag"
+      },
+      "profit": {
+        "title": "Winst",
+        "helpertext": "uw winstrendement"
+      }
+    },
+    "affilate": {
+      "title": "verwijzingscommissie",
+      "subheader": "Elke keer dat je doorverwijzing je beloont met zijn stortingsbedrag. Uw eigen storting is niet nodig om investeerders aan te trekken en te verdienen. Registreer gewoon uw account en pas uw referral link toe waar u maar kunt."
+    },
+    "cac": {
+      "title": "investering beperkt",
+      "subheader": "In juli 2016 heeft onze organisatie het oprichtingsproces in het Verenigd Koninkrijk doorstaan en is genoteerd aan het Companies House, met de volgende corporate affairs commissie nummer 10634443."
+    },
+    "footer": {
+      "menu": "Links en contacten",
+      "submenu": "websitemenu's, socials en e-mailcontacten",
+      "made": "Gemaakt met",
+      "securities": {
+        "privacy": "Privacybeleid",
+        "terms": "Servicevoorwaarden",
+        "Eu": "EU-gegevensbescherming"
+      }
+    },
+    "pages": {
+      "investments": {
+        "title": "INVESTERINGEN",
+        "subheader": "Onze plannen"
+      },
+      "about_us": {
+        "title": "Over ons",
+        "subheader": "Over",
+        "typeA": "investment Limited is bereid om een winstgevende samenwerking voor te stellen voor iedereen. Wij presenteren een high-tech en modern bedrijf dat erkend is als marktleider op het gebied van computertechnologie, software en innovaties. Onze technische experts zijn betrokken bij de ontwikkeling van nieuwe methoden en effectieve algoritmen van de Bitcoin-investering. In de afgelopen jaren is ons bedrijf erin geslaagd een paar grote investeringsboerderijen in het Verenigd Koninkrijk en Schotland te bouwen. We hebben ze uitgerust met de krachtigste en modernste investeringshardware die de klok rond uitstekende resultaten oplevert en dient als bron van inkomsten.",
+        "typeB": "is bereid om een winstgevende samenwerking voor te stellen voor iedereen. We presenteren een high-tech en modern bedrijf dat erkend is als marktleider op het gebied van computertechnologie, software en innovaties. Onze technische experts zijn betrokken bij de ontwikkeling van nieuwe methoden en effectieve algoritmen van de Bitcoin-investering. In de afgelopen jaren is ons bedrijf erin geslaagd een paar grote investeringsboerderijen in het Verenigd Koninkrijk en Schotland te bouwen. We hebben ze uitgerust met de krachtigste en modernste investeringshardware die de klok rond uitstekende resultaten oplevert en dient als bron van inkomsten. In de zomer van 2016 heeft ons team een succesvolle poging gedaan om de internationale beleggingsmarkt te betreden met als doel het aanbieden van samenwerking voor klanten en partners. Op dit moment is het ons doel om een breder Europees netwerk van Bitcoin-beleggingsboerderijen te ontwikkelen om iedereen de mogelijkheid te bieden om deel te nemen aan investerings- en verdienprocessen. Als u vandaag wilt deelnemen, nodigen we u uit om deel te nemen aan onze pool van investeerders. Ons aanbod is geldig op een permanente basis en uw winst zal altijd worden opgebouwd nadat u een storting heeft gedaan, van 10% tot 20% op een dagelijkse basis met de mogelijkheid om direct op te nemen. velen van u hebben gewacht op een dergelijk voorstel en we zijn ervan overtuigd dat u niet teleurgesteld zult zijn in onze service. Met de komst van cryptocurrency hebben veel ondernemers gemerkt dat dit niet alleen een handige betaalmethode is, maar ook een grote bron van inkomsten op het gebied van online beleggen. Vandaag de dag kunt u tientallen verleidelijke aanbiedingen vinden, maar u moet elk van hen zorgvuldig overwegen. Let in de eerste plaats op de rechtmatigheid van het werk van het bedrijf, maar ook op de eerdere ervaringen en de geschiedenis van het bedrijf. Een betrouwbare partner die vermogensbeheerdiensten aanbiedt, verbergt nooit iets. Wij hopen van harte dat ons bedrijf een partner wordt in uw leven. De hoofdactiviteit van het bedrijf is het ontwikkelen van professionele software door ervaren experts die direct betrokken waren bij de ontwikkeling en het testen van de meest bekende klassieke investeringsalgoritmen. Hun uitgebreide kennis en praktische vaardigheden zijn een garantie voor het succes van ons bedrijf. Sinds de zomer van 2016 bieden wij hoogwaardige beleggingsdiensten aan. De winst van het bedrijf is het resultaat van een nauwe samenwerking tussen de technische medewerkers en de handelaars om cryptocurrency te ruilen. We hebben onze eigen technische basis en investeringsboerderij op basis van high-end grafische kaarten en ASIC-hardware die aan populariteit wint op het gebied van Bitcoin-investeringen door een optimaal stroomverbruik en hoge prestaties. Een investeringsstrategie die wij voorstellen is duidelijk genoeg en de voorwaarden kunnen voor iedereen aanvaardbaar zijn. Ongetwijfeld moet het bedrijf van dit niveau officieel geregistreerd zijn om aan alle criteria van de investeerders te voldoen. In juli 2016 heeft ons bedrijf het oprichtingsproces in het Verenigd Koninkrijk doorlopen en is het genoteerd aan het Companies House."
+      },
+      "get_started": {
+        "title": "Vastberadenheid",
+        "subheader": "Gidsen",
+        "typeA": "Om uw eerste storting te doen en te beginnen met verdienen, moet u een geregistreerde gebruiker zijn op de website van",
+        "typeB": "U moet een persoonlijke rekening hebben die u in staat zal zijn om een investering te doen in de cryptocurrency markten, dagelijkse winst op een lopende investering te krijgen en ook terug te trekken, u kunt ook gebruik maken van affiliate link om uw inkomen te verhogen.",
+        "typeC": "Het registratieproces is vrij eenvoudig en snel genoeg. U hoeft alleen maar uw persoonlijke gegevens en Bitcoin-adres op te geven. Het is gratis en vereist geen e-mailbevestiging of sommige van uw documenten."
+      },
+      "support": {
+        "title": "Ondersteuning",
+        "subheader": "berichtgeving"
+      },
+      "faq": {
+        "title": "Faq",
+        "subheader": "vrijelijk gestelde vragen",
+        "questions": {
+          "a": {
+            "title": "Wat is ons doel",
+            "subheader": "De investeringen staan klaar om een winstgevende samenwerking voor te stellen voor alle deelnemers aan het project. Wij presenteren een high-tech en modern bedrijf dat erkend is als marktleider op het gebied van computertechnologie, software en innovaties. Onze technische experts zijn betrokken bij de ontwikkeling van nieuwe methoden en effectieve algoritmen van Bitcoin-mijnbouw."
+          },
+          "b": {
+            "title": "Hoe lang bent u van plan te werken",
+            "subheader": "We plannen onze activiteiten voor de komende jaren"
+          },
+          "c": {
+            "title": "Hoe veilig zijn mijn persoonlijke gegevens, die ik naar deze website stuur",
+            "subheader": "De site staat op een dedicated server met de klok rond bescherming tegen DDoS-aanvallen, hij wordt dagelijks gescand op malware. Bovendien worden alle gegevens versleuteld door middel van een SSL-certificaat."
+          },
+          "d": {
+            "title": "Wie kan zich aansluiten bij uw investeringsmaatschappij",
+            "subheader": "Om klant te worden moet je een account aanmaken. Voer uw gebruikersnaam in, stel uw wachtwoord in, voeg uw e-mailadres en Bitcoin-adres toe om een account aan te maken."
+          },
+          "e": {
+            "title": "Waar kan ik het Bitcoin-adres registreren?",
+            "subheader": "Bezoek https://blockchain.info om een uniek Bitcoin-adres te registreren.https://blockchain.info"
+          },
+          "f": {
+            "title": "Hoeveel accounts kan ik registreren?",
+            "subheader": "We stellen voor om slechts één account te registreren"
+          },
+          "g": {
+            "title": "Kan ik zelfs vanaf één IP-adres een paar accounts registreren?",
+            "subheader": "Ja, in het geval dat deze accounts bij uw familieleden van uw vrienden horen..."
+          },
+          "h": {
+            "title": "Krijg ik elke kalenderdag winst",
+            "subheader": "Ja, juist. Uw winst wordt elke 24 uur, 7 dagen per week opgebouwd."
+          },
+          "i": {
+            "title": "Betaalt u zelfs in het weekend",
+            "subheader": "Ja, natuurlijk, we betalen in het weekend en op feestdagen."
+          },
+          "j": {
+            "title": "Hoe lang werkt mijn storting",
+            "subheader": "Je borg loopt voor eeuwig. Dit betekent dat je het nooit meer terugkrijgt"
+          },
+          "k": {
+            "title": "Welke valuta kan ik investeren?",
+            "subheader": "We accepteren alleen Bitcoins, etherium en litecoin..."
+          }
+        }
+      }
+    }
+  },
+  "account": {
+    "email": "E-mailadres",
+    "password": "Wachtwoord",
+    "signin": {
+      "title": "Aanmelden",
+      "remember": "Denk aan mij.",
+      "forgot_pass": "Wachtwoord vergeten",
+      "redir": "Ik heb geen account."
+    },
+    "signup": {
+      "title": "Aanmelden",
+      "fname": "Voornaam",
+      "lname": "Achternaam",
+      "country": "Land",
+      "mobile": "Mobiel",
+      "ref_id": "Verwijzers-ID",
+      "terms": "Ik ga akkoord met de voorwaarden, de privacy en het beleid",
+      "redir": "Hebben al een account"
+    },
+    "reset_pass": {
+      "title": "Wachtwoord resetten"
+    }
+  },
+  "emailmessages": {
+    "hello": "hallo",
+    "amount": "Bedrag",
+    "signup_referral": {
+      "subject": "Nieuwe uitnodiging",
+      "a": "Dit is om u te attenderen op het feit dat uw verwijzing...",
+      "b": "zich met succes heeft geregistreerd",
+      "c": "Bedankt voor de samenwerking met ons"
+    },
+    "accountinfo": {
+      "subject": "profielupdate",
+      "text": "u heeft uw profiel geüpdatet, uw profiel wordt geüpdatet zodra we uw profielgegevens bekijken en bevestigen."
+    },
+    "deposit": {
+      "subject": "Fonds portemonnee",
+      "a": "het exacte bedrag naar dit adres overmaken",
+      "b": "zodra de betaling is gedaan, stuur een melding naar live-support of stuur een e-mail naar support op ",
+      "c": "om ons op de hoogte te stellen van een succesvolle storting"
+    },
+    "withdraw": {
+      "subject": "Intrekkingsverzoek",
+      "a": "U heeft met succes een portemonnee-opnameverzoek geplaatst van",
+      "b": "op uw BTC-portemonnee",
+      "c": "Wees geduldig terwijl we uw transactie verwerken. Bedankt."
+    },
+    "address": {
+      "subject_bonus": "Terugtrekking van de bonus",
+      "subject_withdraw": "investeringsonttrekking",
+      "a": "U heeft met succes een herroepingsverzoek geplaatst van",
+      "b": "op uw BTC-portemonnee",
+      "c": "Gelieve geduld te oefenen terwijl wij uw transactie verwerken, dank u."
+    }
+  }
+}

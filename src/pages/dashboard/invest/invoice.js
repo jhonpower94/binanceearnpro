@@ -386,7 +386,7 @@ function Invoice() {
               size="small"
               fullWidth
               id="outlined-number"
-              label="Amount"
+              label={currentStrings.Dashboard.invest.invoice.amount}
               name="amount"
               defaultValue={paymentInfo.amount}
               variant="outlined"
@@ -400,7 +400,9 @@ function Invoice() {
                 inputComponent: NumberFormatCustom,
               }}
               helperText={
-                amounterr.status ? amounterr.text : "Enter investment amount"
+                amounterr.status
+                  ? amounterr.text
+                  : currentStrings.Dashboard.invest.invoice.helpertext
               }
               error={amounterr.status ? true : false}
             />

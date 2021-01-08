@@ -1,0 +1,324 @@
+{
+  "language": "idioma",
+  "Nav": {
+    "Dashboard": "Cuenta",
+    "withdraw": "Retirada",
+    "account_info": "información de la cuenta",
+    "wallet": "Cartera",
+    "invest": "Invierte",
+    "investments": "Mi inversión",
+    "referral_bonus": "Remisión y bonificación"
+  },
+  "usermenu": {
+    "logout": "Firme la salida.",
+    "settings": "Configuración de la cuenta",
+    "light_mode": "Modo de luz"
+  },
+  "Dashboard": {
+    "account": {
+      "main_balance": "Balance principal",
+      "earning": "Ganancias activas",
+      "bonus_balance": "Saldo de bonificaciones",
+      "Wallet_Balance": "Balance de la cartera",
+      "plans": "Planes",
+      "plan_helpertext": "Elija el gráfico del plan de inversión",
+      "plan_titles": {
+        "title": "Plan",
+        "plan1": "Plan 1",
+        "plan2": "Plan 2",
+        "plan3": "Plan 3"
+      },
+      "action": {
+        "investments": "Mis inversiones",
+        "invest": "invertir"
+      },
+      "Total_profit_amount": "Cantidad de ganancia total",
+      "Total_bonus_earned": "Bonos totales ganados",
+      "Total_investment_amount": "El monto total de la inversión",
+      "Total_withdrawn_amount": "Total de la cantidad retirada"
+    },
+    "invest": {
+      "plan_title": "Plan",
+      "duration": "Duración",
+      "hour": "Horario",
+      "Minimun_stake": "Inversión mínima",
+      "Maximun_stake": "Inversión máxima",
+      "action": "Seleccione",
+      "invoice": {
+        "min": "La apuesta mínima",
+        "wallet_balance": "Balance de la cartera",
+        "min_profit": "Ganancia mínima",
+        "max_profit": "Máximo beneficio",
+        "action": "Proceda al pago",
+        "amount": "Cantidad",
+        "helpertext": "Introduzca el monto de la inversión"
+      }
+    },
+    "withdraw": {
+      "wallet_balance": "El saldo restante de la cartera",
+      "adress_label": "Dirección de Bitcoin",
+      "helpertext_btc": "Introduzca su dirección de bitcoin",
+      "amount": "Cantidad",
+      "helpertext_amount": "Introduzca el monto de la retirada",
+      "error_amount": "No hay suficiente cantidad",
+      "action": "retirar los depósitos"
+    },
+    "deposit": {
+      "helpertext_amount": "Introduzca la cantidad del depósito",
+      "error_amount": "El monto del depósito es bajo",
+      "currency_lable": "Moneda",
+      "helpertext_currency": "Por favor, seleccione la moneda de pago",
+      "action_btn": "cartera de crédito",
+      "alert_title": "Depósito mínimo"
+    },
+    "investments": {
+      "investment": "Inversión",
+      "amount": "Cantidad",
+      "return": "Devuelve",
+      "confirm": "Retirada",
+      "date": "Fecha de depósito",
+      "status": "Estado",
+      "pending": "PENDIENTE",
+      "complete": "COMPLETADO"
+    },
+    "bonus": {
+      "from": "De",
+      "description": "Descripción",
+      "amount": "Cantidad",
+      "confirm": "Retirada",
+      "date": "Fecha"
+    },
+    "address": {
+      "cancel": "Cancelar",
+      "confirm": "Confirme"
+    },
+    "account_info": {
+      "profile_status": "Estado del perfil",
+      "Current_running_investments": "Las inversiones actuales",
+      "Matured_investments": "Inversiones maduras",
+      "Total_invested": "Total invertido",
+      "Total_withdrawn": "Total retirado",
+      "name": "Nombre de la cuenta",
+      "mobile": "Móvil",
+      "Referral_link": "Enlace de referencia",
+      "copy_link": "Enlace copiado"
+    },
+    "payment": {
+      "send": "Envíe el pago a la",
+      "send_": "dirección y cantidad proporcionada a continuación",
+      "info": "una vez que el pago se haya realizado, envíe una notificación al soporte en vivo o al correo electrónico de soporte a support@hotblockinvest.com. para notificarnos que su depósito se ha realizado con éxito"
+    },
+    "tabs": {
+      "account": "Cuenta",
+      "acount_info": "Información de la cuenta",
+      "investments": "Inversiones",
+      "bonus": "Puntos de bonificación",
+      "deposit": "Depósito",
+      "withdraw": "Retirar la cartera"
+    },
+    "titles": {
+      "home": "Cuenta",
+      "invest": "Invierte",
+      "invoice": "Factura",
+      "withdraw": "Retirada",
+      "wallet": "Cartera"
+    }
+  },
+  "homepage": {
+    "menus": {
+      "home": "Inicio",
+      "investment": "inversión",
+      "about": "Sobre nosotros",
+      "get_started": "Empieza.",
+      "support": "Apoyo",
+      "faq": "Faq",
+      "header": {
+        "title": "Menús",
+        "subheader": "Menús del sitio y aplicación web disponible"
+      }
+    },
+    "button": "Ingresa en",
+    "intro": {
+      "title": "INVERTIR EN CRIPTOMONEDAS",
+      "subheader": "La mejor plataforma de inversión en la nube del mundo",
+      "body": "Esperamos sinceramente que nuestra compañía se convierta en un socio en su vida.",
+      "button": "Empieza."
+    },
+    "activities": {
+      "deposit": "DEPÓSITOS",
+      "withdrawal": "RETIROS",
+      "subheader": "Las últimas 5 operaciones",
+      "name": "USUARIO",
+      "amount": "CANTIDAD"
+    },
+    "stats": {
+      "online": "DÍAS EN LÍNEA",
+      "accounts": "TOTAL DE CUENTAS",
+      "deposits": "TOTAL DEPOSITADO",
+      "withdrawn": "TOTAL RETIRADO"
+    },
+    "calculate_invest": {
+      "title": "Calcular la inversión",
+      "subheader": "Calcular los beneficios totales de la inversión",
+      "plan": {
+        "title": "Plan",
+        "helpertext": "Elija el plan de inversión"
+      },
+      "amount": {
+        "title": "Cantidad",
+        "helpertext": "Introducir la cantidad de inversión"
+      },
+      "profit": {
+        "title": "Ganancias",
+        "helpertext": "tu retorno de la ganancia"
+      }
+    },
+    "affilate": {
+      "title": "comisión de referencia",
+      "subheader": "Cada uno de sus referidos le trae una recompensa de su cantidad de depósito. Su propio depósito no es necesario para atraer a los inversores y ganar. Sólo registre la cuenta y aplique su enlace de referencia en todos los lugares que pueda."
+    },
+    "cac": {
+      "title": "inversión LIMITADA",
+      "subheader": "En julio de 2016 nuestra organización pasó el proceso de incorporación en el Reino Unido y está inscrita en la lista del Registro de Sociedades, con el número de comisión de asuntos corporativos 10634443."
+    },
+    "footer": {
+      "menu": "Enlaces y contactos",
+      "submenu": "menús de la página web, sociales y contactos de correo electrónico",
+      "made": "Hecho con",
+      "securities": {
+        "privacy": "Política de privacidad",
+        "terms": "Condiciones del servicio",
+        "Eu": "Protección de datos de la UE"
+      }
+    },
+    "pages": {
+      "investments": {
+        "title": "INVERSIONES",
+        "subheader": "Nuestros planes"
+      },
+      "about_us": {
+        "title": "Sobre nosotros",
+        "subheader": "Acerca de",
+        "typeA": "investment Limited está dispuesta a proponer una cooperación rentable para todos los participantes. Presentamos una empresa de alta tecnología y moderna que es reconocida como líder de la industria en el campo de la tecnología informática, software e innovaciones. Nuestros expertos técnicos están involucrados en el desarrollo de nuevos métodos y algoritmos eficaces de inversión Bitcoin. Durante los últimos años nuestra empresa ha logrado construir unas cuantas granjas de inversión en el Reino Unido y Escocia. Las hemos equipado con el más potente y moderno hardware de inversión que las veinticuatro horas del día proporciona excelentes resultados y sirve como fuente de ingresos.",
+        "typeB": "está dispuesto a proponer una cooperación rentable para todos los que vengan. Presentamos una empresa de alta tecnología y moderna que es líder reconocido en la industria en el campo de la tecnología informática, software e innovaciones. Nuestros expertos técnicos están involucrados en el desarrollo de nuevos métodos y algoritmos efectivos de inversión de Bitcoin. Durante los últimos años nuestra empresa ha logrado construir unas cuantas granjas de inversión en el Reino Unido y Escocia. Las hemos equipado con el más potente y moderno hardware de inversión que las veinticuatro horas del día proporciona excelentes resultados y sirve como fuente de ingresos. En el verano de 2016 nuestro equipo ha hecho un intento exitoso de entrar en el mercado de la inversión internacional con el fin de ofrecer cooperación a clientes y socios. Actualmente, nuestro objetivo es desarrollar una red europea más amplia de granjas de inversión de Bitcoin para proporcionar a todo el mundo la oportunidad de participar en los procesos de inversión y ganancias. Si quiere hacer hoy, le invitamos a unirse a nuestro grupo de inversores. Nuestra oferta es válida de forma permanente, así como sus ganancias serán siempre acumuladas después de que haga un depósito, del 10% al 20% sobre una base diaria con la posibilidad de retirarse instantáneamente. Muchos de ustedes han estado esperando tal propuesta, y estamos seguros de que no se sentirán decepcionados con nuestro servicio. Con la llegada de la criptografía, muchos empresarios se han dado cuenta de que no sólo es un método de pago conveniente, sino también una gran fuente de ingresos en el área de las inversiones en línea. Hoy en día, se pueden encontrar docenas de ofertas tentadoras, pero debe considerar cuidadosamente cada una de ellas. En primer lugar, preste atención a la legalidad del trabajo de la empresa, así como a la experiencia previa y su historia. Un socio fiable que ofrece servicios de gestión de activos nunca esconde nada. Esperamos sinceramente que nuestra compañía se convierta en un socio en su vida. La actividad principal de la empresa es el desarrollo de software profesional por expertos experimentados que participaron directamente en el desarrollo y la prueba de los más famosos algoritmos clásicos de inversión para la inversión. Sus amplios conocimientos y habilidades prácticas son una garantía de éxito de nuestra empresa. Desde el verano de 2016, ofrecemos servicios de inversión de alta calidad. El beneficio de la empresa es el resultado de una estrecha colaboración entre el personal técnico y los comerciantes para el intercambio de criptodólares. Tenemos nuestra propia base técnica y granja de inversiones sobre la base de tarjetas gráficas de alta gama y hardware ASIC, que está ganando popularidad en el ámbito de la inversión de Bitcoin a través de un óptimo consumo de energía y un alto rendimiento. La estrategia de inversión que proponemos es lo suficientemente clara y los términos pueden ser aceptables para todos. Sin duda, la empresa de este nivel debe estar registrada oficialmente para cumplir con todos los criterios de los inversores. En julio de 2016 nuestra compañía pasó el proceso de incorporación en el Reino Unido y está listada por el Companies House."
+      },
+      "get_started": {
+        "title": "Cómo se establece",
+        "subheader": "Guías",
+        "typeA": "Para hacer su primer depósito y empezar a ganar, tiene que ser un usuario registrado en el sitio web de",
+        "typeB": "Usted debe tener una cuenta personal con la que podrá hacer una inversión en los mercados de criptodólares, obtener beneficios diarios en una inversión en curso y retirar también, también puede utilizar el enlace de afiliado para aumentar sus ingresos.",
+        "typeC": "El proceso de registro es bastante simple y rápido. Sólo tiene que especificar sus datos personales y la dirección de Bitcoin. Es gratis y no requiere ninguna confirmación por correo electrónico o algunos de sus documentos."
+      },
+      "support": {
+        "title": "Soporte técnico",
+        "subheader": "envíanos un mensaje..."
+      },
+      "faq": {
+        "title": "Faq",
+        "subheader": "preguntas frecuentes",
+        "questions": {
+          "a": {
+            "title": "¿Cuál es nuestro objetivo",
+            "subheader": "la inversión está dispuesta a proponer una cooperación rentable para todos los participantes. Presentamos una empresa de alta tecnología y moderna que es líder reconocido en la industria en el campo de la tecnología informática, software e innovaciones. Nuestros expertos técnicos están involucrados en el desarrollo de nuevos métodos y algoritmos efectivos de la minería de Bitcoin."
+          },
+          "b": {
+            "title": "¿Cuánto tiempo planea trabajar",
+            "subheader": "Planeamos nuestras actividades para los próximos años"
+          },
+          "c": {
+            "title": "¿Qué tan seguros son mis datos personales, que envío a este sitio web",
+            "subheader": "El sitio está en un servidor dedicado con protección las 24 horas del día contra ataques DDoS, es escaneado diariamente en busca de malware. Además, todos los datos están encriptados por un certificado SSL"
+          },
+          "d": {
+            "title": "¿Quién puede unirse a su compañía de inversiones",
+            "subheader": "Para ser cliente tienes que registrar una cuenta. Introduzca el nombre de usuario, establezca la contraseña, añada su correo electrónico y la dirección de Bitcoin para crear una cuenta"
+          },
+          "e": {
+            "title": "¿Dónde puedo registrar la dirección de Bitcoin",
+            "subheader": "Visite https://blockchain.info para registrar la dirección única de Bitcoin.https://blockchain.info"
+          },
+          "f": {
+            "title": "¿Cuántas cuentas puedo registrar",
+            "subheader": "Sugerimos que se registre una sola cuenta"
+          },
+          "g": {
+            "title": "¿Puedo registrar unas cuantas cuentas incluso desde una dirección IP?",
+            "subheader": "Sí, en caso de que estas cuentas pertenezcan a los miembros de tu familia o a tus amigos."
+          },
+          "h": {
+            "title": "¿Recibiré beneficios todos los días del calendario",
+            "subheader": "Sí, correcto. Su beneficio se acumula cada 24 horas, 7 días a la semana"
+          },
+          "i": {
+            "title": "¿Pagas incluso los fines de semana",
+            "subheader": "Sí, por supuesto, pagamos los fines de semana y los días festivos."
+          },
+          "j": {
+            "title": "¿Cuánto tiempo funciona mi depósito",
+            "subheader": "Tu depósito es eterno. Esto significa que nunca lo recuperarás"
+          },
+          "k": {
+            "title": "¿Qué moneda puedo invertir",
+            "subheader": "Sólo aceptamos Bitcoins, etherium y litecoin"
+          }
+        }
+      }
+    }
+  },
+  "account": {
+    "email": "Dirección de correo electrónico",
+    "password": "Contraseña",
+    "signin": {
+      "title": "Firme en el registro",
+      "remember": "Recuérdame.",
+      "forgot_pass": "Olvidé la contraseña",
+      "redir": "No tengo una cuenta"
+    },
+    "signup": {
+      "title": "Inscríbete.",
+      "fname": "Nombre de pila",
+      "lname": "Apellido",
+      "country": "País",
+      "mobile": "Móvil",
+      "ref_id": "Identificación del remitente",
+      "terms": "Estoy de acuerdo con los términos, la privacidad y la política",
+      "redir": "Ya tengo una cuenta"
+    },
+    "reset_pass": {
+      "title": "Restablecer la contraseña"
+    }
+  },
+  "emailmessages": {
+    "hello": "hola",
+    "amount": "Cantidad",
+    "signup_referral": {
+      "subject": "Nueva invitación",
+      "a": "Esto es para notificarle que su referencia",
+      "b": "ha registrado con éxito",
+      "c": "Gracias por asociarse con nosotros"
+    },
+    "accountinfo": {
+      "subject": "actualización de perfil",
+      "text": "has actualizado tu perfil, tu perfil se actualizará una vez que revisemos y confirmemos tus datos de perfil"
+    },
+    "deposit": {
+      "subject": "Cartera de fondos",
+      "a": "transferir la cantidad exacta a esta dirección",
+      "b": "una vez que se haya realizado el pago, envíe una notificación al soporte en vivo o al soporte por correo electrónico a ",
+      "c": "para notificarnos que el depósito se ha realizado con éxito"
+    },
+    "withdraw": {
+      "subject": "Solicitud de retirada",
+      "a": "Ha presentado con éxito una solicitud de retirada de la cartera de",
+      "b": "a tu cartera BTC",
+      "c": "Por favor, tenga paciencia mientras procesamos su transacción. Gracias."
+    },
+    "address": {
+      "subject_bonus": "Retiro de bonos",
+      "subject_withdraw": "retirada de la inversión",
+      "a": "Ha presentado con éxito una solicitud de retirada de",
+      "b": "a tu cartera BTC",
+      "c": "Por favor, tenga paciencia mientras procesamos su transacción, gracias."
+    }
+  }
+}

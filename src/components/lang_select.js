@@ -124,8 +124,33 @@ function SelectLanguage() {
             languagecode: "ar",
           },
           {
+            countryname: "Deutsche",
+            languagecode: "nl",
+          },
+          {
             countryname: "English",
             languagecode: "en",
+          },
+          {
+            countryname: "español",
+            languagecode: "es",
+          },
+          {
+            countryname: "français",
+            languagecode: "fr",
+          },
+          {
+            countryname: "Italia",
+            languagecode: "it",
+          },
+
+          {
+            countryname: "Português",
+            languagecode: "pt",
+          },
+          {
+            countryname: "Россия",
+            languagecode: "ru",
           },
           /*       {
             countryname: "azərbaycan",
@@ -151,10 +176,7 @@ function SelectLanguage() {
             countryname: "中文",
             languagecode: "zh",
           },
-          {
-            countryname: "中文",
-            languagecode: "nl",
-          },
+          
           {
             countryname: "hrvatski",
             languagecode: "hr",
@@ -168,10 +190,7 @@ function SelectLanguage() {
             languagecode: "de",
           },
          
-          {
-            countryname: "español",
-            languagecode: "es",
-          },
+          
           {
             countryname: "français",
             languagecode: "fr",
