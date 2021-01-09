@@ -288,14 +288,14 @@ function Invoice() {
           }
         );
         ajax({
-          url: "https://admindigitalocean.herokuapp.com/mail",
+          url: "https://hotblockinvestmain.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `New incoming investment request from ${userInfos.firstName} ${userInfos.lastName} has been placed, total deposit amount : ${amountnn}`,
-            to: `${userInfos.email}, support@digitalallianceap.net`,
+            to: `${userInfos.email}, support@hotblockinvest.com`,
             subject: "investment",
           },
         }).subscribe(() => {
