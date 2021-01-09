@@ -94,7 +94,7 @@ function IntroHeader() {
               <Box
                 display="flex"
                 flexDirection="column"
-                alignItems="center"
+                alignItems="flex-start"
                 mt={3}
                 style={{ color: "#fafafa" }}
               >
@@ -106,7 +106,7 @@ function IntroHeader() {
                 </Typography>
               </Box>
               <Box mt={3} style={{ color: "#fafafa" }}>
-                <Typography variant="h6" align="center">
+                <Typography variant="h6" align="left">
                   {currentStrings.homepage.intro.body}
                 </Typography>
               </Box>
