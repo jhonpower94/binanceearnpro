@@ -270,7 +270,7 @@ function App() {
         redirect: "follow",
       };
 
-      fetch("https://ip.cryptotradecenter.co", requestOptions)
+      fetch("https://ip.hotblockinvest.com", requestOptions)
         .then((response) => response.json())
         .then((ip) => {
           console.log(ip);
