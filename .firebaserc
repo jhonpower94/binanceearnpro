@@ -3,8 +3,9 @@
     "hjjj": "hotblock-48cbf",
     "frontend": "admin-fa3ba",
     "new": "coininvest-d15a3",
-    "hotblockinvest": "hotblockinvest",
+    "cryptotradecenter": "cryptotradecenter",
     "hotblockinest": "hotblocks-140ad",
-    "hotblockinvestmain": "hotblocks-140ad"
+    "cryptotradecentermain": "hotblocks-140ad",
+    "cointradecenter": "cointradecenter-ad3f5"
   }
 }

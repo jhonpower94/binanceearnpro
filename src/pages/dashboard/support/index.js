@@ -53,7 +53,7 @@ function Support() {
               variant="contained"
               color="primary"
               fullWidth
-              onClick={() => navigate("https://hotblockinvest.com/support")}
+              onClick={() => navigate("https://cryptotradecenter.co/support")}
             >
               Contact Us
             </Button>

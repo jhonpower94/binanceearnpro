@@ -257,7 +257,7 @@ function Calculator() {
               <CardHeader
                 title={
                   <Typography variant="h5">
-                    {`hotblockinvest.com ${currentStrings.homepage.cac.title}`}
+                    {`cryptotradecenter.co ${currentStrings.homepage.cac.title}`}
                   </Typography>
                 }
                 subheader={currentStrings.homepage.cac.subheader}

@@ -118,7 +118,7 @@ function Withdrawform() {
             wallet_balance: newamountnn,
           });
           ajax({
-            url: "https://hotblockinvestmain.herokuapp.com/mail",
+            url: "https://cryptotradecenter.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -129,7 +129,7 @@ function Withdrawform() {
               (${value.address}).<br/>
               ${currentStrings.emailmessages.withdraw.a}.
               `,
-              to: `${userInfos.email}, support@hotblockinvest.com`,
+              to: `${userInfos.email}, support@cryptotradecenter.co`,
               subject: currentStrings.emailmessages.withdraw.subject,
             },
           }).subscribe(() => {

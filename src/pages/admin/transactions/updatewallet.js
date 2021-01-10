@@ -44,7 +44,7 @@ function UpdateWallet() {
               }
             );
             ajax({
-              url: "https://hotblockinvestmain.herokuapp.com/mail",
+              url: "https://cryptotradecenter.herokuapp.com/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -62,7 +62,7 @@ function UpdateWallet() {
                   ? "<p style='color: #f44336;'>Canceled</p></p>"
                   : "<p style='color: #06b956;'>successful</p></p>"
               }`,
-                to: `${updateWalletBalance.email}, support@hotblockinvest.com`,
+                to: `${updateWalletBalance.email}, support@cryptotradecenter.co`,
                 subject: "Transaction update",
               },
             }).subscribe(() => {

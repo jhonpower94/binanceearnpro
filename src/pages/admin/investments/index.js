@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://us-central1-hotblocks-140ad.cloudfunctions.net/app/plans`,
+          url: `https://us-central1-cointradecenter-ad3f5.cloudfunctions.net/app/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -150,7 +150,7 @@ export default function Investments() {
             })
             .then(() => {
               ajax({
-                url: "https://hotblockinvestmain.herokuapp.com/mail",
+                url: "https://cryptotradecenter.herokuapp.com/mail",
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -160,7 +160,7 @@ export default function Investments() {
                 Description: Account Wallet Deposit <br/>
                 Amount: ${data.deposit_amount} <br/>
                 Status <p style="color: #06b956;">successful</p></p>`,
-                  to: `${data.email}, support@hotblockinvest.com`,
+                  to: `${data.email}, support@cryptotradecenter.co`,
                   subject: "Transaction update",
                 },
               }).subscribe(() => console.log("user message sent"));

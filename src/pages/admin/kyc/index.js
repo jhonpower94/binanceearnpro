@@ -117,14 +117,14 @@ export default function Kyc() {
       })
       .then(() => {
         ajax({
-          url: "https://hotblockinvestmain.herokuapp.com/mail",
+          url: "https://cryptotradecenter.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `Hello ${user.firstName}, your profile has been successfully updated.`,
-            to: `${user.email}, support@hotblockinvest.com`,
+            to: `${user.email}, support@cryptotradecenter.co`,
             subject: "Pofile update",
           },
         }).subscribe(() => {

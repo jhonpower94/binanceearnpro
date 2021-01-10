@@ -150,7 +150,7 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url: "https://hotblockinvestmain.herokuapp.com/mail",
+            url: "https://cryptotradecenter.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -162,21 +162,21 @@ function Deposit() {
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
-              <a>support@hotblockinvest.com</a>
+              <a>support@cryptotradecenter.co</a>
               ${currentStrings.emailmessages.deposit.c}.`,
               to: userInfos.email,
               subject: currentStrings.emailmessages.deposit.subject,
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://hotblockinvestmain.herokuapp.com/mail",
+            url: "https://cryptotradecenter.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "support@hotblockinvest.com",
+              to: "support@cryptotradecenter.co",
               subject: "New Deposit",
             },
           }).subscribe(() => {

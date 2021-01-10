@@ -40,7 +40,7 @@ function About() {
       layout: (
         <IntroHeaderPages
           title={currentStrings.homepage.pages.about_us.title}
-          subheader={`${currentStrings.homepage.pages.about_us.subheader} hotblockinvest.com`}
+          subheader={`${currentStrings.homepage.pages.about_us.subheader} cryptotradecenter.co`}
         />
       ),
     });
@@ -53,11 +53,11 @@ function About() {
         <Grid item xs={6} sm={12}>
           <CardContent>
             <Typography align="left" variant="subtitle2">
-              {`hotblockinvest.com ${currentStrings.homepage.pages.about_us.typeA}`}
+              {`cryptotradecenter.co ${currentStrings.homepage.pages.about_us.typeA}`}
             </Typography>
             <br />
             <Typography align="left" variant="subtitle2">
-              {`hotblockinvest.com ${currentStrings.homepage.pages.about_us.typeB}`}
+              {`cryptotradecenter.co ${currentStrings.homepage.pages.about_us.typeB}`}
             </Typography>
           </CardContent>
         </Grid>

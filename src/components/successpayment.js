@@ -85,7 +85,7 @@ function PaymentSuccess() {
 
             const newDate = addDays(date, paymentInfo.block.duration);
 
-            fetch("https://us-central1-hotblocks-140ad.cloudfunctions.net/app/plans", {
+            fetch("https://us-central1-cointradecenter-ad3f5.cloudfunctions.net/app/plans", {
               method: "POST",
               mode: "cors",
               headers: {

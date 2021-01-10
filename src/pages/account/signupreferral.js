@@ -41,8 +41,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {" © "}
-      <Link color="inherit" href="https://hotblockinvest.com/">
-      hotblockinvest
+      <Link color="inherit" href="https://cryptotradecenter.co/">
+      cryptotradecenter
       </Link>
     </Typography>
   );
@@ -171,7 +171,7 @@ export default function SignUpReferral(props) {
           const getreferrerdata = firestore.doc(`users/${id}`);
           docData(getreferrerdata, "id").subscribe((data) => {
             ajax({
-              url: "https://hotblockinvestmain.herokuapp.com/mail",
+              url: "https://cryptotradecenter.herokuapp.com/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

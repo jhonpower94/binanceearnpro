@@ -199,7 +199,7 @@ function FooterHomepage() {
         >
           <img src={require("./images/logo.svg")} width="100" />
           <Typography variant="caption">
-            &copy; hotblockinvest LLC, {new Date().getFullYear()}.
+            &copy; cryptotradecenter LLC, {new Date().getFullYear()}.
           </Typography>
         </Box>
       </Container>

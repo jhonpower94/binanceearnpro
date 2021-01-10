@@ -110,14 +110,14 @@ function AccountInfo() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://hotblockinvestmain.herokuapp.com/mail",
+          url: "https://cryptotradecenter.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `${currentStrings.emailmessages.hello} ${userInfos.firstName}, ${currentStrings.emailmessages.accountinfo.text}.`,
-            to: `${userInfos.email}, support@hotblockinvest.com`,
+            to: `${userInfos.email}, support@cryptotradecenter.co`,
             subject: currentStrings.emailmessages.accountinfo.subject,
           },
         }).subscribe(() => {

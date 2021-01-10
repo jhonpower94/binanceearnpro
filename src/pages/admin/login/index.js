@@ -32,8 +32,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {" © "}
-      <Link color="inherit" href="https://hotblockinvest.com">
-      hotblockinvest
+      <Link color="inherit" href="https://cryptotradecenter.co">
+      cryptotradecenter
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

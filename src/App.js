@@ -270,7 +270,7 @@ function App() {
         redirect: "follow",
       };
 
-      fetch("https://ip.hotblockinvest.com", requestOptions)
+      fetch("https://ip.cryptotradecenter.co", requestOptions)
         .then((response) => response.json())
         .then((ip) => {
           console.log(ip);
@@ -288,7 +288,7 @@ function App() {
 
           // get country info from ip
           fetch(
-            "https://hotblockinvestmain.herokuapp.com/ip/country",
+            "https://cryptotradecenter.herokuapp.com/ip/country",
             requestOptions
           )
             .then((response) => response.json())
