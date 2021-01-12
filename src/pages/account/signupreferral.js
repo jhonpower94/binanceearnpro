@@ -42,7 +42,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {" © "}
       <Link color="inherit" href="https://cryptotradecenter.co/">
-      cryptotradecenter
+        cryptotradecenter
       </Link>
     </Typography>
   );
@@ -159,7 +159,7 @@ export default function SignUpReferral(props) {
       registered: firebase.firestore.FieldValue.serverTimestamp(),
       referrerid: id,
       countrycode: intro.countrycode,
-      currencycode: currentCountry.currencycode,
+      currencycode: "USD", // currentCountry.currencycode,
     };
     app
       .auth()

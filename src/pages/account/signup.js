@@ -145,7 +145,7 @@ export default function SignUp() {
       referrer: false,
       registered: firebase.firestore.FieldValue.serverTimestamp(),
       countrycode: intro.countrycode,
-      currencycode: currentCountry.currencycode,
+      currencycode: "USD" // currentCountry.currencycode,
     };
     app
       .auth()

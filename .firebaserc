@@ -6,6 +6,7 @@
     "cryptotradecenter": "cryptotradecenter",
     "hotblockinest": "hotblocks-140ad",
     "cryptotradecentermain": "hotblocks-140ad",
-    "cointradecenter": "cointradecenter-ad3f5"
+    "cointradecenter": "cointradecenter-ad3f5",
+    "cointrader": "cointradecenter-ad3f5"
   }
 }
