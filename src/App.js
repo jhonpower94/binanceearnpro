@@ -223,6 +223,17 @@ function App() {
 
     const localstore = reactLocalStorage.getObject("country").country;
 
+    const add_to_storage = (country, currencycode) => {
+      // set localstorage country data
+      reactLocalStorage.setObject("country", {
+        country: country.name,
+        dail_coe: country.dial_code,
+        code: country.code,
+        currencycode: currencycode, // or currencyCode
+      });
+      window.location.reload(false);
+    };
+
     if (localstore) {
       dispatch(loading$());
       console.log(reactLocalStorage.getObject("country"));
@@ -263,6 +274,7 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
+          dispatch(loading$());
         });
     } else {
       var requestOptions = {
@@ -270,7 +282,7 @@ function App() {
         redirect: "follow",
       };
 
-      fetch("https://ip.hotblockinvest.com", requestOptions)
+      fetch("https://ip.relianceexchange.co", requestOptions)
         .then((response) => response.json())
         .then((ip) => {
           console.log(ip);
@@ -300,17 +312,23 @@ function App() {
               const currencyCode = getCountry(country.name).currency; // get currenvy code
 
               // set localstorage country data
-              reactLocalStorage.setObject("country", {
-                country: country.name,
-                dail_coe: country.dial_code,
-                code: country.code,
-                currencycode: currencyCode,
-              });
-              window.location.reload(false);
+              add_to_storage(country, "USD");
             })
-            .catch((error) => console.log("error", error));
+            .catch((error) => {
+              add_to_storage(
+                { name: "United States", dial_code: "+1", code: "US" },
+                "USD"
+              );
+              console.log("error", error);
+            });
         })
-        .catch((error) => console.log("error", error));
+        .catch((error) => {
+          add_to_storage(
+            { name: "United States", dial_code: "+1", code: "US" },
+            "USD"
+          );
+          console.log("error", error);
+        });
     }
   }, []);
 
