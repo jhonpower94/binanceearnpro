@@ -27,12 +27,12 @@ export default firebase;
 export const addresses = (crypto) => {
   switch (crypto) {
     case "BTC":
-      return "1EepRbmuMDmXdpDKynB8TaMMT2zZF2EPyw";
+      return "14DM3eSeuWWLPfbrmSJEYx9dZb8hPkw2BL";
     case "ETH":
       return "0x7D62Fac09F1991F613127cE3158B1B5d7FcE521b";
     case "BTCC":
       return "qz2up8g2chgarrrynaw0q25rhqkw2reyss84fcxdl4";
     default:
-      return "1EepRbmuMDmXdpDKynB8TaMMT2zZF2EPyw";
+      return "14DM3eSeuWWLPfbrmSJEYx9dZb8hPkw2BL";
   }
 };
