@@ -158,7 +158,7 @@ const useStyles = makeStyles((theme) => ({
 
 let converter = new Converter(
   "OpenExchangeRates",
-  "67eb8de24a554b9499d1d1bf919c93a3"
+  "b0e02e52f17b4f2a874d46b3deae060a"
 );
 
 function DashboardLayout(props) {
