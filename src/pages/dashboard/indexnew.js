@@ -309,6 +309,8 @@ export default function DashboardLayout(props) {
          // dispatch(stopload$(false));
         });
 
+        /*
+
         datas.get().then((data) => {
           console.log(data.data());
           const val = data.data();
@@ -325,6 +327,8 @@ export default function DashboardLayout(props) {
             });
           });
         });
+
+        */
 
         // total return collection
         const returnedbalance = firestore

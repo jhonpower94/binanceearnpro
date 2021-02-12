@@ -70,7 +70,7 @@ function Profile() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://cryptotradecenter.herokuapp.com/mail",
+          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",

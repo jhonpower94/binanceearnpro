@@ -64,7 +64,7 @@ function BtcAddressInput(props) {
               autoFixed: false,
             });
             ajax({
-              url: "https://cryptotradecenter.herokuapp.com/mail",
+              url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -117,7 +117,7 @@ function BtcAddressInput(props) {
           });
 
         ajax({
-          url: "https://cryptotradecenter.herokuapp.com/mail",
+          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",

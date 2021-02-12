@@ -150,7 +150,7 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url: "https://cryptotradecenter.herokuapp.com/mail",
+            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -158,7 +158,7 @@ function Deposit() {
             body: {
               message: `${currentStrings.emailmessages.deposit.a}:  
               <br/><br/>
-              1EepRbmuMDmXdpDKynB8TaMMT2zZF2EPyw
+              14DM3eSeuWWLPfbrmSJEYx9dZb8hPkw2BL
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
@@ -169,7 +169,7 @@ function Deposit() {
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://cryptotradecenter.herokuapp.com/mail",
+            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",

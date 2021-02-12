@@ -214,7 +214,7 @@ function App() {
         return setRightoleft({ status: false });
     }
   }
-
+  
   useEffect(() => {
     console.log(detectBrowserLanguage());
     Strings.setLanguage(detectBrowserLanguage());
@@ -231,7 +231,7 @@ function App() {
         code: country.code,
         currencycode: currencycode, // or currencyCode
       });
-      window.location.reload(false);
+      window.location.reload();
     };
 
     if (localstore) {
@@ -241,14 +241,10 @@ function App() {
       // convert investment plan
       const currency = reactLocalStorage.getObject("country").currencycode;
       blocks.forEach((val, inex) => {
-        converter.convert(val.lot, "USD", currency).then((data) => {
-          val.lot = formatLocaleCurrency(Math.floor(data), currency);
-          navigate("");
-        });
-        converter.convert(val.max, "USD", currency).then((data) => {
-          val.max = formatLocaleCurrency(Math.floor(data), currency);
-          navigate("");
-        });
+        val.lot = formatLocaleCurrency(Math.floor(val.lot), currency);
+
+        val.max = formatLocaleCurrency(Math.floor(val.max), currency);
+        navigate("");
       });
       // end convert investment plan
 
@@ -263,20 +259,29 @@ function App() {
             });
           };
           waittransaction().then(() => {
-            transactiondatas.forEach((vl) => {
+            /*  transactiondatas.forEach((vl) => {
               converter.convert(vl.amount, "USD", currency).then((rt) => {
                 vl.amount = rt;
                 navigate("");
               });
-            });
-            dispatch(loading$());
+            }); */
+            console.log("done");
           });
+
+          dispatch(loading$());
         })
         .catch((err) => {
           console.log(err);
           dispatch(loading$());
         });
     } else {
+      add_to_storage(
+        { name: "United States", dial_code: "+1", code: "US" },
+        "USD"
+      );
+
+      /*
+
       var requestOptions = {
         method: "GET",
         redirect: "follow",
@@ -300,7 +305,7 @@ function App() {
 
           // get country info from ip
           fetch(
-            "https://cryptotradecenter.herokuapp.com/ip/country",
+            "https://relianceexchange.herokuapp.com/ip/country",
             requestOptions
           )
             .then((response) => response.json())
@@ -329,6 +334,8 @@ function App() {
           );
           console.log("error", error);
         });
+
+        */
     }
   }, []);
 

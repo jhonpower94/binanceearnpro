@@ -207,7 +207,7 @@ function DashboardAdmin() {
                   setTimeout(() => {
                     resolve();
                     ajax({
-                      url: "https://cryptotradecenter.herokuapp.com/delete",
+                      url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/delete",
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",
