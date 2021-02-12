@@ -103,7 +103,7 @@ function InvestBlock(props) {
                   alignItems="baseline"
                 >
                   <Typography component="h2" variant="h3">
-                    {`${trade.min_rate}-${trade.max_rate}%`}
+                    {`${trade.rate}%`}
                   </Typography>
                 </Box>
                 <List dense={true}>
