@@ -44,7 +44,7 @@ function UpdateWallet() {
               }
             );
             ajax({
-              url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
+              url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -62,7 +62,7 @@ function UpdateWallet() {
                   ? "<p style='color: #f44336;'>Canceled</p></p>"
                   : "<p style='color: #06b956;'>successful</p></p>"
               }`,
-                to: `${updateWalletBalance.email}, support@cryptotradecenter.co`,
+                to: `${updateWalletBalance.email}, support@cryptotradecentral.co`,
                 subject: "Transaction update",
               },
             }).subscribe(() => {

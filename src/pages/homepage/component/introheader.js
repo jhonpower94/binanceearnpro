@@ -10,6 +10,9 @@ import {
   makeStyles,
   Button,
   createMuiTheme,
+  useMediaQuery,
+  useTheme,
+  Slide,
 } from "@material-ui/core";
 
 import Particles from "react-tsparticles";
@@ -19,6 +22,7 @@ import Background from "../../../pages/homepage/images/header-middle-bg.png";
 import Backgroundsecond from "../../../pages/homepage/images/header-middle-bg1.png";
 import { navigate } from "@reach/router";
 import { useSelector } from "react-redux";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 const useStyles = makeStyles((theme) => ({
   mobileIntrolarge: {
@@ -43,8 +47,9 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   header: {
-    background: `url(${Background}) center no-repeat`,
-    height: "600px",
+    //  background: `url(${Background}) center no-repeat`,
+    background: "#08091b",
+
     backgroundSize: "cover",
   },
   headerRtl: {
@@ -86,46 +91,168 @@ function IntroHeader() {
   return (
     <div className={classes.header}>
       <div className={classes.toolbar} />
+      <Particles
+      //  height="500px"
+        // height={useMediaQuery(useTheme().breakpoints.up("sm")) ? "80%" : "85%"}
+        style={{ position: "absolute" }}
+        id="tsparticles"
+        options={{
+          background: {
+              color: {
+              value: "#08091b",
+            }, 
+            /*
+            image: `url(${Background})`,
 
+            size: "cover",
+            repeat: "no-repeat",
+            position: "center center",
+            */
+          },
+          fpsLimit: 60,
+          interactivity: {
+            detectsOn: "canvas",
+            events: {
+              onClick: {
+                enable: true,
+                mode: "push",
+              },
+              onHover: {
+                enable: true,
+                mode: "repulse",
+              },
+              resize: true,
+            },
+            modes: {
+              bubble: {
+                distance: 400,
+                duration: 2,
+                opacity: 0.8,
+                size: 40,
+              },
+              push: {
+                quantity: 4,
+              },
+              repulse: {
+                distance: 200,
+                duration: 0.4,
+              },
+            },
+          },
+          particles: {
+            color: {
+              value: "#1565c0",
+            },
+            links: {
+              color: "#1565c0",
+              distance: 150,
+              enable: true,
+              opacity: 0.5,
+              width: 1,
+            },
+            collisions: {
+              enable: true,
+            },
+            move: {
+              direction: "none",
+              enable: true,
+              outMode: "bounce",
+              random: false,
+              speed: 5,
+              straight: false,
+            },
+            number: {
+              density: {
+                enable: true,
+                value_area: 800,
+              },
+              value: 80,
+            },
+            opacity: {
+              value: 0.5,
+            },
+            shape: {
+              type: "circle",
+            },
+            size: {
+              random: true,
+              value: 5,
+            },
+          },
+          detectRetina: true,
+        }}
+      />
       <div className={classes.intro}>
-        <Container>
+        <Container maxWidth="md">
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
+              <Box mt={5} style={{ color: "#fafafa" }}>
+                <AnimationOnScroll animateIn="animate__fadeInUp" animateOnce={true}>
+                  <Typography
+                    variant="h4"
+                    align={
+                      useMediaQuery(useTheme().breakpoints.up("sm"))
+                        ? "left"
+                        : "center"
+                    }
+                  >
+                    {currentStrings.homepage.intro.title}
+                  </Typography>
+                </AnimationOnScroll>
+              </Box>
+              <Box mt={2}>
+                <AnimationOnScroll animateIn="animate__fadeInUp" animateOnce={true}>
+                  <Typography
+                    variant="h6"
+                    align={
+                      useMediaQuery(useTheme().breakpoints.up("sm"))
+                        ? "left"
+                        : "center"
+                    }
+                    color="textSecondary"
+                  >
+                    {currentStrings.homepage.intro.body}
+                  </Typography>
+                </AnimationOnScroll>
+              </Box>
               <Box
                 display="flex"
-                flexDirection="column"
-                alignItems="flex-start"
-                mt={3}
-                style={{ color: "#fafafa" }}
+                justifyContent={
+                  useMediaQuery(useTheme().breakpoints.up("sm"))
+                    ? "flex-start"
+                    : "center"
+                }
+                mt={2}
               >
-                <Typography variant="h4" align="left">
-                  {currentStrings.homepage.intro.title}
-                </Typography>
-                <Typography variant="h6" align="left">
-                  {currentStrings.homepage.intro.subheader}
-                </Typography>
+                <AnimationOnScroll animateIn="animate__fadeInUp" animateOnce={true}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    onClick={() => {
+                      if (intro.refid) {
+                        navigate(`account/register/${intro.refid}`);
+                      } else {
+                        navigate("/account");
+                      }
+                    }}
+                  >
+                    {currentStrings.homepage.intro.button}
+                  </Button>
+                </AnimationOnScroll>
               </Box>
-              <Box mt={3} style={{ color: "#fafafa" }}>
-                <Typography variant="h6" align="left">
-                  {currentStrings.homepage.intro.body}
-                </Typography>
-              </Box>
-              <Box display="flex" justifyContent="center" mt={2}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  size="large"
-                  onClick={() => {
-                    if (intro.refid) {
-                      navigate(`account/register/${intro.refid}`);
-                    } else {
-                      navigate("/account");
-                    }
-                  }}
-                >
-                  {currentStrings.homepage.intro.button}
-                </Button>
-              </Box>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <AnimationOnScroll animateIn="animate__fadeInUp" animateOnce={true}>
+                <Box display="flex" justifyContent="center" mt={2} mb={5} >
+                  <img
+                    src={require("../images/intro.png")}
+                    alt="logo"
+                    height="300px"
+                  />
+                </Box>
+              </AnimationOnScroll>
             </Grid>
           </Grid>
         </Container>

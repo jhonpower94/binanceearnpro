@@ -24,6 +24,7 @@ import WithdrawTable from "../component/trnanstble/withdrawtable";
 import DepositTable from "../component/trnanstble/depositable";
 import { useSelector } from "react-redux";
 import { red } from "@material-ui/core/colors";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 const override = css`
   display: block;
@@ -32,6 +33,9 @@ const override = css`
 `;
 
 const useStyles = makeStyles((theme) => ({
+  mgtop: {
+    marginTop: theme.spacing(5),
+  },
   avatar: {
     width: theme.spacing(3),
     height: theme.spacing(3),
@@ -87,32 +91,31 @@ function Activities() {
   ];
 
   return (
-    <Container maxWidth="lg">
-      <Grid container spacing={10}>
+    <Container maxWidth="md" className={classes.mgtop}>
+      <Grid container spacing={4}>
         {TransactionAray.map((trans, index) => (
           <Grid key={index} item xs={12} sm={6}>
-            <Card variant="outlined" style={{ background: "transparent" }}>
-              <div
-                className={
-                  trans.name === currentStrings.homepage.activities.deposit
-                    ? classes.cardone
-                    : classes.cardtwoe
-                }
-              >
-                <CardHeader
-                  title={trans.name}
-                  subheader={currentStrings.homepage.activities.subheader}
-                  titleTypographyProps={{
-                    align: "center",
-                  }}
-                  subheaderTypographyProps={{
-                    align: "center",
-                  }}
-                />
-              </div>
+            <Box mt={4} mb={4}>
+              
+                <AnimationOnScroll
+                  animateIn="animate__fadeInUp"
+                  animateOnce={true}
+                >
+                  <CardHeader
+                    title={trans.name}
+                    subheader={currentStrings.homepage.activities.subheader}
+                    titleTypographyProps={{
+                      align: "center",
+                    }}
+                    subheaderTypographyProps={{
+                      align: "center",
+                    }}
+                  />
+                </AnimationOnScroll>
 
-              <CardContent>{trans.datas}</CardContent>
-            </Card>
+                <CardContent>{trans.datas}</CardContent>
+              
+            </Box>
           </Grid>
         ))}
       </Grid>

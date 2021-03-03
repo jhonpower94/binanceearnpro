@@ -113,7 +113,7 @@ export default function CreditBonus() {
       .add({
         amount: parseInt(state.amount),
         deposit_amount: parseInt(state.amount),
-        from: "cryptotradecenter",
+        from: "cryptotradecentral",
         description: state.description,
         date: new Date().toLocaleDateString(),
         created_at: firebase.firestore.FieldValue.serverTimestamp(),
@@ -133,7 +133,7 @@ export default function CreditBonus() {
             }
           );
           ajax({
-            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
+            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -142,7 +142,7 @@ export default function CreditBonus() {
               message: `Hello ${user.firstName} ${user.lastName}, <br/><br/> 
               You have recieved a new bonus. <br/><br/>
               Amount:  ${amountnn}`,
-              to: `${user.email}, support@cryptotradecenter.co`,
+              to: `${user.email}, support@cryptotradecentral.co`,
               subject: "Bonus Deposit"
             },
           }).subscribe(() => alert("Bonus has been credited"));

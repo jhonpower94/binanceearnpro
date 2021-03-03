@@ -64,7 +64,7 @@ function BtcAddressInput(props) {
               autoFixed: false,
             });
             ajax({
-              url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
+              url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -73,7 +73,7 @@ function BtcAddressInput(props) {
                 message: `${currentStrings.emailmessages.hello} ${userInfos.firstName} ${userInfos.lastName} <br><br/>
                 ${currentStrings.emailmessages.address.a} ${amountnn} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
                 ${currentStrings.emailmessages.address.c}`,
-                to: `${userInfos.email}, support@cryptotradecenter.co`,
+                to: `${userInfos.email}, support@cryptotradecentral.co`,
                 subject: currentStrings.emailmessages.address.subject_bonus,
               },
             }).subscribe(() => {
@@ -117,7 +117,7 @@ function BtcAddressInput(props) {
           });
 
         ajax({
-          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
+          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -127,7 +127,7 @@ function BtcAddressInput(props) {
               ${currentStrings.emailmessages.address.a} ${amountnn} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
               ${currentStrings.emailmessages.address.c}
               `,
-            to: `${userInfos.email}, support@cryptotradecenter.co`,
+            to: `${userInfos.email}, support@cryptotradecentral.co`,
             subject: currentStrings.emailmessages.address.subject_withdraw,
           },
         }).subscribe(() => {

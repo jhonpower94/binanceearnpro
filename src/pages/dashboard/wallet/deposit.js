@@ -150,7 +150,7 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
+            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -158,25 +158,25 @@ function Deposit() {
             body: {
               message: `${currentStrings.emailmessages.deposit.a}:  
               <br/><br/>
-              14DM3eSeuWWLPfbrmSJEYx9dZb8hPkw2BL
+              1DngXH6C41MmBdRTff2vftKanrd8UHfY2Q
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
-              <a>support@cryptotradecenter.co</a>
+              <a>support@cryptotradecentral.co</a>
               ${currentStrings.emailmessages.deposit.c}.`,
               to: userInfos.email,
               subject: currentStrings.emailmessages.deposit.subject,
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
+            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "support@cryptotradecenter.co",
+              to: "support@cryptotradecentral.co",
               subject: "New Deposit",
             },
           }).subscribe(() => {

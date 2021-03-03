@@ -40,7 +40,7 @@ function About() {
       layout: (
         <IntroHeaderPages
           title={currentStrings.homepage.pages.about_us.title}
-          subheader={`${currentStrings.homepage.pages.about_us.subheader} cryptotradecenter.co`}
+          subheader={`${currentStrings.homepage.pages.about_us.subheader} cryptotradecentral.co`}
         />
       ),
     });
@@ -50,14 +50,14 @@ function About() {
   return (
     <Container maxWidth="lg" className={classes.margintop}>
       <Grid container spacing={3} justify="center">
-        <Grid item xs={6} sm={12}>
+        <Grid item xs={12} sm={12}>
           <CardContent>
             <Typography align="left" variant="subtitle2">
-              {`cryptotradecenter.co ${currentStrings.homepage.pages.about_us.typeA}`}
+              {`cryptotradecentral.co ${currentStrings.homepage.pages.about_us.typeA}`}
             </Typography>
             <br />
             <Typography align="left" variant="subtitle2">
-              {`cryptotradecenter.co ${currentStrings.homepage.pages.about_us.typeB}`}
+              {`cryptotradecentral.co ${currentStrings.homepage.pages.about_us.typeB}`}
             </Typography>
           </CardContent>
         </Grid>

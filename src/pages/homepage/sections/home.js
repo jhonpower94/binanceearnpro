@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "@reach/router";
-import { CssBaseline, Container } from "@material-ui/core";
+import { CssBaseline, Container, Typography, Box } from "@material-ui/core";
 import IntroHeader from "../component/introheader";
 import { AppContext } from "../../../App";
 import { css } from "@emotion/core";
@@ -13,6 +13,7 @@ import Payment from "../sections/payment";
 
 import Calculator from "./calculateinvest";
 import { red } from "@material-ui/core/colors";
+import AboutHome from "./abouthome";
 
 const override = css`
   display: block;
@@ -74,28 +75,20 @@ function Home(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container style={{ position: "relative", top: "-200px" }}>
-        <InvestBlock blocksHome={true} page="Invest" />
-      </Container>
+      <div style={{ position: "relative", background: "#eff6ff" }}>
+        <AboutHome />
+      </div>
+      <InvestBlock />
 
-      <Container
-        className={classes.margintop}
-        style={{ position: "relative", top: "-200px" }}
-      >
+      <div style={{ background: "#08091b" }}>
         <Activities />
-      </Container>
-
-      <div style={{ position: "relative", top: "-100px" }}>
-        <div style={{ background: "#161b22", color: "#fff" }}>
-          <Stats />
-        </div>
-
-        <div >
-          <Calculator />
-        </div>
       </div>
 
-      <div style={{ background: "#fff", position: "relative", top: "-10px" }}>
+      <div style={{ background: "#161b22" }}>
+        <Stats />
+      </div>
+      <Calculator />
+      <div style={{ position: "relative", background: "#fafafa", top: "15px" }}>
         <Payment />
       </div>
     </React.Fragment>

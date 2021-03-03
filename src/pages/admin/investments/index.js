@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://us-central1-cointradecenter-ad3f5.cloudfunctions.net/app/plans`,
+          url: `https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -150,7 +150,7 @@ export default function Investments() {
             })
             .then(() => {
               ajax({
-                url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
+                url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -160,7 +160,7 @@ export default function Investments() {
                 Description: Account Wallet Deposit <br/>
                 Amount: ${data.deposit_amount} <br/>
                 Status <p style="color: #06b956;">successful</p></p>`,
-                  to: `${data.email}, support@cryptotradecenter.co`,
+                  to: `${data.email}, support@cryptotradecentral.co`,
                   subject: "Transaction update",
                 },
               }).subscribe(() => console.log("user message sent"));

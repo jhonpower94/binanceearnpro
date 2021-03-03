@@ -11,6 +11,8 @@ import {
   MenuItem,
   createMuiTheme,
   ThemeProvider,
+  useTheme,
+  useMediaQuery,
 } from "@material-ui/core";
 import Particles from "react-tsparticles";
 import Background from "../images/main2-bg.png";
@@ -75,7 +77,7 @@ function Calculator() {
   return (
     <div>
       <Particles
-        // height="auto"
+         height={useMediaQuery(useTheme().breakpoints.up("sm")) ? "100%" : "1000px"}
         // height={useMediaQuery(useTheme().breakpoints.up("sm")) ? "80%" : "85%"}
         style={{ position: "absolute" }}
         id="tsparticles"
@@ -170,12 +172,12 @@ function Calculator() {
               <CardHeader
                 title={currentStrings.homepage.calculate_invest.title}
                 subheader={currentStrings.homepage.calculate_invest.subheader}
-                titleTypographyProps={{ align: "center", variant: "h4" }}
+                titleTypographyProps={{ align: "center", variant: "h5" }}
                 subheaderTypographyProps={{ align: "center" }}
                 style={{ color: "#fff" }}
               />
             </Grid>
-            <Grid item xs={4} sm={4}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 id="outlined-select-currency"
                 select
@@ -197,7 +199,7 @@ function Calculator() {
                 ))}
               </TextField>
             </Grid>
-            <Grid item xs={4} sm={4}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 size="small"
                 fullWidth
@@ -215,7 +217,7 @@ function Calculator() {
                 }
               />
             </Grid>
-            <Grid item xs={4} sm={4}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 size="small"
                 fullWidth
@@ -242,7 +244,7 @@ function Calculator() {
             justify="center"
             style={{ position: "relative", zIndex: 1 }}
           >
-            <Grid item xs={6} sm={6}>
+            <Grid item xs={12} sm={6}>
               <CardHeader
                 title={
                   <Typography variant="h4">
@@ -253,11 +255,11 @@ function Calculator() {
                 style={{ color: "#fff" }}
               />
             </Grid>
-            <Grid item xs={6} sm={6}>
+            <Grid item xs={12} sm={6}>
               <CardHeader
                 title={
                   <Typography variant="h5">
-                    {`cryptotradecenter.co ${currentStrings.homepage.cac.title}`}
+                    {`cryptotradecentral.co ${currentStrings.homepage.cac.title}`}
                   </Typography>
                 }
                 subheader={currentStrings.homepage.cac.subheader}

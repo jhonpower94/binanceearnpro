@@ -1,10 +1,9 @@
 import React, { useEffect, useState, createContext } from "react";
-import clsx from "clsx";
 import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 import { create } from "jss";
 import rtl from "jss-rtl";
 import { jssPreset, StylesProvider, ThemeProvider } from "@material-ui/styles";
-import { blue, red } from "@material-ui/core/colors";
+import { blue } from "@material-ui/core/colors";
 import { navigate, Router } from "@reach/router";
 import HomeLayout from "./pages/homepage";
 import DashboardLayout from "./pages/dashboard/indexnew";
@@ -59,16 +58,17 @@ import WithdrawTable from "./pages/homepage/component/trnanstble/withdrawtable";
 import { ajax } from "rxjs/ajax";
 import { useDispatch, useSelector } from "react-redux";
 import { language$, loading$ } from "./redux/action";
-import { countrylist } from "./config/countrylist";
 import { Converter } from "easy-currencies";
 import { blocks } from "./service/tradeblocks";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import { Strings } from "./lang/language";
 import detectBrowserLanguage from "detect-browser-language";
 import { firestore } from "./config";
-import { Fab, useMediaQuery, useTheme } from "@material-ui/core";
-import { Telegram, WhatsApp } from "@material-ui/icons";
+
+import { ForumSharp, MessageSharp, WhatsApp } from "@material-ui/icons";
 import UpdateCurrency from "./pages/admin/dashboard/updatecurrency";
+import { Fab, Action } from "react-tiny-fab";
+import "react-tiny-fab/dist/styles.css";
 
 const tawkTo = require("tawkto-react");
 const tawkToPropertyId = "5feb0864df060f156a91965a";
@@ -214,7 +214,7 @@ function App() {
         return setRightoleft({ status: false });
     }
   }
-  
+
   useEffect(() => {
     console.log(detectBrowserLanguage());
     Strings.setLanguage(detectBrowserLanguage());
@@ -253,20 +253,7 @@ function App() {
         .doc("12345")
         .get()
         .then((dataval) => {
-          const waittransaction = async () => {
-            await dataval.data().data.forEach((data) => {
-              transactiondatas.push(data);
-            });
-          };
-          waittransaction().then(() => {
-            /*  transactiondatas.forEach((vl) => {
-              converter.convert(vl.amount, "USD", currency).then((rt) => {
-                vl.amount = rt;
-                navigate("");
-              });
-            }); */
-            console.log("done");
-          });
+          setTransactiondatas(dataval.data().data);
 
           dispatch(loading$());
         })
@@ -460,6 +447,41 @@ function App() {
         </StylesProvider>
       </div>
       <Fab
+        icon={<MessageSharp />}
+        event="hover"
+        alwaysShowTitle={true}
+        //  onClick={() => console.log("works")}
+      >
+        <Action
+          text="Whatsapp"
+          children={<WhatsApp />}
+          onClick={() => {
+            window.open(
+              "https://wa.me/4915217692230",
+              "_blank"
+            );
+          }}
+        />
+        <Action
+          text="Livechat"
+          children={<ForumSharp />}
+          onClick={() => {
+            window.open(
+              "https://tawk.to/chat/5fff33ccc31c9117cb6e4eda/default",
+              "_blank"
+            );
+          }}
+        />
+      </Fab>
+    </AppContext.Provider>
+  );
+}
+
+export default App;
+
+/*
+
+ <Fab
         className={classes.floaticon}
         onClick={() => {
           window.open(
@@ -470,12 +492,5 @@ function App() {
       >
         <Telegram color="primary" fontSize="large" />
       </Fab>
-    </AppContext.Provider>
-  );
-}
-
-export default App;
-
-/*
  
       */

@@ -20,7 +20,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {" © "}
       <Link to="../../" className={classes.link}>
-        cryptotradecenter
+        cryptotradecentral
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

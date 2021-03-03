@@ -110,14 +110,14 @@ function AccountInfo() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
+          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `${currentStrings.emailmessages.hello} ${userInfos.firstName}, ${currentStrings.emailmessages.accountinfo.text}.`,
-            to: `${userInfos.email}, support@cryptotradecenter.co`,
+            to: `${userInfos.email}, support@cryptotradecentral.co`,
             subject: currentStrings.emailmessages.accountinfo.subject,
           },
         }).subscribe(() => {

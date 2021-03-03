@@ -146,7 +146,7 @@ function FooterHomepage() {
         <Divider variant="middle" />
         <Grid container spacing={3} justify="center">
           {downloads.map((download, index) => (
-            <Grid key={index} item xs={6} sm={2}>
+            <Grid key={index} item xs={4} sm={2}>
               <Box
                 className={classes.margintop}
                 display="flex"
@@ -199,7 +199,7 @@ function FooterHomepage() {
         >
           <img src={require("./images/logo.svg")} width="100" />
           <Typography variant="caption">
-            &copy; cryptotradecenter LLC, {new Date().getFullYear()}.
+            &copy; cryptotradecentral LLC, {new Date().getFullYear()}.
           </Typography>
         </Box>
       </Container>

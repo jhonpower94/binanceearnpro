@@ -16,6 +16,7 @@ import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import { AppContext } from "../../../../App";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { red } from "@material-ui/core/colors";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 const useStyles = makeStyles({
   root: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
   },
   container: {
     maxHeight: 400,
-    marginTop: "10px"
+    marginTop: "10px",
   },
 });
 
@@ -71,29 +72,37 @@ export default function DepositTable() {
   }, []);
 
   return (
-   
-      <TableContainer className={classes.container}>
-        <Table aria-label="sticky table">
-          <TableBody>
-            {deposits.slice(0, 5).map((dep, index) => (
-              <TableRow role="checkbox" tabIndex={-1} key={index}>
-                <TableCell align="left" colSpan={2}>
+    <TableContainer className={classes.container}>
+      <Table aria-label="sticky table">
+        <TableBody>
+          {deposits.slice(0, 5).map((dep, index) => (
+            <TableRow role="checkbox" tabIndex={-1} key={index}>
+              <TableCell align="left" colSpan={2}>
+                <AnimationOnScroll
+                  animateIn="animate__fadeInUp"
+                  animateOnce={true}
+                >
                   <Box display="flex" flexDirection="column">
                     <Typography variant="h6">{`${dep.name}`}</Typography>
                   </Box>
-                </TableCell>
-                <TableCell align="right">
-                  <Typography variant="h5" color="textSecondary">
+                </AnimationOnScroll>
+              </TableCell>
+              <TableCell align="right">
+                <AnimationOnScroll
+                  animateIn="animate__fadeInUp"
+                  animateOnce={true}
+                >
+                  <Typography variant="h6" color="textSecondary">
                     {formatLocaleCurrency(dep.amount, currency, {
                       autoFixed: false,
                     })}
                   </Typography>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    
+                </AnimationOnScroll>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }

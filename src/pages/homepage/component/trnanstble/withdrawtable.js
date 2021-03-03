@@ -16,6 +16,7 @@ import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import { AppContext } from "../../../../App";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { red } from "@material-ui/core/colors";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 const useStyles = makeStyles({
   root: {
@@ -62,6 +63,7 @@ export default function WithdrawTable() {
       const newTransactions = data.slice(0, 5);
       setTranactions(newTransactions);
     }); */
+    console.log(transactiondatas);
     const currentwithdrawal = transactiondatas.filter((el) => {
       return el.type == "Deposit withdrawal";
     });
@@ -75,17 +77,27 @@ export default function WithdrawTable() {
           {withdrawal.slice(0, 5).map((trans, index) => (
             <TableRow role="checkbox" tabIndex={-1} key={index}>
               <TableCell align="left" colSpan={2}>
-                <Box display="flex" flexDirection="column">
-                  <Typography variant="h6">{`${trans.name}`}</Typography>
-                </Box>
+                <AnimationOnScroll
+                  animateIn="animate__fadeInUp"
+                  animateOnce={true}
+                >
+                  <Box display="flex" flexDirection="column">
+                    <Typography variant="h6">{`${trans.name}`}</Typography>
+                  </Box>
+                </AnimationOnScroll>
               </TableCell>
 
               <TableCell align="right">
-                <Typography variant="h5" color="textSecondary">
-                  {formatLocaleCurrency(trans.amount, currency, {
-                    autoFixed: false,
-                  })}
-                </Typography>
+                <AnimationOnScroll
+                  animateIn="animate__fadeInUp"
+                  animateOnce={true}
+                >
+                  <Typography variant="h6" color="textSecondary">
+                    {formatLocaleCurrency(trans.amount, currency, {
+                      autoFixed: false,
+                    })}
+                  </Typography>
+                </AnimationOnScroll>
               </TableCell>
             </TableRow>
           ))}

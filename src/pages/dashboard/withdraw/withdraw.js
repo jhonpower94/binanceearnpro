@@ -118,7 +118,7 @@ function Withdrawform() {
             wallet_balance: newamountnn,
           });
           ajax({
-            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
+            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -129,7 +129,7 @@ function Withdrawform() {
               (${value.address}).<br/>
               ${currentStrings.emailmessages.withdraw.a}.
               `,
-              to: `${userInfos.email}, support@cryptotradecenter.co`,
+              to: `${userInfos.email}, support@cryptotradecentral.co`,
               subject: currentStrings.emailmessages.withdraw.subject,
             },
           }).subscribe(() => {

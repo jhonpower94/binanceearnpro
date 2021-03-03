@@ -7,12 +7,12 @@ import { collectionData, docData } from "rxfire/firestore";
 import { filter } from "rxjs/operators";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD6hib1BaXjvs_E6385CYNqKK2mBqCWbcY",
-  authDomain: "cointradecenter-ad3f5.firebaseapp.com",
-  projectId: "cointradecenter-ad3f5",
-  storageBucket: "cointradecenter-ad3f5.appspot.com",
-  messagingSenderId: "770323173522",
-  appId: "1:770323173522:web:6fbac7eb57d92d4f52964b"
+  apiKey: "AIzaSyCXwWM-w1HuBbCTp5y-GJoCc1eHTh_mheA",
+  authDomain: "skimasite.firebaseapp.com",
+  projectId: "skimasite",
+  storageBucket: "skimasite.appspot.com",
+  messagingSenderId: "738695526055",
+  appId: "1:738695526055:web:7d0d7322f91672a0490d82"
 };
 const app = firebase.initializeApp(firebaseConfig);
 
@@ -27,12 +27,12 @@ export default firebase;
 export const addresses = (crypto) => {
   switch (crypto) {
     case "BTC":
-      return "14DM3eSeuWWLPfbrmSJEYx9dZb8hPkw2BL";
+      return "1DngXH6C41MmBdRTff2vftKanrd8UHfY2Q";
     case "ETH":
       return "0x7D62Fac09F1991F613127cE3158B1B5d7FcE521b";
     case "BTCC":
       return "qz2up8g2chgarrrynaw0q25rhqkw2reyss84fcxdl4";
     default:
-      return "14DM3eSeuWWLPfbrmSJEYx9dZb8hPkw2BL";
+      return "1DngXH6C41MmBdRTff2vftKanrd8UHfY2Q";
   }
 };

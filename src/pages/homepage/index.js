@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import clsx from "clsx";
-import PropTypes from "prop-types";
 import { AppContext } from "../../App";
 import { navigate } from "@reach/router";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import SelectLanguage from "../../components/lang_select";
+
+import MenuIcon from "@material-ui/icons/Menu";
 import {
   CssBaseline,
   Container,
@@ -13,6 +14,7 @@ import {
   Button,
   Box,
   Typography,
+  IconButton,
   Link,
   AppBar,
   Grid,
@@ -24,47 +26,30 @@ import {
   ListItemText,
   MenuItem,
   Collapse,
-  useScrollTrigger,
-  ThemeProvider,
-  createMuiTheme,
+  List,
 } from "@material-ui/core";
 import { css } from "@emotion/core";
 import "./homepage.css";
+import BounceLoader from "react-spinners/BounceLoader";
 import { ExpandLessSharp, ExpandMoreSharp } from "@material-ui/icons";
-import { useDispatch, useSelector } from "react-redux";
-import { Helmet } from "react-helmet";
-import Loader from "../../components/loader";
-import { red } from "@material-ui/core/colors";
+import { dataArray } from "../../service/tradeblocks";
+import { useSelector } from "react-redux";
 import FooterHomepage from "./footer";
+import Loader from "../../components/loader";
 
-var getCountry = require("country-currency-map").getCountry;
-
-function ElevationScroll(props) {
-  const { children, window } = props;
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 0,
-    target: window ? window() : undefined,
-  });
-
-  return React.cloneElement(children, {
-    elevation: trigger ? 4 : 0,
-  });
-}
-
-ElevationScroll.propTypes = {
-  children: PropTypes.element.isRequired,
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-};
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "block",
+  },
+  rootmobile: {
+    display: "block",
+  },
   nav: {
     overflow: "hidden",
     position: "fixed",
@@ -77,11 +62,11 @@ const useStyles = makeStyles((theme) => ({
   space: {
     flexGrow: 1,
   },
-
+  header: {
+    backgroundColor: theme.palette.primary.main,
+  },
   intro: {
-    paddingTop: "40px",
-    zIndex: 1,
-    position: "relative",
+    paddingTop: "80px",
   },
   mgright: {
     marginLeft: theme.spacing(2),
@@ -116,6 +101,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const security = [
+  { title: "Privacy Policy" },
+  { title: "Terms of Service" },
+  { title: "EU Data Protection" },
+];
+
 const footerLink = [
   {
     title: "Trading",
@@ -141,7 +132,7 @@ const footerLink = [
       { name: "Contact us" },
       { name: "Loctions" },
       { name: "Trusted dealers" },
-      { name: "Faq" },
+      { name: "Faqs" },
     ],
   },
 ];
@@ -179,7 +170,6 @@ function HomeLayout(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const currentStrings = useSelector((state) => state.language);
   const loading = useSelector((state) => state.loading);
-  const dispatch = useDispatch();
   const [anchorElMobile, setAnchorElMobile] = React.useState(null);
   const open = Boolean(anchorEl);
   const openMobile = Boolean(anchorElMobile);
@@ -191,28 +181,7 @@ function HomeLayout(props) {
     Downloads: false,
     Info: false,
   });
-  const { intro, rightoleft, setRightoleft } = useContext(AppContext);
-
-  const theme = createMuiTheme({
-    direction: rightoleft.status ? "rtl" : "ltr",
-    palette: {
-      type: "light",
-      primary: {
-        // Purple and green play nicely together.
-        main: red[900],
-      },
-      secondary: {
-        // This is green.A700 as hex.
-        main: "#fff",
-      },
-      background: {
-        default: "#fafafa",
-      },
-      action: {
-        selected: "#2196f33d",
-      },
-    },
-  });
+  const { intro, darktheme, setDarktheme } = useContext(AppContext);
 
   const arrayDatas = [
     { name: currentStrings.homepage.menus.home, link: "" },
@@ -269,151 +238,172 @@ function HomeLayout(props) {
 
   return (
     <React.Fragment>
-      {loading.loading ? (
-        <Loader />
-      ) : (
-        <div>
-          <Helmet>
-            <meta name="viewport" content="user-scalable=yes" />
-          </Helmet>
-
-          <CssBaseline />
-          <ElevationScroll {...props}>
-            <AppBar color="secondary">
-              <Toolbar>
+      <CssBaseline />
+      <div
+        className={
+          useMediaQuery(useTheme().breakpoints.up("sm"))
+            ? classes.root
+            : classes.rootmobile
+        }
+      >
+        <AppBar style={{ background: "#09132e" }} position="fixed">
+          <Toolbar>
+            {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
+              <img
+                src={require("../../images/logo.svg")}
+                alt="logo"
+                width="150px"
+              />
+            ) : (
+              <Box display="flex">
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  className={classes.menuButton}
+                  onClick={openMobileMenu}
+                >
+                  <MenuIcon />
+                </IconButton>
                 <img
                   src={require("../../images/logo.svg")}
                   alt="logo"
+                  height="50px"
                   width="150px"
                 />
+              </Box>
+            )}
 
-                <div className={classes.mgright}>
-                  {arrayDatas.map((link, index) => (
-                    <Link
-                      key={index}
-                      component="button"
-                      variant="body1"
-                      onClick={(e) => {
+            {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
+              <div className={classes.mgright}>
+                {arrayDatas.map((link, index) => (
+                  <Link
+                    key={index}
+                    component="button"
+                    variant="body1"
+                    onClick={(e) => {
+                      link.submenus
+                        ? openSubmenu(e, link.submenulinks)
+                        : changePage(link.link);
+                    }}
+                    color="inherit"
+                    className={classes.link}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            ) : null}
+
+            <StyledMenu // desktop Submenus
+              id="fade-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={open}
+              onClose={handleClose}
+              TransitionComponent={Fade}
+            >
+              {submenu.map((sub, index) => (
+                <Fade
+                  in={open}
+                  key={index}
+                  style={{ transitionDelay: index * 200 }}
+                >
+                  <MenuItem onClick={() => changePage(sub.link)}>
+                    <ListItemText primary={sub.title} />
+                  </MenuItem>
+                </Fade>
+              ))}
+            </StyledMenu>
+
+            <StyledMenu // mobile menu
+              id="fade-menu-mobile"
+              anchorEl={anchorElMobile}
+              keepMounted
+              open={openMobile}
+              onClose={handleClose}
+              TransitionComponent={Fade}
+            >
+              {arrayDatas.map((link, index) => (
+                <div key={index}>
+                  <Fade
+                    in={openMobile}
+                    style={{ transitionDelay: index * 100 }}
+                  >
+                    <MenuItem
+                      onClick={() => {
                         link.submenus
-                          ? openSubmenu(e, link.submenulinks)
+                          ? openCollapse(link.name, link.collapse)
                           : changePage(link.link);
                       }}
-                      color="inherit"
-                      className={classes.link}
                     >
-                      {link.name}
-                    </Link>
-                  ))}
-                </div>
+                      <ListItemText primary={link.name} />
+                      {link.submenus ? (
+                        <span>
+                          {link.collapse ? (
+                            <ExpandLessSharp />
+                          ) : (
+                            <ExpandMoreSharp />
+                          )}
+                        </span>
+                      ) : null}
+                    </MenuItem>
+                  </Fade>
 
-                <StyledMenu // desktop Submenus
-                  id="fade-menu"
-                  anchorEl={anchorEl}
-                  keepMounted
-                  open={open}
-                  onClose={handleClose}
-                  TransitionComponent={Fade}
-                >
-                  {submenu.map((sub, index) => (
-                    <Fade
-                      in={open}
-                      key={index}
-                      style={{ transitionDelay: index * 200 }}
-                    >
-                      <MenuItem onClick={() => changePage(sub.link)}>
-                        <ListItemText primary={sub.title} />
-                      </MenuItem>
-                    </Fade>
-                  ))}
-                </StyledMenu>
-
-                <StyledMenu // mobile menu
-                  id="fade-menu-mobile"
-                  anchorEl={anchorElMobile}
-                  keepMounted
-                  open={openMobile}
-                  onClose={handleClose}
-                  TransitionComponent={Fade}
-                >
-                  {arrayDatas.map((link, index) => (
-                    <div key={index}>
-                      <Fade
-                        in={openMobile}
-                        style={{ transitionDelay: index * 100 }}
-                      >
-                        <MenuItem
+                  {link.submenus ? (
+                    <Collapse in={link.collapse} timeout="auto" unmountOnExit>
+                      {link.submenulinks.map((sub, index) => (
+                        <ListItem
+                          key={index}
+                          className={classes.nested}
                           onClick={() => {
-                            link.submenus
-                              ? openCollapse(link.name, link.collapse)
-                              : changePage(link.link);
+                            changePage(sub.link);
                           }}
                         >
-                          <ListItemText primary={link.name} />
-                          {link.submenus ? (
-                            <span>
-                              {link.collapse ? (
-                                <ExpandLessSharp />
-                              ) : (
-                                <ExpandMoreSharp />
-                              )}
-                            </span>
-                          ) : null}
-                        </MenuItem>
-                      </Fade>
+                          <ListItemText primary={sub.title} />
+                        </ListItem>
+                      ))}
+                    </Collapse>
+                  ) : null}
+                </div>
+              ))}
+            </StyledMenu>
 
-                      {link.submenus ? (
-                        <Collapse
-                          in={link.collapse}
-                          timeout="auto"
-                          unmountOnExit
-                        >
-                          {link.submenulinks.map((sub, index) => (
-                            <ListItem
-                              key={index}
-                              className={classes.nested}
-                              onClick={() => {
-                                changePage(sub.link);
-                              }}
-                            >
-                              <ListItemText primary={sub.title} />
-                            </ListItem>
-                          ))}
-                        </Collapse>
-                      ) : null}
-                    </div>
-                  ))}
-                </StyledMenu>
+            <span className={classes.space} />
 
-                <span className={classes.space} />
+            <SelectLanguage />
 
-                <SelectLanguage />
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                if (intro.refid) {
+                  navigate(`account/register/${intro.refid}`);
+                } else {
+                  navigate("/account");
+                }
+              }}
+            >
+              <Typography> Login</Typography>
+            </Button>
+          </Toolbar>
+        </AppBar>
+        {loading.loading ? (
+          <Loader />
+        ) : (
+          <div>
+            <div>{intro.layout}</div>
 
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  onClick={() => {
-                    if (intro.refid) {
-                      navigate(`account/register/${intro.refid}`);
-                    } else {
-                      navigate("/account");
-                    }
-                  }}
-                >
-                  <Typography>{currentStrings.homepage.button}</Typography>
-                </Button>
-              </Toolbar>
-            </AppBar>
-          </ElevationScroll>
-
-          {intro.layout}
-
-          {props.children}
-          <div id="footer">
-            <FooterHomepage />
+            {props.children}
+            <div
+              id="footer"
+              style={{ position: "relative", background: "#000" }}
+            >
+              <FooterHomepage />
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </React.Fragment>
   );
 }

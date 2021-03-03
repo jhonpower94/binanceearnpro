@@ -137,7 +137,7 @@ function Invoice() {
             }
           ),
     },
-    {
+  /*  {
       name: currentStrings.Dashboard.invest.invoice.min_profit,
       value: formatLocaleCurrency(
         (paymentInfo.block.min_rate / 100) * paymentInfo.amount,
@@ -146,11 +146,11 @@ function Invoice() {
           autoFixed: false,
         }
       ),
-    },
+    }, */
     {
       name: currentStrings.Dashboard.invest.invoice.max_profit,
       value: formatLocaleCurrency(
-        (paymentInfo.block.max_rate / 100) * paymentInfo.amount,
+        (paymentInfo.block.rate / 100) * paymentInfo.amount,
         userInfos.currencycode,
         {
           autoFixed: false,
@@ -288,14 +288,14 @@ function Invoice() {
           }
         );
         ajax({
-          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
+          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `New incoming investment request from ${userInfos.firstName} ${userInfos.lastName} has been placed, total deposit amount : ${amountnn}`,
-            to: `${userInfos.email}, support@cryptotradecenter.co`,
+            to: `${userInfos.email}, support@cryptotradecentral.co`,
             subject: "investment",
           },
         }).subscribe(() => {

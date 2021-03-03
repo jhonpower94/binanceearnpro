@@ -212,7 +212,7 @@ function Wallet() {
             <Card variant="outlined">
               <CardContent>
                 <QRCode
-                  value={`14DM3eSeuWWLPfbrmSJEYx9dZb8hPkw2BL`}
+                  value={`1DngXH6C41MmBdRTff2vftKanrd8UHfY2Q`}
                   renderAs="svg"
                   size={150}
                 />
@@ -238,7 +238,7 @@ function Wallet() {
               display="block"
               className={classes.wordbreak}
             >
-              {`14DM3eSeuWWLPfbrmSJEYx9dZb8hPkw2BL`}
+              {`1DngXH6C41MmBdRTff2vftKanrd8UHfY2Q`}
             </Typography>
           </Box>
         </div>
@@ -247,7 +247,7 @@ function Wallet() {
         <CardContent>
           <Typography variant="body2" align="center">
             once payment is done send notification to live support or email
-            support @ support@cryptotradecenter.co to notify us of successful deposit
+            support @ support@cryptotradecentral.co to notify us of successful deposit
           </Typography>
         </CardContent>
       </Card>

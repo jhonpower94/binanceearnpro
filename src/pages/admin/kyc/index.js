@@ -117,14 +117,14 @@ export default function Kyc() {
       })
       .then(() => {
         ajax({
-          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
+          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `Hello ${user.firstName}, your profile has been successfully updated.`,
-            to: `${user.email}, support@cryptotradecenter.co`,
+            to: `${user.email}, support@cryptotradecentral.co`,
             subject: "Pofile update",
           },
         }).subscribe(() => {

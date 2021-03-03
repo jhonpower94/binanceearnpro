@@ -16,13 +16,14 @@ import {
   Divider,
   createMuiTheme,
   ThemeProvider,
+  useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
 import IntroHeaderPages from "../component/introheaderpages";
 import { red } from "@material-ui/core/colors";
 import { Rating } from "@material-ui/lab";
 import { useSelector } from "react-redux";
-import { reactLocalStorage } from "reactjs-localstorage";
-import { Converter } from "easy-currencies";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -70,19 +71,26 @@ function InvestBlock(props) {
 
   return (
     <Container maxWidth="md" className={classes.margintop}>
-      <Grid container spacing={8} justify="center">
-        {blocks.map((trade, index) => (
-          <Fade
-            in={true}
-            key={index}
-            style={{ transitionDelay: `${index * 200}ms` }}
-          >
-            <Grid item xs={6} sm={4}>
-              <Card>
+      <Box display="flex" justifyContent="center" mt={5} mb={5}>
+        <Typography variant="h4" align="center">
+          Investment Plans
+        </Typography>
+      </Box>
+      <Grid
+        container
+        spacing={useMediaQuery(useTheme().breakpoints.up("sm")) ? 8 : 4}
+        justify="center"
+      >
+        {blocks.slice(0, 3).map((trade, index) => (
+          <Grid item key={index} xs={12} sm={4}>
+            <AnimationOnScroll
+              delay={index}
+              animateIn="animate__fadeInUp"
+              animateOnce={true}
+            >
+              <Card variant="outlined">
                 <CardHeader
-                  title={`${
-                    currentStrings.Dashboard.account.plan_titles.title
-                  } ${index + 1}`}
+                  title={trade.name}
                   subheader={
                     <Rating
                       name="read-only"
@@ -140,8 +148,91 @@ function InvestBlock(props) {
                   </ListItem>
                 </List>
               </Card>
-            </Grid>
-          </Fade>
+            </AnimationOnScroll>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Box display="flex" justifyContent="center" mt={5} mb={5}>
+        <Typography variant="h4" align="center">
+          Mining Plans
+        </Typography>
+      </Box>
+
+      <Grid
+        container
+        spacing={useMediaQuery(useTheme().breakpoints.up("sm")) ? 8 : 4}
+        justify="center"
+      >
+        {blocks.slice(3, 6).map((trade, index) => (
+          <Grid item key={index} xs={12} sm={4}>
+            <AnimationOnScroll
+              delay={index}
+              animateIn="animate__fadeInUp"
+              animateOnce={true}
+            >
+              <Card variant="outlined">
+                <CardHeader
+                  title={trade.name}
+                  subheader={
+                    <Rating
+                      name="read-only"
+                      value={index + 3}
+                      readOnly
+                      size="small"
+                    />
+                  }
+                  titleTypographyProps={{ align: "center" }}
+                  subheaderTypographyProps={{
+                    align: "center",
+                    variant: "body1",
+                  }}
+                />
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="baseline"
+                >
+                  <Typography component="h2" variant="h3">
+                    {`${trade.rate}%`}
+                  </Typography>
+                </Box>
+                <List dense={true}>
+                  <Divider variant="inset" component="li" />
+
+                  <ListItem>
+                    <ListItemText
+                      primary={currentStrings.Dashboard.invest.Minimun_stake}
+                      secondary={trade.lot}
+                      primaryTypographyProps={{
+                        align: "center",
+                        variant: "h6",
+                      }}
+                      secondaryTypographyProps={{
+                        align: "center",
+                        variant: "h5",
+                      }}
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                  <ListItem>
+                    <ListItemText
+                      primary={currentStrings.Dashboard.invest.Maximun_stake}
+                      secondary={trade.max}
+                      primaryTypographyProps={{
+                        align: "center",
+                        variant: "h6",
+                      }}
+                      secondaryTypographyProps={{
+                        align: "center",
+                        variant: "h5",
+                      }}
+                    />
+                  </ListItem>
+                </List>
+              </Card>
+            </AnimationOnScroll>
+          </Grid>
         ))}
       </Grid>
     </Container>

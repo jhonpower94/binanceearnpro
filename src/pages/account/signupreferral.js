@@ -41,8 +41,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {" © "}
-      <Link color="inherit" href="https://cryptotradecenter.co/">
-        cryptotradecenter
+      <Link color="inherit" href="https://cryptotradecentral.co/">
+        cryptotradecentral
       </Link>
     </Typography>
   );
@@ -171,7 +171,7 @@ export default function SignUpReferral(props) {
           const getreferrerdata = firestore.doc(`users/${id}`);
           docData(getreferrerdata, "id").subscribe((data) => {
             ajax({
-              url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
+              url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

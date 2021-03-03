@@ -167,15 +167,15 @@ function ChartsPage() {
   const plansChart = [
     {
       label: `${currentStrings.Dashboard.account.plan_titles.title} 1`,
-      value: "plan1",
+      value: "Silver plan",
     },
     {
       label: `${currentStrings.Dashboard.account.plan_titles.title} 2`,
-      value: "plan2",
+      value: "Gold plan",
     },
     {
       label: `${currentStrings.Dashboard.account.plan_titles.title} 3`,
-      value: "plan3",
+      value: "Diamond plan",
     },
   ];
 

@@ -70,14 +70,14 @@ function Profile() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/mail",
+          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `Hello ${userInfos.firstName}, you have updated your profile, your profile will be updated once we review and confirm your proile details`,
-            to: `${userInfos.email}, support@cryptotradecenter.co`,
+            to: `${userInfos.email}, support@cryptotradecentral.co`,
             subject: "Pofile update",
           },
         }).subscribe(() => {

@@ -54,7 +54,7 @@ function Payment() {
     window.scrollTo(0, 0);
     console.log(paymentInfo.cryptoType);
     converterxx
-      .convert("NGN", paymentInfo.cryptoType, paymentInfo.amount)
+      .convert("USD", paymentInfo.cryptoType, paymentInfo.amount)
       .then((data) => setNewamount(data));
   }, []);
 
