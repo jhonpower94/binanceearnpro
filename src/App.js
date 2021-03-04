@@ -65,10 +65,11 @@ import { Strings } from "./lang/language";
 import detectBrowserLanguage from "detect-browser-language";
 import { firestore } from "./config";
 
-import { ForumSharp, MessageSharp, WhatsApp } from "@material-ui/icons";
+import { ForumSharp, MessageSharp, Telegram, WhatsApp } from "@material-ui/icons";
 import UpdateCurrency from "./pages/admin/dashboard/updatecurrency";
-import { Fab, Action } from "react-tiny-fab";
+// import { Fab, Action } from "react-tiny-fab";
 import "react-tiny-fab/dist/styles.css";
+import { Fab } from "@material-ui/core";
 
 const tawkTo = require("tawkto-react");
 const tawkToPropertyId = "5feb0864df060f156a91965a";
@@ -178,7 +179,7 @@ function App() {
   const [converted, setConverted] = useState({ status: false });
 
   const palletType = darktheme.status ? "dark" : "light";
-  const secondary = darktheme.status ? "#161b22" : "#fff";
+  const secondary = darktheme.status ? "#09132e" : "#fff";
 
   // Configure JSS
   const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -197,7 +198,7 @@ function App() {
       },
       background: {
         default: "#0d1117",
-        paper: secondary,
+        paper: "#09132e",
       },
       action: {
         selected: "#2196f33d",
@@ -447,6 +448,38 @@ function App() {
         </StylesProvider>
       </div>
       <Fab
+        className={classes.floaticon}
+        onClick={() => {
+          window.open(
+            "https://tawk.to/chat/603f0f471c1c2a130d644215/default",
+            "_blank"
+          );
+        }}
+      >
+        <Telegram color="primary" fontSize="large" />
+      </Fab>
+    </AppContext.Provider>
+  );
+}
+
+export default App;
+
+/*
+
+ <Fab
+        className={classes.floaticon}
+        onClick={() => {
+          window.open(
+            "https://tawk.to/chat/603f0f471c1c2a130d644215/default",
+            "_blank"
+          );
+        }}
+      >
+        <Telegram color="primary" fontSize="large" />
+      </Fab>
+
+      
+ <Fab
         icon={<MessageSharp />}
         event="hover"
         alwaysShowTitle={true}
@@ -467,30 +500,11 @@ function App() {
           children={<ForumSharp />}
           onClick={() => {
             window.open(
-              "https://tawk.to/chat/5fff33ccc31c9117cb6e4eda/default",
+              "https://tawk.to/chat/603f0f471c1c2a130d644215/default",
               "_blank"
             );
           }}
         />
       </Fab>
-    </AppContext.Provider>
-  );
-}
-
-export default App;
-
-/*
-
- <Fab
-        className={classes.floaticon}
-        onClick={() => {
-          window.open(
-            "https://tawk.to/chat/5fff33ccc31c9117cb6e4eda/default",
-            "_blank"
-          );
-        }}
-      >
-        <Telegram color="primary" fontSize="large" />
-      </Fab>
- 
+    
       */

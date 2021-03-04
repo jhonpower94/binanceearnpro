@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(5),
   },
   avatar: {
-    background: theme.palette.primary.main,
+    background: "#fafafa",
   },
 }));
 
@@ -118,7 +118,8 @@ function Withdrawform() {
             wallet_balance: newamountnn,
           });
           ajax({
-            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
+            url:
+              "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -153,33 +154,35 @@ function Withdrawform() {
     <Container maxWidth="md">
       <Grid container spacing={5} justify="center">
         <Grid item xs={12} sm={12}>
-          <CardHeader
-            avatar={
-              <Avatar variant="rounded" className={classes.avatar}>
-                <AccountBalanceWallet />
-              </Avatar>
-            }
-            title={currentStrings.Dashboard.withdraw.wallet_balance}
-            subheader={
-              isNaN(userInfos.wallet_balance) ? (
-                <Typography variant="h4">
-                  {formatLocaleCurrency(0, userInfos.currencycode, {
-                    autoFixed: false,
-                  })}
-                </Typography>
-              ) : (
-                <Typography variant="h4">
-                  {formatLocaleCurrency(
-                    userInfos.wallet_balance,
-                    userInfos.currencycode,
-                    {
+          <Card variant="outlined">
+            <CardHeader
+              avatar={
+                <Avatar variant="rounded" className={classes.avatar}>
+                  <AccountBalanceWallet />
+                </Avatar>
+              }
+              title={currentStrings.Dashboard.withdraw.wallet_balance}
+              subheader={
+                isNaN(userInfos.wallet_balance) ? (
+                  <Typography variant="h4">
+                    {formatLocaleCurrency(0, userInfos.currencycode, {
                       autoFixed: false,
-                    }
-                  )}
-                </Typography>
-              )
-            }
-          />
+                    })}
+                  </Typography>
+                ) : (
+                  <Typography variant="h4">
+                    {formatLocaleCurrency(
+                      userInfos.wallet_balance,
+                      userInfos.currencycode,
+                      {
+                        autoFixed: false,
+                      }
+                    )}
+                  </Typography>
+                )
+              }
+            />
+          </Card>
         </Grid>
         <Grid item xs={12} sm={12}>
           <form onSubmit={submitForm}>

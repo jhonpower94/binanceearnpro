@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.getContrastText("#1835c0"),
   },
   avatar: {
-    background: theme.palette.primary.main,
+    background: "#fafafa",
   },
 }));
 
@@ -150,7 +150,8 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
+            url:
+              "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -169,7 +170,8 @@ function Deposit() {
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
+            url:
+              "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -195,29 +197,31 @@ function Deposit() {
     <Container maxWidth="md">
       <Grid container spacing={5} justify="center">
         <Grid item xs={12} sm={12}>
-          <CardHeader
-            avatar={
-              <Avatar variant="rounded" className={classes.avatar}>
-                <AccountBalanceWallet />
-              </Avatar>
-            }
-            title={currentStrings.Dashboard.withdraw.wallet_balance}
-            subheader={
-              <Typography variant="h4">
-                {isNaN(userInfos.wallet_balance)
-                  ? formatLocaleCurrency(0, userInfos.currencycode, {
-                      autoFixed: false,
-                    })
-                  : formatLocaleCurrency(
-                      userInfos.wallet_balance,
-                      userInfos.currencycode,
-                      {
+          <Card variant="outlined">
+            <CardHeader
+              avatar={
+                <Avatar variant="rounded" className={classes.avatar}>
+                  <AccountBalanceWallet />
+                </Avatar>
+              }
+              title={currentStrings.Dashboard.withdraw.wallet_balance}
+              subheader={
+                <Typography variant="h4">
+                  {isNaN(userInfos.wallet_balance)
+                    ? formatLocaleCurrency(0, userInfos.currencycode, {
                         autoFixed: false,
-                      }
-                    )}
-              </Typography>
-            }
-          />
+                      })
+                    : formatLocaleCurrency(
+                        userInfos.wallet_balance,
+                        userInfos.currencycode,
+                        {
+                          autoFixed: false,
+                        }
+                      )}
+                </Typography>
+              }
+            />
+          </Card>
         </Grid>
 
         <Grid item xs={12} sm={12}>

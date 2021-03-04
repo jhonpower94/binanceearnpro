@@ -115,7 +115,7 @@ function InvestNew() {
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               <Grid item xs={12} sm={4}>
-                <Card variant="outlined" className={classes.column}>
+                <Card variant="outlined" >
                   <CardHeader
                     title={trade.name}
                     titleTypographyProps={{ align: "center" }}
@@ -174,10 +174,11 @@ function InvestNew() {
 
                     <CardActions>
                       <Button
-                        variant="outlined"
+                        variant="contained"
                         className={classes.mgtopx}
                         fullWidth
                         onClick={() => addTrade(index, trade)}
+                        
                       >
                         {currentStrings.Dashboard.invest.action}
                       </Button>
@@ -202,7 +203,7 @@ function InvestNew() {
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               <Grid item xs={12} sm={4}>
-                <Card variant="outlined" className={classes.column}>
+                <Card variant="outlined" >
                   <CardHeader
                     title={trade.name}
                     titleTypographyProps={{ align: "center" }}

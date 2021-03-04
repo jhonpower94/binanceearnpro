@@ -17,27 +17,22 @@ import {
   ListItem,
   ListItemText,
   Typography,
-  InputLabel,
-  FormControl,
-  OutlinedInput,
-  InputAdornment,
   TextField,
   MenuItem,
   Button,
-  Box,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormLabel,
   CardActions,
+  DialogTitle,
 } from "@material-ui/core";
-import { client } from "../../../config/services";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { navigate } from "@reach/router";
 import { ajax } from "rxjs/ajax";
-import { Rating } from "@material-ui/lab";
+import { Alert, Rating } from "@material-ui/lab";
 import NumberFormat from "react-number-format";
 import getSymbolFromCurrency from "currency-symbol-map";
+
 var formatLocaleCurrency = require("country-currency-map").formatLocaleCurrency;
 
 const useStyles = makeStyles((theme) => ({
@@ -84,7 +79,7 @@ NumberFormatCustom.propTypes = {
 function Invoice() {
   const classes = useStyles();
   const currentStrings = useSelector((state) => state.language);
-
+  const [open, setOpen] = React.useState(false);
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const dispatch = useDispatch();
   const { paymentInfo, setPaymentInfo, pagetitle, setPagetitle } = useContext(
@@ -137,7 +132,7 @@ function Invoice() {
             }
           ),
     },
-  /*  {
+    /*  {
       name: currentStrings.Dashboard.invest.invoice.min_profit,
       value: formatLocaleCurrency(
         (paymentInfo.block.min_rate / 100) * paymentInfo.amount,
@@ -288,7 +283,8 @@ function Invoice() {
           }
         );
         ajax({
-          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
+          url:
+            "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -332,6 +328,7 @@ function Invoice() {
         status: true,
         text: "Insufficient Wallet balance",
       });
+      handleClickOpen();
       console.log("true");
     } else if (paymentInfo.amount < paymentInfo.block.lot) {
       setAmountErr({
@@ -358,6 +355,13 @@ function Invoice() {
     }
   };
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Container maxWidth="sm">
       <CardHeader
@@ -373,74 +377,110 @@ function Invoice() {
         subheaderTypographyProps={{ align: "center" }}
         className={classes.headerbgss}
       />
-      <List>
-        {invoiceData.map((data, index) => (
-          <ListItem key={index}>
-            <ListItemText primary={data.name} />
-            <Typography variant="body1">{data.value}</Typography>
-          </ListItem>
-        ))}
-        <form className={classes.margintop} onSubmit={submitpaymentWallet}>
-          <ListItem>
-            <TextField
-              size="small"
-              fullWidth
-              id="outlined-number"
-              label={currentStrings.Dashboard.invest.invoice.amount}
-              name="amount"
-              defaultValue={paymentInfo.amount}
-              variant="outlined"
-              onChange={(e) => {
-                setPaymentInfo({
-                  ...paymentInfo,
-                  amount: e.target.value,
-                });
-              }}
-              InputProps={{
-                inputComponent: NumberFormatCustom,
-              }}
-              helperText={
-                amounterr.status
-                  ? amounterr.text
-                  : currentStrings.Dashboard.invest.invoice.helpertext
-              }
-              error={amounterr.status ? true : false}
-            />
-          </ListItem>
-          {selectedValue === "wallet" ? null : (
+      <Card variant="outlined">
+        <List>
+          {invoiceData.map((data, index) => (
+            <ListItem key={index}>
+              <ListItemText primary={data.name} />
+              <Typography variant="body1">{data.value}</Typography>
+            </ListItem>
+          ))}
+          <form className={classes.margintop} onSubmit={submitpaymentWallet}>
             <ListItem>
-              <ListItemText primary="Change currency" />
               <TextField
-                id="outlined-select-currency"
-                select
                 size="small"
-                label="Currency"
-                value={paymentInfo.cryptoType}
-                onChange={(e) =>
+                fullWidth
+                id="outlined-number"
+                label={currentStrings.Dashboard.invest.invoice.amount}
+                name="amount"
+                defaultValue={paymentInfo.amount}
+                variant="outlined"
+                onChange={(e) => {
                   setPaymentInfo({
                     ...paymentInfo,
-                    cryptoType: e.target.value,
-                  })
+                    amount: e.target.value,
+                  });
+                }}
+                InputProps={{
+                  inputComponent: NumberFormatCustom,
+                }}
+                helperText={
+                  amounterr.status
+                    ? amounterr.text
+                    : currentStrings.Dashboard.invest.invoice.helpertext
                 }
-                helperText="Please select your currency"
-                variant="outlined"
-              >
-                {currencies.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
+                error={amounterr.status ? true : false}
+              />
             </ListItem>
-          )}
+            {selectedValue === "wallet" ? null : (
+              <ListItem>
+                <ListItemText primary="Change currency" />
+                <TextField
+                  id="outlined-select-currency"
+                  select
+                  size="small"
+                  label="Currency"
+                  value={paymentInfo.cryptoType}
+                  onChange={(e) =>
+                    setPaymentInfo({
+                      ...paymentInfo,
+                      cryptoType: e.target.value,
+                    })
+                  }
+                  helperText="Please select your currency"
+                  variant="outlined"
+                >
+                  {currencies.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </ListItem>
+            )}
 
-          <CardActions>
-            <Button type="submit" variant="contained" fullWidth color="primary">
-              {currentStrings.Dashboard.invest.invoice.action}
-            </Button>
-          </CardActions>
-        </form>
-      </List>
+            <CardActions>
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                color="primary"
+              >
+                {currentStrings.Dashboard.invest.invoice.action}
+              </Button>
+            </CardActions>
+          </form>
+        </List>
+      </Card>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Deposit fund to wallet"}
+        </DialogTitle>
+        <DialogContent>
+          <Alert severity="info">
+            you do not have sufficient balance in your wallet, please click on
+            deposit button below in order to add funds to your wallet
+          </Alert>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              navigate("/dashboard/wallet");
+            }}
+            color="primary"
+          >
+            Deposit
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }

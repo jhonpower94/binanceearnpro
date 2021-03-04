@@ -92,15 +92,15 @@ function IntroHeader() {
     <div className={classes.header}>
       <div className={classes.toolbar} />
       <Particles
-      //  height="500px"
+        //  height="500px"
         // height={useMediaQuery(useTheme().breakpoints.up("sm")) ? "80%" : "85%"}
         style={{ position: "absolute" }}
         id="tsparticles"
         options={{
           background: {
-              color: {
+            color: {
               value: "#08091b",
-            }, 
+            },
             /*
             image: `url(${Background})`,
 
@@ -187,7 +187,10 @@ function IntroHeader() {
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <Box mt={5} style={{ color: "#fafafa" }}>
-                <AnimationOnScroll animateIn="animate__fadeInUp" animateOnce={true}>
+                <AnimationOnScroll
+                  animateIn="animate__fadeInUp"
+                  animateOnce={true}
+                >
                   <Typography
                     variant="h4"
                     align={
@@ -201,7 +204,10 @@ function IntroHeader() {
                 </AnimationOnScroll>
               </Box>
               <Box mt={2}>
-                <AnimationOnScroll animateIn="animate__fadeInUp" animateOnce={true}>
+                <AnimationOnScroll
+                  animateIn="animate__fadeInUp"
+                  animateOnce={true}
+                >
                   <Typography
                     variant="h6"
                     align={
@@ -224,7 +230,10 @@ function IntroHeader() {
                 }
                 mt={2}
               >
-                <AnimationOnScroll animateIn="animate__fadeInUp" animateOnce={true}>
+                <AnimationOnScroll
+                  animateIn="animate__fadeInUp"
+                  animateOnce={true}
+                >
                   <Button
                     variant="contained"
                     color="primary"
@@ -233,7 +242,7 @@ function IntroHeader() {
                       if (intro.refid) {
                         navigate(`account/register/${intro.refid}`);
                       } else {
-                        navigate("/account");
+                        navigate("/account/register");
                       }
                     }}
                   >
@@ -244,8 +253,11 @@ function IntroHeader() {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <AnimationOnScroll animateIn="animate__fadeInUp" animateOnce={true}>
-                <Box display="flex" justifyContent="center" mt={2} mb={5} >
+              <AnimationOnScroll
+                animateIn="animate__fadeInUp"
+                animateOnce={true}
+              >
+                <Box display="flex" justifyContent="center" mt={2} mb={5}>
                   <img
                     src={require("../images/intro.png")}
                     alt="logo"

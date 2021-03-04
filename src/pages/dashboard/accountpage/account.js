@@ -9,6 +9,8 @@ import {
   Button,
   useMediaQuery,
   useTheme,
+  Card,
+  CardContent,
 } from "@material-ui/core";
 import ChartsPage from "./charts";
 import { useSelector } from "react-redux";
@@ -115,39 +117,47 @@ function Account() {
     <Container maxWidth="lg">
       <Grid container spacing={4} justify="flex-start">
         <Grid item xs={12} sm={4}>
-          <ListItemText
-            primary={formatLocaleCurrency(
-              Math.floor(mainbalance.main_balance),
-              userInfos.currencycode,
-              {
-                autoFixed: false,
-              }
-            )}
-            secondary={currentStrings.Dashboard.account.main_balance}
-            primaryTypographyProps={{
-              variant: "h4",
-              align: useMediaQuery(useTheme().breakpoints.up("sm"))
-                ? "left"
-                : "center",
-            }}
-            secondaryTypographyProps={{
-              //  variant: "h4",
-              align: useMediaQuery(useTheme().breakpoints.up("sm"))
-                ? "left"
-                : "center",
-            }}
-          />
+          <Card variant="outlined">
+            <CardContent>
+              <ListItemText
+                primary={formatLocaleCurrency(
+                  Math.floor(mainbalance.main_balance),
+                  userInfos.currencycode,
+                  {
+                    autoFixed: false,
+                  }
+                )}
+                secondary={currentStrings.Dashboard.account.main_balance}
+                primaryTypographyProps={{
+                  variant: "h4",
+                  align: useMediaQuery(useTheme().breakpoints.up("sm"))
+                    ? "left"
+                    : "center",
+                }}
+                secondaryTypographyProps={{
+                  //  variant: "h4",
+                  align: useMediaQuery(useTheme().breakpoints.up("sm"))
+                    ? "left"
+                    : "center",
+                }}
+              />
+            </CardContent>
+          </Card>
         </Grid>
         {balanceAmount.map((vl, index) => (
           <Grid key={index} item xs={vl.xs} sm={vl.sm}>
-            <ListItemText
-              primary={vl.value}
-              secondary={vl.title}
-              primaryTypographyProps={{ variant: "h6", align: "center" }}
-              secondaryTypographyProps={{
-                align: "center",
-              }}
-            />
+            <Card variant="outlined">
+              <CardContent>
+                <ListItemText
+                  primary={vl.value}
+                  secondary={vl.title}
+                  primaryTypographyProps={{ variant: "h6", align: "center" }}
+                  secondaryTypographyProps={{
+                    align: "center",
+                  }}
+                />
+              </CardContent>
+            </Card>
           </Grid>
         ))}
 
@@ -187,10 +197,11 @@ function Account() {
 
         {profileData.map((data, index) => (
           <Grid item key={index} xs={6} sm={3}>
-            <ListItemText
-              primary={data.value}
-              secondary={data.title}
-            />
+            <Card variant="outlined">
+              <CardContent>
+                <ListItemText primary={data.value} secondary={data.title} />
+              </CardContent>
+            </Card>
           </Grid>
         ))}
       </Grid>
