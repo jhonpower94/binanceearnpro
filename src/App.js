@@ -260,7 +260,7 @@ function App() {
         .get()
         .then((dataval) => {
           dataval.docs.forEach((doc) => {
-            console.log(doc.data());
+           
             transactiondatas.push(doc.data());
           });
         })

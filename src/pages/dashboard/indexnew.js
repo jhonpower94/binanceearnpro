@@ -297,7 +297,7 @@ export default function DashboardLayout(props) {
   const [value, setValue] = React.useState(currentab);
 
   useEffect(() => {
-  //  dispatch(loading$());
+    //  dispatch(loading$());
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         navigate("../account");
@@ -306,7 +306,7 @@ export default function DashboardLayout(props) {
         docData(datas, "id").subscribe((val) => {
           dispatch(locationinfo$(val));
 
-         // dispatch(stopload$(false));
+          // dispatch(stopload$(false));
         });
 
         /*
@@ -526,6 +526,12 @@ export default function DashboardLayout(props) {
               icon: <HomeSharp />,
             },
             {
+              title: currentStrings.Dashboard.tabs.deposit,
+              link: "dashboard/wallet",
+
+              icon: <AccountBalanceWalletSharp />,
+            },
+            {
               title: currentStrings.Nav.invest,
               link: "dashboard/invest",
 
@@ -536,12 +542,6 @@ export default function DashboardLayout(props) {
               link: "dashboard/withdraw",
 
               icon: <GetAppSharp />,
-            },
-            {
-              title: currentStrings.Nav.wallet,
-              link: "dashboard/wallet",
-
-              icon: <AccountBalanceWalletSharp />,
             },
           ].map((link, index) => (
             <ListItem button key={index} onClick={() => changeNav(link, index)}>
