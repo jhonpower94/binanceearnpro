@@ -34,7 +34,7 @@ const override = css`
 
 const useStyles = makeStyles((theme) => ({
   mgtop: {
-    marginTop: theme.spacing(5),
+    marginTop: theme.spacing(3),
   },
   avatar: {
     width: theme.spacing(3),
@@ -91,30 +91,28 @@ function Activities() {
   ];
 
   return (
-    <Container maxWidth="md" className={classes.mgtop}>
+    <Container maxWidth="lg" className={classes.mgtop}>
       <Grid container spacing={4}>
         {TransactionAray.map((trans, index) => (
           <Grid key={index} item xs={12} sm={6}>
             <Box mt={4} mb={4}>
-              
-                <AnimationOnScroll
-                  animateIn="animate__fadeInUp"
-                  animateOnce={true}
-                >
-                  <CardHeader
-                    title={trans.name}
-                    subheader={currentStrings.homepage.activities.subheader}
-                    titleTypographyProps={{
-                      align: "center",
-                    }}
-                    subheaderTypographyProps={{
-                      align: "center",
-                    }}
-                  />
-                </AnimationOnScroll>
+              <AnimationOnScroll
+                animateIn="animate__fadeInUp"
+                animateOnce={true}
+              >
+                <CardHeader
+                  title={trans.name}
+                  subheader={currentStrings.homepage.activities.subheader}
+                  titleTypographyProps={{
+                    align: "center",
+                  }}
+                  subheaderTypographyProps={{
+                    align: "center",
+                  }}
+                />
+              </AnimationOnScroll>
 
-                <CardContent>{trans.datas}</CardContent>
-              
+              <CardContent>{trans.datas}</CardContent>
             </Box>
           </Grid>
         ))}

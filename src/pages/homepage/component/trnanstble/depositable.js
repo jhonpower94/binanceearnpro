@@ -55,7 +55,7 @@ export default function DepositTable() {
   const currency = reactLocalStorage.getObject("country").currencycode;
 
   useEffect(() => {
-    /*   const alldeposits = firestore
+    /* const alldeposits = firestore
       .collection("transactions")
       .where("type", "==", "wallet deposit")
       .where("pending", "==", false)
@@ -83,7 +83,7 @@ export default function DepositTable() {
                   animateOnce={true}
                 >
                   <Box display="flex" flexDirection="column">
-                    <Typography variant="h6">{`${dep.name}`}</Typography>
+                    <Typography variant="body1">{`${dep.firstname} ${dep.lastname}`}</Typography>
                   </Box>
                 </AnimationOnScroll>
               </TableCell>
@@ -92,8 +92,8 @@ export default function DepositTable() {
                   animateIn="animate__fadeInUp"
                   animateOnce={true}
                 >
-                  <Typography variant="h6" color="textSecondary">
-                    {formatLocaleCurrency(dep.amount, currency, {
+                  <Typography variant="body1" color="textSecondary">
+                    {formatLocaleCurrency(dep.return_amount, dep.currency, {
                       autoFixed: false,
                     })}
                   </Typography>

@@ -63,9 +63,9 @@ export default function WithdrawTable() {
       const newTransactions = data.slice(0, 5);
       setTranactions(newTransactions);
     }); */
-    console.log(transactiondatas);
+
     const currentwithdrawal = transactiondatas.filter((el) => {
-      return el.type == "Deposit withdrawal";
+      return el.type == "Plan withdrawal";
     });
     setwithdrawal(currentwithdrawal);
   }, []);
@@ -82,7 +82,7 @@ export default function WithdrawTable() {
                   animateOnce={true}
                 >
                   <Box display="flex" flexDirection="column">
-                    <Typography variant="h6">{`${trans.name}`}</Typography>
+                    <Typography variant="body1">{`${trans.firstname} ${trans.lastname}`}</Typography>
                   </Box>
                 </AnimationOnScroll>
               </TableCell>
@@ -92,10 +92,14 @@ export default function WithdrawTable() {
                   animateIn="animate__fadeInUp"
                   animateOnce={true}
                 >
-                  <Typography variant="h6" color="textSecondary">
-                    {formatLocaleCurrency(trans.amount, currency, {
-                      autoFixed: false,
-                    })}
+                  <Typography variant="body1" color="textSecondary">
+                    {formatLocaleCurrency(
+                      trans.return_amount,
+                      trans.currency,
+                      {
+                        autoFixed: false,
+                      }
+                    )}
                   </Typography>
                 </AnimationOnScroll>
               </TableCell>

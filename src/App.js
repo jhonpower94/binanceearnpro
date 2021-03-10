@@ -65,7 +65,12 @@ import { Strings } from "./lang/language";
 import detectBrowserLanguage from "detect-browser-language";
 import { firestore } from "./config";
 
-import { ForumSharp, MessageSharp, Telegram, WhatsApp } from "@material-ui/icons";
+import {
+  ForumSharp,
+  MessageSharp,
+  Telegram,
+  WhatsApp,
+} from "@material-ui/icons";
 import UpdateCurrency from "./pages/admin/dashboard/updatecurrency";
 // import { Fab, Action } from "react-tiny-fab";
 import "react-tiny-fab/dist/styles.css";
@@ -250,12 +255,16 @@ function App() {
       // end convert investment plan
 
       firestore
-        .collection("fakerator")
-        .doc("12345")
+        .collection("transactions")
+
         .get()
         .then((dataval) => {
-          setTransactiondatas(dataval.data().data);
-
+          dataval.docs.forEach((doc) => {
+            console.log(doc.data());
+            transactiondatas.push(doc.data());
+          });
+        })
+        .then(() => {
           dispatch(loading$());
         })
         .catch((err) => {
