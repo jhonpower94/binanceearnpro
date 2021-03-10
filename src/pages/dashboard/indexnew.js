@@ -283,7 +283,7 @@ function FacebookCircularProgress(props) {
 
 let converter = new Converter(
   "OpenExchangeRates",
-  "fb74edb0a937e39c966d"
+  "236dd075cd5245eea8b196f1dd855fff"
 );
 
 export default function DashboardLayout(props) {

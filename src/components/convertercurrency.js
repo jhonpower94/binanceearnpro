@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 
 let converter = new Converter(
   "OpenExchangeRates",
-  "fb74edb0a937e39c966d"
+  "236dd075cd5245eea8b196f1dd855fff"
 );
 
 export const convertCurrency = (amount, currency) => {
