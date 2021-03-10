@@ -12,7 +12,7 @@ var QRCode = require("qrcode.react");
 
 let converter = new Converter(
   "OpenExchangeRates",
-  "b0e02e52f17b4f2a874d46b3deae060a"
+  "fb74edb0a937e39c966d"
 );
 
 let CurrencyConverter = require("@y2nk4/currency-converter");
