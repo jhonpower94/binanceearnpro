@@ -71,7 +71,8 @@ export default function WithdrawTable() {
   }, []);
 
   return (
-    <TableContainer className={classes.container}>
+    <TableContainer // className={classes.container}>
+    >
       <Table aria-label="sticky table">
         <TableBody>
           {withdrawal.slice(0, 5).map((trans, index) => (
@@ -93,13 +94,9 @@ export default function WithdrawTable() {
                   animateOnce={true}
                 >
                   <Typography variant="body1" color="textSecondary">
-                    {formatLocaleCurrency(
-                      trans.return_amount,
-                      trans.currency,
-                      {
-                        autoFixed: false,
-                      }
-                    )}
+                    {formatLocaleCurrency(trans.return_amount, trans.currency, {
+                      autoFixed: false,
+                    })}
                   </Typography>
                 </AnimationOnScroll>
               </TableCell>

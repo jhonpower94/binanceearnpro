@@ -72,7 +72,9 @@ export default function DepositTable() {
   }, []);
 
   return (
-    <TableContainer className={classes.container}>
+    <TableContainer // className={classes.container}>
+    >
+      {" "}
       <Table aria-label="sticky table">
         <TableBody>
           {deposits.slice(0, 5).map((dep, index) => (
