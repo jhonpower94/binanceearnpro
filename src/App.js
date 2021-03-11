@@ -255,13 +255,13 @@ function App() {
       // end convert investment plan
 
       firestore
-        .collection("transactions")
-
+        .collection("fakerator")
+        .doc("12345")
         .get()
         .then((dataval) => {
-          dataval.docs.forEach((doc) => {
-           
-            transactiondatas.push(doc.data());
+          //  dataval.docs.forEach (for collection arrays)
+          dataval.data().data.forEach((doc) => {
+            transactiondatas.push(doc); // doc.data() (for coolection arrays)
           });
         })
         .then(() => {

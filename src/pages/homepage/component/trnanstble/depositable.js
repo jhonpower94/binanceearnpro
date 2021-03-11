@@ -85,7 +85,7 @@ export default function DepositTable() {
                   animateOnce={true}
                 >
                   <Box display="flex" flexDirection="column">
-                    <Typography variant="body1">{`${dep.firstname} ${dep.lastname}`}</Typography>
+                    <Typography variant="body1">{`${dep.name}`}</Typography>
                   </Box>
                 </AnimationOnScroll>
               </TableCell>
@@ -95,7 +95,7 @@ export default function DepositTable() {
                   animateOnce={true}
                 >
                   <Typography variant="body1" color="textSecondary">
-                    {formatLocaleCurrency(dep.return_amount, dep.currency, {
+                    {formatLocaleCurrency(dep.amount, currency, {
                       autoFixed: false,
                     })}
                   </Typography>
