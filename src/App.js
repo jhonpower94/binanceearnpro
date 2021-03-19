@@ -460,7 +460,7 @@ function App() {
         className={classes.floaticon}
         onClick={() => {
           window.open(
-            "https://tawk.to/chat/603f0f471c1c2a130d644215/default",
+            "https://tawk.to/chat/605452c7f7ce18270931b70e/default",
             "_blank"
           );
         }}
