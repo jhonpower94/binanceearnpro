@@ -456,17 +456,7 @@ function App() {
           </ThemeProvider>
         </StylesProvider>
       </div>
-      <Fab
-        className={classes.floaticon}
-        onClick={() => {
-          window.open(
-            "https://tawk.to/chat/605452c7f7ce18270931b70e/default",
-            "_blank"
-          );
-        }}
-      >
-        <Telegram color="primary" fontSize="large" />
-      </Fab>
+    
     </AppContext.Provider>
   );
 }
