@@ -74,7 +74,7 @@ import {
 import UpdateCurrency from "./pages/admin/dashboard/updatecurrency";
 // import { Fab, Action } from "react-tiny-fab";
 import "react-tiny-fab/dist/styles.css";
-import { Fab } from "@material-ui/core";
+import { Fab, useMediaQuery, useTheme } from "@material-ui/core";
 
 const tawkTo = require("tawkto-react");
 const tawkToPropertyId = "5feb0864df060f156a91965a";
@@ -90,9 +90,9 @@ const useStyles = makeStyles((theme) => ({
     width: "60px",
     height: "60px",
     bottom: "20px",
-    right: "10px",
-    backgroundColor: "#fff",
-
+    left: "20px",
+    backgroundColor: "#25d366",
+    color: "#fff",
     borderRadius: "50px",
     textAlign: "center",
     fontSize: "30px",
@@ -104,8 +104,8 @@ const useStyles = makeStyles((theme) => ({
     height: "60px",
     bottom: "20px",
     left: "80px",
-    backgroundColor: "#fff",
-
+    backgroundColor: "#25d366",
+    color: "#fff",
     borderRadius: "50px",
     textAlign: "center",
     fontSize: "30px",
@@ -456,7 +456,21 @@ function App() {
           </ThemeProvider>
         </StylesProvider>
       </div>
-    
+      <Fab
+        className={
+          useMediaQuery(useTheme().breakpoints.up("sm"))
+            ? classes.floaticonmobile
+            : classes.floaticon
+        }
+        onClick={() => {
+          window.open(
+            "https://api.whatsapp.com/send?phone=380931857179&text=",
+            "_blank"
+          );
+        }}
+      >
+        <WhatsApp fontSize="large" />
+      </Fab>
     </AppContext.Provider>
   );
 }
