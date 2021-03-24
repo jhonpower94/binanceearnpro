@@ -88,7 +88,7 @@ function BtcAddressInput(props) {
                   },
                   body: {
                     message: `${currentStrings.emailmessages.hello} ${userInfos.firstName} ${userInfos.lastName} <br><br/>
-                    ${currentStrings.emailmessages.address.a} ${remainingBonus} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
+                    ${currentStrings.emailmessages.address.a} ${value.amount} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
                     ${currentStrings.emailmessages.address.c}`,
                     to: `${userInfos.email}, support@cryptotradecentral.co`,
                     subject: currentStrings.emailmessages.address.subject_bonus,
@@ -157,7 +157,7 @@ function BtcAddressInput(props) {
               },
               body: {
                 message: `${currentStrings.emailmessages.hello} ${userInfos.firstName} ${userInfos.lastName} <br><br/>
-              ${currentStrings.emailmessages.address.a} ${remainingAmount} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
+              ${currentStrings.emailmessages.address.a} ${value.amount} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
               ${currentStrings.emailmessages.address.c}
               `,
                 to: `${userInfos.email}, support@cryptotradecentral.co`,
