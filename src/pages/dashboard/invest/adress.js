@@ -154,7 +154,7 @@ function BtcAddressInput(props) {
                     message: `${currentStrings.emailmessages.hello} ${userInfos.firstName} ${userInfos.lastName} <br><br/>
                     ${currentStrings.emailmessages.address.a} ${value.amount} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
                     ${currentStrings.emailmessages.address.c}`,
-                    to: `${userInfos.email}, support@cryptotradecentral.co`,
+                    to: `${userInfos.email}, support@exchangetradingzone.com`,
                     subject: currentStrings.emailmessages.address.subject_bonus,
                   },
                 }).subscribe(() => {
@@ -224,7 +224,7 @@ function BtcAddressInput(props) {
               ${currentStrings.emailmessages.address.a} ${amountnn} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
               ${currentStrings.emailmessages.address.c}
               `,
-                to: `${userInfos.email}, support@cryptotradecentral.co`,
+                to: `${userInfos.email}, support@exchangetradingzone.com`,
                 subject: currentStrings.emailmessages.address.subject_withdraw,
               },
             }).subscribe(() => {
@@ -260,7 +260,7 @@ function BtcAddressInput(props) {
        <br/>
        you can now use your wallet balance to reininvest, thank you.
     `,
-        to: `${userInfos.email}, support@cryptotradecentral.co`,
+        to: `${userInfos.email}, support@exchangetradingzone.com`,
         subject: currentStrings.emailmessages.address.subject_withdraw,
       },
     }).subscribe(() => {
@@ -404,7 +404,7 @@ function BtcAddressInput(props) {
                   helperText={
                     err.status
                       ? err.text
-                      : currentStrings.Dashboard.withdraw.helpertext_btc
+                      : currentStrings.Dashboard.withdraw.helpertext_amount
                   }
                   error={err.status}
                 />

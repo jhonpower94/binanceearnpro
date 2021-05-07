@@ -53,7 +53,7 @@ function Support() {
               variant="contained"
               color="primary"
               fullWidth
-              onClick={() => navigate("https://cryptotradecentral.co/support")}
+              onClick={() => navigate("https://exchangetradingzone.com/support")}
             >
               Contact Us
             </Button>
