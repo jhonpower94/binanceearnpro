@@ -155,12 +155,12 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "flex-start",
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
-  main: {
+  space: {
     flexGrow: 1,
   },
   content: {
@@ -486,6 +486,11 @@ export default function DashboardLayout(props) {
             >
               <MenuIcon />
             </IconButton>
+            <Box m={1}>
+              {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
+                <img src={require("../../images/logomobile.svg")} height="50" />
+              ) : null}
+            </Box>
             <Typography variant="h6">{pagetitle.title}</Typography>
             <span className={classes.space} />
             <SelectLanguage />
@@ -507,7 +512,8 @@ export default function DashboardLayout(props) {
         }}
       >
         <div className={classes.toolbar}>
-          <img src={require("../homepage/images/logo.svg")} height="50" />
+          <img src={require("../../images/logomobile.svg")} height="50" />
+          <span className={classes.space} />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />

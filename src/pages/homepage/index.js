@@ -30,9 +30,9 @@ import {
 } from "@material-ui/core";
 import { css } from "@emotion/core";
 import "./homepage.css";
-import BounceLoader from "react-spinners/BounceLoader";
+
 import { ExpandLessSharp, ExpandMoreSharp } from "@material-ui/icons";
-import { dataArray } from "../../service/tradeblocks";
+
 import { useSelector } from "react-redux";
 import FooterHomepage from "./footer";
 import Loader from "../../components/loader";
@@ -252,7 +252,7 @@ function HomeLayout(props) {
               <img
                 src={require("../../images/logo.svg")}
                 alt="logo"
-                width="150px"
+                width="250px"
               />
             ) : (
               <Box display="flex">
@@ -266,10 +266,9 @@ function HomeLayout(props) {
                   <MenuIcon />
                 </IconButton>
                 <img
-                  src={require("../../images/logo.svg")}
+                  src={require("../../images/logomobile.svg")}
                   alt="logo"
-                  height="50px"
-                  width="150px"
+                  height="60px"
                 />
               </Box>
             )}

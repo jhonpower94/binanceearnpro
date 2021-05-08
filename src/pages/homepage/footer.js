@@ -197,7 +197,7 @@ function FooterHomepage() {
           flexDirection="column"
           alignItems="center"
         >
-          <img src={require("./images/logo.svg")} width="100" />
+          <img src={require("./images/logo.svg")} width="150" />
           <Typography variant="caption">
             &copy; exchangetradingzone LLC, {new Date().getFullYear()}.
           </Typography>
