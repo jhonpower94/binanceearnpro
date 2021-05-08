@@ -353,7 +353,7 @@ function BtcAddressInput(props) {
         <Grid container spacing={5} justify="center">
           <Grid item xs={12} sm={12}>
             <FormControl component="fieldset">
-              <FormLabel component="legend">Gender</FormLabel>
+              <FormLabel component="legend">Select your withdrawal option</FormLabel>
               <RadioGroup
                 value={value.type}
                 aria-label="gender"
