@@ -163,6 +163,9 @@ const useStyles = makeStyles((theme) => ({
   space: {
     flexGrow: 1,
   },
+  main: {
+    flexGrow: 1,
+  },
   content: {
     padding: theme.spacing(2),
   },
@@ -512,7 +515,9 @@ export default function DashboardLayout(props) {
         }}
       >
         <div className={classes.toolbar}>
-          <img src={require("../../images/logomobile.svg")} height="50" />
+          {useMediaQuery(useTheme().breakpoints.up("sm")) ? null : (
+            <img src={require("../../images/logomobile.svg")} height="50" />
+          )}
           <span className={classes.space} />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
