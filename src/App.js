@@ -104,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
     height: "60px",
     bottom: "20px",
     left: "80px",
-    backgroundColor: "#25d366",
+    backgroundColor: theme.palette.primary,
     color: "#fff",
     borderRadius: "50px",
     textAlign: "center",

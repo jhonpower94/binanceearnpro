@@ -62,7 +62,7 @@ function UpdateWallet() {
                   ? "<p style='color: #f44336;'>Canceled</p></p>"
                   : "<p style='color: #06b956;'>successful</p></p>"
               }`,
-                to: `${updateWalletBalance.email}, support@exchangetradinginvest.com`,
+                to: `${updateWalletBalance.email}, support@exchangetradingzone.com`,
                 subject: "Transaction update",
               },
             }).subscribe(() => {

@@ -9,11 +9,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import Fade from "@material-ui/core/Fade";
 import Avatar from "@material-ui/core/Avatar";
-import { deepOrange, orange, blue } from "@material-ui/core/colors";
-import { Button, Link } from "@material-ui/core";
+import { blue } from "@material-ui/core/colors";
 import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
-import { locationinfo$ } from "../../redux/action";
 import { app, firestore } from "../../config";
 import { navigate } from "@reach/router";
 import { NotificationsOutlined } from "@material-ui/icons";
@@ -24,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   orange: {
-    color: blue[800],
-    backgroundColor: "#fafafa",
+    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.primary.main,
     textTransform: "uppercase",
   },
   space: {
