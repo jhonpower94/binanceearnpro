@@ -72,39 +72,35 @@ export default function DepositTable() {
   }, []);
 
   return (
-    <TableContainer // className={classes.container}>
-    >
-      {" "}
-      <Table aria-label="sticky table">
-        <TableBody>
-          {deposits.slice(0, 5).map((dep, index) => (
-            <TableRow role="checkbox" tabIndex={-1} key={index}>
-              <TableCell align="left" colSpan={2}>
-                <AnimationOnScroll
-                  animateIn="animate__fadeInUp"
-                  animateOnce={true}
-                >
-                  <Box display="flex" flexDirection="column">
-                    <Typography variant="body1">{`${dep.name}`}</Typography>
-                  </Box>
-                </AnimationOnScroll>
-              </TableCell>
-              <TableCell align="right">
-                <AnimationOnScroll
-                  animateIn="animate__fadeInUp"
-                  animateOnce={true}
-                >
-                  <Typography variant="body1" color="textSecondary">
-                    {formatLocaleCurrency(dep.amount, currency, {
-                      autoFixed: false,
-                    })}
-                  </Typography>
-                </AnimationOnScroll>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Table aria-label="sticky table">
+      <TableBody>
+        {deposits.slice(0, 5).map((dep, index) => (
+          <TableRow role="checkbox" tabIndex={-1} key={index}>
+            <TableCell align="left" colSpan={2}>
+              <AnimationOnScroll
+                animateIn="animate__fadeInUp"
+                animateOnce={true}
+              >
+                <Box display="flex" flexDirection="column">
+                  <Typography variant="body1">{`${dep.name}`}</Typography>
+                </Box>
+              </AnimationOnScroll>
+            </TableCell>
+            <TableCell align="right">
+              <AnimationOnScroll
+                animateIn="animate__fadeInUp"
+                animateOnce={true}
+              >
+                <Typography variant="body1" color="textSecondary">
+                  {formatLocaleCurrency(dep.amount, currency, {
+                    autoFixed: false,
+                  })}
+                </Typography>
+              </AnimationOnScroll>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 }

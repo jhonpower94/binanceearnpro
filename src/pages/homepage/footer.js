@@ -1,12 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../App";
-import {
-  AndroidSharp,
-  Apple,
-  LaptopMac,
-  Telegram,
-  Twitter,
-} from "@material-ui/icons";
+import { Telegram, Twitter } from "@material-ui/icons";
 
 import {
   makeStyles,
@@ -19,12 +13,11 @@ import {
   CardHeader,
   Icon,
   Avatar,
-  ThemeProvider,
   createMuiTheme,
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { navigate } from "@reach/router";
-import { blue, grey, red } from "@material-ui/core/colors";
+import { blue, red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -40,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 const downloads = [
   {
     title: "Facebook",
-    image: <Icon className="fa fa-facebook-f" style={{color: blue[500]}} />,
+    image: <Icon className="fa fa-facebook-f" style={{ color: blue[500] }} />,
     color: blue[800],
   },
   {
@@ -50,7 +43,7 @@ const downloads = [
   },
   {
     title: "Telegram",
-    image: <Telegram  htmlColor={blue[500]} />,
+    image: <Telegram htmlColor={blue[500]} />,
     color: blue[500],
   },
 ];
@@ -114,96 +107,89 @@ function FooterHomepage() {
   };
 
   return (
-    
-      <Container maxWidth="md" className={classes.margintop}>
-        <Grid container spacing={3} justify="center">
-          <Grid item xs={12} sm={12}>
-            <CardHeader
-              title="Links and contacts"
-              subheader="website menus, socials and email contacts"
-              titleTypographyProps={{ align: "center" }}
-              subheaderTypographyProps={{ align: "center" }}
-            />
-          </Grid>
-          {arrayDatas.map((link, index) => (
-            <Grid key={index} item xs={6} sm={2}>
-              <Box display="flex" justifyContent="center">
-                <Link
-                  component="button"
-                  variant="body1"
-                  onClick={(e) => {
-                    changePage(link.link);
-                  }}
-                  color="inherit"
-                  className={classes.link}
-                >
-                  {link.name}
-                </Link>
-              </Box>
-            </Grid>
-          ))}
+    <Container maxWidth="md" className={classes.margintop}>
+      <Grid container spacing={3} justify="center">
+        <Grid item xs={12} sm={12}>
+          <CardHeader
+            title="Links and Contacts"
+            subheader="website menus, socials and email contacts"
+            titleTypographyProps={{ align: "center" }}
+            subheaderTypographyProps={{ align: "center" }}
+          />
         </Grid>
-        <Divider variant="middle" />
-        <Grid container spacing={3} justify="center">
-          {downloads.map((download, index) => (
-            <Grid key={index} item xs={4} sm={2}>
-              <Box
-                className={classes.margintop}
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
+        {arrayDatas.map((link, index) => (
+          <Grid key={index} item xs={12} sm={2}>
+            <Box display="flex" justifyContent="center">
+              <Link
+                component="button"
+                variant="body1"
+                onClick={(e) => {
+                  changePage(link.link);
+                }}
+                color="inherit"
+                className={classes.link}
               >
-                <Avatar style={{ background: "#fff" }}>
-                  {download.image}
-                </Avatar>
-                <Typography>{download.title}</Typography>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-
-        <Divider className={classes.margintop} />
-
-        <Box
-          className={classes.margintop}
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-        >
-          <Typography variant="body1">
-            {`${currentStrings.homepage.footer.made}`} &#10084;&#65039; @ AFX
-          </Typography>
-        </Box>
-        <Box
-          className={classes.margintop}
-          display="flex"
-          justifyContent="center"
-        >
-          {security.map((links, index) => (
-            <Link
-              key={index}
-              component="button"
-              variant="caption"
-              color="textSecondary"
-              className={classes.link}
+                {link.name}
+              </Link>
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
+      <Divider variant="middle" className={classes.margintop} />
+      <Grid container spacing={3} justify="center">
+        {downloads.map((download, index) => (
+          <Grid key={index} item xs={4} sm={2}>
+            <Box
+              className={classes.margintop}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
             >
-              {links.title}
-            </Link>
-          ))}
-        </Box>
-        <Box
-          className={classes.margintop}
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-        >
-          <img src={require("./images/logo.svg")} width="150" />
-          <Typography variant="caption">
-            &copy; exchangetradingzone LLC, {new Date().getFullYear()}.
-          </Typography>
-        </Box>
-      </Container>
-    
+              <Avatar style={{ background: "#fff" }}>{download.image}</Avatar>
+              <Typography>{download.title}</Typography>
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Divider className={classes.margintop} />
+
+      <Box
+        className={classes.margintop}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
+        <Typography variant="body1">
+          {`${currentStrings.homepage.footer.made}`} &#10084;&#65039; @ AFX
+        </Typography>
+      </Box>
+      <Box className={classes.margintop} display="flex" justifyContent="center">
+        {security.map((links, index) => (
+          <Link
+            key={index}
+            component="button"
+            variant="caption"
+            color="textSecondary"
+            className={classes.link}
+          >
+            {links.title}
+          </Link>
+        ))}
+      </Box>
+      <Box
+        className={classes.margintop}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
+        <img src={require("../../images/logomobile.svg")} width="50" />
+
+        <Typography variant="caption">
+          &copy; exchangetradinginvest LLC, {new Date().getFullYear()}.
+        </Typography>
+      </Box>
+    </Container>
   );
 }
 

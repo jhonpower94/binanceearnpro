@@ -3,7 +3,7 @@ import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 import { create } from "jss";
 import rtl from "jss-rtl";
 import { jssPreset, StylesProvider, ThemeProvider } from "@material-ui/styles";
-import { blue } from "@material-ui/core/colors";
+import { blue, yellow } from "@material-ui/core/colors";
 import { navigate, Router } from "@reach/router";
 import HomeLayout from "./pages/homepage";
 import DashboardLayout from "./pages/dashboard/indexnew";
@@ -195,7 +195,7 @@ function App() {
       type: palletType,
       primary: {
         // Purple and green play nicely together.
-        main: blue[800],
+        main: yellow["800"],
       },
       secondary: {
         // This is green.A700 as hex.
@@ -205,9 +205,8 @@ function App() {
         default: "#0d1117",
         paper: "#09132e",
       },
-      action: {
-        selected: "#2196f33d",
-      },
+      
+      contrastThreshold: 1,
     },
   });
 

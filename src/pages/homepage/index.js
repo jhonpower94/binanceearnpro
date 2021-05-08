@@ -396,7 +396,7 @@ function HomeLayout(props) {
             {props.children}
             <div
               id="footer"
-              style={{ position: "relative", background: "#000" }}
+              style={{ position: "relative", background: "#09132e" }}
             >
               <FooterHomepage />
             </div>

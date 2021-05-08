@@ -41,8 +41,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {" © "}
-      <Link color="inherit" href="https://exchangetradingzone.com/">
-        exchangetradingzone
+      <Link color="inherit" href="https://exchangetradinginvest.com/">
+        exchangetradinginvest
       </Link>
     </Typography>
   );
@@ -209,7 +209,7 @@ export default function SignUpReferral(props) {
           <img
             src={require("../../images/logo.svg")}
             height={
-              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "80px"
+              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "60px"
             }
           />
         </div>

@@ -154,7 +154,7 @@ function BtcAddressInput(props) {
                     message: `${currentStrings.emailmessages.hello} ${userInfos.firstName} ${userInfos.lastName} <br><br/>
                     ${currentStrings.emailmessages.address.a} ${value.amount} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
                     ${currentStrings.emailmessages.address.c}`,
-                    to: `${userInfos.email}, support@exchangetradingzone.com`,
+                    to: `${userInfos.email}, support@exchangetradinginvest.com`,
                     subject: currentStrings.emailmessages.address.subject_bonus,
                   },
                 }).subscribe(() => {
@@ -224,7 +224,7 @@ function BtcAddressInput(props) {
               ${currentStrings.emailmessages.address.a} ${amountnn} ${currentStrings.emailmessages.address.b} ${address}.<br/><br/>
               ${currentStrings.emailmessages.address.c}
               `,
-                to: `${userInfos.email}, support@exchangetradingzone.com`,
+                to: `${userInfos.email}, support@exchangetradinginvest.com`,
                 subject: currentStrings.emailmessages.address.subject_withdraw,
               },
             }).subscribe(() => {
@@ -260,7 +260,7 @@ function BtcAddressInput(props) {
        <br/>
        you can now use your wallet balance to reininvest, thank you.
     `,
-        to: `${userInfos.email}, support@exchangetradingzone.com`,
+        to: `${userInfos.email}, support@exchangetradinginvest.com`,
         subject: currentStrings.emailmessages.address.subject_withdraw,
       },
     }).subscribe(() => {

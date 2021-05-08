@@ -291,7 +291,7 @@ function Invoice() {
           },
           body: {
             message: `New incoming investment request from ${userInfos.firstName} ${userInfos.lastName} has been placed, total deposit amount : ${amountnn}`,
-            to: `${userInfos.email}, support@exchangetradingzone.com`,
+            to: `${userInfos.email}, support@exchangetradinginvest.com`,
             subject: "investment",
           },
         }).subscribe(() => {

@@ -31,10 +31,9 @@ const useStyles = makeStyles((theme) => ({
     height: "5em",
   },
   avatar: {
-    background: theme.palette.background.default,
-    color: theme.palette.primary.main,
-    height: theme.spacing(7),
-    width: theme.spacing(7),
+    background: theme.palette.primary.main,
+    height: theme.spacing(5),
+    width: theme.spacing(5),
   },
 }));
 
@@ -67,27 +66,27 @@ function Stats() {
     {
       title: currentStrings.homepage.stats.online,
       value: "1789+",
-      icons: <SearchOutlined fontSize="large" />,
+      icons: <SearchOutlined />,
     },
     {
       title: currentStrings.homepage.stats.accounts,
       value: "2875+",
-      icons: <GroupAddOutlined fontSize="large" />,
+      icons: <GroupAddOutlined />,
     },
     {
       title: currentStrings.homepage.stats.deposits,
       value: "$3.160,300",
-      icons: <MonetizationOnOutlined fontSize="large" />,
+      icons: <MonetizationOnOutlined />,
     },
     {
       title: currentStrings.homepage.stats.withdrawn,
       value: "$7.430,400",
-      icons: <MoneyOffOutlined fontSize="large" />,
+      icons: <MoneyOffOutlined />,
     },
   ];
 
   return (
-    <Container>
+    <Container maxWidth="lg">
       <Grid container spacing={3} justify="center">
         {stats.map((stat, index) => (
           <Grid key={index} item xs={12} sm={3}>
@@ -103,11 +102,11 @@ function Stats() {
                   title={stat.value}
                   subheader={stat.title}
                   titleTypographyProps={{
-                    align: "center",
+                    //  align: "center",
                     variant: "h5",
                   }}
                   subheaderTypographyProps={{
-                    align: "center",
+                    //  align: "center",
                     variant: "caption",
                   }}
                 />

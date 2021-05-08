@@ -71,8 +71,8 @@ export default function WithdrawTable() {
   }, []);
 
   return (
-    <TableContainer // className={classes.container}>
-    >
+ 
+    
       <Table aria-label="sticky table">
         <TableBody>
           {withdrawal.slice(0, 5).map((trans, index) => (
@@ -104,6 +104,6 @@ export default function WithdrawTable() {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    
   );
 }

@@ -80,7 +80,7 @@ function VerifyEmail() {
           <img
             src={require("../../images/logo.svg")}
             height={
-              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "80px"
+              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "60px"
             }
           />
         </div>

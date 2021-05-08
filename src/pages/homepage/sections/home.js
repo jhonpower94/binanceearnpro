@@ -84,7 +84,7 @@ function Home(props) {
         <Activities />
       </div>
 
-      <div style={{ background: "#161b22" }}>
+      <div >
         <Stats />
       </div>
       <Calculator />

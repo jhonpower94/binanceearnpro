@@ -12,5 +12,17 @@
     "ct": "cointradecenter-ad3f5",
     "skima": "skimasite",
     "sk": "skimasite"
+  },
+  "targets": {
+    "skimasite": {
+      "hosting": {
+        "exchange": [
+          "exchangetrading"
+        ],
+        "skima": [
+          "skimasite"
+        ]
+      }
+    }
   }
 }

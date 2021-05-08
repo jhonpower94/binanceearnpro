@@ -33,7 +33,7 @@ import firebase, { app } from "../../config";
 import { addUsers } from "../../config/services";
 import { dispatch } from "rxjs/internal/observable/pairs";
 import { navigate } from "@reach/router";
-import Copyright  from "./copyright";
+import Copyright from "./copyright";
 import { reactLocalStorage } from "reactjs-localstorage";
 var cc = require("currency-codes");
 
@@ -145,7 +145,7 @@ export default function SignUp() {
       referrer: false,
       registered: firebase.firestore.FieldValue.serverTimestamp(),
       countrycode: intro.countrycode,
-      currencycode: "USD" // currentCountry.currencycode,
+      currencycode: "USD", // currentCountry.currencycode,
     };
     app
       .auth()
@@ -185,7 +185,7 @@ export default function SignUp() {
           <img
             src={require("../../images/logo.svg")}
             height={
-              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "80px"
+              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "60px"
             }
           />
         </div>
@@ -232,7 +232,7 @@ export default function SignUp() {
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControl variant="outlined" fullWidth>
+              <FormControl variant="outlined" fullWidth required>
                 <InputLabel htmlFor="outlined-adornment-password">
                   {currentStrings.account.password}
                 </InputLabel>
@@ -258,7 +258,6 @@ export default function SignUp() {
                     </InputAdornment>
                   }
                   labelWidth={70}
-                  required
                 />
               </FormControl>
             </Grid>

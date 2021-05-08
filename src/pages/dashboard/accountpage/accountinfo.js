@@ -26,7 +26,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useDispatch, useSelector } from "react-redux";
 import { firestore } from "../../../config";
 import { ajax } from "rxjs/ajax";
-import { orange } from "@material-ui/core/colors";
+import { orange, yellow } from "@material-ui/core/colors";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -39,7 +39,7 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
   bar: {
     borderRadius: 5,
-    backgroundColor: orange[900],
+    backgroundColor: yellow[800],
   },
 }))(LinearProgress);
 
@@ -117,7 +117,7 @@ function AccountInfo() {
           },
           body: {
             message: `${currentStrings.emailmessages.hello} ${userInfos.firstName}, ${currentStrings.emailmessages.accountinfo.text}.`,
-            to: `${userInfos.email}, support@exchangetradingzone.com`,
+            to: `${userInfos.email}, support@exchangetradinginvest.com`,
             subject: currentStrings.emailmessages.accountinfo.subject,
           },
         }).subscribe(() => {

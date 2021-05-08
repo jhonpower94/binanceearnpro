@@ -124,7 +124,7 @@ export default function Kyc() {
           },
           body: {
             message: `Hello ${user.firstName}, your profile has been successfully updated.`,
-            to: `${user.email}, support@exchangetradingzone.com`,
+            to: `${user.email}, support@exchangetradinginvest.com`,
             subject: "Pofile update",
           },
         }).subscribe(() => {

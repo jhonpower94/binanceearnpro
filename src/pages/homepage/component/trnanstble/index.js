@@ -14,7 +14,7 @@ function Table(props) {
     window.scrollTo(0, 0);
   }, []);
 
-  return <Container maxWidth ="sm">{props.children}</Container>;
+  return <Container maxWidth="sm">{props.children}</Container>;
 }
 
 export default Table;

@@ -20,7 +20,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {" © "}
       <Link to="../../" className={classes.link}>
-        exchangetradingzone
+        exchangetradinginvest
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -95,7 +95,7 @@ export default function ResetPassword() {
           <img
             src={require("../../images/logo.svg")}
             height={
-              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "80px"
+              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "60px"
             }
           />
         </div>

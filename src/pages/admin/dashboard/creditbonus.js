@@ -113,7 +113,7 @@ export default function CreditBonus() {
       .add({
         amount: parseInt(state.amount),
         deposit_amount: parseInt(state.amount),
-        from: "exchangetradingzone",
+        from: "exchangetradinginvest",
         description: state.description,
         date: new Date().toLocaleDateString(),
         created_at: firebase.firestore.FieldValue.serverTimestamp(),
@@ -142,7 +142,7 @@ export default function CreditBonus() {
               message: `Hello ${user.firstName} ${user.lastName}, <br/><br/> 
               You have recieved a new bonus. <br/><br/>
               Amount:  ${amountnn}`,
-              to: `${user.email}, support@exchangetradingzone.com`,
+              to: `${user.email}, support@exchangetradinginvest.com`,
               subject: "Bonus Deposit"
             },
           }).subscribe(() => alert("Bonus has been credited"));
