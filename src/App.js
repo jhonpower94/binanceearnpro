@@ -205,7 +205,7 @@ function App() {
         default: "#0d1117",
         paper: "#09132e",
       },
-      
+
       contrastThreshold: 1,
     },
   });
