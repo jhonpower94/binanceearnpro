@@ -192,7 +192,11 @@ function Account() {
         </Grid>
 
         <Grid item xs={12} sm={12}>
-          <ChartsPage />
+          <coingecko-coin-compare-chart-widget
+            coin-ids="bitcoin,ethereum,eos,ripple,litecoin"
+            currency="usd"
+            locale="en"
+          ></coingecko-coin-compare-chart-widget>
         </Grid>
 
         {profileData.map((data, index) => (

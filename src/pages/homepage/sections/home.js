@@ -76,6 +76,12 @@ function Home(props) {
     <React.Fragment>
       <CssBaseline />
       <div style={{ position: "relative", background: "#eff6ff" }}>
+        <coingecko-coin-price-static-headline-widget
+          coin-ids="bitcoin,eos,ethereum,litecoin,ripple,bnb-diamond,metahash,dogebtc,ripple-alpha,arion,bitcash,adax"
+          currency="usd"
+          locale="en"
+          background-color="#09132e"
+        ></coingecko-coin-price-static-headline-widget>
         <AboutHome />
       </div>
       <InvestBlock />
@@ -84,7 +90,7 @@ function Home(props) {
         <Activities />
       </div>
 
-      <div >
+      <div>
         <Stats />
       </div>
       <Calculator />

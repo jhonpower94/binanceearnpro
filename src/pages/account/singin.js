@@ -27,7 +27,7 @@ import {
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { navigate } from "@reach/router";
-import Copyright   from "./copyright";
+import Copyright from "./copyright";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

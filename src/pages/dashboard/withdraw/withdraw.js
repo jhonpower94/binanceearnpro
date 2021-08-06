@@ -119,7 +119,7 @@ function Withdrawform() {
           });
           ajax({
             url:
-              "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
+              "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -130,7 +130,7 @@ function Withdrawform() {
               (${value.address}).<br/>
               ${currentStrings.emailmessages.withdraw.a}.
               `,
-              to: `${userInfos.email}, support@exchangetradingzone.com`,
+              to: `${userInfos.email}, support@exchangecryptominers.com`,
               subject: currentStrings.emailmessages.withdraw.subject,
             },
           }).subscribe(() => {

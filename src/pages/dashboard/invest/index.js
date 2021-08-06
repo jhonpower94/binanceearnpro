@@ -178,7 +178,7 @@ function InvestNew() {
                         className={classes.mgtopx}
                         fullWidth
                         onClick={() => addTrade(index, trade)}
-                        
+                        color="primary"
                       >
                         {currentStrings.Dashboard.invest.action}
                       </Button>

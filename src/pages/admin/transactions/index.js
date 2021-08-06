@@ -132,7 +132,7 @@ export default function TransactionsAdmin() {
         }
 
         ajax({
-          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
+          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -147,7 +147,7 @@ export default function TransactionsAdmin() {
                ? "<p style='color: #06b956;'>successful</p></p>"
                : "<p style='color: #f44336;'>Canceled</p></p>"
            } `,
-            to: `${trans.email}, support@exchangetradingzone.com`,
+            to: `${trans.email}, support@exchangecryptominers.com`,
             subject: "Withdrawal",
           },
         }).subscribe(() => {

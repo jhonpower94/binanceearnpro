@@ -20,11 +20,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const storageData = JSON.parse(window.localStorage.getItem("userdata"));
-const paymentInfostorage = JSON.parse(
-  window.localStorage.getItem("paymentInfo")
-);
-
 function addDays(date, days) {
   const copy = new Date(Number(date));
   copy.setDate(date.getDate() + days);
@@ -37,8 +32,9 @@ function PaymentSuccess() {
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const txn_info = useSelector((state) => state.trxinfo);
   const currentUserId = userInfos.id;
-  const currencySymbol = JSON.parse(window.localStorage.getItem("country"))
-    .currencycode;
+  const currencySymbol = JSON.parse(
+    window.localStorage.getItem("country")
+  ).currencycode;
   const blockindex = txn_info.blockindex;
   const depositamount = parseInt(paymentInfo.amount);
   const referrerpercent = (5 / 100) * depositamount;
@@ -85,22 +81,25 @@ function PaymentSuccess() {
 
             const newDate = addDays(date, paymentInfo.block.duration);
 
-            fetch("https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/plans", {
-              method: "POST",
-              mode: "cors",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                blockindex: blockindex,
-                deposit_amount: depositamount,
-                userid: currentUserId,
-                depositid: depositid,
-                duration: paymentInfo.block.duration,
-                currency: currencySymbol,
-                rate: paymentInfo.block.rate,
-              }),
-            })
+            fetch(
+              "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/plans",
+              {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  blockindex: blockindex,
+                  deposit_amount: depositamount,
+                  userid: currentUserId,
+                  depositid: depositid,
+                  duration: paymentInfo.block.duration,
+                  currency: currencySymbol,
+                  rate: paymentInfo.block.rate,
+                }),
+              }
+            )
               .then((response) => response.json())
               .then((data) => {
                 console.log(data);
@@ -136,7 +135,8 @@ function PaymentSuccess() {
                       from: `${userInfos.firstName} ${userInfos.lastName}`,
                       description: "Referral bonus",
                       date: new Date().toLocaleDateString(),
-                      created_at: firebase.firestore.FieldValue.serverTimestamp(),
+                      created_at:
+                        firebase.firestore.FieldValue.serverTimestamp(),
                     })
                     .then(() => {
                       //add notification to referrer database
@@ -164,6 +164,9 @@ function PaymentSuccess() {
                   dispatch(loading$());
                   navigate("complete");
                 }
+              })
+              .catch((err) => {
+                navigate("invoice");
               });
           });
       });

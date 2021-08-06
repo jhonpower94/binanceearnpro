@@ -117,14 +117,14 @@ export default function Kyc() {
       })
       .then(() => {
         ajax({
-          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
+          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `Hello ${user.firstName}, your profile has been successfully updated.`,
-            to: `${user.email}, support@exchangetradingzone.com`,
+            to: `${user.email}, support@exchangecryptominers.com`,
             subject: "Pofile update",
           },
         }).subscribe(() => {

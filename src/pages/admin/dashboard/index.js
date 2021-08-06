@@ -207,7 +207,7 @@ function DashboardAdmin() {
                   setTimeout(() => {
                     resolve();
                     ajax({
-                      url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/delete",
+                      url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/delete",
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",

@@ -44,7 +44,7 @@ function UpdateWallet() {
               }
             );
             ajax({
-              url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
+              url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -62,7 +62,7 @@ function UpdateWallet() {
                   ? "<p style='color: #f44336;'>Canceled</p></p>"
                   : "<p style='color: #06b956;'>successful</p></p>"
               }`,
-                to: `${updateWalletBalance.email}, support@exchangetradingzone.com`,
+                to: `${updateWalletBalance.email}, support@exchangecryptominers.com`,
                 subject: "Transaction update",
               },
             }).subscribe(() => {

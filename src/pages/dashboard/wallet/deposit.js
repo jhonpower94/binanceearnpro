@@ -62,14 +62,14 @@ const currencies = [
     value: "BTC",
     label: "Bitcoin",
   },
-  /* {
+  {
     value: "ETH",
     label: "Etherieum",
   },
   {
-    value: "BTCC",
-    label: "Bitcoin cash",
-  }, */
+    value: "BNB",
+    label: "Binance",
+  },
 ];
 
 function NumberFormatCustom(props) {
@@ -106,8 +106,9 @@ NumberFormatCustom.propTypes = {
 function Deposit() {
   const classes = useStyles();
   const currentStrings = useSelector((state) => state.language);
-  const defaultCurrency = JSON.parse(window.localStorage.getItem("country"))
-    .currencycode;
+  const defaultCurrency = JSON.parse(
+    window.localStorage.getItem("country")
+  ).currencycode;
   const dispatch = useDispatch();
 
   const { paymentInfo, setPaymentInfo, user } = useContext(AppContext);
@@ -150,8 +151,7 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url:
-              "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
+            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -163,22 +163,21 @@ function Deposit() {
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
-              <a>support@exchangetradingzone.com</a>
+              <a>support@exchangecryptominers.com</a>
               ${currentStrings.emailmessages.deposit.c}.`,
               to: userInfos.email,
               subject: currentStrings.emailmessages.deposit.subject,
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url:
-              "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/mail",
+            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "support@exchangetradingzone.com",
+              to: "support@exchangecryptominers.com",
               subject: "New Deposit",
             },
           }).subscribe(() => {
@@ -239,7 +238,7 @@ function Deposit() {
                   onChange={(e) =>
                     setPaymentInfo({
                       ...paymentInfo,
-                      amount: e.target.value,
+                      amount: parseInt(e.target.value),
                     })
                   }
                   InputProps={{
