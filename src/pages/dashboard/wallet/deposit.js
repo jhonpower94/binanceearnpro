@@ -67,8 +67,8 @@ const currencies = [
     label: "Etherieum",
   },
   {
-    value: "BNB",
-    label: "Binance",
+    value: "USDT",
+    label: "USDT",
   },
 ];
 
@@ -159,7 +159,7 @@ function Deposit() {
             body: {
               message: `${currentStrings.emailmessages.deposit.a}:  
               <br/><br/>
-              1DngXH6C41MmBdRTff2vftKanrd8UHfY2Q
+              ${paymentInfo.cryptoType}
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 

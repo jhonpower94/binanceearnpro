@@ -11,7 +11,8 @@
     "cryptotrade": "cointradecenter-ad3f5",
     "ct": "cointradecenter-ad3f5",
     "skima": "skimasite",
-    "sk": "skimasite"
+    "sk": "skimasite",
+    "exch": "hotblocks-140ad"
   },
   "targets": {
     "skimasite": {

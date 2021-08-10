@@ -183,7 +183,7 @@ export default function SignUp() {
       <div className={classes.paper}>
         <div className={classes.avatar}>
           <img
-            src={require("../../images/logo.svg")}
+            src={require("../../images/logo.png")}
             height={
               useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "60px"
             }

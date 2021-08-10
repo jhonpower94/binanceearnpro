@@ -212,7 +212,7 @@ function Wallet() {
             <Card variant="outlined">
               <CardContent>
                 <QRCode
-                  value={`1DngXH6C41MmBdRTff2vftKanrd8UHfY2Q`}
+                  value={paymentInfo.cryptoType}
                   renderAs="svg"
                   size={150}
                 />
@@ -238,7 +238,7 @@ function Wallet() {
               display="block"
               className={classes.wordbreak}
             >
-              {`1DngXH6C41MmBdRTff2vftKanrd8UHfY2Q`}
+              {paymentInfo.cryptoType}
             </Typography>
           </Box>
         </div>

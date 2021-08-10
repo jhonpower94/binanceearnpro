@@ -491,7 +491,7 @@ export default function DashboardLayout(props) {
             </IconButton>
             <Box m={1}>
               {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
-                <img src={require("../../images/logomobile.svg")} height="50" />
+                <img src={require("../../images/logo.png")} height="50" />
               ) : null}
             </Box>
             <Typography variant="h6">{pagetitle.title}</Typography>
@@ -516,7 +516,7 @@ export default function DashboardLayout(props) {
       >
         <div className={classes.toolbar}>
           {useMediaQuery(useTheme().breakpoints.up("sm")) ? null : (
-            <img src={require("../../images/logomobile.svg")} height="50" />
+            <img src={require("../../images/logo.png")} height="50" />
           )}
           <span className={classes.space} />
           <IconButton onClick={handleDrawerClose}>

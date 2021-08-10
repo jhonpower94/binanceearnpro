@@ -183,7 +183,7 @@ function FooterHomepage() {
         flexDirection="column"
         alignItems="center"
       >
-        <img src={require("../../images/logomobile.svg")} width="50" />
+        <img src={require("../../images/logo.png")} width="50" />
 
         <Typography variant="caption">
           &copy; exchangecryptominers LLC, {new Date().getFullYear()}.

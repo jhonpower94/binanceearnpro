@@ -115,7 +115,7 @@ function InvestNew() {
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               <Grid item xs={12} sm={4}>
-                <Card variant="outlined" >
+                <Card variant="outlined">
                   <CardHeader
                     title={trade.name}
                     titleTypographyProps={{ align: "center" }}
@@ -203,7 +203,7 @@ function InvestNew() {
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               <Grid item xs={12} sm={4}>
-                <Card variant="outlined" >
+                <Card variant="outlined">
                   <CardHeader
                     title={trade.name}
                     titleTypographyProps={{ align: "center" }}
@@ -248,10 +248,14 @@ function InvestNew() {
                     <ListItem>
                       <ListItemText
                         primary={currentStrings.Dashboard.invest.Minimun_stake}
-                        secondary={formatLocaleCurrency(
-                          trade.lot,
-                          userInfos.currencycode
-                        )}
+                        secondary={
+                          trade.rate == 50
+                            ? "Unlimited"
+                            : formatLocaleCurrency(
+                                trade.lot,
+                                userInfos.currencycode
+                              )
+                        }
                         primaryTypographyProps={{ align: "center" }}
                         secondaryTypographyProps={{
                           variant: "h5",

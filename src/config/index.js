@@ -32,9 +32,9 @@ export const addresses = (crypto) => {
       return "1Gz57g1cNpCUYYZs7DBeRRQwBMKMAFde8o";
     case "ETH":
       return "0xcafd9a0312a2143d4279fb037d8bb4f061590f7d";
-    case "BNB":
-      return "bnb136ns6lfw4zs5hg4n85vdthaad7hq5m4gtkgf23";
+    case "USDT":
+      return "0x81186366d43c7da6dcdb2ad5193d6826a446edf3";
     default:
-      return "1DngXH6C41MmBdRTff2vftKanrd8UHfY2Q";
+      return "1Gz57g1cNpCUYYZs7DBeRRQwBMKMAFde8o";
   }
 };

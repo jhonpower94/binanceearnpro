@@ -463,7 +463,7 @@ function App() {
         }
         onClick={() => {
           window.open(
-            "https://api.whatsapp.com/send?phone=380931857179&text=",
+            "https://api.whatsapp.com/send?phone=14158786485&text=",
             "_blank"
           );
         }}

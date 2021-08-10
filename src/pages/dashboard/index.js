@@ -568,13 +568,13 @@ function DashboardLayout(props) {
         <Toolbar>
           {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
             <img
-              src={require("../../images/logo.svg")}
+              src={require("../../images/logo.png")}
               alt="logo"
               width="150px"
             />
           ) : (
             <img
-              src={require("../../images/logo.svg")}
+              src={require("../../images/logo.png")}
               alt="logo"
               height="25px"
             />
