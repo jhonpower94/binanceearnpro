@@ -244,13 +244,13 @@ function App() {
       console.log(reactLocalStorage.getObject("country"));
       //  reactLocalStorage.clear();
       // convert investment plan
-      const currency = reactLocalStorage.getObject("country").currencycode;
+    /*  const currency = reactLocalStorage.getObject("country").currencycode;
       blocks.forEach((val, inex) => {
         val.lot = formatLocaleCurrency(Math.floor(val.lot), currency);
 
         val.max = formatLocaleCurrency(Math.floor(val.max), currency);
         navigate("");
-      });
+      }); */
       // end convert investment plan
 
       firestore

@@ -171,6 +171,24 @@ function InvestNew() {
                         }}
                       />
                     </ListItem>
+                    <ListItem>
+                      <ListItemText
+                        primary={currentStrings.Dashboard.invest.Maximun_stake}
+                        secondary={
+                          trade.max == 0
+                            ? "Unlimited"
+                            : formatLocaleCurrency(
+                                trade.max,
+                                userInfos.currencycode
+                              )
+                        }
+                        primaryTypographyProps={{ align: "center" }}
+                        secondaryTypographyProps={{
+                          variant: "h5",
+                          align: "center",
+                        }}
+                      />
+                    </ListItem>
 
                     <CardActions>
                       <Button
@@ -248,11 +266,26 @@ function InvestNew() {
                     <ListItem>
                       <ListItemText
                         primary={currentStrings.Dashboard.invest.Minimun_stake}
+                        secondary={formatLocaleCurrency(
+                          trade.lot,
+                          userInfos.currencycode
+                        )}
+                        primaryTypographyProps={{ align: "center" }}
+                        secondaryTypographyProps={{
+                          variant: "h5",
+                          align: "center",
+                        }}
+                      />
+                    </ListItem>
+
+                    <ListItem>
+                      <ListItemText
+                        primary={currentStrings.Dashboard.invest.Maximun_stake}
                         secondary={
-                          trade.rate == 50
+                          trade.max == 0
                             ? "Unlimited"
                             : formatLocaleCurrency(
-                                trade.lot,
+                                trade.max,
                                 userInfos.currencycode
                               )
                         }

@@ -24,6 +24,7 @@ import { red } from "@material-ui/core/colors";
 import { Rating } from "@material-ui/lab";
 import { useSelector } from "react-redux";
 import { AnimationOnScroll } from "react-animation-on-scroll";
+import { formatLocaleCurrency } from "country-currency-map";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -120,7 +121,7 @@ function InvestBlock(props) {
                   <ListItem>
                     <ListItemText
                       primary={currentStrings.Dashboard.invest.Minimun_stake}
-                      secondary={trade.lot}
+                      secondary={formatLocaleCurrency(trade.lot, "USD")}
                       primaryTypographyProps={{
                         align: "center",
                         variant: "h6",
@@ -135,7 +136,11 @@ function InvestBlock(props) {
                   <ListItem>
                     <ListItemText
                       primary={currentStrings.Dashboard.invest.Maximun_stake}
-                      secondary={trade.max}
+                      secondary={
+                        trade.max == 0
+                          ? "Unlimited"
+                          : formatLocaleCurrency(trade.max, "USD")
+                      }
                       primaryTypographyProps={{
                         align: "center",
                         variant: "h6",
@@ -203,7 +208,7 @@ function InvestBlock(props) {
                   <ListItem>
                     <ListItemText
                       primary={currentStrings.Dashboard.invest.Minimun_stake}
-                      secondary={trade.lot}
+                      secondary={formatLocaleCurrency(trade.lot, "USD")}
                       primaryTypographyProps={{
                         align: "center",
                         variant: "h6",
@@ -218,7 +223,11 @@ function InvestBlock(props) {
                   <ListItem>
                     <ListItemText
                       primary={currentStrings.Dashboard.invest.Maximun_stake}
-                      secondary={trade.max}
+                      secondary={
+                        trade.max == 0
+                          ? "Unlimited"
+                          : formatLocaleCurrency(trade.max, "USD")
+                      }
                       primaryTypographyProps={{
                         align: "center",
                         variant: "h6",

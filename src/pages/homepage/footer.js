@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../App";
-import { Telegram, Twitter } from "@material-ui/icons";
+import { Telegram, Twitter, WhatsApp } from "@material-ui/icons";
 
 import {
   makeStyles,
@@ -30,20 +30,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const downloads = [
+const socials = [
   {
     title: "Facebook",
-    image: <Icon className="fa fa-facebook-f" style={{ color: blue[500] }} />,
+    image: <WhatsApp htmlColor={blue[500]} />,
+    link: "",
     color: blue[800],
   },
   {
     title: "Twitter",
     image: <Twitter htmlColor={blue[500]} />,
+    link: "",
     color: "#fff",
   },
   {
     title: "Telegram",
     image: <Telegram htmlColor={blue[500]} />,
+    link: "https://t.me/joinchat/faETEzv1ktVkMjdh",
     color: blue[500],
   },
 ];
@@ -137,7 +140,7 @@ function FooterHomepage() {
       </Grid>
       <Divider variant="middle" className={classes.margintop} />
       <Grid container spacing={3} justify="center">
-        {downloads.map((download, index) => (
+        {socials.map((download, index) => (
           <Grid key={index} item xs={4} sm={2}>
             <Box
               className={classes.margintop}
@@ -145,7 +148,15 @@ function FooterHomepage() {
               flexDirection="column"
               alignItems="center"
             >
-              <Avatar style={{ background: "#fff" }}>{download.image}</Avatar>
+              <Avatar
+                style={{ background: "#fff" }}
+                onClick={() => {
+                  if (download.link === "") return;
+                  window.location.href = download.link;
+                }}
+              >
+                {download.image}
+              </Avatar>
               <Typography>{download.title}</Typography>
             </Box>
           </Grid>

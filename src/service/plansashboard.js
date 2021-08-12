@@ -2,12 +2,12 @@ export const investmentplans = [
   {
     name: "Silver Plan",
     //  title: currentStrings.Dashboard.invest.plan_title.a,
-    rate: 5,
+    rate: 8,
     min_rate: 5,
     max_rate: 10,
     duration: 14,
     lot: 100,
-    max: 5000,
+    max: 4999,
     hrs: 24,
   },
   {
@@ -17,8 +17,8 @@ export const investmentplans = [
     min_rate: 15,
     max_rate: 25,
     duration: 28,
-    lot: 5100,
-    max: 10000,
+    lot: 5000,
+    max: 9999,
     hrs: 48,
   },
   {
@@ -29,7 +29,7 @@ export const investmentplans = [
     max_rate: 40,
     duration: 24,
     lot: 10000,
-    max: 25000,
+    max: 0, //  25000,
     hrs: 96,
   },
 
@@ -40,10 +40,10 @@ export const investmentplans = [
     rate: 15,
     min_rate: 5,
     max_rate: 10,
-    duration: 24,
+    duration: 34,
     lot: 1000,
-    max: 10000,
-    hrs: 96,
+    max: 9999,
+    hrs: 48,
   },
   {
     name: "Gold Plan",
@@ -53,7 +53,7 @@ export const investmentplans = [
     max_rate: 25,
     duration: 24,
     lot: 10000,
-    max: 15000,
+    max: 29000,
     hrs: 96,
   },
   {
@@ -63,8 +63,8 @@ export const investmentplans = [
     min_rate: 30,
     max_rate: 40,
     duration: 34,
-    lot: 15000,
-    max: 25000,
+    lot: 30000,
+    max: 0,
     hrs: 96,
   },
 ];
