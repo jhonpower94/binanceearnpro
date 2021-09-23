@@ -82,7 +82,7 @@ function PaymentSuccess() {
             const newDate = addDays(date, paymentInfo.block.duration);
 
             fetch(
-              "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/plans",
+              "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/plans",
               {
                 method: "POST",
                 mode: "cors",

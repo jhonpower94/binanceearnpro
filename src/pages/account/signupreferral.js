@@ -41,7 +41,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {" © "}
-      <Link color="inherit" href="https://exchangecryptominers.com/">
+      <Link color="inherit" href="https://exchangetradingzone.com/">
         exchangecryptominers
       </Link>
     </Typography>
@@ -171,7 +171,7 @@ export default function SignUpReferral(props) {
           const getreferrerdata = firestore.doc(`users/${id}`);
           docData(getreferrerdata, "id").subscribe((data) => {
             ajax({
-              url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/mail",
+              url: "https://skimasite.herokuapp.com/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -207,9 +207,9 @@ export default function SignUpReferral(props) {
       <div className={classes.paper}>
         <div className={classes.avatar}>
           <img
-            src={require("../../images/logo.png")}
+            src={require("../../images/logomobile.svg")}
             height={
-              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "60px"
+              useMediaQuery(useTheme().breakpoints.up("sm")) ? "80px" : "80px"
             }
           />
         </div>

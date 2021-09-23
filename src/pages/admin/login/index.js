@@ -32,7 +32,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {" © "}
-      <Link color="inherit" href="https://exchangecryptominers.com">
+      <Link color="inherit" href="https://exchangetradingzone.com">
       exchangecryptominers
       </Link>{" "}
       {new Date().getFullYear()}
@@ -133,7 +133,7 @@ export default function SignInAdmin() {
       <div className={classes.paper}>
         <div className={classes.avatar}>
           <img
-            src={require("../../../images/logo.png")}
+            src={require("../../../images/logo.svg")}
             height={
               useMediaQuery(useTheme().breakpoints.up("sm")) ? "70px" : "50px"
             }

@@ -1,80 +1,71 @@
-import React, { useEffect, useState, createContext } from "react";
+import { Fab, useMediaQuery, useTheme } from "@material-ui/core";
+import { yellow } from "@material-ui/core/colors";
 import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
+import { Telegram, WhatsApp } from "@material-ui/icons";
+import { jssPreset, StylesProvider, ThemeProvider } from "@material-ui/styles";
+import { Router } from "@reach/router";
+import detectBrowserLanguage from "detect-browser-language";
+import { Converter } from "easy-currencies";
 import { create } from "jss";
 import rtl from "jss-rtl";
-import { jssPreset, StylesProvider, ThemeProvider } from "@material-ui/styles";
-import { blue, yellow } from "@material-ui/core/colors";
-import { navigate, Router } from "@reach/router";
-import HomeLayout from "./pages/homepage";
-import DashboardLayout from "./pages/dashboard/indexnew";
-import AccountLayout from "./pages/account";
-import AccountSettings from "./pages/dashboard/accountsettings";
-import DashboardPage from "./pages/dashboard/accountpage/indexnew";
-import MyInvestments from "./pages/dashboard/allinvestments";
-import Wallet from "./pages/dashboard/wallet";
-import Profile from "./pages/dashboard/profile";
-import CreditWallet from "./pages/dashboard/wallet/payment";
-import CreditSucess from "./pages/dashboard/wallet/creditsuccess";
-import Invest from "./pages/dashboard/invest/indexnew";
-import Withdrawals from "./pages/dashboard/withdraw";
-import Investment from "./pages/dashboard/invest/myinvestments";
-import Invoice from "./pages/dashboard/invest/invoice";
-import Support from "./pages/dashboard/support";
-import Transactions from "./pages/dashboard/transactions";
-import WithdrawBonus from "./pages/dashboard/withdraw/bonus";
-import Withdrawform from "./pages/dashboard/withdraw/withdraw";
-import SignIn from "./pages/account/singin";
-import SignUp from "./pages/account/signup";
-import SignUpReferral from "./pages/account/signupreferral";
-import VerifyEmail from "./pages/account/verifyemail";
-import VerifyEmailSent from "./pages/account/sentverification";
-import ResetPassword from "./pages/account/resetpass";
-import SignInAdmin from "./pages/admin/login";
-import DashboardAdmin from "./pages/admin/dashboard";
-import InvestBlock from "./pages/homepage/sections/investblock";
-import Home from "./pages/homepage/sections/home";
-import Faqs from "./pages/homepage/sections/faq";
-import About from "./pages/homepage/sections/aboutus";
-import Locations from "./pages/homepage/sections/locations";
-import BlocDatas from "./pages/homepage/sections/blockdata";
-import Contactus from "./pages/homepage/sections/contactus";
-import Guide from "./pages/homepage/sections/guide";
-import Downloads from "./pages/homepage/sections/downloads";
-import Security from "./pages/homepage/sections/security";
+import React, { createContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { Fab, Action } from "react-tiny-fab";
+import "react-tiny-fab/dist/styles.css";
 import { reactLocalStorage } from "reactjs-localstorage";
-import Kyc from "./pages/admin/kyc";
-import CreditBonus from "./pages/admin/dashboard/creditbonus";
-import DeleteUsers from "./pages/admin/dashboard/deleteuser";
-import Investments from "./pages/admin/investments";
-import TransactionsAdmin from "./pages/admin/transactions";
-import UpdateWallet from "./pages/admin/transactions/updatewallet";
+import Complete from "./components/complete";
 import Payment from "./components/payment";
 import PaymentSuccess from "./components/successpayment";
-import Complete from "./components/complete";
+import { firestore } from "./config";
+import { Strings } from "./lang/language";
+import AccountLayout from "./pages/account";
+import ResetPassword from "./pages/account/resetpass";
+import VerifyEmailSent from "./pages/account/sentverification";
+import SignUp from "./pages/account/signup";
+import SignUpReferral from "./pages/account/signupreferral";
+import SignIn from "./pages/account/singin";
+import VerifyEmail from "./pages/account/verifyemail";
 import AdminLayout from "./pages/admin";
+import DashboardAdmin from "./pages/admin/dashboard";
+import CreditBonus from "./pages/admin/dashboard/creditbonus";
+import DeleteUsers from "./pages/admin/dashboard/deleteuser";
+import UpdateCurrency from "./pages/admin/dashboard/updatecurrency";
+import Investments from "./pages/admin/investments";
+import Kyc from "./pages/admin/kyc";
+import SignInAdmin from "./pages/admin/login";
+import TransactionsAdmin from "./pages/admin/transactions";
+import UpdateWallet from "./pages/admin/transactions/updatewallet";
+import DashboardPage from "./pages/dashboard/accountpage/indexnew";
+import AccountSettings from "./pages/dashboard/accountsettings";
+import MyInvestments from "./pages/dashboard/allinvestments";
+import DashboardLayout from "./pages/dashboard/indexnew";
+import Invest from "./pages/dashboard/invest/indexnew";
+import Invoice from "./pages/dashboard/invest/invoice";
+import Investment from "./pages/dashboard/invest/myinvestments";
+import Profile from "./pages/dashboard/profile";
+import Support from "./pages/dashboard/support";
+import Transactions from "./pages/dashboard/transactions";
+import Wallet from "./pages/dashboard/wallet";
+import CreditSucess from "./pages/dashboard/wallet/creditsuccess";
+import CreditWallet from "./pages/dashboard/wallet/payment";
+import Withdrawals from "./pages/dashboard/withdraw";
+import WithdrawBonus from "./pages/dashboard/withdraw/bonus";
+import Withdrawform from "./pages/dashboard/withdraw/withdraw";
+import HomeLayout from "./pages/homepage";
 import Tables from "./pages/homepage/component/trnanstble";
 import DepositTable from "./pages/homepage/component/trnanstble/depositable";
 import WithdrawTable from "./pages/homepage/component/trnanstble/withdrawtable";
-import { ajax } from "rxjs/ajax";
-import { useDispatch, useSelector } from "react-redux";
+import About from "./pages/homepage/sections/aboutus";
+import BlocDatas from "./pages/homepage/sections/blockdata";
+import Contactus from "./pages/homepage/sections/contactus";
+import Downloads from "./pages/homepage/sections/downloads";
+import Faqs from "./pages/homepage/sections/faq";
+import Guide from "./pages/homepage/sections/guide";
+import Home from "./pages/homepage/sections/home";
+import InvestBlock from "./pages/homepage/sections/investblock";
+import Locations from "./pages/homepage/sections/locations";
+import Security from "./pages/homepage/sections/security";
 import { language$, loading$ } from "./redux/action";
-import { Converter } from "easy-currencies";
-import { blocks } from "./service/tradeblocks";
-import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
-import { Strings } from "./lang/language";
-import detectBrowserLanguage from "detect-browser-language";
-import { firestore } from "./config";
-
-import {
-  ForumSharp,
-  MessageSharp,
-  Telegram,
-  WhatsApp,
-} from "@material-ui/icons";
-import UpdateCurrency from "./pages/admin/dashboard/updatecurrency";
-// import { Fab, Action } from "react-tiny-fab";
-import "react-tiny-fab/dist/styles.css";
-import { Fab, useMediaQuery, useTheme } from "@material-ui/core";
 
 const tawkTo = require("tawkto-react");
 const tawkToPropertyId = "5feb0864df060f156a91965a";
@@ -90,9 +81,9 @@ const useStyles = makeStyles((theme) => ({
     width: "60px",
     height: "60px",
     bottom: "20px",
-    left: "20px",
-    backgroundColor: yellow[800],
-    color: "#fff",
+    left: "10px",
+    backgroundColor: theme.palette.warning.main,
+
     borderRadius: "50px",
     textAlign: "center",
     fontSize: "30px",
@@ -103,9 +94,9 @@ const useStyles = makeStyles((theme) => ({
     width: "60px",
     height: "60px",
     bottom: "20px",
-    left: "80px",
-    backgroundColor: yellow[800],
-    color: "#fff",
+    left: "10px",
+    backgroundColor: theme.palette.warning.main,
+
     borderRadius: "50px",
     textAlign: "center",
     fontSize: "30px",
@@ -244,7 +235,7 @@ function App() {
       console.log(reactLocalStorage.getObject("country"));
       //  reactLocalStorage.clear();
       // convert investment plan
-    /*  const currency = reactLocalStorage.getObject("country").currencycode;
+      /*  const currency = reactLocalStorage.getObject("country").currencycode;
       blocks.forEach((val, inex) => {
         val.lot = formatLocaleCurrency(Math.floor(val.lot), currency);
 
@@ -456,19 +447,15 @@ function App() {
         </StylesProvider>
       </div>
       <Fab
-        className={
-          useMediaQuery(useTheme().breakpoints.up("sm"))
-            ? classes.floaticonmobile
-            : classes.floaticon
-        }
+        className={classes.floaticon}
         onClick={() => {
           window.open(
-            "https://api.whatsapp.com/send?phone=14158786485&text=",
+            "https://api.whatsapp.com/send?phone=380931857179&text=",
             "_blank"
           );
         }}
       >
-        <WhatsApp fontSize="large" />
+        <WhatsApp htmlColor="#fff" fontSize="large" />
       </Fab>
     </AppContext.Provider>
   );

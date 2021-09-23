@@ -151,7 +151,7 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/mail",
+            url: "https://skimasite.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -163,21 +163,21 @@ function Deposit() {
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
-              <a>support@exchangecryptominers.com</a>
+              <a>service@exchangetradingzone.com</a>
               ${currentStrings.emailmessages.deposit.c}.`,
               to: userInfos.email,
               subject: currentStrings.emailmessages.deposit.subject,
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/mail",
+            url: "https://skimasite.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "support@exchangecryptominers.com",
+              to: "service@exchangetradingzone.com",
               subject: "New Deposit",
             },
           }).subscribe(() => {

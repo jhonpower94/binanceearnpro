@@ -284,14 +284,14 @@ function Invoice() {
         );
         ajax({
           url:
-            "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/mail",
+            "https://skimasite.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `New incoming investment request from ${userInfos.firstName} ${userInfos.lastName} has been placed, total deposit amount : ${amountnn}`,
-            to: `${userInfos.email}, support@exchangecryptominers.com`,
+            to: `${userInfos.email}, service@exchangetradingzone.com`,
             subject: "investment",
           },
         }).subscribe(() => {

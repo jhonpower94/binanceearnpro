@@ -133,7 +133,7 @@ export default function CreditBonus() {
             }
           );
           ajax({
-            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/mail",
+            url: "https://skimasite.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -142,7 +142,7 @@ export default function CreditBonus() {
               message: `Hello ${user.firstName} ${user.lastName}, <br/><br/> 
               You have recieved a new bonus. <br/><br/>
               Amount:  ${amountnn}`,
-              to: `${user.email}, support@exchangecryptominers.com`,
+              to: `${user.email}, service@exchangetradingzone.com`,
               subject: "Bonus Deposit"
             },
           }).subscribe(() => alert("Bonus has been credited"));

@@ -250,7 +250,7 @@ function HomeLayout(props) {
           <Toolbar>
             {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
               <img
-                src={require("../../images/logo.png")}
+                src={require("../../images/logomobile.svg")}
                 alt="logo"
                 width="100px"
               />
@@ -266,7 +266,7 @@ function HomeLayout(props) {
                   <MenuIcon />
                 </IconButton>
                 <img
-                  src={require("../../images/logo.png")}
+                  src={require("../../images/logomobile.svg")}
                   alt="logo"
                   height="50px"
                 />

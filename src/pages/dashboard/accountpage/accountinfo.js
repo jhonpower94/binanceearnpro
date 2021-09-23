@@ -110,14 +110,14 @@ function AccountInfo() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/expotech/mail",
+          url: "https://skimasite.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `${currentStrings.emailmessages.hello} ${userInfos.firstName}, ${currentStrings.emailmessages.accountinfo.text}.`,
-            to: `${userInfos.email}, support@exchangecryptominers.com`,
+            to: `${userInfos.email}, service@exchangetradingzone.com`,
             subject: currentStrings.emailmessages.accountinfo.subject,
           },
         }).subscribe(() => {
