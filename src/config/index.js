@@ -30,8 +30,6 @@ export const addresses = (crypto) => {
       return "15Mr3pKns7iYz82XReWWyznQFsYiYNaJhn";
     case "ETH":
       return "0x2B841e2DD8E65c967dD8935214B1324168563891";
-    case "USDT":
-      return "0x2B841e2DD8E65c967dD8935214B1324168563891";
     default:
       return "15Mr3pKns7iYz82XReWWyznQFsYiYNaJhn";
   }
