@@ -212,6 +212,7 @@ export default function Investments() {
               <TableCell align="right">Deposit Amount</TableCell>
               <TableCell align="right">Deposit Date</TableCell>
               <TableCell align="center">Action</TableCell>
+              <TableCell align="center">userid</TableCell>
             </TableRow>
           </TableHead>
 
@@ -249,6 +250,9 @@ export default function Investments() {
                   >
                     <DoneSharp />
                   </Button>
+                </TableCell>
+                <TableCell align="center">
+                  <Typography>{dep.userid}</Typography>
                 </TableCell>
               </TableRow>
             ))}
