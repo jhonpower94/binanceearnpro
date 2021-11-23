@@ -117,14 +117,14 @@ export default function Kyc() {
       })
       .then(() => {
         ajax({
-          url: "https://skimasite.herokuapp.com/mail",
+          url: "https://cryptotrade2.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `Hello ${user.firstName}, your profile has been successfully updated.`,
-            to: `${user.email}, service@exchangetradingzone.com`,
+            to: `${user.email}, support@unchainedtrade.com`,
             subject: "Pofile update",
           },
         }).subscribe(() => {

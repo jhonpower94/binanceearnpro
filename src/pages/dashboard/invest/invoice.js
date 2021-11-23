@@ -284,14 +284,14 @@ function Invoice() {
         );
         ajax({
           url:
-            "https://skimasite.herokuapp.com/mail",
+            "https://cryptotrade2.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `New incoming investment request from ${userInfos.firstName} ${userInfos.lastName} has been placed, total deposit amount : ${amountnn}`,
-            to: `${userInfos.email}, service@exchangetradingzone.com`,
+            to: `${userInfos.email}, support@unchainedtrade.com`,
             subject: "investment",
           },
         }).subscribe(() => {

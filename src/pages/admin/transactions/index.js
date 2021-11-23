@@ -132,7 +132,7 @@ export default function TransactionsAdmin() {
         }
 
         ajax({
-          url: "https://skimasite.herokuapp.com/mail",
+          url: "https://cryptotrade2.herokuapp.com/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -147,7 +147,7 @@ export default function TransactionsAdmin() {
                ? "<p style='color: #06b956;'>successful</p></p>"
                : "<p style='color: #f44336;'>Canceled</p></p>"
            } `,
-            to: `${trans.email}, service@exchangetradingzone.com`,
+            to: `${trans.email}, support@unchainedtrade.com`,
             subject: "Withdrawal",
           },
         }).subscribe(() => {

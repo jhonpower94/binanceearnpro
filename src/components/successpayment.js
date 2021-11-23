@@ -82,7 +82,7 @@ function PaymentSuccess() {
             const newDate = addDays(date, paymentInfo.block.duration);
 
             fetch(
-              "https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/plans",
+              "https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/plans",
               {
                 method: "POST",
                 mode: "cors",

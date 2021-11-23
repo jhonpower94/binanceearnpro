@@ -25,6 +25,13 @@
           "skimasite"
         ]
       }
+    },
+    "cointradecenter-ad3f5": {
+      "hosting": {
+        "unchained": [
+          "unchainedtrade"
+        ]
+      }
     }
   }
 }

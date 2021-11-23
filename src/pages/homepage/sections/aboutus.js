@@ -40,7 +40,7 @@ function About() {
       layout: (
         <IntroHeaderPages
           title={currentStrings.homepage.pages.about_us.title}
-          subheader={`${currentStrings.homepage.pages.about_us.subheader} exchangetradingzone.com`}
+          subheader={`${currentStrings.homepage.pages.about_us.subheader} unchainedtrade.com`}
         />
       ),
     });
@@ -53,11 +53,11 @@ function About() {
         <Grid item xs={12} sm={12}>
           <CardContent>
             <Typography align="left" variant="subtitle2">
-              {`exchangetradingzone.com ${currentStrings.homepage.pages.about_us.typeA}`}
+              {`unchainedtrade.com ${currentStrings.homepage.pages.about_us.typeA}`}
             </Typography>
             <br />
             <Typography align="left" variant="subtitle2">
-              {`exchangetradingzone.com ${currentStrings.homepage.pages.about_us.typeB}`}
+              {`unchainedtrade.com ${currentStrings.homepage.pages.about_us.typeB}`}
             </Typography>
           </CardContent>
         </Grid>

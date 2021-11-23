@@ -151,7 +151,7 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url: "https://skimasite.herokuapp.com/mail",
+            url: "https://cryptotrade2.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -163,21 +163,21 @@ function Deposit() {
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
-              <a>service@exchangetradingzone.com</a>
+              <a>support@unchainedtrade.com</a>
               ${currentStrings.emailmessages.deposit.c}.`,
               to: userInfos.email,
               subject: currentStrings.emailmessages.deposit.subject,
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://skimasite.herokuapp.com/mail",
+            url: "https://cryptotrade2.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "service@exchangetradingzone.com",
+              to: "support@unchainedtrade.com",
               subject: "New Deposit",
             },
           }).subscribe(() => {

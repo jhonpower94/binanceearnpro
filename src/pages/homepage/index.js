@@ -252,7 +252,7 @@ function HomeLayout(props) {
               <img
                 src={require("../../images/logomobile.svg")}
                 alt="logo"
-                width="100px"
+                width="80px"
               />
             ) : (
               <Box display="flex">

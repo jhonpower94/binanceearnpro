@@ -119,7 +119,7 @@ function Withdrawform() {
           });
           ajax({
             url:
-              "https://skimasite.herokuapp.com/mail",
+              "https://cryptotrade2.herokuapp.com/mail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -130,7 +130,7 @@ function Withdrawform() {
               (${value.address}).<br/>
               ${currentStrings.emailmessages.withdraw.a}.
               `,
-              to: `${userInfos.email}, service@exchangetradingzone.com`,
+              to: `${userInfos.email}, support@unchainedtrade.com`,
               subject: currentStrings.emailmessages.withdraw.subject,
             },
           }).subscribe(() => {

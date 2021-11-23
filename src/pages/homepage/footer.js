@@ -197,7 +197,7 @@ function FooterHomepage() {
         <img src={require("../../images/logomobile.svg")} width="50" />
 
         <Typography variant="caption">
-          &copy; exchangecryptominers LLC, {new Date().getFullYear()}.
+          &copy; unchainedtrade LLC, {new Date().getFullYear()}.
         </Typography>
       </Box>
     </Container>

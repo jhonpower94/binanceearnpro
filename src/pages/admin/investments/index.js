@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://us-central1-bchunters-9ea45.cloudfunctions.net/skimasite/plans`,
+          url: `https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -150,7 +150,7 @@ export default function Investments() {
             })
             .then(() => {
               ajax({
-                url: "https://skimasite.herokuapp.com/mail",
+                url: "https://cryptotrade2.herokuapp.com/mail",
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -160,7 +160,7 @@ export default function Investments() {
                 Description: Account Wallet Deposit <br/>
                 Amount: ${data.deposit_amount} <br/>
                 Status <p style="color: #06b956;">successful</p></p>`,
-                  to: `${data.email}, service@exchangetradingzone.com`,
+                  to: `${data.email}, support@unchainedtrade.com`,
                   subject: "Transaction update",
                 },
               }).subscribe(() => console.log("user message sent"));

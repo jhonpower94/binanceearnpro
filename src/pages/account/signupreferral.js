@@ -41,8 +41,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {" © "}
-      <Link color="inherit" href="https://exchangetradingzone.com/">
-        exchangecryptominers
+      <Link color="inherit" href="https://unchainedtrade.com/">
+        unchainedtrade
       </Link>
     </Typography>
   );
@@ -171,7 +171,7 @@ export default function SignUpReferral(props) {
           const getreferrerdata = firestore.doc(`users/${id}`);
           docData(getreferrerdata, "id").subscribe((data) => {
             ajax({
-              url: "https://skimasite.herokuapp.com/mail",
+              url: "https://cryptotrade2.herokuapp.com/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
