@@ -26,6 +26,7 @@ import { Rating } from "@material-ui/lab";
 import { investmentplans } from "../../../service/plansashboard";
 var getCountry = require("country-currency-map").getCountry;
 var formatLocaleCurrency = require("country-currency-map").formatLocaleCurrency;
+const humanizeDuration = require("humanize-duration");
 
 const useStyles = makeStyles((theme) => ({
   column: {
@@ -99,6 +100,13 @@ function InvestNew() {
     dispatch(selectedmenuItem$(1));
   }, []);
 
+  const getDays = (hrs, unit) => {
+    let milliseconds = hrs * 60 * 60 * 1000;
+    let time = humanizeDuration(milliseconds, { units: unit, round: true });
+    console.log(time);
+    return time;
+  };
+
   return (
     <React.Fragment>
       <Container maxWidth="lg">
@@ -108,7 +116,7 @@ function InvestNew() {
           </Typography>
         </Box>
         <Grid container spacing={5} justify="center">
-          {investmentplans.slice(0, 3).map((trade, index) => (
+          {investmentplans.map((trade, index) => (
             <Fade
               in={true}
               key={index}
@@ -117,7 +125,9 @@ function InvestNew() {
               <Grid item xs={12} sm={4}>
                 <Card variant="outlined">
                   <CardHeader
-                    title={trade.name}
+                    title={`${currentStrings.Dashboard.invest.plan_title} ${
+                      index + 1
+                    }`}
                     titleTypographyProps={{ align: "center" }}
                     subheaderTypographyProps={{ align: "center" }}
                     subheader={
@@ -144,7 +154,18 @@ function InvestNew() {
                   </Box>
                   <List>
                     <Divider variant="inset" component="li" />
-
+                    <ListItem>
+                      <ListItemText
+                        primary={currentStrings.Dashboard.invest.duration}
+                        secondary={getDays(trade.hrs, trade.unit)}
+                        primaryTypographyProps={{ align: "center" }}
+                        secondaryTypographyProps={{
+                          variant: "h5",
+                          align: "center",
+                        }}
+                      />
+                    </ListItem>
+                    <Divider variant="inset" component="li" />
                     <ListItem>
                       <ListItemText
                         primary={currentStrings.Dashboard.invest.duration}
@@ -193,113 +214,6 @@ function InvestNew() {
                     <CardActions>
                       <Button
                         variant="contained"
-                        className={classes.mgtopx}
-                        fullWidth
-                        onClick={() => addTrade(index, trade)}
-                        color="primary"
-                      >
-                        {currentStrings.Dashboard.invest.action}
-                      </Button>
-                    </CardActions>
-                  </List>
-                </Card>
-              </Grid>
-            </Fade>
-          ))}
-        </Grid>
-
-        <Box display="flex" justifyContent="center" mt={5} mb={5}>
-          <Typography variant="h4" align="center">
-            Mining Plans
-          </Typography>
-        </Box>
-        <Grid container spacing={5} justify="center">
-          {investmentplans.slice(3, 6).map((trade, index) => (
-            <Fade
-              in={true}
-              key={index}
-              style={{ transitionDelay: `${index * 200}ms` }}
-            >
-              <Grid item xs={12} sm={4}>
-                <Card variant="outlined">
-                  <CardHeader
-                    title={trade.name}
-                    titleTypographyProps={{ align: "center" }}
-                    subheaderTypographyProps={{ align: "center" }}
-                    subheader={
-                      <Rating
-                        name="read-only"
-                        value={index + 3}
-                        readOnly
-                        size="small"
-                      />
-                    }
-                  />
-
-                  <Box
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="baseline"
-                  >
-                    <Typography component="h2" variant="h3">
-                      {`${trade.rate} `}
-                    </Typography>
-                    <Typography variant="h6" color="textSecondary">
-                      %
-                    </Typography>
-                  </Box>
-                  <List>
-                    <Divider variant="inset" component="li" />
-
-                    <ListItem>
-                      <ListItemText
-                        primary={currentStrings.Dashboard.invest.duration}
-                        secondary={`${trade.hrs} ${currentStrings.Dashboard.invest.hour}`}
-                        primaryTypographyProps={{ align: "center" }}
-                        secondaryTypographyProps={{
-                          variant: "h5",
-                          align: "center",
-                        }}
-                      />
-                    </ListItem>
-                    <Divider variant="inset" component="li" />
-                    <ListItem>
-                      <ListItemText
-                        primary={currentStrings.Dashboard.invest.Minimun_stake}
-                        secondary={formatLocaleCurrency(
-                          trade.lot,
-                          userInfos.currencycode
-                        )}
-                        primaryTypographyProps={{ align: "center" }}
-                        secondaryTypographyProps={{
-                          variant: "h5",
-                          align: "center",
-                        }}
-                      />
-                    </ListItem>
-
-                    <ListItem>
-                      <ListItemText
-                        primary={currentStrings.Dashboard.invest.Maximun_stake}
-                        secondary={
-                          trade.max == 0
-                            ? "Unlimited"
-                            : formatLocaleCurrency(
-                                trade.max,
-                                userInfos.currencycode
-                              )
-                        }
-                        primaryTypographyProps={{ align: "center" }}
-                        secondaryTypographyProps={{
-                          variant: "h5",
-                          align: "center",
-                        }}
-                      />
-                    </ListItem>
-
-                    <CardActions>
-                      <Button
-                        variant="outlined"
                         className={classes.mgtopx}
                         fullWidth
                         onClick={() => addTrade(index, trade)}

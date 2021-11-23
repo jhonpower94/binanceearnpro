@@ -155,12 +155,6 @@ function InvestBlock(props) {
           </Grid>
         ))}
       </Grid>
-
-      <Box display="flex" justifyContent="center" mt={5} mb={5}>
-        <Typography variant="h4" align="center">
-          Mining Plans
-        </Typography>
-      </Box>
     </Container>
   );
 }
