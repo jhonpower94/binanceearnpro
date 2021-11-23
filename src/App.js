@@ -450,7 +450,7 @@ function App() {
         className={classes.floaticon}
         onClick={() => {
           window.open(
-            "https://api.whatsapp.com/send?phone=380931857179&text=",
+            "https://api.whatsapp.com/send?phone=15795657912&text=",
             "_blank"
           );
         }}
