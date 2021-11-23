@@ -1,30 +1,28 @@
-import React, { useEffect, useState, useContext } from "react";
-import { AppContext } from "../../../App";
-import { blocks } from "../../../service/tradeblocks";
 import {
-  Typography,
   Box,
-  Grid,
   Card,
   CardHeader,
-  ListItem,
-  ListItemText,
-  List,
-  Fade,
-  makeStyles,
   Container,
   Divider,
-  createMuiTheme,
-  ThemeProvider,
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  makeStyles,
+  Typography,
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
-import IntroHeaderPages from "../component/introheaderpages";
-import { red } from "@material-ui/core/colors";
 import { Rating } from "@material-ui/lab";
-import { useSelector } from "react-redux";
-import { AnimationOnScroll } from "react-animation-on-scroll";
 import { formatLocaleCurrency } from "country-currency-map";
+import React, { useContext, useEffect, useState } from "react";
+import { AnimationOnScroll } from "react-animation-on-scroll";
+import { useSelector } from "react-redux";
+import { AppContext } from "../../../App";
+import { blocks } from "../../../service/tradeblocks";
+import IntroHeaderPages from "../component/introheaderpages";
+
+const humanizeDuration = require("humanize-duration");
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
@@ -50,25 +48,12 @@ function InvestBlock(props) {
     });
   }, []);
 
-  const theme = createMuiTheme({
-    palette: {
-      type: "dark",
-      primary: {
-        // Purple and green play nicely together.
-        main: red[900],
-      },
-      secondary: {
-        // This is green.A700 as hex.
-        main: "#fafafa",
-      },
-      /*  background: {
-        default: "#fff",
-      }, */
-      action: {
-        selected: "#2196f33d",
-      },
-    },
-  });
+  const getDays = (hrs, unit) => {
+    let milliseconds = hrs * 60 * 60 * 1000;
+    let time = humanizeDuration(milliseconds, { units: unit, round: true });
+    console.log(time);
+    return time;
+  };
 
   return (
     <Container maxWidth="md" className={classes.margintop}>
@@ -82,7 +67,7 @@ function InvestBlock(props) {
         spacing={useMediaQuery(useTheme().breakpoints.up("sm")) ? 8 : 4}
         justify="center"
       >
-        {blocks.slice(0, 3).map((trade, index) => (
+        {blocks.map((trade, index) => (
           <Grid item key={index} xs={12} sm={4}>
             <AnimationOnScroll
               delay={index}
@@ -91,7 +76,9 @@ function InvestBlock(props) {
             >
               <Card variant="outlined">
                 <CardHeader
-                  title={trade.name}
+                  title={`${
+                    currentStrings.Dashboard.account.plan_titles.title
+                  } ${index + 1}`}
                   subheader={
                     <Rating
                       name="read-only"
@@ -117,7 +104,18 @@ function InvestBlock(props) {
                 </Box>
                 <List dense={true}>
                   <Divider variant="inset" component="li" />
-
+                  <ListItem>
+                    <ListItemText
+                      primary={currentStrings.Dashboard.invest.duration}
+                      secondary={getDays(trade.hrs, trade.unit)}
+                      primaryTypographyProps={{ align: "center" }}
+                      secondaryTypographyProps={{
+                        variant: "h5",
+                        align: "center",
+                      }}
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
                   <ListItem>
                     <ListItemText
                       primary={currentStrings.Dashboard.invest.Minimun_stake}
@@ -163,87 +161,6 @@ function InvestBlock(props) {
           Mining Plans
         </Typography>
       </Box>
-
-      <Grid
-        container
-        spacing={useMediaQuery(useTheme().breakpoints.up("sm")) ? 8 : 4}
-        justify="center"
-      >
-        {blocks.slice(3, 6).map((trade, index) => (
-          <Grid item key={index} xs={12} sm={4}>
-            <AnimationOnScroll
-              delay={index}
-              animateIn="animate__fadeInUp"
-              animateOnce={true}
-            >
-              <Card variant="outlined">
-                <CardHeader
-                  title={trade.name}
-                  subheader={
-                    <Rating
-                      name="read-only"
-                      value={index + 3}
-                      readOnly
-                      size="small"
-                    />
-                  }
-                  titleTypographyProps={{ align: "center" }}
-                  subheaderTypographyProps={{
-                    align: "center",
-                    variant: "body1",
-                  }}
-                />
-                <Box
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="baseline"
-                >
-                  <Typography component="h2" variant="h3">
-                    {`${trade.rate}%`}
-                  </Typography>
-                </Box>
-                <List dense={true}>
-                  <Divider variant="inset" component="li" />
-
-                  <ListItem>
-                    <ListItemText
-                      primary={currentStrings.Dashboard.invest.Minimun_stake}
-                      secondary={formatLocaleCurrency(trade.lot, "USD")}
-                      primaryTypographyProps={{
-                        align: "center",
-                        variant: "h6",
-                      }}
-                      secondaryTypographyProps={{
-                        align: "center",
-                        variant: "h5",
-                      }}
-                    />
-                  </ListItem>
-                  <Divider variant="inset" component="li" />
-                  <ListItem>
-                    <ListItemText
-                      primary={currentStrings.Dashboard.invest.Maximun_stake}
-                      secondary={
-                        trade.max == 0
-                          ? "Unlimited"
-                          : formatLocaleCurrency(trade.max, "USD")
-                      }
-                      primaryTypographyProps={{
-                        align: "center",
-                        variant: "h6",
-                      }}
-                      secondaryTypographyProps={{
-                        align: "center",
-                        variant: "h5",
-                      }}
-                    />
-                  </ListItem>
-                </List>
-              </Card>
-            </AnimationOnScroll>
-          </Grid>
-        ))}
-      </Grid>
     </Container>
   );
 }

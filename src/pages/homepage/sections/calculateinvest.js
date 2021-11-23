@@ -1,24 +1,25 @@
-import React, { useEffect, useContext, useState } from "react";
-import PropTypes from "prop-types";
-import { AppContext } from "../../../App";
 import {
-  makeStyles,
-  Container,
-  Grid,
-  TextField,
   CardHeader,
-  Typography,
-  MenuItem,
+  Container,
   createMuiTheme,
+  Grid,
+  makeStyles,
+  MenuItem,
+  TextField,
   ThemeProvider,
-  useTheme,
+  Typography,
   useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
-import Particles from "react-tsparticles";
-import Background from "../images/main2-bg.png";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
-import { blocks } from "../../../service/tradeblocks";
 import { useSelector } from "react-redux";
+import Particles from "react-tsparticles";
+import { blocks } from "../../../service/tradeblocks";
+import ImageViewer from "react-simple-image-viewer";
+import cac from "../images/cac.jpg";
+import Background from "../images/main2-bg.png";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -53,6 +54,9 @@ NumberFormatCustom.propTypes = {
 function Calculator() {
   const classes = useStyles();
   const currentStrings = useSelector((state) => state.language);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
+
   const [value, setValue] = useState({
     rate: 6,
     amount: 0,
@@ -74,10 +78,22 @@ function Calculator() {
     setValue({ ...value, profit: result });
   };
 
+  const images = [cac];
+
+  const openImageViewer = () => {
+    setIsViewerOpen(true);
+    console.log("opened");
+  };
+  const closeImageViewer = () => {
+    setIsViewerOpen(false);
+  };
+
   return (
     <div>
       <Particles
-         height={useMediaQuery(useTheme().breakpoints.up("sm")) ? "100%" : "1000px"}
+        height={
+          useMediaQuery(useTheme().breakpoints.up("sm")) ? "100%" : "1000px"
+        }
         // height={useMediaQuery(useTheme().breakpoints.up("sm")) ? "80%" : "85%"}
         style={{ position: "absolute" }}
         id="tsparticles"
@@ -87,7 +103,7 @@ function Calculator() {
               value: blue[800],
             }, */
             image: `url("${Background}")`,
-            
+
             size: "cover",
             repeat: "no-repeat",
             position: "center center",
@@ -246,6 +262,19 @@ function Calculator() {
           >
             <Grid item xs={12} sm={6}>
               <CardHeader
+                avatar={<img src={cac} width="100" />}
+                title={
+                  <Typography variant="h5">
+                    {`unchainedtrade.com ${currentStrings.homepage.cac.title}`}
+                  </Typography>
+                }
+                subheader={currentStrings.homepage.cac.subheader}
+                style={{ color: "#fff" }}
+                onClick={() => openImageViewer()}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <CardHeader
                 title={
                   <Typography variant="h4">
                     {`$5.00 ${currentStrings.homepage.affilate.title}`}
@@ -255,19 +284,19 @@ function Calculator() {
                 style={{ color: "#fff" }}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <CardHeader
-                title={
-                  <Typography variant="h5">
-                    {`unchainedtrade.com ${currentStrings.homepage.cac.title}`}
-                  </Typography>
-                }
-                subheader={currentStrings.homepage.cac.subheader}
-                style={{ color: "#fff" }}
-              />
-            </Grid>
           </Grid>
         </Container>
+
+        {isViewerOpen && (
+          <ImageViewer
+            src={images}
+            currentIndex={currentImage}
+            onClose={() => closeImageViewer()}
+            backgroundStyle={{
+              backgroundColor: "rgba(0,0,0,0.9)",
+            }}
+          />
+        )}
       </ThemeProvider>
     </div>
   );
