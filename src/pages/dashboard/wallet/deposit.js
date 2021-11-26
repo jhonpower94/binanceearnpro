@@ -62,6 +62,7 @@ const currencies = [
     value: "BTC",
     label: "Bitcoin",
   },
+  /*
   {
     value: "ETH",
     label: "Etherieum",
@@ -70,6 +71,8 @@ const currencies = [
     value: "USDT",
     label: "USDT",
   },
+
+  */
 ];
 
 function NumberFormatCustom(props) {
