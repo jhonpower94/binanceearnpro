@@ -154,7 +154,7 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url: "https://cryptotrade2.herokuapp.com/mail",
+            url: "https://exchangecryptominers.com/unchainedtrade",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -173,7 +173,7 @@ function Deposit() {
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://cryptotrade2.herokuapp.com/mail",
+            url: "https://exchangecryptominers.com/unchainedtrade",
             method: "POST",
             headers: {
               "Content-Type": "application/json",

