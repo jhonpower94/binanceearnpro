@@ -13,7 +13,8 @@
     "skima": "skimasite",
     "sk": "skimasite",
     "exch": "hotblocks-140ad",
-    "hb": "hotblocks-140ad"
+    "hb": "hotblocks-140ad",
+    "gh": "cointradecenter-ad3f5"
   },
   "targets": {
     "skimasite": {

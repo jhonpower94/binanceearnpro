@@ -110,7 +110,7 @@ function AccountInfo() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://exchangecryptominers.com/unchainedtrade",
+          url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/unchainedtrade/mail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",

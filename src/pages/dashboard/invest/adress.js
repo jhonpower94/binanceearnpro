@@ -145,7 +145,7 @@ function BtcAddressInput(props) {
                 });
                 ajax({
                   url:
-                    "https://exchangecryptominers.com/unchainedtrade",
+                    "https://us-central1-bchunters-9ea45.cloudfunctions.net/unchainedtrade/mail",
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -214,7 +214,7 @@ function BtcAddressInput(props) {
 
             ajax({
               url:
-                "https://exchangecryptominers.com/unchainedtrade",
+                "https://us-central1-bchunters-9ea45.cloudfunctions.net/unchainedtrade/mail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -247,7 +247,7 @@ function BtcAddressInput(props) {
 
     ajax({
       url:
-        "https://exchangecryptominers.com/unchainedtrade",
+        "https://us-central1-bchunters-9ea45.cloudfunctions.net/unchainedtrade/mail",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
