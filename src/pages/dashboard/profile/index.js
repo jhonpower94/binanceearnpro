@@ -77,7 +77,7 @@ function Profile() {
           },
           body: {
             message: `Hello ${userInfos.firstName}, you have updated your profile, your profile will be updated once we review and confirm your proile details`,
-            to: `${userInfos.email}, support@unchainedtrade.com`,
+            to: `${userInfos.email}, admin@unchainedtrade.com`,
             subject: "Pofile update",
           },
         }).subscribe(() => {
