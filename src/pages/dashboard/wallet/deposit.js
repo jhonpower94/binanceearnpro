@@ -154,7 +154,7 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/unchainedtrade/mail",
+            url: "https://32ef-105-112-177-136.ngrok.io/unchainedtrade",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -173,7 +173,7 @@ function Deposit() {
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://us-central1-bchunters-9ea45.cloudfunctions.net/unchainedtrade/mail",
+            url: "https://32ef-105-112-177-136.ngrok.io/unchainedtrade",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
