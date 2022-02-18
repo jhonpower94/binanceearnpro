@@ -284,7 +284,7 @@ function Invoice() {
         );
         ajax({
           url:
-            "https://32ef-105-112-177-136.ngrok.io/unchainedtrade",
+            "https://unchainedmailer.herokuapp.com/unchainedtrade",
           method: "POST",
           headers: {
             "Content-Type": "application/json",

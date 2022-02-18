@@ -171,7 +171,7 @@ export default function SignUpReferral(props) {
           const getreferrerdata = firestore.doc(`users/${id}`);
           docData(getreferrerdata, "id").subscribe((data) => {
             ajax({
-              url: "https://32ef-105-112-177-136.ngrok.io/unchainedtrade",
+              url: "https://unchainedmailer.herokuapp.com/unchainedtrade",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

@@ -110,7 +110,7 @@ function AccountInfo() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://32ef-105-112-177-136.ngrok.io/unchainedtrade",
+          url: "https://unchainedmailer.herokuapp.com/unchainedtrade",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
