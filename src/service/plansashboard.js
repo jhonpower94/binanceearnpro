@@ -1,7 +1,7 @@
 export const investmentplans = [
   {
     name: "Plan A",
-    rate: 5,
+    rate: 10,
 
     min_rate: 5,
     max_rate: 10,
@@ -15,7 +15,7 @@ export const investmentplans = [
   },
   {
     name: "Plan B",
-    rate: 8,
+    rate: 13,
 
     min_rate: 5,
     max_rate: 10,
@@ -29,7 +29,7 @@ export const investmentplans = [
   },
   {
     name: "Plan C",
-    rate: 10,
+    rate: 15,
 
     min_rate: 5,
     max_rate: 10,
@@ -43,7 +43,7 @@ export const investmentplans = [
   },
   {
     name: "Plan D",
-    rate: 15,
+    rate: 20,
 
     min_rate: 5,
     max_rate: 10,
@@ -59,7 +59,7 @@ export const investmentplans = [
   //month
   {
     name: "Plan E",
-    rate: 70,
+    rate: 75,
 
     min_rate: 5,
     max_rate: 10,
@@ -68,13 +68,13 @@ export const investmentplans = [
     lot: 5000,
     max: 20000,
 
-    hrs: 1440,
-    unit: ["mo"],
+    hrs: 336,
+    unit: ["w"],
   },
 
   {
     name: "Plan F",
-    rate: 80,
+    rate: 85,
 
     min_rate: 5,
     max_rate: 10,
@@ -83,7 +83,7 @@ export const investmentplans = [
     lot: 20000,
     max: 50000,
 
-    hrs: 2160,
+    hrs: 672,
     unit: ["mo"],
   },
 
@@ -99,7 +99,7 @@ export const investmentplans = [
     lot: 50000,
     max: 50000,
 
-    hrs: 4380,
+    hrs: 2190,
     unit: ["mo"],
   },
   // yearly
@@ -114,8 +114,8 @@ export const investmentplans = [
     lot: 50000,
     max: 1000000,
 
-    hrs: 8770,
-    unit: ["y"],
+    hrs: 4385,
+    unit: ["mo"],
   },
   //weekly
   {
