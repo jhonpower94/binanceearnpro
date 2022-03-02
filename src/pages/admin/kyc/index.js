@@ -117,7 +117,7 @@ export default function Kyc() {
       })
       .then(() => {
         ajax({
-          url: "https://unchainedmailer.herokuapp.com/unchainedtrade",
+          url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
           method: "POST",
           headers: {
             "Content-Type": "application/json",

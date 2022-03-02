@@ -119,7 +119,7 @@ function Withdrawform() {
           });
           ajax({
             url:
-              "https://unchainedmailer.herokuapp.com/unchainedtrade",
+              "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
             method: "POST",
             headers: {
               "Content-Type": "application/json",

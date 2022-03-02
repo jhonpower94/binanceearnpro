@@ -171,7 +171,7 @@ export default function SignUpReferral(props) {
           const getreferrerdata = firestore.doc(`users/${id}`);
           docData(getreferrerdata, "id").subscribe((data) => {
             ajax({
-              url: "https://unchainedmailer.herokuapp.com/unchainedtrade",
+              url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
