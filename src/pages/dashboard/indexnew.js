@@ -1,66 +1,59 @@
-import React, { useContext, useEffect } from "react";
-import clsx from "clsx";
-import PropTypes from "prop-types";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
+import {
+  Box,
+  CircularProgress,
+  Link,
+  useMediaQuery,
+  useScrollTrigger,
+  withStyles,
+} from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import {
-  useScrollTrigger,
-  withStyles,
-  Box,
-  useMediaQuery,
-  CircularProgress,
-} from "@material-ui/core";
-import { red, blue } from "@material-ui/core/colors";
-import { navigate } from "@reach/router";
-
-import { AppContext } from "../../App";
-import SelectLanguage from "../../components/lang_select";
-import DasboardMenu from "./menu";
-import { useDispatch, useSelector } from "react-redux";
-import firebase, { firestore, collectionData, docData } from "../../config";
-
-import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
-import {
-  bonusbalance$,
-  bonusCollections$,
-  loading$,
-  locationinfo$,
-  mainbalance$,
-  myinvestment$,
-  notification$,
-  stopload$,
-  totalbonusearned$,
-  totaldeposit$,
-  totalprofit$,
-  totalwithdrawn$,
-} from "../../redux/action";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import {
   AccountBalanceWalletSharp,
   AddCircleSharp,
   GetAppSharp,
   HomeSharp,
 } from "@material-ui/icons";
-import { Helmet } from "react-helmet";
-import { investmentplans } from "../../service/plansashboard";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import MenuIcon from "@material-ui/icons/Menu";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import { navigate } from "@reach/router";
+import clsx from "clsx";
 import { Converter } from "easy-currencies";
-import { doc } from "rxfire/firestore";
+import PropTypes from "prop-types";
+import React, { useContext, useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
+import { useDispatch, useSelector } from "react-redux";
+import { AppContext } from "../../App";
+import SelectLanguage from "../../components/lang_select";
+import firebase, { collectionData, docData, firestore } from "../../config";
+import { getVerifiedUsers } from "../../config/verification";
+import {
+  bonusbalance$,
+  bonusCollections$,
+  locationinfo$,
+  mainbalance$,
+  myinvestment$,
+  notification$,
+  totalbonusearned$,
+  totaldeposit$,
+  totalprofit$,
+  totalwithdrawn$,
+} from "../../redux/action";
+import DasboardMenu from "./menu";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -298,6 +291,10 @@ export default function DashboardLayout(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(currentab);
+  const [user, setUser] = useState({
+    email: "email@example.com",
+    verified: true,
+  });
 
   useEffect(() => {
     //  dispatch(loading$());
@@ -305,6 +302,17 @@ export default function DashboardLayout(props) {
       if (!user) {
         navigate("../account");
       } else {
+        // for kyc verification
+        getVerifiedUsers(user.email).subscribe((val) => {
+          if (val.verified) {
+            console.log(val);
+            setUser({ email: user.email, verified: true });
+          } else {
+            console.log("not verified");
+            setUser({ email: user.email, verified: false });
+          }
+        });
+
         const datas = firestore.doc(`users/${user.uid}`);
         docData(datas, "id").subscribe((val) => {
           dispatch(locationinfo$(val));
@@ -575,7 +583,28 @@ export default function DashboardLayout(props) {
             <FacebookCircularProgress />
           </Box>
         ) : (
-          props.children
+          <>
+            {user.verified ? null : (
+              <Box p={2}>
+                <Alert variant="filled" severity="info">
+                  <AlertTitle>Profile verification</AlertTitle>
+                  <Typography gutterBottom variant="body2">
+                    Activate account full usage access, by verifying your
+                    profile, click on verify profile below.
+                  </Typography>
+                  <Link
+                    variant="body1"
+                    href={`https://kycverify.firebaseapp.com/kyc?sname=unchainedtrade&user=${user.email}&rdr=web.unchainedtrade.com`}
+                    color="inherit"
+                  >
+                    {"Verify profile"}
+                  </Link>
+                </Alert>
+              </Box>
+            )}
+
+            {props.children}
+          </>
         )}
       </main>
     </div>

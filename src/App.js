@@ -193,7 +193,7 @@ function App() {
         main: secondary,
       },
       background: {
-        default: "#0d1117",
+        default: "#09132e",
         paper: "#09132e",
       },
 
