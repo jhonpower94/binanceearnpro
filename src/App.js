@@ -31,7 +31,8 @@ import CreditBonus from "./pages/admin/dashboard/creditbonus";
 import DeleteUsers from "./pages/admin/dashboard/deleteuser";
 import UpdateCurrency from "./pages/admin/dashboard/updatecurrency";
 import Investments from "./pages/admin/investments";
-import Kyc from "./pages/admin/kyc";
+import Kyc from "./pages/admin/kycnew";
+import Document from "./pages/admin/kycnew/document";
 import SignInAdmin from "./pages/admin/login";
 import TransactionsAdmin from "./pages/admin/transactions";
 import UpdateWallet from "./pages/admin/transactions/updatewallet";
@@ -434,6 +435,7 @@ function App() {
                 <TransactionsAdmin path="transactions" />
                 <UpdateWallet path="updatewallet" />
                 <Kyc path="kyc" />
+                <Document path="document/:email" />
                 <Investments path="investments" />
                 <UpdateCurrency path="convert" />
               </AdminLayout>

@@ -151,7 +151,7 @@ function AdminLyout(props) {
             <img
               src={require("../../images/logomobile.svg")}
               alt="logo"
-              width="150px"
+              width="50px"
             />
           ) : (
             <img
