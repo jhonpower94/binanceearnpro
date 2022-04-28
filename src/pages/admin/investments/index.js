@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://wandering-ionized-cauliflower.glitch.me/plans`,
+          url: `https://fourth-difficult-maize.glitch.me/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
