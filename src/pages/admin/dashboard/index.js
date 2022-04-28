@@ -207,7 +207,7 @@ function DashboardAdmin() {
                   setTimeout(() => {
                     resolve();
                     ajax({
-                      url: "https://wandering-ionized-cauliflower.glitch.me/delete",
+                      url: "https://fourth-difficult-maize.glitch.me/delete",
                       method: "POST",
                       headers: {
                         "Content-Type": "application/json",

@@ -82,7 +82,7 @@ function PaymentSuccess() {
             const newDate = addDays(date, paymentInfo.block.duration);
 
             fetch(
-              "https://wandering-ionized-cauliflower.glitch.me/plans",
+              "https://fourth-difficult-maize.glitch.me/plans",
               {
                 method: "POST",
                 mode: "cors",
