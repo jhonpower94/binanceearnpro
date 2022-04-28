@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://us-central1-bchunters-9ea45.cloudfunctions.net/cryptotrade/plans`,
+          url: `https://wandering-ionized-cauliflower.glitch.me/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",

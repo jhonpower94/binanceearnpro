@@ -1,30 +1,21 @@
-import React, { useEffect, useContext } from "react";
-import { AppContext } from "../../../App";
-import Container from "@material-ui/core/Container";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import "../../../App.css";
 import {
-  ListItem,
+  Box, Button, Card, CardActions, CardHeader, Divider, Fade,
+  List, ListItem,
   ListItemText,
-  Typography,
-  Button,
-  Fade,
-  List,
-  Box,
-  CardHeader,
-  Card,
-  Divider,
-  CardActions,
+  Typography
 } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
 import Menu from "@material-ui/core/Menu";
-import { useSelector, useDispatch } from "react-redux";
-import { selectedmenuItem$ } from "../../../redux/action";
-import { navigate } from "@reach/router";
-import { Converter } from "easy-currencies";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { Rating } from "@material-ui/lab";
+import { navigate } from "@reach/router";
+import React, { useContext, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppContext } from "../../../App";
+import "../../../App.css";
+import { selectedmenuItem$ } from "../../../redux/action";
 import { investmentplans } from "../../../service/plansashboard";
-var getCountry = require("country-currency-map").getCountry;
 var formatLocaleCurrency = require("country-currency-map").formatLocaleCurrency;
 const humanizeDuration = require("humanize-duration");
 
