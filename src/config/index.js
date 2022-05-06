@@ -7,12 +7,12 @@ import { collectionData, docData } from "rxfire/firestore";
 import { filter } from "rxjs/operators";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD6hib1BaXjvs_E6385CYNqKK2mBqCWbcY",
-  authDomain: "cointradecenter-ad3f5.firebaseapp.com",
-  projectId: "cointradecenter-ad3f5",
-  storageBucket: "cointradecenter-ad3f5.appspot.com",
-  messagingSenderId: "770323173522",
-  appId: "1:770323173522:web:6fbac7eb57d92d4f52964b"
+  apiKey: "AIzaSyBXQ2SQ12nrGC2Ou8ToCUH1TbbUdVwIFIM",
+  authDomain: "unchainedtrade-a4ee3.firebaseapp.com",
+  projectId: "unchainedtrade-a4ee3",
+  storageBucket: "unchainedtrade-a4ee3.appspot.com",
+  messagingSenderId: "205375798344",
+  appId: "1:205375798344:web:f463b7218fff4ddc93ec7d"
 };
 const app = firebase.initializeApp(firebaseConfig);
 
