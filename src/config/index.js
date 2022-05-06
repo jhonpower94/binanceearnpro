@@ -7,12 +7,12 @@ import { collectionData, docData } from "rxfire/firestore";
 import { filter } from "rxjs/operators";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBXQ2SQ12nrGC2Ou8ToCUH1TbbUdVwIFIM",
-  authDomain: "unchainedtrade-a4ee3.firebaseapp.com",
-  projectId: "unchainedtrade-a4ee3",
-  storageBucket: "unchainedtrade-a4ee3.appspot.com",
-  messagingSenderId: "205375798344",
-  appId: "1:205375798344:web:f463b7218fff4ddc93ec7d"
+  apiKey: "AIzaSyA_sCJSwYGON--abjby-OLouYOPJZJWXTA",
+  authDomain: "ositasite.firebaseapp.com",
+  projectId: "ositasite",
+  storageBucket: "ositasite.appspot.com",
+  messagingSenderId: "663725486111",
+  appId: "1:663725486111:web:2860b35293067e1475a52a"
 };
 const app = firebase.initializeApp(firebaseConfig);
 
