@@ -14,7 +14,8 @@
     "sk": "skimasite",
     "exch": "hotblocks-140ad",
     "hb": "hotblocks-140ad",
-    "gh": "cointradecenter-ad3f5"
+    "gh": "cointradecenter-ad3f5",
+    "unchained": "unchainedtrade-a4ee3"
   },
   "targets": {
     "skimasite": {
