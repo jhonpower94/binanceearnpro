@@ -1,37 +1,12 @@
 {
   "projects": {
-    "hjjj": "hotblock-48cbf",
-    "frontend": "admin-fa3ba",
-    "new": "coininvest-d15a3",
-    "cryptotradecenter": "cryptotradecenter",
-    "hotblockinest": "hotblocks-140ad",
-    "cryptotradecentermain": "hotblocks-140ad",
-    "cointradecenter": "cointradecenter-ad3f5",
-    "cointrader": "cointradecenter-ad3f5",
-    "cryptotrade": "cointradecenter-ad3f5",
-    "ct": "cointradecenter-ad3f5",
-    "skima": "skimasite",
-    "sk": "skimasite",
-    "exch": "hotblocks-140ad",
-    "hb": "hotblocks-140ad",
-    "gh": "cointradecenter-ad3f5",
-    "unchained": "unchainedtrade-a4ee3"
+    "ositasite": "ositasite"
   },
   "targets": {
-    "skimasite": {
-      "hosting": {
-        "exchange": [
-          "exchangetrading"
-        ],
-        "skima": [
-          "skimasite"
-        ]
-      }
-    },
-    "cointradecenter-ad3f5": {
+    "ositasite": {
       "hosting": {
         "unchained": [
-          "unchainedtrade"
+          "unchainedtraders"
         ]
       }
     }
