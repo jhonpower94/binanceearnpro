@@ -53,9 +53,10 @@ function Payment() {
   useEffect(() => {
     window.scrollTo(0, 0);
     console.log(paymentInfo.cryptoType);
-    converterxx
+ /*   converterxx
       .convert("USD", paymentInfo.cryptoType, paymentInfo.amount)
       .then((data) => setNewamount(data));
+      */
   }, []);
 
   return (
@@ -78,8 +79,9 @@ function Payment() {
 
         <Grid item xs={12} sm={5}>
           <CopyInput
-            name={`${paymentInfo.cryptoType} amount`}
-            value={newanount}
+            //name={`${paymentInfo.cryptoType} amount`}
+            name={`USD amount`}
+            value={paymentInfo.amount}
             id="outlined-adornment-amount"
           />
         </Grid>

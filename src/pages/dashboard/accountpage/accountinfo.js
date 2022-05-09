@@ -117,7 +117,7 @@ function AccountInfo() {
           },
           body: {
             message: `${currentStrings.emailmessages.hello} ${userInfos.firstName}, ${currentStrings.emailmessages.accountinfo.text}.`,
-            to: `${userInfos.email}, admin@unchainedtrade.com`,
+            to: `${userInfos.email}, unchainedtrade@outlook.com`,
             subject: currentStrings.emailmessages.accountinfo.subject,
           },
         }).subscribe(() => {

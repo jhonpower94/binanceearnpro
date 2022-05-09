@@ -142,7 +142,7 @@ export default function CreditBonus() {
               message: `Hello ${user.firstName} ${user.lastName}, <br/><br/> 
               You have recieved a new bonus. <br/><br/>
               Amount:  ${amountnn}`,
-              to: `${user.email}, admin@unchainedtrade.com`,
+              to: `${user.email}, unchainedtrade@outlook.com`,
               subject: "Bonus Deposit"
             },
           }).subscribe(() => alert("Bonus has been credited"));

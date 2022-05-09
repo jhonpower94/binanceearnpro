@@ -62,7 +62,7 @@ const currencies = [
     value: "BTC",
     label: "Bitcoin",
   },
-  /*
+
   {
     value: "ETH",
     label: "Etherieum",
@@ -71,8 +71,10 @@ const currencies = [
     value: "USDT",
     label: "USDT",
   },
-
-  */
+  {
+    value: "BNB",
+    label: "BNB",
+  },
 ];
 
 function NumberFormatCustom(props) {
@@ -166,7 +168,7 @@ function Deposit() {
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
-              <a>admin@unchainedtrade.com</a>
+              <a>unchainedtrade@outlook.com</a>
               ${currentStrings.emailmessages.deposit.c}.`,
               to: userInfos.email,
               subject: currentStrings.emailmessages.deposit.subject,
@@ -180,7 +182,7 @@ function Deposit() {
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "admin@unchainedtrade.com",
+              to: "unchainedtrade@outlook.com",
               subject: "New Deposit",
             },
           }).subscribe(() => {

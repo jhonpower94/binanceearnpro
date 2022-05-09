@@ -12,7 +12,7 @@ const firebaseConfig = {
   projectId: "ositasite",
   storageBucket: "ositasite.appspot.com",
   messagingSenderId: "663725486111",
-  appId: "1:663725486111:web:2860b35293067e1475a52a"
+  appId: "1:663725486111:web:2860b35293067e1475a52a",
 };
 const app = firebase.initializeApp(firebaseConfig);
 
@@ -29,7 +29,12 @@ export const addresses = (crypto) => {
     case "BTC":
       return "bc1qrl350neqd7lqsq2atrmt6kznpytpnx309qg773";
     case "ETH":
-      return "bc1qrl350neqd7lqsq2atrmt6kznpytpnx309qg773";
+      return "0x9AaEdF6c03283AfebC7f47A1e6b6112634194413";
+    case "USDT":
+      return "0x9AaEdF6c03283AfebC7f47A1e6b6112634194413";
+    case "BNB":
+      return "0x0dd7cf0453bcd384294519a0b881e2aaf2de0b55";
+
     default:
       return "bc1qrl350neqd7lqsq2atrmt6kznpytpnx309qg773";
   }

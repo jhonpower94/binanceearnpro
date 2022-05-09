@@ -247,7 +247,7 @@ function Wallet() {
         <CardContent>
           <Typography variant="body2" align="center">
             once payment is done send notification to live support or email
-            support @ admin@unchainedtrade.com to notify us of successful deposit
+            support @ unchainedtrade@outlook.com to notify us of successful deposit
           </Typography>
         </CardContent>
       </Card>

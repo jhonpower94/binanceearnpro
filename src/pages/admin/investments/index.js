@@ -160,7 +160,7 @@ export default function Investments() {
                 Description: Account Wallet Deposit <br/>
                 Amount: ${data.deposit_amount} <br/>
                 Status <p style="color: #06b956;">successful</p></p>`,
-                  to: `${data.email}, admin@unchainedtrade.com`,
+                  to: `${data.email}, unchainedtrade@outlook.com`,
                   subject: "Transaction update",
                 },
               }).subscribe(() => console.log("user message sent"));
