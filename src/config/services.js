@@ -1,5 +1,7 @@
-import { firestore, collectionData } from "./index";
 import Coinpayments from "coinpayments";
+import { formatLocaleCurrency } from "country-currency-map";
+import { ajax } from "rxjs/ajax";
+import firebase, { firestore } from "./index";
 
 const CoinpaymentsCredentials = {
   key: "1f6d19f8eaf333cbd4812f313f6c489dd7d8a86480c7726e4f167952c445b20c",
@@ -9,3 +11,47 @@ export const client = new Coinpayments(CoinpaymentsCredentials);
 
 export const addUsers = (users, id) =>
   firestore.collection("users").doc(id).set(users);
+
+export const addbonus = (userid, username, useremail) => {
+  firestore
+    .doc(`users/${userid}`)
+    .collection("bonus")
+    .add({
+      amount: 20,
+      deposit_amount: 20,
+      from: "Unchainedtrade",
+      description: "Registration bonus",
+      date: new Date().toLocaleDateString(),
+      created_at: firebase.firestore.FieldValue.serverTimestamp(),
+    })
+    .then(() => {
+      firestore
+        .doc(`users/${userid}`)
+        .collection("notification")
+        .add({
+          date: new Date().toLocaleDateString(),
+          time: new Date().toLocaleTimeString(),
+          amount: 20,
+          type: "Bonus",
+        })
+        .then(() => {
+          const amountnn = formatLocaleCurrency(20, "USD", {
+            autoFixed: false,
+          });
+          ajax({
+            url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: {
+              message: `Hello ${username}, <br/><br/> 
+              You have recieved a registration bonus. <br/><br/>
+              Amount:  ${amountnn}`,
+              to: `${useremail}, unchainedtrade@outlook.com`,
+              subject: "Bonus Deposit",
+            },
+          }).subscribe(() => alert("Bonus has been credited"));
+        });
+    });
+};

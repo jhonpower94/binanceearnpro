@@ -35,7 +35,7 @@ const StyledTabs = withStyles((theme) => ({
     "& > span": {
       maxWidth: 40,
       width: "100%",
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.background.default,
       borderTopLeftRadius: "50px",
       borderTopRightRadius: "50px",
     },
@@ -51,7 +51,7 @@ const StyledTabs = withStyles((theme) => ({
 const StyledTab = withStyles((theme) => ({
   root: {
     textTransform: "none",
-    color: theme.palette.getContrastText("#2196f3"),
+    //color: theme.palette.getContrastText("#2196f3"),
     fontWeight: theme.typography.fontWeightRegular,
     fontSize: theme.typography.pxToRem(15),
     marginRight: theme.spacing(1),

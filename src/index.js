@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import "./fonts/Roboto-Regular.ttf";
+//import "./fonts/Roboto-Regular.ttf";
 import * as serviceWorker from "./serviceWorker";
 import { createStore } from "redux";
 import { allreducer } from "./redux/reducer";

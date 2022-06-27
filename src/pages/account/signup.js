@@ -30,7 +30,7 @@ import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { countrylist } from "../../config/countrylist";
 import { from } from "rxjs";
 import firebase, { app } from "../../config";
-import { addUsers } from "../../config/services";
+import { addbonus, addUsers } from "../../config/services";
 import { dispatch } from "rxjs/internal/observable/pairs";
 import { navigate } from "@reach/router";
 import Copyright from "./copyright";
@@ -154,6 +154,7 @@ export default function SignUp() {
         console.log("user created");
         const userid = user.user.uid;
         addUsers(datas, userid).then(() => {
+          addbonus(user.user.uid, user.user.displayName, user.user.email);
           dispatch(loading$());
           navigate("../dashboard");
         });

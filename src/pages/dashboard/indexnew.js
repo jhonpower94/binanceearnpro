@@ -168,6 +168,14 @@ const useStyles = makeStyles((theme) => ({
   demo2: {
     backgroundColor: theme.palette.primary.main,
   },
+  stackicon: {
+    height: 38,
+    width: 38,
+    border: "1px solid #E0E3E7",
+    borderRadius: 10,
+    color: "#d20000",
+    backgroundColor: theme.palette.background.default,
+  },
 }));
 
 function ElevationScroll(props) {
@@ -487,22 +495,20 @@ export default function DashboardLayout(props) {
         >
           <Toolbar>
             <IconButton
-              color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, {
+              className={clsx(classes.menuButton, classes.stackicon, {
                 [classes.hide]: open,
               })}
             >
               <MenuIcon />
             </IconButton>
-            <Box m={1}>
-              {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
-                <img src={require("../../images/logomobile.svg")} height="50" />
-              ) : null}
-            </Box>
-            <Typography variant="h6">{pagetitle.title}</Typography>
+            <img
+              src={require("../../images/logomobile.svg")}
+              height="35"
+              style={{ marginLeft: 16 }}
+            />
+           
             <span className={classes.space} />
             <SelectLanguage />
             <DasboardMenu />
@@ -523,9 +529,7 @@ export default function DashboardLayout(props) {
         }}
       >
         <div className={classes.toolbar}>
-          {useMediaQuery(useTheme().breakpoints.up("sm")) ? null : (
-            <img src={require("../../images/logomobile.svg")} height="50" />
-          )}
+          
           <span className={classes.space} />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
@@ -573,7 +577,14 @@ export default function DashboardLayout(props) {
       <main className={classes.main}>
         <div className={classes.toolbar} />
 
-        {loading.loading ? (
+        {props.children}
+      </main>
+    </div>
+  );
+}
+
+/*
+  {loading.loading ? (
           <Box
             display="flex"
             flexDirection="column"
@@ -606,50 +617,4 @@ export default function DashboardLayout(props) {
             {props.children}
           </>
         )}
-      </main>
-    </div>
-  );
-}
-
-/*
-<div className={classes.demo2}>
-          <StyledTabs
-            value={value}
-            onChange={handleChange}
-            aria-label="styled tabs example"
-          >
-            {tabs.map((tab, index) => (
-              <StyledTab label={tab.title} key={index} {...allyProps(index)} />
-            ))}
-          </StyledTabs>
-        </div>
-
-         <List>
-          {[
-            {
-              title: currentStrings.Nav.investments,
-              link: "dashboard/invest",
-              tabindex: 0,
-            },
-            {
-              title: currentStrings.Nav.referral_bonus,
-              link: "dashboard/invest",
-              tabindex: 1,
-            },
-            {
-              title: currentStrings.Nav.account_info,
-              link: "dashboard/invest",
-              tabindex: 2,
-            },
-          ].map((link, index) => (
-            <ListItem button key={index} onClick={() => changeNav(link, index)}>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={link.title} />
-            </ListItem>
-          ))}
-        </List>
-      
-
         */

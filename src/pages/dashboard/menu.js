@@ -14,12 +14,22 @@ import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
 import { app, firestore } from "../../config";
 import { navigate } from "@reach/router";
-import { NotificationsOutlined } from "@material-ui/icons";
+import { AccountCircle, NotificationsOutlined } from "@material-ui/icons";
 import { AppContext } from "../../App";
+import Account from "./accountpage/account";
 
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
     display: "flex",
+    alignItems: "center",
+  },
+  stackicon: {
+    height: 38,
+    width: 38,
+    border: "1px solid #E0E3E7",
+    borderRadius: 10,
+    color: "#d20000",
+    backgroundColor: theme.palette.background.default,
   },
   orange: {
     color: theme.palette.primary.contrastText,
@@ -130,17 +140,22 @@ function DasboardMenu() {
 
   return (
     <div className={classes.sectionDesktop}>
-      <IconButton onClick={handleClick}>
-        <StyledBadge
-          badgeContent={notifications.length < 1 ? "0" : notifications.length}
-          color="primary"
-        >
-          <NotificationsOutlined color="inherit" />
+      <IconButton
+        onClick={handleClick}
+        className={classes.stackicon}
+        style={{ marginLeft: 16 }}
+      >
+        <StyledBadge badgeContent={notifications.length} color="primary">
+          <NotificationsOutlined />
         </StyledBadge>
       </IconButton>
 
-      <IconButton edge="end" color="primary" onClick={handleClickUser}>
-        <Avatar className={classes.orange}>{firstString}</Avatar>
+      <IconButton
+        onClick={handleClickUser}
+        className={classes.stackicon}
+        style={{ marginLeft: 16 }}
+      >
+        <AccountCircle />
       </IconButton>
 
       <StyledMenu

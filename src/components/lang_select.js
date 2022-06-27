@@ -15,10 +15,17 @@ import Grow from "@material-ui/core/Grow";
 import { useDispatch, useSelector } from "react-redux";
 import { language$ } from "../redux/action";
 import { AppContext } from "../App";
+import { IconButton } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  button: {
-    display: "flex",
+  stackicon: {
+    height: 38,
+    width: 38,
+    border: "1px solid #E0E3E7",
+    borderRadius: 10,
+    color: "#d20000",
+    backgroundColor: theme.palette.background.default,
+    marginLeft: 16
   },
   space: {
     marginLeft: theme.spacing(1),
@@ -52,9 +59,8 @@ const StyledMenu = withStyles({
 function SelectLanguage() {
   const classes = useStyles();
   const currentStrings = useSelector((state) => state.language);
-  const { setRightoleft, currentlanguage, setCurrentlanguage } = useContext(
-    AppContext
-  );
+  const { setRightoleft, currentlanguage, setCurrentlanguage } =
+    useContext(AppContext);
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -93,22 +99,9 @@ function SelectLanguage() {
 
   return (
     <React.Fragment>
-      <Grow in={true} style={{ transitionDelay: "500ms" }}>
-        <Button
-          variant="text"
-          size="large"
-          className={classes.button}
-          onClick={handleClick}
-        >
-          <TranslateSharpIcon />
-
-          {useMediaQuery(useTheme().breakpoints.up("sm")) ? (
-            <Typography className={classes.space}>{currentlanguage}</Typography>
-          ) : null}
-
-          <ExpandMoreSharpIcon className={open ? "rotate" : ""} />
-        </Button>
-      </Grow>
+      <IconButton onClick={handleClick} className={classes.stackicon}>
+        <TranslateSharpIcon />
+      </IconButton>
 
       <StyledMenu
         id="fade-menu"

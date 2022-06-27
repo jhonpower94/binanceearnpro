@@ -167,19 +167,20 @@ function Account() {
               {
                 title: currentStrings.Dashboard.titles.invest,
                 icon: "",
-                color: "primary",
+                color: "secondary",
                 action: "invest",
               },
               {
                 title: currentStrings.Dashboard.titles.withdraw,
                 icon: "",
-                color: "secondary",
+                color: "primary",
                 action: "withdraw",
               },
             ].map((btn, index) => (
               <Grid item key={index} xs={6} sm={3}>
                 <Button
                   variant="contained"
+                  disableElevation
                   color={btn.color}
                   fullWidth
                   onClick={() => navigate(`dashboard/${btn.action}`)}

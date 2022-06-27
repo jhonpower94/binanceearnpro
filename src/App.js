@@ -1,5 +1,5 @@
 import { Fab, useMediaQuery, useTheme } from "@material-ui/core";
-import { yellow } from "@material-ui/core/colors";
+import { green, yellow } from "@material-ui/core/colors";
 import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 import { Telegram, WhatsApp } from "@material-ui/icons";
 import { jssPreset, StylesProvider, ThemeProvider } from "@material-ui/styles";
@@ -114,7 +114,7 @@ function App() {
   const dispatch = useDispatch();
   const currentStrings = useSelector((state) => state.language);
   const [darktheme, setDarktheme] = useState({
-    status: true,
+    status: false,
   });
   const [rightoleft, setRightoleft] = useState({
     status: false,
@@ -187,18 +187,18 @@ function App() {
       type: palletType,
       primary: {
         // Purple and green play nicely together.
-        main: yellow["800"],
+        main: green[600], // "#002203",
       },
       secondary: {
         // This is green.A700 as hex.
-        main: secondary,
+        main: "#ffa244",
       },
       background: {
-        default: "#09132e",
-        paper: "#09132e",
+        //  default: "#002203", //"#09132e",
+        //  paper: "#09132e",
       },
 
-      contrastThreshold: 1,
+      // contrastThreshold: 1,
     },
   });
 
@@ -383,20 +383,6 @@ function App() {
         <StylesProvider jss={jss}>
           <ThemeProvider theme={theme}>
             <Router>
-              <HomeLayout path="/">
-                <Home path="/" />
-                <Home path="/:refid" />
-                <InvestBlock path="invest" />
-                <Faqs path="faq" />
-                <About path="about" />
-                <Locations path="locations" />
-                <BlocDatas path="tradedatas" />
-                <Downloads path="downloads/:page" />
-                <Contactus path="contact" />
-                <Guide path="guide" />
-                <Security path="security/:page" />
-              </HomeLayout>
-
               <DashboardLayout path="dashboard">
                 <DashboardPage path="/" />
                 <Invest path="invest" />
@@ -466,6 +452,20 @@ function App() {
 export default App;
 
 /*
+
+<HomeLayout path="/">
+                <Home path="/" />
+                <Home path="/:refid" />
+                <InvestBlock path="invest" />
+                <Faqs path="faq" />
+                <About path="about" />
+                <Locations path="locations" />
+                <BlocDatas path="tradedatas" />
+                <Downloads path="downloads/:page" />
+                <Contactus path="contact" />
+                <Guide path="guide" />
+                <Security path="security/:page" />
+              </HomeLayout>
 
  <Fab
         className={classes.floaticon}
