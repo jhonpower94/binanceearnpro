@@ -27,6 +27,9 @@ function TabPanel(props) {
 }
 
 const StyledTabs = withStyles((theme) => ({
+  root: {
+    color: "#fff",
+  },
   indicator: {
     display: "flex",
     height: "0.4em",

@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     width: 38,
     border: "1px solid #E0E3E7",
     borderRadius: 10,
-    color: "#d20000",
+    
     backgroundColor: theme.palette.background.default,
     marginLeft: 16
   },

@@ -1,12 +1,16 @@
 {
   "projects": {
-    "ositasite": "ositasite"
+    "ositasite": "ositasite",
+    "opsy\b\b": "ositasite"
   },
   "targets": {
     "ositasite": {
       "hosting": {
         "unchained": [
           "unchainedtraders"
+        ],
+        "dashboard": [
+          "dashboarduchainedtrade"
         ]
       }
     }

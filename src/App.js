@@ -1,5 +1,5 @@
 import { Fab, useMediaQuery, useTheme } from "@material-ui/core";
-import { green, yellow } from "@material-ui/core/colors";
+import { deepOrange, green, yellow } from "@material-ui/core/colors";
 import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 import { Telegram, WhatsApp } from "@material-ui/icons";
 import { jssPreset, StylesProvider, ThemeProvider } from "@material-ui/styles";
@@ -187,11 +187,11 @@ function App() {
       type: palletType,
       primary: {
         // Purple and green play nicely together.
-        main: green[600], // "#002203",
+        main: deepOrange[500], // "#002203",
       },
       secondary: {
         // This is green.A700 as hex.
-        main: "#ffa244",
+        main: green[600],
       },
       background: {
         //  default: "#002203", //"#09132e",
