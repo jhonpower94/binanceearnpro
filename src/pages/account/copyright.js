@@ -9,8 +9,8 @@ export default function Copyright() {
   return (
     <Typography variant="body2" align="center">
       {` © 2017 - ${new Date().getFullYear()}  `}
-      <Link color="inherit" href="https://unchainedtrade.com/">
-        unchainedtrade
+      <Link color="inherit" href="https://unchainedtrader.com/">
+        unchainedtrader
       </Link>
     </Typography>
   );

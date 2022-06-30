@@ -61,7 +61,7 @@ export default function Kyc() {
           },
           body: {
             message: `Hello ${user.firstName}, your profile has been successfully updated.`,
-            to: `${user.email}, unchainedtrade@outlook.com`,
+            to: `${user.email}, support@unchainedtrader.com`,
             subject: "Pofile update",
           },
         }).subscribe(() => {

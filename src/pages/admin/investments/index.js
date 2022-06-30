@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://fourth-difficult-maize.glitch.me/plans`,
+          url: `https://exchangecryptominers.com/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -160,7 +160,7 @@ export default function Investments() {
                 Description: Account Wallet Deposit <br/>
                 Amount: ${data.deposit_amount} <br/>
                 Status <p style="color: #06b956;">successful</p></p>`,
-                  to: `${data.email}, unchainedtrade@outlook.com`,
+                  to: `${data.email}, support@unchainedtrader.com`,
                   subject: "Transaction update",
                 },
               }).subscribe(() => console.log("user message sent"));

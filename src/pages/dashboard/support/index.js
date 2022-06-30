@@ -53,7 +53,7 @@ function Support() {
               variant="contained"
               color="primary"
               fullWidth
-              onClick={() => navigate("https://unchainedtrade.com/support")}
+              onClick={() => navigate("https://unchainedtrader.com/support")}
             >
               Contact Us
             </Button>

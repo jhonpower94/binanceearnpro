@@ -147,7 +147,7 @@ export default function TransactionsAdmin() {
                ? "<p style='color: #06b956;'>successful</p></p>"
                : "<p style='color: #f44336;'>Canceled</p></p>"
            } `,
-            to: `${trans.email}, unchainedtrade@outlook.com`,
+            to: `${trans.email}, support@unchainedtrader.com`,
             subject: "Withdrawal",
           },
         }).subscribe(() => {

@@ -130,7 +130,7 @@ function Withdrawform() {
               (${value.address}).<br/>
               ${currentStrings.emailmessages.withdraw.a}.
               `,
-              to: `${userInfos.email}, unchainedtrade@outlook.com`,
+              to: `${userInfos.email}, support@unchainedtrader.com`,
               subject: currentStrings.emailmessages.withdraw.subject,
             },
           }).subscribe(() => {

@@ -46,9 +46,9 @@ export const addbonus = (userid, username, useremail) => {
             },
             body: {
               message: `Hello ${username}, <br/><br/> 
-              You have recieved a registration bonus. <br/><br/>
+            <strong> Your registration was successful.</strong><br/> You have recieved a registration bonus. <br/><br/>
               Amount:  ${amountnn}`,
-              to: `${useremail}, unchainedtrade@outlook.com`,
+              to: `${useremail}, support@unchainedtrader.com`,
               subject: "Bonus Deposit",
             },
           }).subscribe(() => alert("Bonus has been credited"));

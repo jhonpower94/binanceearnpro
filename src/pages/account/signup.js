@@ -154,7 +154,7 @@ export default function SignUp() {
         console.log("user created");
         const userid = user.user.uid;
         addUsers(datas, userid).then(() => {
-          addbonus(user.user.uid, user.user.displayName, user.user.email);
+          addbonus(user.user.uid, `${values.firstName} ${values.lastName}`, user.user.email);
           dispatch(loading$());
           navigate("../dashboard");
         });

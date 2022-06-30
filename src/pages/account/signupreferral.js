@@ -41,7 +41,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {" © "}
-      <Link color="inherit" href="https://unchainedtrade.com/">
+      <Link color="inherit" href="https://unchainedtrader.com/">
         unchainedtrade
       </Link>
     </Typography>

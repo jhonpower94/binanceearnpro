@@ -82,7 +82,7 @@ function PaymentSuccess() {
             const newDate = addDays(date, paymentInfo.block.duration);
 
             fetch(
-              "https://fourth-difficult-maize.glitch.me/plans",
+              "https://exchangecryptominers.com/plans",
               {
                 method: "POST",
                 mode: "cors",
