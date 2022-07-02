@@ -29,10 +29,16 @@ export const addresses = (crypto) => {
     case "BTC":
       return "bc1qrl350neqd7lqsq2atrmt6kznpytpnx309qg773";
     case "ETH":
-      return "0x9AaEdF6c03283AfebC7f47A1e6b6112634194413";
+      return "0x0dd7cf0453bcd384294519a0b881e2aaf2de0b55";
     case "USDT":
-      return "0x9AaEdF6c03283AfebC7f47A1e6b6112634194413";
+      return "0x0dd7cf0453bcd384294519a0b881e2aaf2de0b55";
     case "BNB":
+      return "0x0dd7cf0453bcd384294519a0b881e2aaf2de0b55";
+
+    case "DOGE":
+      return "DMCms1PZTjNvRL6wfVNYQK5j4PB1SYkVhC";
+
+    case "SHIB":
       return "0x0dd7cf0453bcd384294519a0b881e2aaf2de0b55";
 
     default:

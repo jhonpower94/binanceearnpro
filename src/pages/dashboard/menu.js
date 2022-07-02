@@ -181,7 +181,7 @@ function DasboardMenu() {
               <Typography variant="subtitle2">
                 {lnk.type === "investment"
                   ? `Investment return of ${lnk.amount} @${lnk.date}`
-                  : `you have recieves a bonus of from a user`}
+                  : `You have recieved some bonus credit from a user`}
               </Typography>
             </MenuItem>
           </Fade>

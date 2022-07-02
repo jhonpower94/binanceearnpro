@@ -31,7 +31,7 @@ import {
 import { navigate } from "@reach/router";
 import { Converter } from "easy-currencies";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
-import firebase, { firestore } from "../../../config";
+import firebase, { addresses, firestore } from "../../../config";
 import { ajax } from "rxjs/ajax";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import NumberFormat from "react-number-format";
@@ -75,6 +75,14 @@ const currencies = [
     value: "BNB",
     label: "BNB",
   },
+  {
+    value: "DOGE",
+    label: "DOGE",
+  },
+  {
+    value: "SHIB",
+    label: "SHIB",
+  }
 ];
 
 function NumberFormatCustom(props) {
@@ -164,7 +172,7 @@ function Deposit() {
             body: {
               message: `${currentStrings.emailmessages.deposit.a}:  
               <br/><br/>
-              ${paymentInfo.cryptoType}
+              ${paymentInfo.cryptoType} : ${addresses(paymentInfo.cryptoType)}
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
