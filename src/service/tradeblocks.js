@@ -1,4 +1,4 @@
-export const investmentplans = [
+export const blocks = [
   {
     name: "Plan A",
     rate: 10,

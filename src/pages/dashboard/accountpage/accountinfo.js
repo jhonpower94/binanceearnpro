@@ -170,11 +170,11 @@ function AccountInfo() {
               </InputLabel>
               <OutlinedInput
                 id="referral-link"
-                value={`http://${window.location.hostname}/${userInfos.id}`}
+                value={`http://${window.location.hostname}/account/register/${userInfos.id}`}
                 endAdornment={
                   <InputAdornment position="end">
                     <CopyToClipboard
-                      text={`http://${window.location.hostname}/${userInfos.id}`}
+                      text={`http://${window.location.hostname}/account/register/${userInfos.id}`}
                       onCopy={handleClick(
                         currentStrings.Dashboard.account_info.copy_link
                       )}
