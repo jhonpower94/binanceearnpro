@@ -13,20 +13,9 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useSelector } from "react-redux";
+import Copyright from "./copyright";
 
-function Copyright() {
-  const classes = useStyles();
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {" © "}
-      <Link to="../../" className={classes.link}>
-        unchainedtrade
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
