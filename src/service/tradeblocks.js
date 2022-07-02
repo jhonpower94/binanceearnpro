@@ -1,11 +1,11 @@
-export const blocks = [
+export const investmentplans = [
   {
     name: "Plan A",
     rate: 10,
 
     min_rate: 5,
     max_rate: 10,
-    duration: 11,
+    duration: 20,
 
     lot: 50,
     max: 1000,
@@ -19,7 +19,7 @@ export const blocks = [
 
     min_rate: 5,
     max_rate: 10,
-    duration: 11,
+    duration: 20,
 
     lot: 1000,
     max: 3500,
@@ -33,7 +33,7 @@ export const blocks = [
 
     min_rate: 5,
     max_rate: 10,
-    duration: 22,
+    duration: 40,
 
     lot: 3500,
     max: 5000,
@@ -47,7 +47,7 @@ export const blocks = [
 
     min_rate: 5,
     max_rate: 10,
-    duration: 22,
+    duration: 70,
 
     lot: 5000,
     max: 10000,
@@ -63,7 +63,7 @@ export const blocks = [
 
     min_rate: 5,
     max_rate: 10,
-    duration: 1000,
+    duration: 330,
 
     lot: 5000,
     max: 20000,
