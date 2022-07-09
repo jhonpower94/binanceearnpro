@@ -576,8 +576,18 @@ export default function DashboardLayout(props) {
       </Drawer>
       <main className={classes.main}>
         <div className={classes.toolbar} />
-
-        {props.children}
+        {loading.loading ? (
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt={20}
+          >
+            <FacebookCircularProgress />
+          </Box>
+        ) : (
+          props.children
+        )}
       </main>
     </div>
   );

@@ -30,7 +30,7 @@ import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { countrylist } from "../../config/countrylist";
 import { from } from "rxjs";
 import firebase, { app, firestore, docData } from "../../config";
-import { addUsers } from "../../config/services";
+import { addbonus, addUsers } from "../../config/services";
 import { dispatch } from "rxjs/internal/observable/pairs";
 import { navigate } from "@reach/router";
 import { ajax } from "rxjs/ajax";
@@ -168,6 +168,7 @@ export default function SignUpReferral(props) {
         console.log("user created");
         const userid = user.user.uid;
         addUsers(datas, userid).then(() => {
+          addbonus(user.user.uid, `${values.firstName} ${values.lastName}`, user.user.email);
           const getreferrerdata = firestore.doc(`users/${id}`);
           docData(getreferrerdata, "id").subscribe((data) => {
             ajax({
