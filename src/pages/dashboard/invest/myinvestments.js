@@ -180,9 +180,9 @@ function Investment() {
                       ).toLocaleDateString()}
                     </TableCell>
                     <TableCell align="center">
-                      {dep.pending
-                        ? currentStrings.Dashboard.investments.pending
-                        : currentStrings.Dashboard.investments.complete}
+                      {dep.complete
+                        ? currentStrings.Dashboard.investments.complete
+                        : currentStrings.Dashboard.investments.pending}
                     </TableCell>
                   </TableRow>
                 ))}

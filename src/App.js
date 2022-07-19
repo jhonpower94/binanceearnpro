@@ -434,7 +434,15 @@ function App() {
           </ThemeProvider>
         </StylesProvider>
       </div>
-      <Fab
+    
+    </AppContext.Provider>
+  );
+}
+
+export default App;
+
+/*
+  <Fab
         className={classes.floaticon}
         onClick={() => {
           window.open(
@@ -445,14 +453,6 @@ function App() {
       >
         <WhatsApp htmlColor="#fff" fontSize="large" />
       </Fab>
-    </AppContext.Provider>
-  );
-}
-
-export default App;
-
-/*
-
 <HomeLayout path="/">
                 <Home path="/" />
                 <Home path="/:refid" />
