@@ -1,8 +1,8 @@
-import React, { useEffect, useContext } from "react";
-import { AppContext } from "../../../App";
-import { loading$ } from "../../../redux/action";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  Badge, Box, Button, ButtonGroup, Typography
+} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -11,24 +11,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import {
-  Button,
-  Badge,
-  IconButton,
-  ButtonGroup,
-  Box,
-  Typography,
-} from "@material-ui/core";
-import { firestore, collectionData, docData } from "../../../config";
-import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
-import {
-  CheckBox,
-  CheckSharp,
-  CheckBoxSharp,
-  ClearSharp,
+  CheckSharp, ClearSharp
 } from "@material-ui/icons";
-import { async } from "rxjs";
 import { navigate } from "@reach/router";
+import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
+import React, { useContext, useEffect } from "react";
 import { ajax } from "rxjs/ajax";
+import { AppContext } from "../../../App";
+import { collectionData, docData, firestore } from "../../../config";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },

@@ -157,6 +157,30 @@ const trxinfo = (state = {}, action) => {
   }
 };
 
+const deposithistory = (
+  state = [{ return_amount: 0, date: "--", pending: "" }],
+  action
+) => {
+  switch (action.type) {
+    case "DEPOSITS":
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const withdrawhistory = (
+  state = [{ return_amount: 0, date: "", pending: "" }],
+  action
+) => {
+  switch (action.type) {
+    case "WITHDRAWHISTORY":
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export const allreducer = combineReducers({
   language: languageSelected,
   darkMode: darkMode,
@@ -171,4 +195,6 @@ export const allreducer = combineReducers({
   locationinfo: locationinfo,
   selectetedmenu: selectetedmenu,
   trxinfo: trxinfo,
+  deposithistory: deposithistory,
+  withdrawhistory: withdrawhistory
 });

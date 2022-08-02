@@ -232,7 +232,7 @@ function App() {
     };
 
     if (localstore) {
-      dispatch(loading$());
+     
       console.log(reactLocalStorage.getObject("country"));
       //  reactLocalStorage.clear();
       // convert investment plan
@@ -245,23 +245,7 @@ function App() {
       }); */
       // end convert investment plan
 
-      firestore
-        .collection("fakerator")
-        .doc("12345")
-        .get()
-        .then((dataval) => {
-          //  dataval.docs.forEach (for collection arrays)
-          dataval.data().data.forEach((doc) => {
-            transactiondatas.push(doc); // doc.data() (for coolection arrays)
-          });
-        })
-        .then(() => {
-          dispatch(loading$());
-        })
-        .catch((err) => {
-          console.log(err);
-          dispatch(loading$());
-        });
+      
     } else {
       add_to_storage(
         { name: "United States", dial_code: "+1", code: "US" },

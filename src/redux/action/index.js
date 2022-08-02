@@ -112,3 +112,19 @@ export const transactionInfo$ = (data) => {
   };
 };
 
+export const deposithistory$ = (data) => {
+  return {
+    type: "DEPOSITS",
+    payload: data,
+  };
+};
+
+export const withdrawhistory$ = (data) => {
+  return {
+    type: "WITHDRAWHISTORY",
+    payload: data,
+  };
+};
+
+
+

@@ -44,6 +44,7 @@ import { getVerifiedUsers } from "../../config/verification";
 import {
   bonusbalance$,
   bonusCollections$,
+  deposithistory$,
   locationinfo$,
   mainbalance$,
   myinvestment$,
@@ -52,6 +53,7 @@ import {
   totaldeposit$,
   totalprofit$,
   totalwithdrawn$,
+  withdrawhistory$,
 } from "../../redux/action";
 import DasboardMenu from "./menu";
 
@@ -173,7 +175,7 @@ const useStyles = makeStyles((theme) => ({
     width: 38,
     border: "1px solid #E0E3E7",
     borderRadius: 10,
-    
+
     backgroundColor: theme.palette.background.default,
   },
 }));
@@ -447,6 +449,25 @@ export default function DashboardLayout(props) {
         collectionData(notifications, "id").subscribe((data) => {
           dispatch(notification$(data));
         });
+
+        // deposit / withdrawal history
+        const allWalletHistory = (transactionType) =>
+          firestore
+            .collection("transactions")
+            .where("userid", "==", user.uid)
+            .where("name", "==", transactionType)
+            .orderBy("timestamp", "desc");
+
+        collectionData(allWalletHistory("wallet deposit"), "id").subscribe(
+          (data) => {
+            if (data.length > 0) return dispatch(deposithistory$(data));
+          }
+        );
+        collectionData(allWalletHistory("Wallet withdrawal"), "id").subscribe(
+          (data) => {
+            if (data.length > 0) return dispatch(withdrawhistory$(data));
+          }
+        );
       }
     });
   }, []);
@@ -508,7 +529,7 @@ export default function DashboardLayout(props) {
               height="35"
               style={{ marginLeft: 16 }}
             />
-           
+
             <span className={classes.space} />
             <SelectLanguage />
             <DasboardMenu />
@@ -529,7 +550,6 @@ export default function DashboardLayout(props) {
         }}
       >
         <div className={classes.toolbar}>
-          
           <span className={classes.space} />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (

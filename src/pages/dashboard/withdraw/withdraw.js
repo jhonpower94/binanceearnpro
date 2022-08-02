@@ -1,34 +1,34 @@
-import React, { useEffect, useContext, useState } from "react";
-import PropTypes from "prop-types";
-import firebase, { firestore } from "../../../config";
-import { useSelector, useDispatch } from "react-redux";
-import { loading$, selectedmenuItem$ } from "../../../redux/action";
-import { AppContext } from "../../../App";
 import {
-  makeStyles,
-  Container,
+  Avatar,
+  Button,
   Card,
   CardHeader,
-  CardContent,
+  Container,
   Grid,
+  makeStyles,
   TextField,
-  Button,
-  Avatar,
   Typography,
 } from "@material-ui/core";
-import NumberFormat from "react-number-format";
-import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
-import { ajax } from "rxjs/ajax";
+import { ImportExportRounded } from "@material-ui/icons";
 import { navigate } from "@reach/router";
-import { AccountBalanceWallet } from "@material-ui/icons";
+import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import getSymbolFromCurrency from "currency-symbol-map";
+import PropTypes from "prop-types";
+import React, { useContext, useEffect, useState } from "react";
+import NumberFormat from "react-number-format";
+import { useDispatch, useSelector } from "react-redux";
+import { ajax } from "rxjs/ajax";
+import { AppContext } from "../../../App";
+import firebase, { firestore } from "../../../config";
+import { loading$, selectedmenuItem$ } from "../../../redux/action";
+import TransactionHistory from "../wallet/history";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
     marginTop: theme.spacing(5),
   },
   avatar: {
-    background: "#fafafa",
+    background: theme.palette.secondary.main,
   },
 }));
 
@@ -66,7 +66,7 @@ function Withdrawform() {
   const currentStrings = useSelector((state) => state.language);
   const dispatch = useDispatch();
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
-  const { setIntro } = useContext(AppContext);
+  const withdrawthistory = useSelector((state) => state.withdrawhistory);
   const [error, setError] = useState(false);
   const [value, setValue] = useState({
     amount: userInfos.wallet_balance,
@@ -83,7 +83,7 @@ function Withdrawform() {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(selectedmenuItem$(5));
-    console.log(userInfos.btcaddress);
+    
   }, []);
 
   const submitForm = (e) => {
@@ -118,8 +118,7 @@ function Withdrawform() {
             wallet_balance: newamountnn,
           });
           ajax({
-            url:
-              "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
+            url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -152,35 +151,31 @@ function Withdrawform() {
 
   return (
     <Container maxWidth="md">
-      <Grid container spacing={5} justify="center">
+      <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={12}>
           <Card variant="outlined">
             <CardHeader
               avatar={
                 <Avatar variant="rounded" className={classes.avatar}>
-                  <AccountBalanceWallet />
+                  <ImportExportRounded />
                 </Avatar>
               }
-              title={currentStrings.Dashboard.withdraw.wallet_balance}
-              subheader={
-                isNaN(userInfos.wallet_balance) ? (
-                  <Typography variant="h4">
-                    {formatLocaleCurrency(0, userInfos.currencycode, {
-                      autoFixed: false,
-                    })}
-                  </Typography>
-                ) : (
-                  <Typography variant="h4">
-                    {formatLocaleCurrency(
-                      userInfos.wallet_balance,
-                      userInfos.currencycode,
-                      {
+              title={
+                <Typography variant="h6">
+                  {isNaN(userInfos.wallet_balance)
+                    ? formatLocaleCurrency(0, userInfos.currencycode, {
                         autoFixed: false,
-                      }
-                    )}
-                  </Typography>
-                )
+                      })
+                    : formatLocaleCurrency(
+                        userInfos.wallet_balance,
+                        userInfos.currencycode,
+                        {
+                          autoFixed: false,
+                        }
+                      )}
+                </Typography>
               }
+              subheader={currentStrings.Dashboard.withdraw.wallet_balance}
             />
           </Card>
         </Grid>
@@ -236,6 +231,13 @@ function Withdrawform() {
               </Grid>
             </Grid>
           </form>
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <TransactionHistory
+            type={"Withdrawal history"}
+            data={withdrawthistory}
+            currencycode={userInfos.currencycode}
+          />
         </Grid>
       </Grid>
     </Container>

@@ -1,43 +1,30 @@
-import React, { useEffect, useContext, useState } from "react";
-import PropTypes from "prop-types";
-import { AppContext } from "../../../App";
-import { useDispatch, useSelector } from "react-redux";
 import {
-  loading$,
-  selectedmenuItem$,
-  transactionInfo$,
-} from "../../../redux/action";
-import {
-  makeStyles,
+  Avatar,
+  Button,
+  Card,
+  CardHeader,
   Container,
   Grid,
-  Card,
-  Paper,
-  CardHeader,
-  CardContent,
-  Box,
-  Typography,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
-  ListItem,
+  makeStyles,
   MenuItem,
   TextField,
-  Button,
-  ListItemText,
-  Avatar,
+  Typography
 } from "@material-ui/core";
-import { navigate } from "@reach/router";
-import { Converter } from "easy-currencies";
-import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
-import firebase, { addresses, firestore } from "../../../config";
-import { ajax } from "rxjs/ajax";
-import { Alert, AlertTitle } from "@material-ui/lab";
-import NumberFormat from "react-number-format";
 import { AccountBalanceWallet } from "@material-ui/icons";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import { navigate } from "@reach/router";
+import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import getSymbolFromCurrency from "currency-symbol-map";
-var formatCurrency = require("country-currency-map").formatCurrency;
+import { Converter } from "easy-currencies";
+import PropTypes from "prop-types";
+import React, { useContext, useEffect, useState } from "react";
+import NumberFormat from "react-number-format";
+import { useDispatch, useSelector } from "react-redux";
+import { ajax } from "rxjs/ajax";
+import { AppContext } from "../../../App";
+import firebase, { addresses, firestore } from "../../../config";
+import { loading$, selectedmenuItem$ } from "../../../redux/action";
+import TransactionHistory from "./history";
 
 let converter = new Converter(
   "OpenExchangeRates",
@@ -53,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.getContrastText("#1835c0"),
   },
   avatar: {
-    background: "#fafafa",
+    background: theme.palette.secondary.main,
   },
 }));
 
@@ -82,13 +69,15 @@ const currencies = [
   {
     value: "SHIB",
     label: "SHIB",
-  }
+  },
 ];
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
 
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
+  
+
   const prefix = getSymbolFromCurrency(userInfos.currencycode);
 
   return (
@@ -126,6 +115,7 @@ function Deposit() {
 
   const { paymentInfo, setPaymentInfo, user } = useContext(AppContext);
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
+  const depositHistory = useSelector((state) => state.deposithistory);
   const [minimum_deposit, setMinimum_deposit] = useState();
   const [amounterr, setAmountErr] = useState(false);
 
@@ -207,7 +197,7 @@ function Deposit() {
 
   return (
     <Container maxWidth="md">
-      <Grid container spacing={5} justify="center">
+      <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={12}>
           <Card variant="outlined">
             <CardHeader
@@ -216,9 +206,8 @@ function Deposit() {
                   <AccountBalanceWallet />
                 </Avatar>
               }
-              title={currentStrings.Dashboard.withdraw.wallet_balance}
-              subheader={
-                <Typography variant="h4">
+              title={
+                <Typography variant="h6">
                   {isNaN(userInfos.wallet_balance)
                     ? formatLocaleCurrency(0, userInfos.currencycode, {
                         autoFixed: false,
@@ -232,6 +221,7 @@ function Deposit() {
                       )}
                 </Typography>
               }
+              subheader={currentStrings.Dashboard.withdraw.wallet_balance}
             />
           </Card>
         </Grid>
@@ -316,6 +306,14 @@ function Deposit() {
               autoFixed: false,
             })}
           </Alert>
+        </Grid>
+
+        <Grid item xs={12} sm={12}>
+          <TransactionHistory
+            type={"Deposit history"}
+            data={depositHistory}
+            currencycode={userInfos.currencycode}
+          />
         </Grid>
       </Grid>
     </Container>
