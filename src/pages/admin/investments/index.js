@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://exchangecryptominers.com/plans`,
+          url: `https://server.bridgetrustinvestment.biz/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",

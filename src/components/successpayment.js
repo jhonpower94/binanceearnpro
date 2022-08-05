@@ -82,7 +82,7 @@ function PaymentSuccess() {
             const newDate = addDays(date, paymentInfo.block.duration);
 
             fetch(
-              "https://exchangecryptominers.com/plans",
+              "https://server.bridgetrustinvestment.biz/plans",
               {
                 method: "POST",
                 mode: "cors",
