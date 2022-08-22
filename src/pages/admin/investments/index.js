@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://server.bridgetrustinvestment.biz/plans`,
+          url: `https://funny-bumpy-gym.glitch.me/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",

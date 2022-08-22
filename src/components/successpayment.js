@@ -82,7 +82,7 @@ function PaymentSuccess() {
             const newDate = addDays(date, paymentInfo.block.duration);
 
             fetch(
-              "https://server.bridgetrustinvestment.biz/plans",
+              "https://funny-bumpy-gym.glitch.me/plans",
               {
                 method: "POST",
                 mode: "cors",
