@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://funny-bumpy-gym.glitch.me/plans`,
+          url: `https://api.hillsinger.fun/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -82,7 +82,7 @@ function PaymentSuccess() {
             const newDate = addDays(date, paymentInfo.block.duration);
 
             fetch(
-              "https://funny-bumpy-gym.glitch.me/plans",
+              "https://api.hillsinger.fun/plans",
               {
                 method: "POST",
                 mode: "cors",
