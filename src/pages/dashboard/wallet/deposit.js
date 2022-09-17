@@ -166,7 +166,7 @@ function Deposit() {
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
-              <a>support@unchainedtrader.com</a>
+              <a>service@unchainedtrader.com</a>
               ${currentStrings.emailmessages.deposit.c}.`,
               to: userInfos.email,
               subject: currentStrings.emailmessages.deposit.subject,
@@ -180,7 +180,7 @@ function Deposit() {
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "support@unchainedtrader.com",
+              to: "service@unchainedtrader.com",
               subject: "New Deposit",
             },
           }).subscribe(() => {

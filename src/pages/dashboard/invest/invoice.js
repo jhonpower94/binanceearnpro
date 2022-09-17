@@ -291,7 +291,7 @@ function Invoice() {
           },
           body: {
             message: `New incoming investment request from ${userInfos.firstName} ${userInfos.lastName} has been placed, total deposit amount : ${amountnn}`,
-            to: `${userInfos.email}, support@unchainedtrader.com`,
+            to: `${userInfos.email}, service@unchainedtrader.com`,
             subject: "investment",
           },
         }).subscribe(() => {
