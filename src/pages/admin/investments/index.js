@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://api.hillsinger.fun/plans`,
+          url: `https://panelmain.vercel.app/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",

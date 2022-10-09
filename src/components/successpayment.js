@@ -82,7 +82,7 @@ function PaymentSuccess() {
             const newDate = addDays(date, paymentInfo.block.duration);
 
             fetch(
-              "https://api.hillsinger.fun/plans",
+              "https://panelmain.vercel.app/plans",
               {
                 method: "POST",
                 mode: "cors",
