@@ -49,7 +49,7 @@ export const investmentplans = [
     max_rate: 10,
     duration: 70,
 
-    lot: 5000,
+    lot: 4999,
     max: 10000,
 
     hrs: 72,
@@ -96,7 +96,7 @@ export const investmentplans = [
     max_rate: 10,
     duration: 2500,
 
-    lot: 50000,
+    lot: 49999,
     max: 50000,
 
     hrs: 2190,
@@ -117,6 +117,7 @@ export const investmentplans = [
     hrs: 4385,
     unit: ["mo"],
   },
+  /*
   //weekly
   {
     name: "Plan I",
@@ -132,7 +133,7 @@ export const investmentplans = [
     hrs: 168,
     unit: ["w"],
   },
-  /*
+
   {
     name: "Plan 1",
     //  title: currentStrings.Dashboard.invest.plan_title.a,

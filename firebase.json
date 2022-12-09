@@ -21,7 +21,17 @@
           "destination": "/index.html"
         }
       ]
+    },
+    {
+      "target": "binance",
+      "public": "build",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
     }
-
   ]
 }

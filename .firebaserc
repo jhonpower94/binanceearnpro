@@ -1,7 +1,8 @@
 {
   "projects": {
     "ositasite": "ositasite",
-    "opsy\b\b": "ositasite"
+    "opsy\b\b": "ositasite",
+    "bn": "binanceearnpro"
   },
   "targets": {
     "ositasite": {
@@ -11,6 +12,13 @@
         ],
         "dashboard": [
           "dashboarduchainedtrade"
+        ]
+      }
+    },
+    "binanceearnpro": {
+      "hosting": {
+        "binance": [
+          "binanceearnpro"
         ]
       }
     }

@@ -1,4 +1,4 @@
-import { deepOrange, green } from "@material-ui/core/colors";
+import { deepOrange } from "@material-ui/core/colors";
 import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 import { jssPreset, StylesProvider, ThemeProvider } from "@material-ui/styles";
 import { Router } from "@reach/router";
@@ -49,13 +49,13 @@ import CreditWallet from "./pages/dashboard/wallet/payment";
 import Withdrawals from "./pages/dashboard/withdraw";
 import WithdrawBonus from "./pages/dashboard/withdraw/bonus";
 import Withdrawform from "./pages/dashboard/withdraw/withdraw";
-import Tables from "./pages/homepage/component/trnanstble";
-import DepositTable from "./pages/homepage/component/trnanstble/depositable";
-import WithdrawTable from "./pages/homepage/component/trnanstble/withdrawtable";
+import HomepageBinan from "./pages/homepage-binance";
+import AboutUs from "./pages/homepage-binance/about";
+import Faqs from "./pages/homepage-binance/faq";
+import Guide from "./pages/homepage-binance/guide";
+import Home from "./pages/homepage-binance/home";
+import InvestmentPage from "./pages/homepage-binance/investmentpage";
 import { language$ } from "./redux/action";
-
-const tawkTo = require("tawkto-react");
-const tawkToPropertyId = "5feb0864df060f156a91965a";
 
 let converter = new Converter(
   "OpenExchangeRates",
@@ -100,7 +100,7 @@ function App() {
   const dispatch = useDispatch();
   const currentStrings = useSelector((state) => state.language);
   const [darktheme, setDarktheme] = useState({
-    status: false,
+    status: true,
   });
   const [rightoleft, setRightoleft] = useState({
     status: false,
@@ -177,11 +177,11 @@ function App() {
       },
       secondary: {
         // This is green.A700 as hex.
-        main: green[600],
+        main: "#2b3139",
       },
       background: {
-        //  default: "#002203", //"#09132e",
-        //  paper: "#09132e",
+        default: "#181a20", //"#09132e",
+        paper: "#2b3139",
       },
 
       // contrastThreshold: 1,
@@ -218,7 +218,6 @@ function App() {
     };
 
     if (localstore) {
-     
       console.log(reactLocalStorage.getObject("country"));
       //  reactLocalStorage.clear();
       // convert investment plan
@@ -230,8 +229,6 @@ function App() {
         navigate("");
       }); */
       // end convert investment plan
-
-      
     } else {
       add_to_storage(
         { name: "United States", dial_code: "+1", code: "US" },
@@ -396,15 +393,17 @@ function App() {
                 <UpdateCurrency path="convert" />
               </AdminLayout>
 
-              <Tables path="tables">
-                <WithdrawTable path="withdrawtable" />
-                <DepositTable path="depositable" />
-              </Tables>
+              <HomepageBinan path="/">
+                <Home path="/" />
+                <AboutUs path="about" />
+                <InvestmentPage path="plans" />
+                <Guide path="guide" />
+                <Faqs path="faqs" />
+              </HomepageBinan>
             </Router>
           </ThemeProvider>
         </StylesProvider>
       </div>
-    
     </AppContext.Provider>
   );
 }

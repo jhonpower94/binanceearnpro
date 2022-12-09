@@ -1,21 +1,15 @@
-import React, { useEffect, useContext } from "react";
-import { AppContext } from "../../../App";
 import {
-  makeStyles,
-  Container,
+  Button, Card,
+  CardContent, Container,
   Grid,
-  ListItemText,
-  Typography,
-  Button,
-  useMediaQuery,
-  useTheme,
-  Card,
-  CardContent,
+  ListItemText, makeStyles, useMediaQuery,
+  useTheme
 } from "@material-ui/core";
-import ChartsPage from "./charts";
-import { useSelector } from "react-redux";
 import { navigate } from "@reach/router";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
+import React, { useContext, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { AppContext } from "../../../App";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {

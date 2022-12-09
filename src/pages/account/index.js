@@ -1,10 +1,8 @@
-import React, { useEffect, useContext } from "react";
-import { AppContext } from "../../App";
-import PulseLoader from "react-spinners/PulseLoader";
 import { css } from "@emotion/core";
-import { useSelector } from "react-redux";
 import { Box, CircularProgress, CssBaseline, makeStyles } from "@material-ui/core";
-import { Helmet } from "react-helmet";
+import React, { useContext, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { AppContext } from "../../App";
 
 const override = css`
   display: block;
@@ -69,12 +67,7 @@ function AccountLayout(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Helmet>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
-      </Helmet>
+     
       {loading.loading ? (
         <Box display="flex" flexDirection="column" alignItems="center" mt={20}>
           <FacebookCircularProgress />

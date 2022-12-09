@@ -40,7 +40,7 @@ function Support() {
           <CardHeader
             action={
               <img
-                src={require("../../homepage/images/message.svg")}
+                src={require("./message.svg")}
                 alt="image"
                 width="80"
               />

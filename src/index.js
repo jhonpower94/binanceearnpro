@@ -7,7 +7,7 @@ import * as serviceWorker from "./serviceWorker";
 import { createStore } from "redux";
 import { allreducer } from "./redux/reducer";
 import { Provider } from "react-redux";
-import "animate.css/animate.min.css";
+
 
 const store = createStore(allreducer);
 store.subscribe(() => console.log(store.getState()));

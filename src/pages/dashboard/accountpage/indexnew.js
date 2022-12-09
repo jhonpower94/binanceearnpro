@@ -1,19 +1,12 @@
-import React, { useEffect, useContext } from "react";
-import clsx from "clsx";
 import PropTypes from "prop-types";
+import React, { useContext, useEffect } from "react";
 
-import { makeStyles, Box, Typography, Container } from "@material-ui/core";
+import { Container, makeStyles } from "@material-ui/core";
+import { useSelector } from "react-redux";
 import { AppContext } from "../../../App";
+import CustomizedTabs from "../tabs";
 import Account from "./account";
 import AccountInfo from "./accountinfo";
-import Wallet from "../wallet";
-import Withdrawform from "../withdraw/withdraw";
-import InvestNew from "../invest";
-import Invoice from "../invest/invoice";
-import Invest from "../invest/indexnew";
-import Investment from "../invest/myinvestments";
-import CustomizedTabs from "../tabs";
-import { useSelector } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

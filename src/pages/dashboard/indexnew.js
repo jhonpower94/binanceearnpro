@@ -1,10 +1,8 @@
 import {
   Box,
-  CircularProgress,
-  Link,
-  useMediaQuery,
+  CircularProgress, useMediaQuery,
   useScrollTrigger,
-  withStyles,
+  withStyles
 } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -24,18 +22,16 @@ import {
   AccountBalanceWalletSharp,
   AddCircleSharp,
   GetAppSharp,
-  HomeSharp,
+  HomeSharp
 } from "@material-ui/icons";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import MenuIcon from "@material-ui/icons/Menu";
-import { Alert, AlertTitle } from "@material-ui/lab";
 import { navigate } from "@reach/router";
 import clsx from "clsx";
 import { Converter } from "easy-currencies";
 import PropTypes from "prop-types";
 import React, { useContext, useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { AppContext } from "../../App";
 import SelectLanguage from "../../components/lang_select";
@@ -53,7 +49,7 @@ import {
   totaldeposit$,
   totalprofit$,
   totalwithdrawn$,
-  withdrawhistory$,
+  withdrawhistory$
 } from "../../redux/action";
 import DasboardMenu from "./menu";
 
@@ -499,12 +495,7 @@ export default function DashboardLayout(props) {
           : classes.rootmobile
       }
     >
-      <Helmet>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
-      </Helmet>
+      
       <CssBaseline />
       <ElevationScroll {...props}>
         <AppBar

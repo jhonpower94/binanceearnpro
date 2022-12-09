@@ -38,7 +38,7 @@ const StyledTabs = withStyles((theme) => ({
     "& > span": {
       maxWidth: 40,
       width: "100%",
-      backgroundColor: theme.palette.background.default,
+      backgroundColor: theme.palette.primary.main,
       borderTopLeftRadius: "50px",
       borderTopRightRadius: "50px",
     },
