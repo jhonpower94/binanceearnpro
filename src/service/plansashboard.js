@@ -15,7 +15,7 @@ export const investmentplans = [
   },
   {
     name: "Standard",
-    rate: 18,
+    rate: 126,
 
     min_rate: 5,
     max_rate: 10,
@@ -29,7 +29,7 @@ export const investmentplans = [
   },
   {
     name: "Premium",
-    rate: 27,
+    rate: 189,
 
     min_rate: 5,
     max_rate: 10,
@@ -43,7 +43,7 @@ export const investmentplans = [
   },
   {
     name: "Ultimate",
-    rate: 39,
+    rate: 1170,
 
     min_rate: 5,
     max_rate: 10,
