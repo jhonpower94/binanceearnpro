@@ -14,7 +14,7 @@ function AboutUs() {
 
       <section class="bodycontent">
         <p>
-          Established at block height 433179, Unchained Traded is the world’s
+          Established at block height 433179, Binance earn pro is the world’s
           premier bitcoin financial services company.
           <br />
           <br />
