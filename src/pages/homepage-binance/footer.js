@@ -8,22 +8,22 @@ function Footer() {
     <footer className="footer">
       <ul className="social-icon">
         <li className="social-icon__item">
-          <a className="social-icon__link" href="#">
+          <a className="social-icon__link" href="http://facebook.com/">
             <ion-icon name="logo-facebook" />
           </a>
         </li>
         <li className="social-icon__item">
-          <a className="social-icon__link" href="#">
+          <a className="social-icon__link" href="http://twitter.com/">
             <ion-icon name="logo-twitter" />
           </a>
         </li>
         <li className="social-icon__item">
-          <a className="social-icon__link" href="#">
+          <a className="social-icon__link" href="http://linkedin.com/">
             <ion-icon name="logo-linkedin" />
           </a>
         </li>
         <li className="social-icon__item">
-          <a className="social-icon__link" href="#">
+          <a className="social-icon__link" href="http://instagram.com/">
             <ion-icon name="logo-instagram" />
           </a>
         </li>

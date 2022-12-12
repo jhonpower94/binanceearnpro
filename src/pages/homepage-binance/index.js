@@ -8,6 +8,8 @@ import "./fonts/index.min.scoped.css";
 import Footer from "./footer";
 import "./styles.scoped.css";
 import Logo from "../../images/logomobile.svg";
+import TranslateWidget from "../../lang/yandextranslatewidget";
+
 
 function HomepageBinan(props) {
   return (
@@ -525,6 +527,8 @@ function HomepageBinan(props) {
               ))}
             </div>
             <div className="css-11y6cix" />
+
+            <TranslateWidget />
 
             <div className="css-wu6zme">
               {useMediaQuery(useTheme().breakpoints.up("sm")) ? (

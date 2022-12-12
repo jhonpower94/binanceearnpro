@@ -37,6 +37,7 @@ import { AppContext } from "../../App";
 import SelectLanguage from "../../components/lang_select";
 import firebase, { collectionData, docData, firestore } from "../../config";
 import { getVerifiedUsers } from "../../config/verification";
+import TranslateWidget from "../../lang/yandextranslatewidget";
 import {
   bonusbalance$,
   bonusCollections$,
@@ -523,7 +524,7 @@ export default function DashboardLayout(props) {
             />
 
             <span className={classes.space} />
-            <SelectLanguage />
+            <TranslateWidget />
             <DasboardMenu />
           </Toolbar>
         </AppBar>
