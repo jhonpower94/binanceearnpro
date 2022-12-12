@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.getContrastText("#1835c0"),
   },
   avatar: {
-    background: theme.palette.secondary.main,
+    background: theme.palette.text.primary,
   },
 }));
 
@@ -52,7 +52,7 @@ const currencies = [
 
   {
     value: "ETH",
-    label: "Etherieum",
+    label: "Ethereum",
   },
   {
     value: "USDT",
@@ -62,9 +62,10 @@ const currencies = [
     value: "BNB",
     label: "BNB",
   },
+  
   {
-    value: "DOGE",
-    label: "DOGE",
+    value: "Perfect money",
+    label: "Perfect money",
   },
   {
     value: "SHIB",
@@ -154,7 +155,7 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
+            url: "https://bnbearnpro.vercel.app/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -166,21 +167,21 @@ function Deposit() {
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
-              <a>service@unchainedtrader.com</a>
+              <a>binanceearnpro@outlook.com</a>
               ${currentStrings.emailmessages.deposit.c}.`,
               to: userInfos.email,
               subject: currentStrings.emailmessages.deposit.subject,
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
+            url: "https://bnbearnpro.vercel.app/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "service@unchainedtrader.com",
+              to: "binanceearnpro@outlook.com",
               subject: "New Deposit",
             },
           }).subscribe(() => {

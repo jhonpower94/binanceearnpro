@@ -7,17 +7,16 @@ import "./fonts/font.min.scoped.css";
 import "./fonts/index.min.scoped.css";
 import Footer from "./footer";
 import "./styles.scoped.css";
-import Logo from "../../images/logomobile.svg"
+import Logo from "../../images/logomobile.svg";
 
 function HomepageBinan(props) {
- 
   return (
     <>
       <CssBaseline />
       <div id="__APP">
         <div className="css-tq0shg">
           <header className="css-jmskxt">
-            <a onClick={() => navigate('/')} className="css-yvl53z">
+            <a onClick={() => navigate("/")} className="css-yvl53z">
               <img src={Logo} width={150} />
             </a>
             <div className="css-1tp5kus">
@@ -43,7 +42,7 @@ function HomepageBinan(props) {
                     className="css-4vx0ri"
                   >
                     <a
-                      href="https://www.binance.com/en/trade/BTC_USDT"
+                      href="https://www.binanceearnpro.web.app/en/trade/BTC_USDT"
                       id="header_menu_item_ba-Exchange"
                       data-size="large"
                       className="menu-item css-nht4qr"
@@ -72,7 +71,7 @@ function HomepageBinan(props) {
                       />
                     </a>
                     <a
-                      href="https://academy.binance.com/en"
+                      href="https://academy.binanceearnpro.web.app/en"
                       id="header_menu_item_ba-Academy"
                       data-size="large"
                       className="menu-item css-nht4qr"
@@ -101,7 +100,7 @@ function HomepageBinan(props) {
                       />
                     </a>
                     <a
-                      href="https://www.binance.com/en/link"
+                      href="https://www.binanceearnpro.web.app/en/link"
                       id="header_menu_item_Link"
                       data-size="large"
                       className="menu-item css-nht4qr"
@@ -130,7 +129,7 @@ function HomepageBinan(props) {
                       />
                     </a>
                     <a
-                      href="https://www.binance.com/en/vip-institutional-services"
+                      href="https://www.binanceearnpro.web.app/en/vip-institutional-services"
                       id="header_menu_item_ba-institutional"
                       data-size="large"
                       className="menu-item css-nht4qr"
@@ -159,7 +158,7 @@ function HomepageBinan(props) {
                       />
                     </a>
                     <a
-                      href="https://academy.binance.com/en/learn-and-earn"
+                      href="https://academy.binanceearnpro.web.app/en/learn-and-earn"
                       id="header_menu_item_ba-learn-earn-title"
                       data-size="large"
                       className="menu-item css-nht4qr"
@@ -217,7 +216,7 @@ function HomepageBinan(props) {
                       />
                     </a>
                     <a
-                      href="https://cloud.binance.com/"
+                      href="https://cloud.binanceearnpro.web.app/"
                       id="header_menu_item_ba-Cloud"
                       data-size="large"
                       className="menu-item css-nht4qr"
@@ -275,7 +274,7 @@ function HomepageBinan(props) {
                       />
                     </a>
                     <a
-                      href="https://labs.binance.com/"
+                      href="https://labs.binanceearnpro.web.app/"
                       id="header_menu_item_ba-Labs"
                       data-size="large"
                       className="menu-item css-nht4qr"
@@ -304,7 +303,7 @@ function HomepageBinan(props) {
                       />
                     </a>
                     <a
-                      href="https://launchpad.binance.com/en"
+                      href="https://launchpad.binanceearnpro.web.app/en"
                       id="header_menu_item_ba-Launchpad"
                       data-size="large"
                       className="menu-item css-nht4qr"
@@ -333,7 +332,7 @@ function HomepageBinan(props) {
                       />
                     </a>
                     <a
-                      href="https://research.binance.com/en"
+                      href="https://research.binanceearnpro.web.app/en"
                       id="header_menu_item_ba-Research"
                       data-size="large"
                       className="menu-item css-nht4qr"
@@ -391,7 +390,7 @@ function HomepageBinan(props) {
                       />
                     </a>
                     <a
-                      href="https://www.binance.com/en/gift-card"
+                      href="https://www.binanceearnpro.web.app/en/gift-card"
                       id="header_menu_item_ba-gift-binance"
                       data-size="large"
                       className="menu-item css-nht4qr"
@@ -406,7 +405,7 @@ function HomepageBinan(props) {
                       <div className="menu-ctx css-9pwsq">
                         <div className="css-10nf7hq">
                           <div data-bn-type="text" className="css-1iqe90x">
-                            Binance Gift Card
+                            Binance earn pro Gift Card
                           </div>
                         </div>
                         <div data-bn-type="text" className="css-ppte8m">
@@ -420,7 +419,7 @@ function HomepageBinan(props) {
                       />
                     </a>
                     <a
-                      href="https://www.binance.com/en/live"
+                      href="https://www.binanceearnpro.web.app/en/live"
                       id="header_menu_item_ba-live"
                       data-size="large"
                       className="menu-item css-nht4qr"
@@ -435,7 +434,7 @@ function HomepageBinan(props) {
                       <div className="menu-ctx css-9pwsq">
                         <div className="css-10nf7hq">
                           <div data-bn-type="text" className="css-1iqe90x">
-                            Binance Live
+                            Binance earn pro Live
                           </div>
                           <div data-bn-type="text" className="css-17hpqak">
                             new
@@ -452,7 +451,7 @@ function HomepageBinan(props) {
                       />
                     </a>
                     <a
-                      href="https://www.binance.com/en/binance-api"
+                      href="https://www.binanceearnpro.web.app/en/binance-api"
                       id="header_menu_item_APIs"
                       data-size="large"
                       className="menu-item css-nht4qr"
@@ -481,7 +480,7 @@ function HomepageBinan(props) {
                       />
                     </a>
                     <a
-                      href="https://www.binance.com/en/BABT?source=header"
+                      href="https://www.binanceearnpro.web.app/en/BABT?source=header"
                       id="header_menu_item_BABT"
                       data-size="large"
                       className="menu-item css-nht4qr"

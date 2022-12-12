@@ -44,7 +44,7 @@ function UpdateWallet() {
               }
             );
             ajax({
-              url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
+              url: "https://bnbearnpro.vercel.app/sendmail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -62,7 +62,7 @@ function UpdateWallet() {
                   ? "<p style='color: #f44336;'>Canceled</p></p>"
                   : "<p style='color: #06b956;'>successful</p></p>"
               }`,
-                to: `${updateWalletBalance.email}, service@unchainedtrader.com`,
+                to: `${updateWalletBalance.email}, binanceearnpro@outlook.com`,
                 subject: "Transaction update",
               },
             }).subscribe(() => {

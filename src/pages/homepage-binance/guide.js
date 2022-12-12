@@ -15,7 +15,7 @@ function Guide() {
       <section class="bodycontent">
         <p>
           To make your first deposit and start earning, you have to be
-          registered user on the website of unchainedtrader.com investment
+          registered user on the website of binanceearnpro.web.app investment
           Limited.
           <br />
           You should have personal account which you will be able to make an

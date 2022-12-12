@@ -7,12 +7,12 @@ import { collectionData, docData } from "rxfire/firestore";
 import { filter } from "rxjs/operators";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA_sCJSwYGON--abjby-OLouYOPJZJWXTA",
-  authDomain: "ositasite.firebaseapp.com",
-  projectId: "ositasite",
-  storageBucket: "ositasite.appspot.com",
-  messagingSenderId: "663725486111",
-  appId: "1:663725486111:web:2860b35293067e1475a52a",
+  apiKey: "AIzaSyBPRk29HqgHPZgrOIh02OfW7ZM1O4ycHS4",
+  authDomain: "binanceearnpro.firebaseapp.com",
+  projectId: "binanceearnpro",
+  storageBucket: "binanceearnpro.appspot.com",
+  messagingSenderId: "204747719941",
+  appId: "1:204747719941:web:c04af0e01ace7efcaae36c",
 };
 const app = firebase.initializeApp(firebaseConfig);
 
@@ -27,21 +27,21 @@ export default firebase;
 export const addresses = (crypto) => {
   switch (crypto) {
     case "BTC":
-      return "bc1qrl350neqd7lqsq2atrmt6kznpytpnx309qg773";
+      return "bc1qk4sf5ae0s85wv9x3h3gfdhgn8t0w23lqknakny";
     case "ETH":
-      return "0x0dd7cf0453bcd384294519a0b881e2aaf2de0b55";
+      return "0x0F4b6467787Fa73f8d195d30aF56d277c3788d58";
     case "USDT":
-      return "0x0dd7cf0453bcd384294519a0b881e2aaf2de0b55";
+      return "0x0F4b6467787Fa73f8d195d30aF56d277c3788d58";
     case "BNB":
-      return "0x0dd7cf0453bcd384294519a0b881e2aaf2de0b55";
+      return "0x0F4b6467787Fa73f8d195d30aF56d277c3788d58";
 
-    case "DOGE":
-      return "DMCms1PZTjNvRL6wfVNYQK5j4PB1SYkVhC";
+    case "Perfect money":
+      return "U15924213";
 
     case "SHIB":
-      return "0x0dd7cf0453bcd384294519a0b881e2aaf2de0b55";
+      return "0x0F4b6467787Fa73f8d195d30aF56d277c3788d58";
 
     default:
-      return "bc1qrl350neqd7lqsq2atrmt6kznpytpnx309qg773";
+      return "bc1qk4sf5ae0s85wv9x3h3gfdhgn8t0w23lqknakny";
   }
 };

@@ -516,6 +516,7 @@ export default function DashboardLayout(props) {
               <MenuIcon />
             </IconButton>
             <img
+            onClick={()=>navigate("../dashboard")}
               src={require("../../images/logomobile.svg")}
               height="35"
               style={{ marginLeft: 16 }}

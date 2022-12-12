@@ -5,33 +5,33 @@ import "./footer.scoped.css";
 
 function Footer() {
   return (
-    <footer class="footer">
-      <ul class="social-icon">
-        <li class="social-icon__item">
-          <a class="social-icon__link" href="#">
+    <footer className="footer">
+      <ul className="social-icon">
+        <li className="social-icon__item">
+          <a className="social-icon__link" href="#">
             <ion-icon name="logo-facebook" />
           </a>
         </li>
-        <li class="social-icon__item">
-          <a class="social-icon__link" href="#">
+        <li className="social-icon__item">
+          <a className="social-icon__link" href="#">
             <ion-icon name="logo-twitter" />
           </a>
         </li>
-        <li class="social-icon__item">
-          <a class="social-icon__link" href="#">
+        <li className="social-icon__item">
+          <a className="social-icon__link" href="#">
             <ion-icon name="logo-linkedin" />
           </a>
         </li>
-        <li class="social-icon__item">
-          <a class="social-icon__link" href="#">
+        <li className="social-icon__item">
+          <a className="social-icon__link" href="#">
             <ion-icon name="logo-instagram" />
           </a>
         </li>
       </ul>
-      <ul class="menu">
+      <ul className="menu">
         {menuLinks.map((link, index) => (
-          <li key={index} class="menu__item">
-            <a class="menu__link" onClick={() => navigate(link.path)}>
+          <li key={index} className="menu__item">
+            <a className="menu__link" onClick={() => navigate(link.path)}>
               {link.title}
             </a>
           </li>

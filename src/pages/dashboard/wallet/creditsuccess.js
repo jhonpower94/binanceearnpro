@@ -1,23 +1,15 @@
-import React, { useEffect, useContext, useState } from "react";
-import { AppContext } from "../../../App";
-import { useDispatch, useSelector } from "react-redux";
-import { loading$, loadingpayment$ } from "../../../redux/action";
-import { makeStyles, Container } from "@material-ui/core";
-import firebase, { firestore, auth, docData } from "../../../config";
-import { ajax } from "rxjs/ajax";
-import { async } from "rxjs/internal/scheduler/async";
+import { Container, makeStyles } from "@material-ui/core";
 import { navigate } from "@reach/router";
+import React, { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppContext } from "../../../App";
+import firebase, { auth, firestore } from "../../../config";
 
 const useStyles = makeStyles((theme) => ({
   margintop: {
     marginTop: theme.spacing(2),
   },
 }));
-
-const storageData = JSON.parse(window.localStorage.getItem("userdata"));
-const paymentInfostorage = JSON.parse(
-  window.localStorage.getItem("paymentInfo")
-);
 
 function CreditSucess() {
   const classes = useStyles();
@@ -46,7 +38,10 @@ function CreditSucess() {
       setUserInfo({ ...userInfo, name: user.displayName, id: user.uid });
     });
     async function getDoc(id) {
-      const snapshot = await firestore.collection("users").doc(id).get();
+      const snapshot = await firestore
+        .collection("users")
+        .doc(id)
+        .get();
       const data = snapshot.data();
       return data;
     }

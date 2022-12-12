@@ -1,60 +1,62 @@
 export const investmentplans = [
   {
-    name: "Plan A",
+    name: "Basic",
     rate: 10,
 
     min_rate: 5,
     max_rate: 10,
     duration: 20,
 
-    lot: 50,
-    max: 1000,
+    lot: 10,
+    max: 999,
 
     hrs: 24,
     unit: ["h"],
   },
   {
-    name: "Plan B",
-    rate: 13,
+    name: "Standard",
+    rate: 18,
 
     min_rate: 5,
     max_rate: 10,
     duration: 20,
 
     lot: 1000,
-    max: 3500,
+    max: 4999,
 
-    hrs: 24,
-    unit: ["h"],
+    hrs: 336,
+    unit: ["d", "h"],
   },
   {
-    name: "Plan C",
-    rate: 15,
+    name: "Premium",
+    rate: 27,
 
     min_rate: 5,
     max_rate: 10,
     duration: 40,
 
-    lot: 3500,
-    max: 5000,
+    lot: 5000,
+    max: 49999,
 
-    hrs: 48,
+    hrs: 168,
     unit: ["d", "h"],
   },
   {
-    name: "Plan D",
-    rate: 20,
+    name: "Ultimate",
+    rate: 39,
 
     min_rate: 5,
     max_rate: 10,
     duration: 70,
 
-    lot: 4999,
-    max: 10000,
+    lot: 50000,
+    max: 999999,
 
-    hrs: 72,
-    unit: ["d", "h"],
+    hrs: 720,
+    unit: ["mo"],
   },
+
+  /*
 
   //month
   {
@@ -117,7 +119,10 @@ export const investmentplans = [
     hrs: 4385,
     unit: ["mo"],
   },
-  /*
+
+
+
+  
   //weekly
   {
     name: "Plan I",

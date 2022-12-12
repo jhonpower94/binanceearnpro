@@ -127,7 +127,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://panelmain.vercel.app/plans`,
+          url: `https://bnbearnpro.vercel.app/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -150,7 +150,7 @@ export default function Investments() {
             })
             .then(() => {
               ajax({
-                url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
+                url: "https://bnbearnpro.vercel.app/sendmail",
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -160,7 +160,7 @@ export default function Investments() {
                 Description: Account Wallet Deposit <br/>
                 Amount: ${data.deposit_amount} <br/>
                 Status <p style="color: #06b956;">successful</p></p>`,
-                  to: `${data.email}, service@unchainedtrader.com`,
+                  to: `${data.email}, binanceearnpro@outlook.com`,
                   subject: "Transaction update",
                 },
               }).subscribe(() => console.log("user message sent"));

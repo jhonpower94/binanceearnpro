@@ -1,38 +1,15 @@
-import React, { useEffect, useContext, useState } from "react";
-import { AppContext } from "../../../App";
-import { useDispatch, useSelector } from "react-redux";
-import { loading$, loadingpayment$ } from "../../../redux/action";
-import firebase, { auth, firestore, docData } from "../../../config";
-import {
-  makeStyles,
-  Container,
-  ListItem,
-  ListItemText,
-  Card,
-  Box,
-  CardHeader,
-  Typography,
-  CardContent,
-  Divider,
-  CircularProgress,
-  Avatar,
-  Button,
-} from "@material-ui/core";
-import { reactLocalStorage } from "reactjs-localstorage";
-import repeat from "repeat";
-import { client } from "../../../config/services";
-import { ajax } from "rxjs/ajax";
-import { map, catchError } from "rxjs/operators";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import { css } from "@emotion/core";
-import PulseLoader from "react-spinners/PulseLoader";
-import Snackbar from "@material-ui/core/Snackbar";
+import {
+  Box, Button, Card, CardContent, CardHeader, Container, Divider, makeStyles, Typography
+} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
+import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
-import { navigate } from "@reach/router";
-import Countdown from "react-countdown";
-import { async } from "rxjs/internal/scheduler/async";
 import { Converter } from "easy-currencies";
+import React, { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppContext } from "../../../App";
+import { auth } from "../../../config";
 var QRCode = require("qrcode.react");
 
 let converter = new Converter(
@@ -247,7 +224,7 @@ function Wallet() {
         <CardContent>
           <Typography variant="body2" align="center">
             once payment is done send notification to live support or email
-            support @ service@unchainedtrader.com to notify us of successful deposit
+            support @ binanceearnpro@outlook.com to notify us of successful deposit
           </Typography>
         </CardContent>
       </Card>

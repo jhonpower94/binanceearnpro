@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(5),
   },
   avatar: {
-    background: theme.palette.secondary.main,
+    background: theme.palette.text.primary,
   },
 }));
 
@@ -118,7 +118,7 @@ function Withdrawform() {
             wallet_balance: newamountnn,
           });
           ajax({
-            url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
+            url: "https://bnbearnpro.vercel.app/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -129,7 +129,7 @@ function Withdrawform() {
               (${value.address}).<br/>
               ${currentStrings.emailmessages.withdraw.a}.
               `,
-              to: `${userInfos.email}, service@unchainedtrader.com`,
+              to: `${userInfos.email}, binanceearnpro@outlook.com`,
               subject: currentStrings.emailmessages.withdraw.subject,
             },
           }).subscribe(() => {

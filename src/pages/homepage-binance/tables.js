@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from "react";
-import "./fonts/index.min.scoped.css";
-import "./fonts/font.min.scoped.css";
-import "./styles.scoped.css";
 import { Avatar, Grid, makeStyles } from "@material-ui/core";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
-import { AppContext } from "../../App";
-import { collectionData, firestore } from "../../config";
+import React, { useEffect } from "react";
+import socketIOClient from "socket.io-client";
+import "./fonts/font.min.scoped.css";
+import "./fonts/index.min.scoped.css";
+import "./styles.scoped.css";
 
 const useStyles = makeStyles((theme) => ({
   small: {
@@ -13,16 +12,6 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(3.5),
   },
 }));
-
-const arrays = [
-  { user: "namelongname lastnamelonglastname", amount: 10053 },
-  { user: "namelongname lastnamelonglastname", amount: 10053 },
-  { user: "namelongname lastnamelonglastname", amount: 10053 },
-  { user: "namelongname lastnamelonglastname", amount: 10053 },
-  { user: "namelongname lastnamelonglastname", amount: 10053 },
-];
-
-const currencies = ["BTC", "USDT", "ETH", "BNB"];
 
 const setImage = (currncy) => {
   switch (currncy) {
@@ -41,22 +30,20 @@ const setImage = (currncy) => {
 
 function TransactionTable() {
   const classes = useStyles();
+  const ENDPOINT = "https://bnbearnpro.vercel.app/";
 
   const [deposits, setDeposits] = React.useState([]);
   const [withdrawals, setWithdrawals] = React.useState([]);
 
   useEffect(() => {
-    const transac = firestore.collection("transactions");
-    collectionData(transac, "id").subscribe((data) => {
-      const currentDeposits = data.filter((el) => {
-        return el.type == "wallet deposit";
-      });
-      const currentWithdrawal = data.filter((el) => {
-        return el.type == "Deposit withdrawal";
-      });
-      setDeposits(currentDeposits);
-      setWithdrawals(currentWithdrawal);
+    const socket = socketIOClient(ENDPOINT);
+    socket.on("DepositData", (data) => {
+      setDeposits((oldata) => [data, ...oldata]);
     });
+    socket.on("WithdrawalData", (data) => {
+      setWithdrawals((oldata) => [data, ...oldata]);
+    });
+    return () => socket.disconnect();
   }, []);
 
   return (
@@ -67,7 +54,7 @@ function TransactionTable() {
       ].map((table, index) => (
         <Grid key={index} item xs={12} sm={6}>
           <>
-            <div data-bn-type="text" class="css-mc306l" data-v-b89db13b="">
+            <div data-bn-type="text" className="css-mc306l" data-v-b89db13b="">
               Last 5 investment {table.title}
             </div>
 
@@ -96,7 +83,7 @@ function TransactionTable() {
                   title="24h Change"
                   className="css-1i04fkn div_824j9t"
                 >
-                  24h Change
+                  Currency
                 </div>
               </div>
               <div className="css-m65ilq">
@@ -123,14 +110,14 @@ function TransactionTable() {
                       title="BNB"
                       className="css-101w6jk div_zp9vep"
                     >
-                      {`${data.firstname} ${data.lastname}`}
+                      {`${data.name}`}
                     </div>
                   </div>
                 </div>
                 <div className="css-1gf2u02">
                   <div className="css-10nf7hq">
                     <div data-bn-type="text" className="css-1dqq3gy">
-                      {formatLocaleCurrency(data.return_amount, "USD", {
+                      {formatLocaleCurrency(data.amount, "USD", {
                         autoFixed: false,
                       })}
                     </div>
@@ -140,22 +127,9 @@ function TransactionTable() {
                   <div data-bn-type="text" className="css-139a76i div_hodfb7">
                     <Avatar
                       className={classes.small}
-                      alt={
-                        currencies[
-                          Math.floor(Math.random() * currencies.length)
-                        ]
-                      }
-                      src={setImage(
-                        currencies[
-                          Math.floor(Math.random() * currencies.length)
-                        ]
-                      )}
+                      alt={data.currency}
+                      src={setImage(data.currency)}
                     />
-                  </div>
-                </div>
-                <div className="css-m65ilq">
-                  <div data-bn-type="text" className="css-jgts3k">
-                    –
                   </div>
                 </div>
               </div>

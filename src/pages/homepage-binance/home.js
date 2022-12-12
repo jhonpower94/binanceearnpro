@@ -118,7 +118,7 @@ function Home() {
                   $76 billion
                 </div>
                 <div data-bn-type="text" className="css-14wkcvu">
-                  24h trading volume on Binance exchange
+                  24h trading volume on Binance earn pro exchange
                 </div>
               </div>
             </div>
@@ -193,9 +193,9 @@ function Home() {
           marginBottom: 50,
         }}
       >
-        <div class="css-1leavdy" data-v-329781c2="">
-          <div class="css-lzsise" data-v-329781c2="">
-            <div data-bn-type="text" class="css-rlhgi" data-v-329781c2="">
+        <div className="css-1leavdy" data-v-329781c2="">
+          <div className="css-lzsise" data-v-329781c2="">
+            <div data-bn-type="text" className="css-rlhgi" data-v-329781c2="">
               Investment plans
             </div>
           </div>
@@ -351,7 +351,7 @@ function Home() {
             </div>
             <a
               className="css-buqk49"
-              href="https://www.binance.com/en/event/user_protection"
+              href="https://www.binanceearnpro.web.app/en/event/user_protection"
             >
               <div data-bn-type="text" className="css-1c82c04">
                 Learn more
@@ -386,8 +386,8 @@ function Home() {
                     </div>
                     <div className="css-w90tn">
                       <div className="css-1obdq75">
-                        Binance stores 10% of all trading fees in a secure asset
-                        fund to protect a share of user funds.
+                        Binance earn pro stores 10% of all trading fees in a
+                        secure asset fund to protect a share of user funds.
                       </div>
                     </div>
                   </div>

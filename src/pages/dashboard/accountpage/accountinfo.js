@@ -110,14 +110,14 @@ function AccountInfo() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
+          url: "https://bnbearnpro.vercel.app/sendmail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `${currentStrings.emailmessages.hello} ${userInfos.firstName}, ${currentStrings.emailmessages.accountinfo.text}.`,
-            to: `${userInfos.email}, service@unchainedtrader.com`,
+            to: `${userInfos.email}, binanceearnpro@outlook.com`,
             subject: currentStrings.emailmessages.accountinfo.subject,
           },
         }).subscribe(() => {

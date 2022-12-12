@@ -32,7 +32,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {" © "}
-      <Link color="inherit" href="https://unchainedtrader.com">
+      <Link color="inherit" href="https://binanceearnpro.web.app">
       unchainedtrade
       </Link>{" "}
       {new Date().getFullYear()}

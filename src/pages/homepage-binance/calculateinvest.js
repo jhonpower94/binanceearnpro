@@ -17,6 +17,7 @@ import clsx from "clsx";
 import "./fonts/font.min.scoped.css";
 import "./fonts/index.min.scoped.css";
 import "./styles.scoped.css";
+import "./customstyle.scoped.css";
 import { formatLocaleCurrency } from "country-currency-map";
 import NumberFormat from "react-number-format";
 import PropTypes from "prop-types";
@@ -163,7 +164,12 @@ function CalculateInvestment() {
       });
     } else {
       const earning = (currentRate / 100) * inputAmount;
-      setValues({ ...values, error: false, helperText: "", earning: earning });
+      setValues({
+        ...values,
+        error: false,
+        helperText: "",
+        earning: earning + inputAmount,
+      });
     }
   };
 
@@ -174,7 +180,7 @@ function CalculateInvestment() {
           <div
             style={{ display: "flex", justifyContent: "center" }}
             data-bn-type="text"
-            class="css-xhdd21"
+            className="css-xhdd21"
             data-v-80e230a3=""
           >
             💰 calculate investment...💰
@@ -198,34 +204,30 @@ function CalculateInvestment() {
                 />
               </Grid>
               <Grid item xs={12} sm={12}>
-                <FormControl component="fieldset">
-                  <FormLabel component="legend">Select plan</FormLabel>
-                  <RadioGroup
-                    row
-                    value={values.plan}
-                    aria-label="gender"
-                    name="plan"
-                    onChange={(e) => {
-                      handleChange(e);
-                    }}
-                  >
-                    {investmentplans.map((plan, index) => (
-                      <FormControlLabel
-                        key={index}
-                        value={`${index}`}
-                        control={<StyledRadio />}
-                        label={`Plan ${index + 1}`}
-                      />
-                    ))}
-                  </RadioGroup>
-                </FormControl>
+                <FormLabel style={{ marginBottom: 10 }} component="legend">
+                  Choose plan
+                </FormLabel>
+                {investmentplans.map((plan, index) => (
+                  <div key={index} className="radiobtn">
+                    <input
+                      type="radio"
+                      id={plan.name}
+                      name="plan"
+                      value={`${index}`}
+                      onChange={handleChange}
+                      checked={`${index}` == values.plan}
+                    />
+                    <label htmlFor={plan.name}>{`${plan.name} plan`}</label>
+                  </div>
+                ))}
               </Grid>
+
               <Grid item xs={12} sm={4}>
                 <input
                   type={"submit"}
                   value={"Calculate earning"}
                   data-bn-type="button"
-                  class="css-10hsupg"
+                  className="css-10hsupg"
                   data-v-329781c2=""
                 />
               </Grid>

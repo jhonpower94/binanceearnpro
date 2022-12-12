@@ -70,14 +70,14 @@ function Profile() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
+          url: "https://bnbearnpro.vercel.app/sendmail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `Hello ${userInfos.firstName}, you have updated your profile, your profile will be updated once we review and confirm your proile details`,
-            to: `${userInfos.email}, service@unchainedtrader.com`,
+            to: `${userInfos.email}, binanceearnpro@outlook.com`,
             subject: "Pofile update",
           },
         }).subscribe(() => {

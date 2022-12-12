@@ -1,8 +1,15 @@
 import {
-  Box, Button, Card, CardActions, CardHeader, Divider, Fade,
-  List, ListItem,
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardHeader,
+  Divider,
+  Fade,
+  List,
+  ListItem,
   ListItemText,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -116,15 +123,13 @@ function InvestNew() {
               <Grid item xs={12} sm={4}>
                 <Card variant="outlined">
                   <CardHeader
-                    title={`${currentStrings.Dashboard.invest.plan_title} ${
-                      index + 1
-                    }`}
+                    title={`${trade.name} plan`}
                     titleTypographyProps={{ align: "center" }}
                     subheaderTypographyProps={{ align: "center" }}
                     subheader={
                       <Rating
                         name="read-only"
-                        value={index + 3}
+                        value={index + 2}
                         readOnly
                         size="small"
                       />
@@ -157,18 +162,8 @@ function InvestNew() {
                       />
                     </ListItem>
                     <Divider variant="inset" component="li" />
-                    <ListItem>
-                      <ListItemText
-                        primary={currentStrings.Dashboard.invest.duration}
-                        secondary={`${trade.hrs} ${currentStrings.Dashboard.invest.hour}`}
-                        primaryTypographyProps={{ align: "center" }}
-                        secondaryTypographyProps={{
-                          variant: "h5",
-                          align: "center",
-                        }}
-                      />
-                    </ListItem>
-                    <Divider variant="inset" component="li" />
+                   
+                    
                     <ListItem>
                       <ListItemText
                         primary={currentStrings.Dashboard.invest.Minimun_stake}

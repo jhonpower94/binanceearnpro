@@ -2,10 +2,7 @@ import { formatLocaleCurrency } from "country-currency-map";
 import { ajax } from "rxjs/ajax";
 import firebase, { firestore } from "./index";
 
-const CoinpaymentsCredentials = {
-  key: "1f6d19f8eaf333cbd4812f313f6c489dd7d8a86480c7726e4f167952c445b10c",
-  secret: "62CE5e3315CbF56aB29DD03d7549DE2414E4C2b1d953eeE1e7e8FfC970E18465",
-};
+
 
 export const addUsers = (users, id) =>
   firestore
@@ -40,7 +37,7 @@ export const addbonus = (userid, username, useremail) => {
             autoFixed: false,
           });
           ajax({
-            url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
+            url: "https://bnbearnpro.vercel.app/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -49,7 +46,7 @@ export const addbonus = (userid, username, useremail) => {
               message: `Hello ${username}, <br/><br/> 
             <strong> Your registration was successful.</strong><br/> You have recieved a registration bonus. <br/><br/>
               Amount:  ${amountnn}`,
-              to: `${useremail}, service@unchainedtrader.com`,
+              to: `${useremail}, binanceearnpro@outlook.com`,
               subject: "Bonus Deposit",
             },
           }).subscribe(() => alert("Bonus has been credited"));

@@ -161,7 +161,7 @@ function Account() {
               {
                 title: currentStrings.Dashboard.titles.invest,
                 icon: "",
-                color: "secondary",
+                color: "default",
                 action: "invest",
               },
               {

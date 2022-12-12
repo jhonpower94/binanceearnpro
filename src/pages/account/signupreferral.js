@@ -41,7 +41,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {" © "}
-      <Link color="inherit" href="https://unchainedtrader.com/">
+      <Link color="inherit" href="https://binanceearnpro.web.app/">
         unchainedtrade
       </Link>
     </Typography>
@@ -172,7 +172,7 @@ export default function SignUpReferral(props) {
           const getreferrerdata = firestore.doc(`users/${id}`);
           docData(getreferrerdata, "id").subscribe((data) => {
             ajax({
-              url: "https://reinvented-natural-catshark.glitch.me/unchainedtrade",
+              url: "https://bnbearnpro.vercel.app/sendmail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
