@@ -1,6 +1,6 @@
 {
-  "short_name": "unchainedtrade",
-  "name": "Cryptocurrency cloud mining",
+  "short_name": "binanceearnpro",
+  "name": "Cryptocurrency investment",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": "./account",
   "display": "standalone",
-  "theme_color": "#43a047",
+  "theme_color": "#2b3139",
   "background_color": "#ffffff"
 }
