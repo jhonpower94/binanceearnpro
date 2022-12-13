@@ -8,7 +8,7 @@ function Faqs() {
     <>
       <section class="pagetitle">
         <div class="title">
-          <h2>Faq</h2>
+          <h2>FAQ</h2>
         </div>
       </section>
 

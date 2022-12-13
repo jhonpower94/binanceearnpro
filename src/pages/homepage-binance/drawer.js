@@ -17,7 +17,7 @@ export const menuLinks = [
   { title: "About", path: "/about" },
   { title: "Plans", path: "/plans" },
   { title: "Guide", path: "/guide" },
-  { title: "Faq", path: "/faqs" },
+  { title: "FAQ", path: "/faqs" },
 ];
 
 const useStyles = makeStyles({

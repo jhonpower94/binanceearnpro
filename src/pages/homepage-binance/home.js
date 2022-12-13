@@ -1,3 +1,4 @@
+import { Grid } from "@material-ui/core";
 import { PersonAddRounded } from "@material-ui/icons";
 import { navigate } from "@reach/router";
 import React from "react";
@@ -15,6 +16,7 @@ import UnlockIcon from "./image/julia/new-hompage/svg-icons/unlock.svg";
 import UserIcon from "./image/julia/new-hompage/svg-icons/user.svg";
 import HumanIcon from "./image/register/human-icon.svg";
 import Investments from "./investments";
+import CardSliders from "./slider";
 import "./styles.scoped.css";
 import TransactionTable from "./tables";
 
@@ -24,93 +26,96 @@ function Home() {
       <div className="css-1e4umbp">
         <div className="css-6sm2ml">
           <div className="css-1ig7ggv">
-            <div className="css-1lpyr85">
-              <h1 className="css-qmq7lv">
-                <div className="css-1obdq75">
-                  Invest and earn from 300+ cryptocurrencies on Binance earn pro
-                </div>
-              </h1>
-              <div className="css-j1fvrh">
-                <a
-                  onClick={() => navigate("account/register")}
-                  className="css-10nf7hq"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="css-kxtk92"
-                  >
-                    <path
-                      d="M13.5 6.379V3h-3v3.379l-2.94-2.94-2.12 2.122L7.878 8H4v3h6.75V8h2.5v3H20V8h-3.879l2.44-2.44-2.122-2.12L13.5 6.378zM4 13.5V20h6.75v-6.5H4zM13.25 20H20v-6.5h-6.75V20z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                  <div data-bn-type="text" className="css-1lonx59">
-                    <div className="css-vurnku">
-                      <div className="css-1obdq75">Register to earn reward</div>
+            <Grid container spacing={3}>
+              <Grid className="intro-header" item xs={12} sm={6}>
+                <div className="css-1lpyr85">
+                  <h1 className="css-qmq7lv">
+                    <div className="css-1obdq75">
+                      Invest and earn from 300+ cryptocurrencies on Binance earn
+                      pro
                     </div>
-                  </div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="css-199zucj"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M12.288 12l-3.89 3.89 1.768 1.767L15.823 12l-1.768-1.768-3.889-3.889-1.768 1.768 3.89 3.89z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </a>
-                <div className="css-byk2xc">
-                  <div className="css-unyjhn">
+                  </h1>
+                  <div className="css-j1fvrh">
                     <a
-                      data-bn-type="button"
-                      onClick={() => navigate("account")}
-                      className="css-1ze0m0"
+                      onClick={() => navigate("account/register")}
+                      className="css-10nf7hq"
                     >
-                      <img src={HumanIcon} className="css-1ddwk9a" />
-                      <div data-bn-type="text" className="css-rjqmed">
-                        Sign in
-                      </div>
-                    </a>
-                    <div className="css-5nv61p">
-                      <div className="css-19fuqbj" />
-                      <div data-bn-type="text" className="css-16v162h">
-                        already a member
-                      </div>
-                      <div className="css-19fuqbj" />
-                    </div>
-                    <div className="css-1n7u5cf">
-                      <a
-                        onClick={() => navigate("account/register")}
-                        className="css-1pysja1"
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        className="css-kxtk92"
                       >
-                        <div className="css-cnwzzx">
-                          <div className="css-qfts7w">
-                            <PersonAddRounded />
+                        <path
+                          d="M13.5 6.379V3h-3v3.379l-2.94-2.94-2.12 2.122L7.878 8H4v3h6.75V8h2.5v3H20V8h-3.879l2.44-2.44-2.122-2.12L13.5 6.378zM4 13.5V20h6.75v-6.5H4zM13.25 20H20v-6.5h-6.75V20z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                      <div data-bn-type="text" className="css-1lonx59">
+                        <div className="css-vurnku">
+                          <div className="css-1obdq75">
+                            Register to earn reward
                           </div>
-                          <div className="css-ario60">Register</div>
                         </div>
-                      </a>
+                      </div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        className="css-199zucj"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M12.288 12l-3.89 3.89 1.768 1.767L15.823 12l-1.768-1.768-3.889-3.889-1.768 1.768 3.89 3.89z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </a>
+                    <div className="css-byk2xc">
+                      <div className="css-unyjhn">
+                        <a
+                          data-bn-type="button"
+                          onClick={() => navigate("account")}
+                          className="css-1ze0m0"
+                        >
+                          <img src={HumanIcon} className="css-1ddwk9a" />
+                          <div data-bn-type="text" className="css-rjqmed">
+                            Sign in
+                          </div>
+                        </a>
+                        <div className="css-5nv61p">
+                          <div className="css-19fuqbj" />
+                          <div data-bn-type="text" className="css-16v162h">
+                            already a member
+                          </div>
+                          <div className="css-19fuqbj" />
+                        </div>
+                        <div className="css-1n7u5cf">
+                          <a
+                            onClick={() => navigate("account/register")}
+                            className="css-1pysja1"
+                          >
+                            <div className="css-cnwzzx">
+                              <div className="css-qfts7w">
+                                <PersonAddRounded />
+                              </div>
+                              <div className="css-ario60">Register</div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="css-18ioegm">
-              <div className="css-w24woy">
-                <img
-                  alt=""
-                  src={require("./image/julia/new-hompage/foreground-image-dark.png")}
-                  className="mica-lazy-img css-16vu25q"
-                />
-              </div>
-            </div>
+              </Grid>
+
+              <Grid className="slide-tab" item xs={12} sm={6}>
+                <CardSliders />
+              </Grid>
+            </Grid>
           </div>
+
           <div className="css-ezkr62">
             <div className="css-10htlqu">
               <div className="css-mvufc">

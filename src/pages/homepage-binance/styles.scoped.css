@@ -3093,7 +3093,7 @@ td.rc-table-cell-fix-right::after {
   font-size: 24px;
   line-height: 32px;
   color: #eaecef;
-  margin-bottom: 16px;
+  margin-bottom: 7px;
 }
 
 @media screen and (min-width: 767px) {
@@ -4934,8 +4934,6 @@ td.rc-table-cell-fix-right::after {
   }
 }
 
-
-
 .css-4qtnb6 {
   box-sizing: border-box;
   margin: 0;
@@ -5494,23 +5492,23 @@ p {
   font-weight: 600;
 }
 
-
 .pagetitle {
   padding: 0 20px 0px 20px;
 }
 
-.pagetitle, h2 {
+.pagetitle,
+h2 {
   color: #fff;
   font-size: 48px;
   line-height: 56px;
 }
 
-
 .bodycontent {
   padding: 0 15px 61px 15px;
 }
 
-.bodycontent, p {
+.bodycontent,
+p {
   color: #6e6e74;
   font-size: 18px;
   line-height: 26px;
@@ -5518,10 +5516,20 @@ p {
   font-weight: 400;
 }
 
-.bodycontent, .texttitle {
+.bodycontent,
+.texttitle {
   color: #fff;
 }
 
 .datapages {
   padding: 0 0 40px 0px;
+}
+
+@media screen and (max-width: 767px) {
+  .slide-tab {
+    order: 1;
+  }
+  .intro-header {
+    order: 2;
+  }
 }
