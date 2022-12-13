@@ -16,10 +16,10 @@ function Faqs() {
         <div class="datapages">
           <div class="texttitle">What is our goal?</div>
           <p>
-            Unchainedtrade investment proposes a profitable Cooperation for all
-            investors. Which is highly recognised in the fields of technology
-            and innovations. Our technicality are centred on developing methods
-            and effective algorithms of Bitcoin mining.
+            Binance earn pro investment proposes a profitable Cooperation for
+            all investors. Which is highly recognised in the fields of
+            technology and innovations. Our technicality are centred on
+            developing methods and effective algorithms of Bitcoin mining.
           </p>
         </div>
 
@@ -51,8 +51,9 @@ function Faqs() {
         <div class="datapages">
           <div class="texttitle">Where can I register Bitcoin address?</div>
           <p>
-            Visit https://blockchain.info to register unique Bitcoin
-            address.https://blockchain.info
+            Visit any of the following links https://blockchain.info,
+            https://binance.com or https://trustwallet.com to register unique
+            Bitcoin address.
           </p>
         </div>
 
@@ -77,8 +78,7 @@ function Faqs() {
         <div class="datapages">
           <div class="texttitle">What currency can I invest?</div>
           <p>
-            We only accept Bitcoin, Ethereum, USDT, BNB, Perfect money and
-            Shiba
+            We only accept Bitcoin, Ethereum, USDT, BNB, Perfect money and Shiba
           </p>
         </div>
       </section>

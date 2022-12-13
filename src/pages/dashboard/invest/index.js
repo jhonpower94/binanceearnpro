@@ -145,7 +145,7 @@ function InvestNew() {
                       {`${trade.rate} `}
                     </Typography>
                     <Typography variant="h6" color="textSecondary">
-                      %
+                      % {trade.hrs == 24 ? "" : `daily`}
                     </Typography>
                   </Box>
                   <List>
@@ -162,8 +162,7 @@ function InvestNew() {
                       />
                     </ListItem>
                     <Divider variant="inset" component="li" />
-                   
-                    
+
                     <ListItem>
                       <ListItemText
                         primary={currentStrings.Dashboard.invest.Minimun_stake}

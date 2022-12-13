@@ -44,7 +44,9 @@ function Investments() {
               </div>
               <div className="data">
                 <p>Return profit</p>
-                <span className="itemtext">{plan.rate} %</span>
+                <span className="itemtext">
+                  {plan.rate}% {plan.hrs == 24 ? "" : "daily"}
+                </span>
               </div>
               <div className="data">
                 <p>Minimum stake</p>
