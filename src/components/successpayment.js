@@ -1,12 +1,11 @@
-import React, { useEffect, useContext, useState } from "react";
-import { AppContext } from "../App";
-import { useDispatch, useSelector } from "react-redux";
-import { loading$, loadingpayment$ } from "../redux/action";
-import { makeStyles, Container, Box, Typography } from "@material-ui/core";
-import firebase, { firestore, auth } from "../config";
-import { ajax } from "rxjs/ajax";
-import { async } from "rxjs/internal/scheduler/async";
+import { Box, Container, makeStyles, Typography } from "@material-ui/core";
 import { navigate } from "@reach/router";
+import React, { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppContext } from "../App";
+import firebase, { auth, firestore } from "../config";
+import Invoice from "../pages/dashboard/invest/invoice";
+import { loading$, loadingpayment$ } from "../redux/action";
 const { Converter } = require("easy-currencies");
 
 let converter = new Converter(
@@ -179,7 +178,7 @@ function PaymentSuccess() {
     <Container>
       <Box display="flex" justifyContent="center" m={5}>
         {valid ? (
-          <Typography variant="body1">ok good</Typography>
+          <Invoice />
         ) : (
           <Typography variant="body1" color="error">
             error transaction

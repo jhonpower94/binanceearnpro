@@ -1,8 +1,10 @@
 import {
+  Backdrop,
   Box,
-  CircularProgress, useMediaQuery,
+  CircularProgress,
+  useMediaQuery,
   useScrollTrigger,
-  withStyles
+  withStyles,
 } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -22,7 +24,7 @@ import {
   AccountBalanceWalletSharp,
   AddCircleSharp,
   GetAppSharp,
-  HomeSharp
+  HomeSharp,
 } from "@material-ui/icons";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -50,7 +52,7 @@ import {
   totaldeposit$,
   totalprofit$,
   totalwithdrawn$,
-  withdrawhistory$
+  withdrawhistory$,
 } from "../../redux/action";
 import DasboardMenu from "./menu";
 
@@ -174,6 +176,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 10,
 
     backgroundColor: theme.palette.background.default,
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
   },
 }));
 
@@ -496,7 +502,6 @@ export default function DashboardLayout(props) {
           : classes.rootmobile
       }
     >
-      
       <CssBaseline />
       <ElevationScroll {...props}>
         <AppBar
@@ -517,7 +522,7 @@ export default function DashboardLayout(props) {
               <MenuIcon />
             </IconButton>
             <img
-            onClick={()=>navigate("../dashboard")}
+              onClick={() => navigate("../dashboard")}
               src={require("../../images/logomobile.svg")}
               height="35"
               style={{ marginLeft: 16 }}
@@ -589,18 +594,10 @@ export default function DashboardLayout(props) {
       </Drawer>
       <main className={classes.main}>
         <div className={classes.toolbar} />
-        {loading.loading ? (
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt={20}
-          >
-            <FacebookCircularProgress />
-          </Box>
-        ) : (
-          props.children
-        )}
+        {props.children}
+        <Backdrop className={classes.backdrop} open={loading.loading}>
+          <FacebookCircularProgress />
+        </Backdrop>
       </main>
     </div>
   );

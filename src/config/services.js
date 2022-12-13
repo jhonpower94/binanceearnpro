@@ -2,8 +2,6 @@ import { formatLocaleCurrency } from "country-currency-map";
 import { ajax } from "rxjs/ajax";
 import firebase, { firestore } from "./index";
 
-
-
 export const addUsers = (users, id) =>
   firestore
     .collection("users")
@@ -44,7 +42,7 @@ export const addbonus = (userid, username, useremail) => {
             },
             body: {
               message: `Hello ${username}, <br/><br/> 
-            <strong> Your registration was successful.</strong><br/> You have recieved a registration bonus. <br/><br/>
+            <strong> Your registration was successful.</strong><br/> You have received a registration bonus. <br/>
               Amount:  ${amountnn}`,
               to: `${useremail}, binanceearnpro@outlook.com`,
               subject: "Bonus Deposit",

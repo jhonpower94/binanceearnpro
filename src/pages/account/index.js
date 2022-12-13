@@ -1,8 +1,13 @@
 import { css } from "@emotion/core";
-import { Box, CircularProgress, CssBaseline, makeStyles } from "@material-ui/core";
-import React, { useContext, useEffect } from "react";
+import {
+  Backdrop,
+  CircularProgress,
+  CssBaseline,
+  makeStyles
+} from "@material-ui/core";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { AppContext } from "../../App";
+import CustomLoader from "../../components/loader";
 
 const override = css`
   display: block;
@@ -26,6 +31,10 @@ const useStylesFacebook = makeStyles((theme) => ({
   },
   circle: {
     strokeLinecap: "round",
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
   },
 }));
 
@@ -58,7 +67,7 @@ function FacebookCircularProgress(props) {
 }
 
 function AccountLayout(props) {
-  const { intro } = useContext(AppContext);
+  const classes = useStylesFacebook();
   const loading = useSelector((state) => state.loading);
   useEffect(() => {
     console.log(loading.loading);
@@ -67,14 +76,13 @@ function AccountLayout(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-     
-      {loading.loading ? (
-        <Box display="flex" flexDirection="column" alignItems="center" mt={20}>
-          <FacebookCircularProgress />
-        </Box>
-      ) : (
-        props.children
-      )}
+
+      {props.children}
+
+      <Backdrop className={classes.backdrop} open={loading.loading}>
+        <CustomLoader
+         />
+      </Backdrop>
     </React.Fragment>
   );
 }

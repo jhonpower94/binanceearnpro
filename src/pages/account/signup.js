@@ -1,40 +1,33 @@
-import React, { useEffect, useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loading$ } from "../../redux/action";
-import { AppContext } from "../../App";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
+import {
+  FormControl, IconButton, InputAdornment, InputLabel, MenuItem,
+  OutlinedInput
+} from "@material-ui/core";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import ReactCountryFlag from "react-country-flag";
-import {
-  InputAdornment,
-  MenuItem,
-  OutlinedInput,
-  FormControl,
-  InputLabel,
-  IconButton,
-} from "@material-ui/core";
-import NumberFormat from "react-number-format";
-import PropTypes from "prop-types";
-import getSymbolFromCurrency from "currency-symbol-map";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import { countrylist } from "../../config/countrylist";
-import { from } from "rxjs";
-import firebase, { app } from "../../config";
-import { addbonus, addUsers } from "../../config/services";
-import { dispatch } from "rxjs/internal/observable/pairs";
 import { navigate } from "@reach/router";
-import Copyright from "./copyright";
+import PropTypes from "prop-types";
+import React, { useContext, useEffect } from "react";
+import ReactCountryFlag from "react-country-flag";
+import NumberFormat from "react-number-format";
+import { useDispatch, useSelector } from "react-redux";
 import { reactLocalStorage } from "reactjs-localstorage";
+import { AppContext } from "../../App";
+import firebase, { app } from "../../config";
+import { countrylist } from "../../config/countrylist";
+import { addbonus, addUsers } from "../../config/services";
+import { loading$ } from "../../redux/action";
+import Copyright from "./copyright";
 var cc = require("currency-codes");
 
 function NumberFormatCustom(props) {
