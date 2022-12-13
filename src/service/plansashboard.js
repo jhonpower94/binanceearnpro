@@ -2,6 +2,7 @@ export const investmentplans = [
   {
     name: "Basic",
     rate: 10,
+    daily: 10,
 
     min_rate: 5,
     max_rate: 10,
@@ -15,7 +16,9 @@ export const investmentplans = [
   },
   {
     name: "Standard",
-    rate: 18,
+    rate: 126,
+    daily: 18,
+
 
     min_rate: 5,
     max_rate: 10,
@@ -29,7 +32,8 @@ export const investmentplans = [
   },
   {
     name: "Premium",
-    rate: 27,
+    rate: 189,
+    daily: 27,
 
     min_rate: 5,
     max_rate: 10,
@@ -43,7 +47,8 @@ export const investmentplans = [
   },
   {
     name: "Ultimate",
-    rate: 39,
+    rate: 1170,
+    daily: 39,
 
     min_rate: 5,
     max_rate: 10,

@@ -142,7 +142,7 @@ function InvestNew() {
                     alignItems="baseline"
                   >
                     <Typography component="h2" variant="h3">
-                      {`${trade.rate} `}
+                      {`${trade.daily} `}
                     </Typography>
                     <Typography variant="h6" color="textSecondary">
                       % {trade.hrs == 24 ? "" : `daily`}
