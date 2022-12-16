@@ -296,7 +296,7 @@
   },
 
   "emailmessages": {
-    "hello": "hello",
+    "hello": "Hello",
     "amount": "Amount",
     "signup_referral": {
       "subject": "New invitation",
@@ -306,7 +306,7 @@
     },
     "accountinfo": {
       "subject": "profile update",
-      "text": "you have updated your profile, your profile will be updated once we review and confirm your proile details"
+      "text": "you have updated your profile, your profile will be updated once we review and confirm your profile details"
     },
     "deposit": {
       "subject": "Fund wallet",

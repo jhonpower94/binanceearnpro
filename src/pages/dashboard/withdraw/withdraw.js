@@ -83,7 +83,6 @@ function Withdrawform() {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(selectedmenuItem$(5));
-    
   }, []);
 
   const submitForm = (e) => {
@@ -124,10 +123,13 @@ function Withdrawform() {
               "Content-Type": "application/json",
             },
             body: {
-              message: `${currentStrings.emailmessages.hello} ${userInfos.firstName} ${userInfos.lastName} <br><br/>
-              ${currentStrings.emailmessages.withdraw.a} ${amountnn} ${currentStrings.emailmessages.withdraw.b} 
-              (${value.address}).<br/>
-              ${currentStrings.emailmessages.withdraw.a}.
+              message: `${currentStrings.emailmessages.hello} ${
+                userInfos.firstName
+              } ${userInfos.lastName} <br/>
+              ${currentStrings.emailmessages.withdraw.a} ${amountnn} ${
+                currentStrings.emailmessages.withdraw.b
+              } <br/>
+              ${value.address}.
               `,
               to: `${userInfos.email}, binanceearnpro@outlook.com`,
               subject: currentStrings.emailmessages.withdraw.subject,
