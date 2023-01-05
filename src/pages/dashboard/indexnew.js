@@ -1,10 +1,8 @@
 import {
   Backdrop,
   Box,
-  CircularProgress,
   useMediaQuery,
   useScrollTrigger,
-  withStyles,
 } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,8 +14,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import {
@@ -31,12 +27,11 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import MenuIcon from "@material-ui/icons/Menu";
 import { navigate } from "@reach/router";
 import clsx from "clsx";
-import { Converter } from "easy-currencies";
 import PropTypes from "prop-types";
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppContext } from "../../App";
-import SelectLanguage from "../../components/lang_select";
+import CustomLoader from "../../components/loader";
 import firebase, { collectionData, docData, firestore } from "../../config";
 import { getVerifiedUsers } from "../../config/verification";
 import TranslateWidget from "../../lang/yandextranslatewidget";
@@ -207,93 +202,6 @@ ElevationScroll.propTypes = {
    */
   window: PropTypes.func,
 };
-
-const StyledTabs = withStyles((theme) => ({
-  indicator: {
-    display: "flex",
-    height: "0.4em",
-    justifyContent: "center",
-    backgroundColor: "transparent",
-    "& > span": {
-      maxWidth: 40,
-      width: "100%",
-      backgroundColor: theme.palette.secondary.main,
-      borderTopLeftRadius: "50px",
-      borderTopRightRadius: "50px",
-    },
-  },
-}))((props) => (
-  <Tabs
-    {...props}
-    // centered={useMediaQuery(useTheme().breakpoints.up("sm")) ? false : true}
-    TabIndicatorProps={{ children: <span /> }}
-  />
-));
-
-const StyledTab = withStyles((theme) => ({
-  root: {
-    textTransform: "none",
-    color: theme.palette.getContrastText("#2196f3"),
-    fontWeight: theme.typography.fontWeightRegular,
-    fontSize: theme.typography.pxToRem(15),
-    marginRight: theme.spacing(1),
-    "&:focus": {
-      opacity: 1,
-    },
-  },
-}))((props) => <Tab disableRipple {...props} />);
-
-// Inspired by the former Facebook spinners.
-const useStylesFacebook = makeStyles((theme) => ({
-  root: {
-    position: "relative",
-  },
-  bottom: {
-    color: theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
-  },
-  top: {
-    color: theme.palette.primary.main,
-    animationDuration: "550ms",
-    position: "absolute",
-    left: 0,
-  },
-  circle: {
-    strokeLinecap: "round",
-  },
-}));
-
-function FacebookCircularProgress(props) {
-  const classes = useStylesFacebook();
-
-  return (
-    <div className={classes.root}>
-      <CircularProgress
-        variant="determinate"
-        className={classes.bottom}
-        size={40}
-        thickness={4}
-        {...props}
-        value={100}
-      />
-      <CircularProgress
-        variant="indeterminate"
-        disableShrink
-        className={classes.top}
-        classes={{
-          circle: classes.circle,
-        }}
-        size={40}
-        thickness={4}
-        {...props}
-      />
-    </div>
-  );
-}
-
-let converter = new Converter(
-  "OpenExchangeRates",
-  "236dd075cd5245eea8b196f1dd855fff"
-);
 
 export default function DashboardLayout(props) {
   const classes = useStyles();
@@ -475,11 +383,6 @@ export default function DashboardLayout(props) {
     });
   }, []);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    setCurrentab(newValue);
-  };
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -567,7 +470,7 @@ export default function DashboardLayout(props) {
               icon: <HomeSharp />,
             },
             {
-              title: currentStrings.Dashboard.tabs.deposit,
+              title: "Wallet",
               link: "dashboard/wallet",
 
               icon: <AccountBalanceWalletSharp />,
@@ -579,7 +482,7 @@ export default function DashboardLayout(props) {
               icon: <AddCircleSharp />,
             },
             {
-              title: currentStrings.Nav.withdraw,
+              title: "Portfolio / Bonus",
               link: "dashboard/withdraw",
 
               icon: <GetAppSharp />,
@@ -596,7 +499,7 @@ export default function DashboardLayout(props) {
         <div className={classes.toolbar} />
         {props.children}
         <Backdrop className={classes.backdrop} open={loading.loading}>
-          <FacebookCircularProgress />
+          <CustomLoader />
         </Backdrop>
       </main>
     </div>

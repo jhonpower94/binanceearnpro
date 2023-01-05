@@ -2,7 +2,8 @@
   "projects": {
     "ositasite": "ositasite",
     "opsy\b\b": "ositasite",
-    "bn": "binanceearnpro"
+    "bn": "binanceearnpro",
+    "bb": "binanceearnpro"
   },
   "targets": {
     "ositasite": {

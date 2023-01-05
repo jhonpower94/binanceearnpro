@@ -31,9 +31,8 @@ function PaymentSuccess() {
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const txn_info = useSelector((state) => state.trxinfo);
   const currentUserId = userInfos.id;
-  const currencySymbol = JSON.parse(
-    window.localStorage.getItem("country")
-  ).currencycode;
+  const currencySymbol = JSON.parse(window.localStorage.getItem("country"))
+    .currencycode;
   const blockindex = txn_info.blockindex;
   const depositamount = parseInt(paymentInfo.amount);
   const referrerpercent = (5 / 100) * depositamount;
@@ -80,25 +79,25 @@ function PaymentSuccess() {
 
             const newDate = addDays(date, paymentInfo.block.duration);
 
-            fetch(
-              "https://bnbearnpro.vercel.app/plans",
-              {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  blockindex: blockindex,
-                  deposit_amount: depositamount,
-                  userid: currentUserId,
-                  depositid: depositid,
-                  duration: paymentInfo.block.duration,
-                  currency: currencySymbol,
-                  rate: paymentInfo.block.rate,
-                }),
-              }
-            )
+            fetch("https://bnbearnpro.vercel.app/plans", {
+              method: "POST",
+              mode: "cors",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                blockindex: blockindex,
+                deposit_amount: depositamount,
+                userid: currentUserId,
+                depositid: depositid,
+                duration: paymentInfo.block.duration,
+                currency: currencySymbol,
+                rate: paymentInfo.block.rate,
+                created_at: firebase.firestore.FieldValue.serverTimestamp(),
+                user: userInfo.name,
+                block_name: txn_info.block.name,
+              }),
+            })
               .then((response) => response.json())
               .then((data) => {
                 console.log(data);
@@ -134,8 +133,7 @@ function PaymentSuccess() {
                       from: `${userInfos.firstName} ${userInfos.lastName}`,
                       description: "Referral bonus",
                       date: new Date().toLocaleDateString(),
-                      created_at:
-                        firebase.firestore.FieldValue.serverTimestamp(),
+                      created_at: firebase.firestore.FieldValue.serverTimestamp(),
                     })
                     .then(() => {
                       //add notification to referrer database

@@ -35,7 +35,7 @@ import TransactionsAdmin from "./pages/admin/transactions";
 import UpdateWallet from "./pages/admin/transactions/updatewallet";
 import DashboardPage from "./pages/dashboard/accountpage/indexnew";
 import AccountSettings from "./pages/dashboard/accountsettings";
-import MyInvestments from "./pages/dashboard/allinvestments";
+
 import DashboardLayout from "./pages/dashboard/indexnew";
 import Invest from "./pages/dashboard/invest/indexnew";
 import Invoice from "./pages/dashboard/invest/invoice";
@@ -356,7 +356,7 @@ function App() {
                 <Withdrawals path="withdraw" />
                 <Investment path="investments" />
                 <Invoice path="invoice" />
-                <MyInvestments path="investments" />
+                
                 <WithdrawBonus path="withdraw/:page" />
                 <Withdrawform path="withdrawform" />
                 <Transactions path="transactions" />

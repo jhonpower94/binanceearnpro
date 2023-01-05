@@ -1,25 +1,23 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import { Backdrop } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import MailIcon from "@material-ui/icons/Mail";
-import MenuIcon from "@material-ui/icons/Menu";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { SettingsBackupRestoreSharp } from "@material-ui/icons";
+import MenuIcon from "@material-ui/icons/Menu";
 import { navigate } from "@reach/router";
-import { auth, firestore, docData, collectionData } from "../../config";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import CustomLoader from "../../components/loader";
+import { auth, docData, firestore } from "../../config";
 
 const drawerWidth = 240;
 
@@ -57,6 +55,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
 }));
 
 const navs = [
@@ -73,6 +75,7 @@ function AdminLyout(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const loading = useSelector((state) => state.loading);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -195,7 +198,12 @@ function AdminLyout(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+
         {props.children}
+
+        <Backdrop className={classes.backdrop} open={loading.loading}>
+          <CustomLoader />
+        </Backdrop>
       </main>
     </div>
   );

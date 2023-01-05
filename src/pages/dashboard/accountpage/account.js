@@ -1,29 +1,25 @@
 import {
-  Button, Card,
-  CardContent, Container,
+  Button,
+  Card,
+  CardContent,
+  Container,
   Grid,
-  ListItemText, makeStyles, useMediaQuery,
+  ListItemText, useMediaQuery,
   useTheme
 } from "@material-ui/core";
 import { navigate } from "@reach/router";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { AppContext } from "../../../App";
 
-const useStyles = makeStyles((theme) => ({
-  margintop: {
-    marginTop: theme.spacing(1),
-  },
-}));
+
 
 function Account() {
-  const classes = useStyles();
   const mainbalance = useSelector((state) => state.balance);
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const activities = useSelector((state) => state.activities);
   const currentStrings = useSelector((state) => state.language);
-  const { tabs, setTabs } = useContext(AppContext);
+ 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -46,7 +42,7 @@ function Account() {
       subtitle: "h5",
     }, */
     {
-      title: currentStrings.Dashboard.account.Wallet_Balance,
+      title: "Wallet balance",
       value: isNaN(userInfos.wallet_balance)
         ? formatLocaleCurrency(0, userInfos.currencycode, {
             autoFixed: false,
@@ -63,7 +59,7 @@ function Account() {
       subtitle: "h5",
     },
     {
-      title: currentStrings.Dashboard.account.bonus_balance,
+      title: "Bonus balance",
       value: formatLocaleCurrency(
         mainbalance.bonus_balance,
         userInfos.currencycode,
@@ -121,7 +117,7 @@ function Account() {
                     autoFixed: false,
                   }
                 )}
-                secondary={currentStrings.Dashboard.account.main_balance}
+                secondary="Portfolio balance"
                 primaryTypographyProps={{
                   variant: "h4",
                   align: useMediaQuery(useTheme().breakpoints.up("sm"))
@@ -191,7 +187,7 @@ function Account() {
             coin-ids="bitcoin,ethereum,eos,ripple,litecoin"
             currency="usd"
             locale="en"
-          ></coingecko-coin-compare-chart-widget>
+          />
         </Grid>
 
         {profileData.map((data, index) => (

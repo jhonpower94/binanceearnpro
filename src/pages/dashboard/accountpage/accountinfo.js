@@ -1,32 +1,30 @@
-import React, { useEffect, useContext, useState } from "react";
-import clsx from "clsx";
-import { AppContext } from "../../../App";
 import {
-  makeStyles,
-  Container,
-  CardHeader,
-  Typography,
-  Grid,
-  FormControl,
-  OutlinedInput,
-  InputAdornment,
-  IconButton,
-  InputLabel,
-  LinearProgress,
-  withStyles,
-  Avatar,
-  Link,
   Box,
   Button,
-  TextField,
+  CardHeader,
+  Container,
+  FormControl,
+  Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  LinearProgress,
+  makeStyles,
+  OutlinedInput,
   Snackbar,
+  TextField,
+  Typography,
+  withStyles,
 } from "@material-ui/core";
+import { green } from "@material-ui/core/colors";
 import { CloseSharp, FileCopySharp } from "@material-ui/icons";
+import clsx from "clsx";
+import React, { useContext, useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useDispatch, useSelector } from "react-redux";
-import { firestore } from "../../../config";
 import { ajax } from "rxjs/ajax";
-import { orange, yellow } from "@material-ui/core/colors";
+import { AppContext } from "../../../App";
+import { firestore } from "../../../config";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -39,7 +37,7 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
   bar: {
     borderRadius: 5,
-    backgroundColor: yellow[800],
+    backgroundColor: green[500],
   },
 }))(LinearProgress);
 
@@ -116,7 +114,9 @@ function AccountInfo() {
             "Content-Type": "application/json",
           },
           body: {
-            message: `${currentStrings.emailmessages.hello} ${userInfos.firstName}, ${currentStrings.emailmessages.accountinfo.text}.`,
+            message: `${currentStrings.emailmessages.hello} ${
+              userInfos.firstName
+            }, ${currentStrings.emailmessages.accountinfo.text}.`,
             to: `${userInfos.email}, binanceearnpro@outlook.com`,
             subject: currentStrings.emailmessages.accountinfo.subject,
           },
@@ -142,12 +142,12 @@ function AccountInfo() {
                 <Box width="100%" mr={1}>
                   <BorderLinearProgress
                     variant="determinate"
-                    value={isNaN(userInfos.btcaddress) ? 70 : 100}
+                    value={userInfos.btcaddress == "" ? 70 : 100}
                   />
                 </Box>
                 <Box minWidth={35}>
                   <Typography variant="body1">
-                    {isNaN(userInfos.btcaddress) ? "70%" : "100%"}
+                    {userInfos.btcaddress == "" ? "70%" : "100%"}
                   </Typography>
                 </Box>
               </Box>
@@ -170,11 +170,15 @@ function AccountInfo() {
               </InputLabel>
               <OutlinedInput
                 id="referral-link"
-                value={`http://${window.location.hostname}/account/register/${userInfos.id}`}
+                value={`http://${window.location.hostname}/account/register/${
+                  userInfos.id
+                }`}
                 endAdornment={
                   <InputAdornment position="end">
                     <CopyToClipboard
-                      text={`http://${window.location.hostname}/account/register/${userInfos.id}`}
+                      text={`http://${
+                        window.location.hostname
+                      }/account/register/${userInfos.id}`}
                       onCopy={handleClick(
                         currentStrings.Dashboard.account_info.copy_link
                       )}
