@@ -7,18 +7,17 @@ import {
   Grid,
   makeStyles,
   TextField,
-  Typography,
+  Typography
 } from "@material-ui/core";
 import { ImportExportRounded } from "@material-ui/icons";
-import { navigate } from "@reach/router";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
 import getSymbolFromCurrency from "currency-symbol-map";
 import PropTypes from "prop-types";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { ajax } from "rxjs/ajax";
-import { AppContext } from "../../../App";
+import { SnackbarWallet } from "../../../components/snackbar";
 import firebase, { firestore } from "../../../config";
 import { loading$, selectedmenuItem$ } from "../../../redux/action";
 import TransactionHistory from "../wallet/history";
@@ -80,6 +79,8 @@ function Withdrawform() {
     });
   };
 
+  const [open, setOpen] = React.useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(selectedmenuItem$(5));
@@ -137,7 +138,8 @@ function Withdrawform() {
           }).subscribe(() => {
             dispatch(loading$());
             console.log("user message sent");
-            navigate("complete");
+          // for snackbar
+          setOpen(true);
           });
         });
     }
@@ -152,6 +154,7 @@ function Withdrawform() {
       });
 
   return (
+    <>
     <Container maxWidth="md">
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={12}>
@@ -243,6 +246,9 @@ function Withdrawform() {
         </Grid>
       </Grid>
     </Container>
+    <SnackbarWallet open={open} setOpen={setOpen} type="Wallet" />
+  
+    </>
   );
 }
 
