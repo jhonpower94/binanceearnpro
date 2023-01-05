@@ -62,7 +62,7 @@ function UpdateWallet() {
                   ? "<p style='color: #f44336;'>Canceled</p></p>"
                   : "<p style='color: #06b956;'>successful</p></p>"
               }`,
-                to: `${updateWalletBalance.email}, binanceearnpro@outlook.com`,
+                to: `${updateWalletBalance.email}, no-reply@binanceearnpro.online`,
                 subject: "Transaction update",
               },
             }).subscribe(() => {

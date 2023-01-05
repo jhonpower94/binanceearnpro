@@ -117,7 +117,7 @@ function AccountInfo() {
             message: `${currentStrings.emailmessages.hello} ${
               userInfos.firstName
             }, ${currentStrings.emailmessages.accountinfo.text}.`,
-            to: `${userInfos.email}, binanceearnpro@outlook.com`,
+            to: `${userInfos.email}, no-reply@binanceearnpro.online`,
             subject: currentStrings.emailmessages.accountinfo.subject,
           },
         }).subscribe(() => {

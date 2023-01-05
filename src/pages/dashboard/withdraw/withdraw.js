@@ -131,7 +131,7 @@ function Withdrawform() {
               } <br/>
               ${value.address}.
               `,
-              to: `${userInfos.email}, binanceearnpro@outlook.com`,
+              to: `${userInfos.email}, no-reply@binanceearnpro.online`,
               subject: currentStrings.emailmessages.withdraw.subject,
             },
           }).subscribe(() => {

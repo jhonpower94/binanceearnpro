@@ -111,7 +111,7 @@ export default function Investments() {
                 Description: Account Wallet Deposit <br/>
                 Amount: ${data.deposit_amount} <br/>
                 Status <p style="color: #06b956;">successful</p></p>`,
-                  to: `${data.email}, binanceearnpro@outlook.com`,
+                  to: `${data.email}, no-reply@binanceearnpro.online`,
                   subject: "Transaction update",
                 },
               }).subscribe(() => console.log("user message sent"));

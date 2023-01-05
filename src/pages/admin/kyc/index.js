@@ -124,7 +124,7 @@ export default function Kyc() {
           },
           body: {
             message: `Hello ${user.firstName}, your profile has been successfully updated.`,
-            to: `${user.email}, binanceearnpro@outlook.com`,
+            to: `${user.email}, no-reply@binanceearnpro.online`,
             subject: "Pofile update",
           },
         }).subscribe(() => {

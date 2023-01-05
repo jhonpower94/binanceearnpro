@@ -24,7 +24,7 @@ export const walletEmailType = (amount, newbalance, emailtype, userInfos) => {
        <br/>
        you can now use your wallet balance to reininvest, thank you.
     `,
-      to: `${userInfos.email}, binanceearnpro@outlook.com`,
+      to: `${userInfos.email}, no-reply@binanceearnpro.online`,
       subject: "Investment Withdrawal",
     },
   });

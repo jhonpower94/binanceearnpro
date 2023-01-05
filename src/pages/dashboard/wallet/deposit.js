@@ -167,7 +167,7 @@ function Deposit() {
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
-              <a>binanceearnpro@outlook.com</a>
+              <a>no-reply@binanceearnpro.online</a>
               ${currentStrings.emailmessages.deposit.c}.`,
               to: userInfos.email,
               subject: currentStrings.emailmessages.deposit.subject,
@@ -181,7 +181,7 @@ function Deposit() {
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "binanceearnpro@outlook.com",
+              to: "no-reply@binanceearnpro.online",
               subject: "New Deposit",
             },
           }).subscribe(() => {
