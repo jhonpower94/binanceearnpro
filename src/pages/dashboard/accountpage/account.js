@@ -74,7 +74,7 @@ function Account() {
   ];
   const profileData = [
     {
-      title: currentStrings.Dashboard.account.Total_profit_amount,
+      title: "Total profit earned",
       value: formatLocaleCurrency(
         Math.floor(activities.totlProfit),
         userInfos.currencycode

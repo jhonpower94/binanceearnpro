@@ -11,7 +11,7 @@ export const walletEmailType = (amount, newbalance, emailtype, userInfos) => {
   });
 
   return ajax({
-    url: "https://bnbearnpro.vercel.app/sendmail",
+    url: "http://binanceearnpro.online/sendmail",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export const walletEmailType = (amount, newbalance, emailtype, userInfos) => {
        <br/>
        you can now use your wallet balance to reininvest, thank you.
     `,
-      to: `${userInfos.email}, no-reply@binanceearnpro.online`,
+      to: `${userInfos.email}, support@binanceearnpro.online`,
       subject: "Investment Withdrawal",
     },
   });

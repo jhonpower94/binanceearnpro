@@ -79,7 +79,7 @@ function PaymentSuccess() {
 
             const newDate = addDays(date, paymentInfo.block.duration);
 
-            fetch("https://bnbearnpro.vercel.app/plans", {
+            fetch("http://binanceearnpro.online/plans", {
               method: "POST",
               mode: "cors",
               headers: {

@@ -108,7 +108,7 @@ function AccountInfo() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://bnbearnpro.vercel.app/sendmail",
+          url: "http://binanceearnpro.online/sendmail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -117,7 +117,7 @@ function AccountInfo() {
             message: `${currentStrings.emailmessages.hello} ${
               userInfos.firstName
             }, ${currentStrings.emailmessages.accountinfo.text}.`,
-            to: `${userInfos.email}, no-reply@binanceearnpro.online`,
+            to: `${userInfos.email}, support@binanceearnpro.online`,
             subject: currentStrings.emailmessages.accountinfo.subject,
           },
         }).subscribe(() => {

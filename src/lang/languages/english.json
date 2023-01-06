@@ -108,7 +108,7 @@
     "payment": {
       "send": "Send payment to the",
       "send_": "address and amount provided below",
-      "info": "once payment is done send notification to live support or email support to no-reply@binanceearnpro.online. in order to notify us of your successful deposit"
+      "info": "once payment is done send notification to live support or email support to support@binanceearnpro.online. in order to notify us of your successful deposit"
     },
     "tabs": {
       "account": "Account",
@@ -310,7 +310,7 @@
     },
     "deposit": {
       "subject": "Fund wallet",
-      "a": "transfer exact amount to this address",
+      "a": "Transfer exact amount to this address",
       "b": "once payment is done, send notification to live support or email support at ",
       "c": "to notify us of successful deposit"
     },

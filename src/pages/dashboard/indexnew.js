@@ -470,7 +470,7 @@ export default function DashboardLayout(props) {
               icon: <HomeSharp />,
             },
             {
-              title: "Wallet",
+              title: "Earnpro wallet",
               link: "dashboard/wallet",
 
               icon: <AccountBalanceWalletSharp />,

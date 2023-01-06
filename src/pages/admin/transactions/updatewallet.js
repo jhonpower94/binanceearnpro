@@ -44,25 +44,25 @@ function UpdateWallet() {
               }
             );
             ajax({
-              url: "https://bnbearnpro.vercel.app/sendmail",
+              url: "http://binanceearnpro.online/sendmail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
               body: {
-                message: `your Deposit has been ${
+                message: `Your deposit has been ${
                   updateWalletBalance.pending
                     ? "canceled"
                     : "successfully updated"
                 }  <br/><br/>
-              Description: Account Wallet Deposit <br/>
+              Description: account wallet deposit <br/>
               Amount: ${amountnn} <br/>
               Status ${
                 updateWalletBalance.pending
                   ? "<p style='color: #f44336;'>Canceled</p></p>"
                   : "<p style='color: #06b956;'>successful</p></p>"
               }`,
-                to: `${updateWalletBalance.email}, no-reply@binanceearnpro.online`,
+                to: `${updateWalletBalance.email}, support@binanceearnpro.online`,
                 subject: "Transaction update",
               },
             }).subscribe(() => {

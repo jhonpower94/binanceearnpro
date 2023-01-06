@@ -117,14 +117,14 @@ export default function Kyc() {
       })
       .then(() => {
         ajax({
-          url: "https://bnbearnpro.vercel.app/sendmail",
+          url: "http://binanceearnpro.online/sendmail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `Hello ${user.firstName}, your profile has been successfully updated.`,
-            to: `${user.email}, no-reply@binanceearnpro.online`,
+            to: `${user.email}, support@binanceearnpro.online`,
             subject: "Pofile update",
           },
         }).subscribe(() => {

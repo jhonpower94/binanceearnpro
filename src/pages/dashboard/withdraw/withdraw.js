@@ -118,7 +118,7 @@ function Withdrawform() {
             wallet_balance: newamountnn,
           });
           ajax({
-            url: "https://bnbearnpro.vercel.app/sendmail",
+            url: "http://binanceearnpro.online/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -132,7 +132,7 @@ function Withdrawform() {
               } <br/>
               ${value.address}.
               `,
-              to: `${userInfos.email}, no-reply@binanceearnpro.online`,
+              to: `${userInfos.email}, support@binanceearnpro.online`,
               subject: currentStrings.emailmessages.withdraw.subject,
             },
           }).subscribe(() => {

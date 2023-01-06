@@ -224,7 +224,7 @@ function Wallet() {
         <CardContent>
           <Typography variant="body2" align="center">
             once payment is done send notification to live support or email
-            support @ no-reply@binanceearnpro.online to notify us of successful deposit
+            support @ support@binanceearnpro.online to notify us of successful deposit
           </Typography>
         </CardContent>
       </Card>

@@ -30,7 +30,7 @@ const setImage = (currncy) => {
 
 function TransactionTable() {
   const classes = useStyles();
-  const ENDPOINT = "https://bnbearnpro.vercel.app/";
+  const ENDPOINT = "http://binanceearnpro.online/";
 
   const [deposits, setDeposits] = React.useState([]);
   const [withdrawals, setWithdrawals] = React.useState([]);

@@ -155,7 +155,7 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url: "https://bnbearnpro.vercel.app/sendmail",
+            url: "http://binanceearnpro.online/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -167,21 +167,21 @@ function Deposit() {
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
-              <a>no-reply@binanceearnpro.online</a>
+              <a>support@binanceearnpro.online</a>
               ${currentStrings.emailmessages.deposit.c}.`,
               to: userInfos.email,
               subject: currentStrings.emailmessages.deposit.subject,
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://bnbearnpro.vercel.app/sendmail",
+            url: "http://binanceearnpro.online/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "no-reply@binanceearnpro.online",
+              to: "support@binanceearnpro.online",
               subject: "New Deposit",
             },
           }).subscribe(() => {
