@@ -22,7 +22,7 @@ export const walletEmailType = (amount, newbalance, emailtype, userInfos) => {
        you have succesfully added your ${emailtype} balance of <p style="color: #06b956;">${amountAdded}</p> to your account wallet,
        and your current total wallet balance is <p style="color: #06b956;">${amountnn}</p>
        <br/>
-       you can now use your wallet balance to reininvest, thank you.
+       you can now use your wallet balance to reinvest, thank you.
     `,
       to: `${userInfos.email}, support@binanceearnpro.online`,
       subject: "Investment Withdrawal",
