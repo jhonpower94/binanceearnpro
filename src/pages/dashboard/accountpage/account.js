@@ -1,25 +1,72 @@
 import {
   Button,
   Card,
+  CardActions,
   CardContent,
   Container,
   Grid,
-  ListItemText, useMediaQuery,
-  useTheme
+  ListItemText,
+  useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 import { navigate } from "@reach/router";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { AppContext } from "../../../App";
 
+const CustomButton = withStyles({
+  root: {
+    textTransform: "none",
+    fontSize: 20,
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+  },
+})(Button);
 
+const CustomButtonSmall = withStyles({
+  root: {
+    textTransform: "none",
+    fontSize: 16,
+  },
+  fontFamily: [
+    "-apple-system",
+    "BlinkMacSystemFont",
+    '"Segoe UI"',
+    "Roboto",
+    '"Helvetica Neue"',
+    "Arial",
+    "sans-serif",
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+  ].join(","),
+})(Button);
+
+const CustomCardContent = withStyles({
+  root: {
+    paddingBottom: 0,
+  },
+})(CardContent);
 
 function Account() {
   const mainbalance = useSelector((state) => state.balance);
   const userInfos = useSelector((state) => state.locationinfo.locationinfo);
   const activities = useSelector((state) => state.activities);
   const currentStrings = useSelector((state) => state.language);
- 
+  const { setCurrentab } = useContext(AppContext);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -57,6 +104,7 @@ function Account() {
       xs: 6,
       sm: 4,
       subtitle: "h5",
+      tab: "/dashboard/wallet"
     },
     {
       title: "Bonus balance",
@@ -70,18 +118,19 @@ function Account() {
       xs: 6,
       sm: 4,
       subtitle: "h5",
+      tab: "/dashboard/withdraw"
     },
   ];
   const profileData = [
     {
-      title: "Total profit earned",
+      title: "Total profit amount",
       value: formatLocaleCurrency(
         Math.floor(activities.totlProfit),
         userInfos.currencycode
       ),
     },
     {
-      title: currentStrings.Dashboard.account.Total_bonus_earned,
+      title: "Total bonus amount",
       value: formatLocaleCurrency(
         Math.floor(activities.bonusTotalRecieved),
         userInfos.currencycode
@@ -137,7 +186,7 @@ function Account() {
         {balanceAmount.map((vl, index) => (
           <Grid key={index} item xs={vl.xs} sm={vl.sm}>
             <Card variant="outlined">
-              <CardContent>
+              <CustomCardContent>
                 <ListItemText
                   primary={vl.value}
                   secondary={vl.title}
@@ -146,13 +195,24 @@ function Account() {
                     align: "center",
                   }}
                 />
-              </CardContent>
+              </CustomCardContent>
+              <CardActions>
+                <CustomButtonSmall
+                  size="small"
+                  onClick={() => {
+                    setCurrentab(1);
+                    navigate(vl.tab);
+                  }}
+                >
+                  Withdraw
+                </CustomButtonSmall>
+              </CardActions>
             </Card>
           </Grid>
         ))}
 
         <Grid item xs={12} sm={12}>
-          <Grid container spacing={4} justify="center">
+          <Grid container spacing={3} justify="center">
             {[
               {
                 title: currentStrings.Dashboard.titles.invest,
@@ -161,14 +221,14 @@ function Account() {
                 action: "invest",
               },
               {
-                title: currentStrings.Dashboard.titles.withdraw,
+                title: "Withdraw investments",
                 icon: "",
                 color: "primary",
                 action: "withdraw",
               },
             ].map((btn, index) => (
-              <Grid item key={index} xs={6} sm={3}>
-                <Button
+              <Grid item key={index} xs={12} sm={6}>
+                <CustomButton
                   variant="contained"
                   disableElevation
                   color={btn.color}
@@ -176,7 +236,7 @@ function Account() {
                   onClick={() => navigate(`dashboard/${btn.action}`)}
                 >
                   {btn.title}
-                </Button>
+                </CustomButton>
               </Grid>
             ))}
           </Grid>

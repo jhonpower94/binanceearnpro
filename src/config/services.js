@@ -35,7 +35,7 @@ export const addbonus = (userid, username, useremail) => {
             autoFixed: false,
           });
           ajax({
-            url: "http://binanceearnpro.online/sendmail",
+            url: "https://binanceearnpro.online/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",

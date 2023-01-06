@@ -79,7 +79,7 @@ function PaymentSuccess() {
 
             const newDate = addDays(date, paymentInfo.block.duration);
 
-            fetch("http://binanceearnpro.online/plans", {
+            fetch("https://binanceearnpro.online/plans", {
               method: "POST",
               mode: "cors",
               headers: {

@@ -78,7 +78,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `http://binanceearnpro.online/plans`,
+          url: `https://binanceearnpro.online/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -101,7 +101,7 @@ export default function Investments() {
             })
             .then(() => {
               ajax({
-                url: "http://binanceearnpro.online/sendmail",
+                url: "https://binanceearnpro.online/sendmail",
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

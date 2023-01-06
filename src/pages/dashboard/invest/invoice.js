@@ -284,7 +284,7 @@ function Invoice() {
         );
         ajax({
           url:
-            "http://binanceearnpro.online/sendmail",
+            "https://binanceearnpro.online/sendmail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
