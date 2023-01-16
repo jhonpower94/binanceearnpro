@@ -321,7 +321,7 @@ export default function DashboardLayout(props) {
           .where("return_amount", "==", 0);
         collectionData(Total_withdrawn, "id").subscribe((data) => {
           const totalwithdrawn = data.reduce((prv, cur) => {
-            return prv + cur.amount;
+            return prv + cur.total_return;
           }, 0);
 
           dispatch(totalwithdrawn$(totalwithdrawn));

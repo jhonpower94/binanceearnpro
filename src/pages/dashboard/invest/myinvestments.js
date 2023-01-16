@@ -144,13 +144,12 @@ function Investment() {
                     )}
                   </TableCell>
                   <TableCell align="left">
-                    {}
                     {isNaN(dep.return_amount)
                       ? formatLocaleCurrency(0, userInfos.currencycode, {
                           autoFixed: false,
                         })
                       : formatLocaleCurrency(
-                          dep.return_amount,
+                          dep.total_return,
                           userInfos.currencycode,
                           {
                             autoFixed: false,

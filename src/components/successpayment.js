@@ -57,6 +57,9 @@ function PaymentSuccess() {
         await dispatch(loading$());
       };
 
+      const totalReturn =
+        (paymentInfo.block.rate / 100) * depositamount + depositamount;
+
       startLoadingSucess().then(() => {
         firestore
           .doc(`users/${currentUserId}`)
@@ -70,6 +73,7 @@ function PaymentSuccess() {
             complete: false,
             date: new Date().toLocaleDateString(),
             created_at: firebase.firestore.FieldValue.serverTimestamp(),
+            total_return: totalReturn,
           })
           .then((tr) => {
             console.log("transaction added");
