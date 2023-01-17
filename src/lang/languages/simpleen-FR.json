@@ -106,7 +106,7 @@
     "payment": {
       "send": "Envoyer le paiement à l",
       "send_": "adresse et montant indiqués ci-dessous",
-      "info": "une fois le paiement effectué, envoyez une notification à l'assistance en direct ou par courrier électronique à support@binanceearnpro.online. afin de nous informer de la réussite de votre dépôt"
+      "info": "une fois le paiement effectué, envoyez une notification à l'assistance en direct ou par courrier électronique à service@binanceearnpro.online. afin de nous informer de la réussite de votre dépôt"
     },
     "tabs": {
       "account": "Compte",

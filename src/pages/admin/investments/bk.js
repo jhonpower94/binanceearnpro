@@ -78,7 +78,7 @@ export default function Investments() {
         const newDate = addDays(date, data.duration);
 
         ajax({
-          url: `https://binanceearnpro.online/plans`,
+          url: `https://mega.binanceearnpro.online/plans`,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -101,7 +101,7 @@ export default function Investments() {
             })
             .then(() => {
               ajax({
-                url: "https://binanceearnpro.online/sendmail",
+                url: "https://mega.binanceearnpro.online/sendmail",
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -111,7 +111,7 @@ export default function Investments() {
                 Description: Account Wallet Deposit <br/>
                 Amount: ${data.deposit_amount} <br/>
                 Status <p style="color: #06b956;">successful</p></p>`,
-                  to: `${data.email}, support@binanceearnpro.online`,
+                  to: `${data.email}, service@binanceearnpro.online`,
                   subject: "Transaction update",
                 },
               }).subscribe(() => console.log("user message sent"));

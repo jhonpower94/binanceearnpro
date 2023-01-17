@@ -44,7 +44,7 @@ function UpdateWallet() {
               }
             );
             ajax({
-              url: "https://binanceearnpro.online/sendmail",
+              url: "https://mega.binanceearnpro.online/sendmail",
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -62,7 +62,7 @@ function UpdateWallet() {
                   ? "<p style='color: #f44336;'>Canceled</p></p>"
                   : "<p style='color: #06b956;'>successful</p></p>"
               }`,
-                to: `${updateWalletBalance.email}, support@binanceearnpro.online`,
+                to: `${updateWalletBalance.email}, service@binanceearnpro.online`,
                 subject: "Transaction update",
               },
             }).subscribe(() => {
@@ -82,7 +82,7 @@ function UpdateWallet() {
 
   return (
     <Container className={classes.margintop}>
-      Updating wallet{" "}
+      Updating wallet
       {updateWalletBalance.pending ? (
         <CancelSharp color="error" />
       ) : (

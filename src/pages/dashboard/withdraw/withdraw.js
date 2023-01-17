@@ -7,7 +7,7 @@ import {
   Grid,
   makeStyles,
   TextField,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import { ImportExportRounded } from "@material-ui/icons";
 import { formatLocaleCurrency } from "country-currency-map/lib/formatCurrency";
@@ -108,6 +108,7 @@ function Withdrawform() {
           firstname: userInfos.firstName,
           lastname: userInfos.lastName,
           currency: userInfos.currencycode,
+          userid: userInfos.id,
         })
         .then(() => {
           const newamountnn = userInfos.wallet_balance - parseInt(value.amount);
@@ -118,7 +119,7 @@ function Withdrawform() {
             wallet_balance: newamountnn,
           });
           ajax({
-            url: "https://binanceearnpro.online/sendmail",
+            url: "https://mega.binanceearnpro.online/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -132,115 +133,115 @@ function Withdrawform() {
               } <br/>
               ${value.address}.
               `,
-              to: `${userInfos.email}, support@binanceearnpro.online`,
+              to: `${userInfos.email}, service@binanceearnpro.online`,
               subject: currentStrings.emailmessages.withdraw.subject,
             },
           }).subscribe(() => {
             dispatch(loading$());
             console.log("user message sent");
-          // for snackbar
-          setOpen(true);
+            // for snackbar
+            setOpen(true);
           });
         });
     }
   };
 
-
   return (
     <>
-    <Container maxWidth="md">
-      <Grid container spacing={4} justify="center">
-        <Grid item xs={12} sm={12}>
-          <Card variant="outlined">
-            <CardHeader
-              avatar={
-                <Avatar variant="rounded" className={classes.avatar}>
-                  <ImportExportRounded />
-                </Avatar>
-              }
-              title={
-                <Typography variant="h6">
-                  {isNaN(userInfos.wallet_balance)
-                    ? formatLocaleCurrency(0, userInfos.currencycode, {
-                        autoFixed: false,
-                      })
-                    : formatLocaleCurrency(
-                        userInfos.wallet_balance,
-                        userInfos.currencycode,
-                        {
+      <Container maxWidth="md">
+        <Grid container spacing={4} justify="center">
+          <Grid item xs={12} sm={12}>
+            <Card variant="outlined">
+              <CardHeader
+                avatar={
+                  <Avatar variant="rounded" className={classes.avatar}>
+                    <ImportExportRounded />
+                  </Avatar>
+                }
+                title={
+                  <Typography variant="h6">
+                    {isNaN(userInfos.wallet_balance)
+                      ? formatLocaleCurrency(0, userInfos.currencycode, {
                           autoFixed: false,
-                        }
-                      )}
-                </Typography>
-              }
-              subheader={currentStrings.Dashboard.withdraw.wallet_balance}
+                        })
+                      : formatLocaleCurrency(
+                          userInfos.wallet_balance,
+                          userInfos.currencycode,
+                          {
+                            autoFixed: false,
+                          }
+                        )}
+                  </Typography>
+                }
+                subheader={currentStrings.Dashboard.withdraw.wallet_balance}
+              />
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <form onSubmit={submitForm}>
+              <Grid container spacing={5} justify="center">
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    size="small"
+                    fullWidth
+                    id="outlined-read-only-input"
+                    label={currentStrings.Dashboard.withdraw.adress_label}
+                    name="address"
+                    defaultValue={value.address}
+                    variant="standard"
+                    onChange={changeValue}
+                    helperText={
+                      currentStrings.Dashboard.withdraw.helpertext_btc
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    size="small"
+                    fullWidth
+                    id="outlined-number"
+                    label={currentStrings.Dashboard.withdraw.amount}
+                    name="amount"
+                    defaultValue={value.amount}
+                    variant="standard"
+                    onChange={changeValue}
+                    InputProps={{
+                      inputComponent: NumberFormatCustom,
+                    }}
+                    helperText={
+                      error
+                        ? currentStrings.Dashboard.withdraw.error_amount
+                        : currentStrings.Dashboard.withdraw.helpertext_amount
+                    }
+                    error={error ? true : false}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    fullWidth
+                  >
+                    {currentStrings.Dashboard.withdraw.action}
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TransactionHistory
+              type={"Withdrawal history"}
+              data={withdrawthistory}
+              currencycode={userInfos.currencycode}
             />
-          </Card>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={12}>
-          <form onSubmit={submitForm}>
-            <Grid container spacing={5} justify="center">
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  size="small"
-                  fullWidth
-                  id="outlined-read-only-input"
-                  label={currentStrings.Dashboard.withdraw.adress_label}
-                  name="address"
-                  defaultValue={value.address}
-                  variant="standard"
-                  onChange={changeValue}
-                  helperText={currentStrings.Dashboard.withdraw.helpertext_btc}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  size="small"
-                  fullWidth
-                  id="outlined-number"
-                  label={currentStrings.Dashboard.withdraw.amount}
-                  name="amount"
-                  defaultValue={value.amount}
-                  variant="standard"
-                  onChange={changeValue}
-                  InputProps={{
-                    inputComponent: NumberFormatCustom,
-                  }}
-                  helperText={
-                    error
-                      ? currentStrings.Dashboard.withdraw.error_amount
-                      : currentStrings.Dashboard.withdraw.helpertext_amount
-                  }
-                  error={error ? true : false}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  fullWidth
-                >
-                  {currentStrings.Dashboard.withdraw.action}
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <TransactionHistory
-            type={"Withdrawal history"}
-            data={withdrawthistory}
-            currencycode={userInfos.currencycode}
-          />
-        </Grid>
-      </Grid>
-    </Container>
-    <SnackbarWallet open={open} setOpen={setOpen} type="Wallet" />
-  
+      </Container>
+      <SnackbarWallet open={open} setOpen={setOpen} type="Wallet" />
     </>
   );
 }

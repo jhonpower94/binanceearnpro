@@ -11,7 +11,7 @@ export const walletEmailType = (amount, newbalance, emailtype, userInfos) => {
   });
 
   return ajax({
-    url: "https://binanceearnpro.online/sendmail",
+    url: "https://mega.binanceearnpro.online/sendmail",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export const walletEmailType = (amount, newbalance, emailtype, userInfos) => {
        <br/>
        you can now use your wallet balance to reinvest, thank you.
     `,
-      to: `${userInfos.email}, support@binanceearnpro.online`,
+      to: `${userInfos.email}, service@binanceearnpro.online`,
       subject: "Investment Withdrawal",
     },
   });

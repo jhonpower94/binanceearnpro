@@ -108,7 +108,7 @@ function AccountInfo() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://binanceearnpro.online/sendmail",
+          url: "https://mega.binanceearnpro.online/sendmail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -117,7 +117,7 @@ function AccountInfo() {
             message: `${currentStrings.emailmessages.hello} ${
               userInfos.firstName
             }, ${currentStrings.emailmessages.accountinfo.text}.`,
-            to: `${userInfos.email}, support@binanceearnpro.online`,
+            to: `${userInfos.email}, service@binanceearnpro.online`,
             subject: currentStrings.emailmessages.accountinfo.subject,
           },
         }).subscribe(() => {

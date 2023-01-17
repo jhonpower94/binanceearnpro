@@ -155,7 +155,7 @@ function Deposit() {
             autoFixed: false,
           });
           ajax({
-            url: "https://binanceearnpro.online/sendmail",
+            url: "https://mega.binanceearnpro.online/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -167,21 +167,21 @@ function Deposit() {
               <br/><br/>
               ${currentStrings.emailmessages.amount} : ${amountnn} <br/><br/>
               ${currentStrings.emailmessages.deposit.b} 
-              <a>support@binanceearnpro.online</a>
+              <a>service@binanceearnpro.online</a>
               ${currentStrings.emailmessages.deposit.c}.`,
               to: userInfos.email,
               subject: currentStrings.emailmessages.deposit.subject,
             },
           }).subscribe(() => console.log("user message sent"));
           ajax({
-            url: "https://binanceearnpro.online/sendmail",
+            url: "https://mega.binanceearnpro.online/sendmail",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: {
               message: `incoming deposit request from ${userInfos.firstName} ${userInfos.lastName}, total deposit amount : $${paymentInfo.amount}`,
-              to: "support@binanceearnpro.online",
+              to: "service@binanceearnpro.online",
               subject: "New Deposit",
             },
           }).subscribe(() => {

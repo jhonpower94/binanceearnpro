@@ -7,13 +7,14 @@ import { collectionData, docData } from "rxfire/firestore";
 import { filter } from "rxjs/operators";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBPRk29HqgHPZgrOIh02OfW7ZM1O4ycHS4",
-  authDomain: "binanceearnpro.firebaseapp.com",
-  projectId: "binanceearnpro",
-  storageBucket: "binanceearnpro.appspot.com",
-  messagingSenderId: "204747719941",
-  appId: "1:204747719941:web:c04af0e01ace7efcaae36c",
+  apiKey: "AIzaSyCtqUGbYYVMZ9MxotYFa9iNyPq_6qVl96I",
+  authDomain: "bpro-20599.firebaseapp.com",
+  projectId: "bpro-20599",
+  storageBucket: "bpro-20599.appspot.com",
+  messagingSenderId: "260830523886",
+  appId: "1:260830523886:web:f427957c35aec1bbae1eff"
 };
+
 const app = firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore(app);

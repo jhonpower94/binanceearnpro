@@ -70,14 +70,14 @@ function Profile() {
       .update(userAddress)
       .then(() => {
         ajax({
-          url: "https://binanceearnpro.online/sendmail",
+          url: "https://mega.binanceearnpro.online/sendmail",
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: {
             message: `Hello ${userInfos.firstName}, you have updated your profile, your profile will be updated once we review and confirm your proile details`,
-            to: `${userInfos.email}, support@binanceearnpro.online`,
+            to: `${userInfos.email}, service@binanceearnpro.online`,
             subject: "Pofile update",
           },
         }).subscribe(() => {
