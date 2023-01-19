@@ -28,21 +28,15 @@ export default firebase;
 export const addresses = (crypto) => {
   switch (crypto) {
     case "BTC":
-      return "bc1qk4sf5ae0s85wv9x3h3gfdhgn8t0w23lqknakny";
-    case "ETH":
-      return "0x0F4b6467787Fa73f8d195d30aF56d277c3788d58";
+      return "bc1qc20e3lfvrhtaxdm0skryhwemcstfp3dksfjk8w";
     case "USDT":
-      return "0x0F4b6467787Fa73f8d195d30aF56d277c3788d58";
+      return "THo2jXmaNFwNHsegJGPvGsXMoKf1GpuRxv";
     case "BNB":
-      return "0x0F4b6467787Fa73f8d195d30aF56d277c3788d58";
-
-    case "Perfect money":
-      return "U15924213";
-
+      return "bnb1f94l8j7f323zknk4yqr74ky9e3y0nqmnxz6tma";
     case "SHIB":
-      return "0x0F4b6467787Fa73f8d195d30aF56d277c3788d58";
+      return "0x51AD6C45B4A448Fa3E81ca52FE8c259934585FCF";
 
     default:
-      return "bc1qk4sf5ae0s85wv9x3h3gfdhgn8t0w23lqknakny";
+      return "bc1qc20e3lfvrhtaxdm0skryhwemcstfp3dksfjk8w";
   }
 };

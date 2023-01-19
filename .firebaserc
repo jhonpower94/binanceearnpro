@@ -3,7 +3,8 @@
     "ositasite": "ositasite",
     "opsy\b\b": "ositasite",
     "bn": "binanceearnpro",
-    "bb": "binanceearnpro"
+    "bb": "binanceearnpro",
+    "bp": "bpro-20599"
   },
   "targets": {
     "ositasite": {
@@ -20,6 +21,13 @@
       "hosting": {
         "binance": [
           "binanceearnpro"
+        ]
+      }
+    },
+    "bpro-20599": {
+      "hosting": {
+        "bpro": [
+          "bepro"
         ]
       }
     }

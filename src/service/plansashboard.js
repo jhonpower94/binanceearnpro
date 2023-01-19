@@ -1,14 +1,14 @@
 export const investmentplans = [
   {
     name: "Basic",
-    rate: 10,
-    daily: 10,
+    rate: 5,
+    daily: 5,
 
     min_rate: 5,
     max_rate: 10,
     duration: 20,
 
-    lot: 10,
+    lot: 100,
     max: 999,
 
     hrs: 24,
@@ -16,49 +16,49 @@ export const investmentplans = [
   },
   {
     name: "Standard",
-    rate: 126,
-    daily: 18,
+    rate: 50,
+    daily: 10,
 
 
     min_rate: 5,
     max_rate: 10,
-    duration: 20,
+    duration: 60,
 
     lot: 1000,
     max: 4999,
 
-    hrs: 336,
+    hrs: 120,
     unit: ["d", "h"],
   },
   {
     name: "Premium",
-    rate: 189,
-    daily: 27,
+    rate: 50,
+    daily: 12.5,
+
+    min_rate: 5,
+    max_rate: 10,
+    duration: 80,
+
+    lot: 5000,
+    max: 49999,
+
+    hrs: 96,
+    unit: ["d", "h"],
+  },
+  {
+    name: "Ultimate",
+    rate: 50,
+    daily: 25,
 
     min_rate: 5,
     max_rate: 10,
     duration: 40,
 
-    lot: 5000,
-    max: 49999,
-
-    hrs: 168,
-    unit: ["d", "h"],
-  },
-  {
-    name: "Ultimate",
-    rate: 1170,
-    daily: 39,
-
-    min_rate: 5,
-    max_rate: 10,
-    duration: 70,
-
     lot: 50000,
     max: 999999,
 
-    hrs: 720,
-    unit: ["mo"],
+    hrs: 56,
+    unit: ["d", "h"],
   },
 
   /*

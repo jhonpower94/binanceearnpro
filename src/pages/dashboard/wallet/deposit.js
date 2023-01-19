@@ -49,11 +49,6 @@ const currencies = [
     value: "BTC",
     label: "Bitcoin",
   },
-
-  {
-    value: "ETH",
-    label: "Ethereum",
-  },
   {
     value: "USDT",
     label: "USDT",
@@ -61,11 +56,6 @@ const currencies = [
   {
     value: "BNB",
     label: "BNB",
-  },
-  
-  {
-    value: "Perfect money",
-    label: "Perfect money",
   },
   {
     value: "SHIB",
